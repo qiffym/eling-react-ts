@@ -25,14 +25,17 @@ const useLogin = () => {
       }),
     });
     const result = await response.json();
-
-    dispatch({
-      type: Types.Login,
-      payload: {
-        user: result.data.user,
-        token: result.data.token,
-      },
-    });
+    if (response.status >= 200 && response.status < 300) {
+      dispatch({
+        type: Types.Login,
+        payload: {
+          user: result.data.user,
+          token: result.data.token,
+        },
+      });
+    } else {
+      alert('Username dan passsword salah');
+    }
   };
 
   return authLogin;
