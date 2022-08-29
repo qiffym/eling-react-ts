@@ -1,8 +1,9 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
   const authLogin = useLogin();
+  const [disable, setDisable] = useState(false);
   const [input, setInput] = useState({
     username: '',
     password: '',
@@ -14,6 +15,14 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    if (input.username === '' || input.password === '') {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }, [input]);
 
   return (
     <div className="flex w-screen h-screen">
@@ -36,7 +45,9 @@ const Login = () => {
             value={input.password}
             onChange={handleChange}
           />
-          <button className="btn w-full max-w-sm">Button</button>
+          <button disabled={disable} className="btn w-full max-w-sm">
+            Button
+          </button>
         </form>
       </div>
     </div>
