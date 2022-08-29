@@ -26,6 +26,7 @@ const useLogin = () => {
     });
     const result = await response.json();
     if (response.status >= 200 && response.status < 300) {
+      localStorage.setItem('token', result.data.token);
       dispatch({
         type: Types.Login,
         payload: {

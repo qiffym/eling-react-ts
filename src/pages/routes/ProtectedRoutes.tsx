@@ -4,9 +4,9 @@ import { MyContext } from '../../context/context';
 
 const ProtectedRoutes = () => {
   const { state } = useContext(MyContext);
-
+  const token = localStorage.getItem('token');
   const useAuth = () => {
-    if (state.login.token) {
+    if (token) {
       return true;
     } else {
       return false;

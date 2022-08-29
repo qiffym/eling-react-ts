@@ -5,9 +5,10 @@ import { MyContext } from '../../context/context';
 
 function PublicRoutes() {
   const { state } = useContext(MyContext);
+  const token = localStorage.getItem('token');
 
   const useAuth = () => {
-    if (state.login.token) {
+    if (token) {
       return true;
     }
     return false;
