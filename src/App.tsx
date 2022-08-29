@@ -1,14 +1,10 @@
-import React from 'react';
-import ContextProvider from './context/context';
-
-import Login from './pages/login/Login';
-import AppRoutes from './pages/routes/AppRoutes';
+import React from "react";
 
 function App() {
   return (
-    <ContextProvider>
-      <AppRoutes />
-    </ContextProvider>
+    <div>
+      <h1 className=" text-orange-800">NAMA SAYA PIKRI</h1>
+    </div>
   );
 }
 
