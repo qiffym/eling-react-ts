@@ -46,7 +46,7 @@ const Login = () => {
             onChange={handleChange}
           />
           <button disabled={disable} className="btn w-full max-w-sm">
-            Button
+            Login
           </button>
         </form>
       </div>

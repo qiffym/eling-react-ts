@@ -2,10 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const LinkNavItems = [
-  // { name: 'Dashboard', path: '/home' },
-  { name: 'Users', path: '/users' },
-  { name: 'Rombel Classes', path: '/class' },
-  { name: 'Motivational Words', path: '/motivation' },
+  { name: 'Users', path: 'resources/users' },
+  { name: 'Rombel Classes', path: 'resources/classes' },
+  { name: 'Motivational Words', path: 'resources/motivational' },
 ];
 
 const Sidebar = () => {
@@ -13,7 +12,7 @@ const Sidebar = () => {
     <div className="drawer-side bg-white overflow-auto h-screen">
       <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
         <li>
-          <NavLink to="/home">Dashboard</NavLink>
+          <NavLink to="dashboard">Dashboard</NavLink>
         </li>
       </ul>
       <label className="px-6 text-gray-400 text-sm">Resources</label>
