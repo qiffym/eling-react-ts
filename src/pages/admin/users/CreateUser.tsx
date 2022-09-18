@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../component/header/Header';
+import Header from '../../../component/header/Header';
 
 const CreateUser = () => {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const CreateUser = () => {
         </button>
         <button
           onClick={() => console.log('new')}
-          className="btn btn-accent px-12 text-white"
+          className="btn btn-primary px-12 text-white"
         >
           Save
         </button>

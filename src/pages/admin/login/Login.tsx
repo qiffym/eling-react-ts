@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import useLogin from '../../hooks/useLogin';
+import useLogin from '../../../hooks/useLogin';
 
 const Login = () => {
   const authLogin = useLogin();
@@ -41,6 +41,7 @@ const Login = () => {
             type="password"
             placeholder="Password"
             name="password"
+            autoComplete="on"
             className="input input-bordered w-full max-w-sm mt-2 mb-3"
             value={input.password}
             onChange={handleChange}

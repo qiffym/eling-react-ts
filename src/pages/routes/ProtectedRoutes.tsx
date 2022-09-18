@@ -1,21 +1,50 @@
-import React, { useContext } from 'react';
+import { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { MyContext } from '../../context/context';
+import { LoginType } from '../../types/context-type';
 
-const ProtectedRoutes = () => {
-  const { state } = useContext(MyContext);
-  const token = localStorage.getItem('token');
+type ProtectedRouteRole = {
+  roleRequired?: 'admin' | 'teacher' | 'student';
+};
+
+const ProtectedRoutes: FC<ProtectedRouteRole> = ({ roleRequired }) => {
+  const getUser = localStorage.getItem('user');
+  let token: string;
+  let user: LoginType;
+
+  if (typeof getUser === 'string') {
+    user = JSON.parse(getUser);
+    token = user.token;
+  }
+
   const useAuth = () => {
     if (token) {
-      return true;
+      return {
+        auth: true,
+        roles: user.user.role,
+      };
     } else {
-      return false;
+      return {
+        auth: false,
+        roles: null,
+      };
     }
   };
 
-  const auth = useAuth();
+  const { auth, roles } = useAuth();
 
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  if (roleRequired) {
+    return auth ? (
+      roleRequired === roles ? (
+        <Outlet />
+      ) : (
+        <Navigate to="/permissiondenied" />
+      )
+    ) : (
+      <Navigate to="/login" />
+    );
+  } else {
+    return auth ? <Outlet /> : <Navigate to="/login" />;
+  }
 };
 
 export default ProtectedRoutes;

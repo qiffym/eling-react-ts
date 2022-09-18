@@ -1,9 +1,12 @@
 import { FormEvent, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { MyContext } from '../context/context';
 import { Types } from '../types/reducer-type';
 
 const useLogin = () => {
   const { dispatch } = useContext(MyContext);
+  const navigate = useNavigate();
   const baseURL = process.env.REACT_APP_BASE_URL;
 
   const authLogin = async (
@@ -27,13 +30,8 @@ const useLogin = () => {
     const result = await response.json();
     if (response.status >= 200 && response.status < 300) {
       localStorage.setItem('token', result.data.token);
-      dispatch({
-        type: Types.Login,
-        payload: {
-          user: result.data.user,
-          token: result.data.token,
-        },
-      });
+      localStorage.setItem('user', JSON.stringify(result.data));
+      navigate('/');
     } else {
       alert('Username dan passsword salah');
     }

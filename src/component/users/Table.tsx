@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import ryujin1 from '../../assets/ryujin1.jpg';
+import ryujin2 from '../../assets/ryujin2.jpg';
 
 type Props = {
   view: () => void;
@@ -20,15 +22,12 @@ const Table: FC<Props> = ({ view, edit }) => {
         </thead>
         <tbody>
           <tr>
-            <td>Ha</td>
+            <td>Admin</td>
             <td>
               <div className="flex items-center space-x-3">
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
-                    <img
-                      src="/tailwind-css-component-profile-2@56w.png"
-                      alt="Avatar Tailwind CSS Component"
-                    />
+                    <img src={ryujin1} alt="Avatar Tailwind CSS Component" />
                   </div>
                 </div>
                 <div>
@@ -58,15 +57,12 @@ const Table: FC<Props> = ({ view, edit }) => {
           </tr>
 
           <tr>
-            <td>Ha</td>
+            <td>Guru</td>
             <td>
               <div className="flex items-center space-x-3">
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
-                    <img
-                      src="/tailwind-css-component-profile-3@56w.png"
-                      alt="Avatar Tailwind CSS Component"
-                    />
+                    <img src={ryujin2} alt="Avatar Tailwind CSS Component" />
                   </div>
                 </div>
                 <div>
@@ -91,15 +87,12 @@ const Table: FC<Props> = ({ view, edit }) => {
           </tr>
 
           <tr>
-            <td>Ha</td>
+            <td>User</td>
             <td>
               <div className="flex items-center space-x-3">
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
-                    <img
-                      src="/tailwind-css-component-profile-4@56w.png"
-                      alt="Avatar Tailwind CSS Component"
-                    />
+                    <img src={ryujin1} alt="Avatar Tailwind CSS Component" />
                   </div>
                 </div>
                 <div>
@@ -126,15 +119,12 @@ const Table: FC<Props> = ({ view, edit }) => {
           </tr>
 
           <tr>
-            <td>Ha</td>
+            <td>User</td>
             <td>
               <div className="flex items-center space-x-3">
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
-                    <img
-                      src="/tailwind-css-component-profile-5@56w.png"
-                      alt="Avatar Tailwind CSS Component"
-                    />
+                    <img src={ryujin2} alt="Avatar Tailwind CSS Component" />
                   </div>
                 </div>
                 <div>

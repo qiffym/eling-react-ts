@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../component/header/Header';
+
 import { HiChevronLeft } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const ViewUser = () => {
     <>
       <div className="px-6 py-14">
         <div className="flex flex-row items-center mb-4 space-x-1">
-          <button onClick={() => navigate(-1)} className="btn btn-ghost">
+          <button onClick={() => navigate(-1)} className="btn btn-ghost p-3">
             <HiChevronLeft className="text-2xl" />
           </button>
           <h1 className="text-3xl font-bold">User Detail</h1>
