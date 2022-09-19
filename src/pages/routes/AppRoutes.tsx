@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LayoutIndex from '../../component/layout';
 import Appbar from '../../component/layout/Appbar';
-
 import Home from '../home/Home';
 import Login from '../admin/login/Login';
 import CreateUser from '../admin/users/CreateUser';
@@ -9,7 +8,6 @@ import EditUser from '../admin/users/EditUser';
 import Users from '../admin/users/Users';
 import ViewUser from '../admin/users/ViewUser';
 import PermissionDenied from '../not-found-page/PermissionDenied';
-
 import ProtectedRoutes from './ProtectedRoutes';
 import PublicRoutes from './PublicRoutes';
 
@@ -21,7 +19,6 @@ const AppRoutes = () => {
           <Route path="/" element={<Appbar />}>
             <Route path="/" element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Home />} />
-
             <Route path="/" element={<ProtectedRoutes roleRequired="admin" />}>
               <Route path="resources">
                 <Route path="users">

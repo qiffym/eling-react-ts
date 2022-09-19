@@ -1,28 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HiPlus } from 'react-icons/hi';
+import Modal from '../../../component/modal/Modal';
+import CardClass from '../../../component/teacher/home/Card';
+import { useFetch } from '../../../hooks/useFetch';
 
 const DashboardTeacher = () => {
+  const { data } = useFetch('/api/teacher/online-classes');
+
   return (
     <>
-      <button
-        onClick={() => console.log('test')}
+      <label
+        htmlFor="my-modal-3"
         className="btn flex w-14 h-14 btn-primary rounded-full fixed z-10 right-5 bottom-5 items-center content-center justify-center drop-shadow-xl"
       >
         <HiPlus className="text-xl" />
-      </button>
-
-      <div className="card w-80 bg-base-100 shadow-xl">
-        <figure>
-          <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Teknik Jaringan Komputer</h2>
-          <p>Membuat jaringan agar hatimu dan hatiku menyatu</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary px-8">View</button>
-          </div>
-        </div>
-      </div>
+      </label>
+      <Modal />
+      <CardClass classes={data} />
     </>
   );
 };

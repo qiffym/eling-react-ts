@@ -6,6 +6,8 @@ import DashboardTeacher from '../teacher/dashboard/DashboardTeacher';
 const Home = () => {
   const user = JSON.parse(localStorage.getItem('user') || '');
 
+  console.log(user.token);
+
   const dashboardRole = (role: string) => {
     switch (role) {
       case 'admin':
@@ -29,9 +31,7 @@ const Home = () => {
     }
   };
 
-  return (
-    <div className="w-screen px-6 py-14">{dashboardRole(user.user.role)}</div>
-  );
+  return <div className="px-6 py-20">{dashboardRole(user.user.role)}</div>;
 };
 
 export default Home;
