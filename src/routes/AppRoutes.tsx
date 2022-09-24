@@ -10,6 +10,7 @@ import ViewUser from '../pages/admin/users/ViewUser';
 import PermissionDenied from '../pages/not-found-page/PermissionDenied';
 import ProtectedRoutes from './ProtectedRoutes';
 import PublicRoutes from './PublicRoutes';
+import NotFound from '../pages/not-found-page/NotFound';
 
 const AppRoutes = () => {
   return (
@@ -43,6 +44,7 @@ const AppRoutes = () => {
       </Route>
 
       <Route path="permissiondenied" element={<PermissionDenied />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
