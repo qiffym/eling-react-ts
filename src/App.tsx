@@ -1,6 +1,7 @@
 import React from 'react';
 import ContextProvider from './context/context';
-import AppRoutes from './pages/routes/AppRoutes';
+import AppRoutes from './routes/AppRoutes';
+import './App.css';
 
 function App() {
   return (

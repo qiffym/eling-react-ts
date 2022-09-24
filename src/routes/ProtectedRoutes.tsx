@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { LoginType } from '../../types/context-type';
+import { LoginType } from '../types/context-type';
 
 type ProtectedRouteRole = {
   roleRequired?: 'admin' | 'teacher' | 'student';

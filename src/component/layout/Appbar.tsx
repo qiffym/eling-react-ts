@@ -1,16 +1,29 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { LoginType } from '../../types/context-type';
+import { HiOutlineChevronDown } from 'react-icons/hi';
+import useLogout from '../../hooks/useLogout';
 
 const Appbar = () => {
-  const user = JSON.parse(localStorage.getItem('user') || '');
+  const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
+  const authLogout = useLogout();
 
   return (
     <>
       <nav className="flex flex-row fixed w-[82%] justify-end items-center h-16 px-6 space-x-5 z-50">
         <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn m-1">
-            {user.user.name}
+          <label tabIndex={0} className="btn m-1 space-x-3">
+            <div className="flex flex-row items-center space-x-2">
+              <div className="avatar ">
+                <div className="w-8 rounded-full ring ring-gray-400 ring-offset-base-100 ring-offset-0">
+                  <img src={user.user.avatar} alt={user.user.name} />
+                </div>
+              </div>
+              <h1>{user.user.name}</h1>
+            </div>
+            <HiOutlineChevronDown />
           </label>
+
           <ul
             tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
@@ -21,6 +34,7 @@ const Appbar = () => {
             <li>
               <p
                 onClick={() => {
+                  authLogout();
                   localStorage.clear();
                   window.location.reload();
                 }}

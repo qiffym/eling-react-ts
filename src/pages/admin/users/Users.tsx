@@ -1,9 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../component/header/Header';
+import Loading from '../../../component/loading/Loading';
 import Table from '../../../component/users/Table';
+import { useFetch } from '../../../hooks/useFetch';
 
 const Users = () => {
+  const { isLoading, data } = useFetch('/api/admin/resources/users');
   const navigate = useNavigate();
 
   return (
@@ -19,7 +22,7 @@ const Users = () => {
           Create User
         </button>
       </div>
-      <Table view={() => navigate('user')} edit={() => navigate('edit')} />
+      {isLoading ? <Loading /> : <Table userData={data} />}
     </div>
   );
 };

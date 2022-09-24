@@ -6,7 +6,14 @@ import React, {
   useMemo,
   useReducer,
 } from 'react';
-import { LoginAction, loginReducer } from '../reducers/reducers';
+import {
+  ClassesAction,
+  classesReducer,
+  LoginAction,
+  loginReducer,
+  NgetesAction,
+  ngetesReducer,
+} from '../reducers/reducers';
 import { InitialStateType } from '../types/context-type';
 
 type Props = {
@@ -25,18 +32,27 @@ const contextInitialState: InitialStateType = {
     },
     token: '',
   },
+  ngetes: {
+    hasil: '',
+  },
+  classes: [],
 };
 
 export const MyContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<LoginAction>;
+  dispatch: Dispatch<LoginAction | ClassesAction | NgetesAction>;
 }>({
   state: contextInitialState,
   dispatch: () => {},
 });
 
-const mainReducer = ({ login }: InitialStateType, action: any) => ({
+const mainReducer = (
+  { login, classes, ngetes }: InitialStateType,
+  action: any
+) => ({
   login: loginReducer(login, action),
+  classes: classesReducer(classes, action),
+  ngetes: ngetesReducer(ngetes, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

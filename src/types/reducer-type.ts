@@ -11,6 +11,8 @@ export type ActionMap<M extends { [index: string]: any }> = {
 
 export enum Types {
   Login = 'LOGIN',
+  Ngetes = 'NGETES',
+  Classes = 'CLASSES',
 }
 
 export type LoginPayload = {
@@ -25,4 +27,22 @@ export type LoginPayload = {
     };
     token: string;
   };
+};
+
+export type NgetesPayload = {
+  [Types.Ngetes]: {
+    hasil: string;
+  };
+};
+
+export type ClassesPayload = {
+  [Types.Classes]: {
+    rombel_name: string;
+    id: number;
+    name: string;
+    description: string;
+    teacher_avatar: string;
+    teacher_id?: number;
+    teacher_name?: string;
+  }[];
 };

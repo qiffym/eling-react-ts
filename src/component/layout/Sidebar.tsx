@@ -1,17 +1,16 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useFetch } from '../../hooks/useFetch';
-import { Classes } from '../../types/class-type';
+import { MyContext } from '../../context/context';
 
 const LinkNavItems = [
   { name: 'Users', path: 'resources/users' },
-  { name: 'Rombel Classes', path: 'resources/classes' },
+  { name: 'Rombel Classes', path: 'resources/tes' },
   { name: 'Motivational Words', path: 'resources/motivational' },
 ];
 
 const Sidebar = () => {
+  const { state } = useContext(MyContext);
   const user = JSON.parse(localStorage.getItem('user') || '');
-  const { data } = useFetch('/api/teacher/online-classes');
-  const classes: Classes[] = data;
 
   const subNav = (role: string) => {
     switch (role) {
@@ -36,7 +35,7 @@ const Sidebar = () => {
         return (
           <>
             <label className="px-6 text-gray-400 text-sm">My Class</label>
-            {classes.map((item) => (
+            {state.classes?.map((item) => (
               <ul
                 key={item.id}
                 className="menu p-4 py-2 text-sm overflow-y-auto w-64 bg-base-100 text-base-content"

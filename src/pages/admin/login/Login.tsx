@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import LoadingButton from '../../../component/loading/LoadingButton';
 import useLogin from '../../../hooks/useLogin';
 
 const Login = () => {
-  const authLogin = useLogin();
+  const { isLoading, authLogin } = useLogin();
   const [disable, setDisable] = useState(false);
   const [input, setInput] = useState({
     username: '',
@@ -19,10 +20,12 @@ const Login = () => {
   useEffect(() => {
     if (input.username === '' || input.password === '') {
       setDisable(true);
+    } else if (isLoading) {
+      setDisable(true);
     } else {
       setDisable(false);
     }
-  }, [input]);
+  }, [input, isLoading]);
 
   return (
     <div className="flex w-screen h-screen">
@@ -47,7 +50,7 @@ const Login = () => {
             onChange={handleChange}
           />
           <button disabled={disable} className="btn w-full max-w-sm">
-            Login
+            {isLoading ? <LoadingButton /> : 'Login'}
           </button>
         </form>
       </div>
