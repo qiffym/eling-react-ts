@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { HiPlus } from 'react-icons/hi';
 import Loading from '../../../component/loading/Loading';
-import Modal from '../../../component/modal/Modal';
+
 import CardClass from '../../../component/teacher/home/Card';
 import { MyContext } from '../../../context/context';
 import { useFetch } from '../../../hooks/useFetch';
@@ -26,7 +26,6 @@ const DashboardTeacher = () => {
       >
         <HiPlus className="text-xl" />
       </label>
-      <Modal />
 
       {isLoading ? <Loading /> : <CardClass classes={data} />}
     </>

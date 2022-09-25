@@ -2,8 +2,6 @@ import { useContext } from 'react';
 import { MyContext } from '../context/context';
 import { Types } from '../types/reducer-type';
 
-// /admin/resources/users/:id
-
 export const useDeleteUser = () => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');

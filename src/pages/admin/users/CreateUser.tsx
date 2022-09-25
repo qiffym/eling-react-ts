@@ -1,6 +1,5 @@
 import React, {
   ChangeEvent,
-  FormEvent,
   MouseEvent,
   useEffect,
   useReducer,
@@ -171,7 +170,7 @@ const CreateUser = () => {
           />
           <label className="text-sm font-semibold text-slate-400">Email</label>
           <input
-            type="text"
+            type="email"
             className="input input-bordered w-full bg-gray-50 max-w-2xl"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               dispatch({
@@ -186,7 +185,7 @@ const CreateUser = () => {
             Password
           </label>
           <input
-            type="text"
+            type="password"
             className="input input-bordered w-full bg-gray-50 max-w-2xl"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               dispatch({
@@ -201,7 +200,7 @@ const CreateUser = () => {
             Password Confirmation
           </label>
           <input
-            type="text"
+            type="password"
             className={`input input-bordered w-full bg-gray-50 max-w-2xl ${
               isEquals ? '' : 'input-error'
             }`}
