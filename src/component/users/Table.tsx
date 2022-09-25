@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDeleteUser } from '../../hooks/useDeleteUser';
 import { UserType } from '../../types/user-type';
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
 
 const Table: FC<Props> = ({ userData }) => {
   const navigate = useNavigate();
+  const deleteUser = useDeleteUser();
 
   return (
     <div className="overflow-x-auto w-full">
@@ -68,7 +70,10 @@ const Table: FC<Props> = ({ userData }) => {
                   >
                     Edit
                   </button>
-                  <button className="btn btn-error btn-xs text-white">
+                  <button
+                    onClick={() => deleteUser(item.id)}
+                    className="btn btn-error btn-xs text-white"
+                  >
                     Delete
                   </button>
                 </th>

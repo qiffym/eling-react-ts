@@ -11,8 +11,16 @@ export type ActionMap<M extends { [index: string]: any }> = {
 
 export enum Types {
   Login = 'LOGIN',
-  Ngetes = 'NGETES',
   Classes = 'CLASSES',
+  DeleteSuccess = 'SUCCESS',
+
+  Role = 'ROLE',
+  Gender = 'GENDER',
+  Name = 'NAME',
+  Username = 'USERNAME',
+  Email = 'EMAIL',
+  Password = 'PASSWORD',
+  ConfirmPassword = 'CONFIRM_PASSWORD',
 }
 
 export type LoginPayload = {
@@ -29,12 +37,6 @@ export type LoginPayload = {
   };
 };
 
-export type NgetesPayload = {
-  [Types.Ngetes]: {
-    hasil: string;
-  };
-};
-
 export type ClassesPayload = {
   [Types.Classes]: {
     rombel_name: string;
@@ -45,4 +47,34 @@ export type ClassesPayload = {
     teacher_id?: number;
     teacher_name?: string;
   }[];
+};
+
+export type DeleteSuccessPayload = {
+  [Types.DeleteSuccess]: {
+    success: boolean;
+  };
+};
+
+export type CreateUserPayload = {
+  [Types.Role]: {
+    role: number;
+  };
+  [Types.Gender]: {
+    gender: string;
+  };
+  [Types.Name]: {
+    name: string;
+  };
+  [Types.Username]: {
+    username: string;
+  };
+  [Types.Email]: {
+    email: string;
+  };
+  [Types.Password]: {
+    password: string;
+  };
+  [Types.ConfirmPassword]: {
+    confirm_password: string;
+  };
 };

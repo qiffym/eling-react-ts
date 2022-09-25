@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
+
 import { UserType } from '../../../types/user-type';
 
 type LocationParams = {

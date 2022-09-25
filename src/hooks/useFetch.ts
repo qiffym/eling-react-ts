@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { MyContext } from '../context/context';
 
 export const useFetch = (url: string) => {
   const [data, setData] = useState<any>([]);
   const [isLoading, setLoading] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
+  const { state } = useContext(MyContext);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -25,7 +27,8 @@ export const useFetch = (url: string) => {
       console.log(e);
       setLoading(false);
     }
-  }, [baseURL, url, user.token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseURL, url, user.token, state.deleteSuccess.success]);
 
   useEffect(() => {
     fetchData();

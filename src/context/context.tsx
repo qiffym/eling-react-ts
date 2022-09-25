@@ -9,10 +9,10 @@ import React, {
 import {
   ClassesAction,
   classesReducer,
+  DeleteSuccessAction,
+  deleteSuccessReducer,
   LoginAction,
   loginReducer,
-  NgetesAction,
-  ngetesReducer,
 } from '../reducers/reducers';
 import { InitialStateType } from '../types/context-type';
 
@@ -32,27 +32,27 @@ const contextInitialState: InitialStateType = {
     },
     token: '',
   },
-  ngetes: {
-    hasil: '',
-  },
   classes: [],
+  deleteSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<LoginAction | ClassesAction | NgetesAction>;
+  dispatch: Dispatch<LoginAction | ClassesAction | DeleteSuccessAction>;
 }>({
   state: contextInitialState,
   dispatch: () => {},
 });
 
 const mainReducer = (
-  { login, classes, ngetes }: InitialStateType,
+  { login, classes, deleteSuccess }: InitialStateType,
   action: any
 ) => ({
   login: loginReducer(login, action),
   classes: classesReducer(classes, action),
-  ngetes: ngetesReducer(ngetes, action),
+  deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

@@ -10,8 +10,14 @@ export type LoginType = {
   token: string;
 };
 
-export type TheT = {
-  hasil: string;
+export type CreateUserType = {
+  role: number;
+  name: string;
+  username: string;
+  email: string;
+  gender: string;
+  password: string;
+  confirm_password: string;
 };
 
 export type ClassesType = {
@@ -24,8 +30,12 @@ export type ClassesType = {
   teacher_name?: string;
 };
 
+export type DeleteSuccessType = {
+  success: boolean;
+};
+
 export type InitialStateType = {
   login: LoginType;
-  ngetes: TheT;
   classes: ClassesType[];
+  deleteSuccess: DeleteSuccessType;
 };
