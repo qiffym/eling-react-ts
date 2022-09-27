@@ -18,14 +18,14 @@ const Home = () => {
         return (
           <>
             <Header>student</Header>
-            <Stat />
+            {/* <Stat /> */}
           </>
         );
       default:
         return (
           <>
             <Header>Dashboard</Header>
-            <Stat />
+            {/* <Stat /> */}
           </>
         );
     }
