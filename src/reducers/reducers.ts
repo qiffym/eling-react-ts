@@ -1,12 +1,12 @@
 import {
-  ClassesType,
+  ClassListType,
   CreateUserType,
   DeleteSuccessType,
   LoginType,
 } from '../types/context-type';
 import {
   ActionMap,
-  ClassesPayload,
+  ClassPayload,
   CreateUserPayload,
   DeleteSuccessPayload,
   LoginPayload,
@@ -29,13 +29,16 @@ export const loginReducer = (state: LoginType, action: LoginAction) => {
   }
 };
 
-export type ClassesAction =
-  ActionMap<ClassesPayload>[keyof ActionMap<ClassesPayload>];
+export type ClassListAction =
+  ActionMap<ClassPayload>[keyof ActionMap<ClassPayload>];
 
-export const classesReducer = (state: ClassesType[], action: ClassesAction) => {
+export const classReducer = (state: ClassListType, action: ClassListAction) => {
   switch (action.type) {
     case 'CLASSES':
-      return [...action.payload];
+      return {
+        ...state,
+        classList: action.payload.classList,
+      };
 
     default:
       return state;

@@ -7,8 +7,8 @@ import React, {
   useReducer,
 } from 'react';
 import {
-  ClassesAction,
-  classesReducer,
+  ClassListAction,
+  classReducer,
   DeleteSuccessAction,
   deleteSuccessReducer,
   LoginAction,
@@ -32,7 +32,20 @@ const contextInitialState: InitialStateType = {
     },
     token: '',
   },
-  classes: [],
+
+  classes: {
+    classList: [
+      {
+        rombel_name: '',
+        id: 0,
+        name: '',
+        description: '',
+        teacher_avatar: '',
+        teacher_id: 0,
+        teacher_name: '',
+      },
+    ],
+  },
   deleteSuccess: {
     success: false,
   },
@@ -40,7 +53,7 @@ const contextInitialState: InitialStateType = {
 
 export const MyContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<LoginAction | ClassesAction | DeleteSuccessAction>;
+  dispatch: Dispatch<LoginAction | ClassListAction | DeleteSuccessAction>;
 }>({
   state: contextInitialState,
   dispatch: () => {},
@@ -51,7 +64,7 @@ const mainReducer = (
   action: any
 ) => ({
   login: loginReducer(login, action),
-  classes: classesReducer(classes, action),
+  classes: classReducer(classes, action),
   deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
 });
 

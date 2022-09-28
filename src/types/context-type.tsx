@@ -20,14 +20,20 @@ export type CreateUserType = {
   confirm_password: string;
 };
 
-export type ClassesType = {
-  rombel_name: string;
-  id: number;
-  name: string;
-  description: string;
-  teacher_avatar: string;
-  teacher_id?: number;
-  teacher_name?: string;
+export type ClassListType = {
+  classList:
+    | [
+        {
+          rombel_name: string;
+          id: number;
+          name: string;
+          description: string;
+          teacher_avatar: string;
+          teacher_id?: number;
+          teacher_name?: string;
+        }
+      ]
+    | undefined;
 };
 
 export type DeleteSuccessType = {
@@ -36,6 +42,6 @@ export type DeleteSuccessType = {
 
 export type InitialStateType = {
   login: LoginType;
-  classes: ClassesType[];
+  classes: ClassListType;
   deleteSuccess: DeleteSuccessType;
 };

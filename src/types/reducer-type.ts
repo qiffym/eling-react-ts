@@ -37,16 +37,22 @@ export type LoginPayload = {
   };
 };
 
-export type ClassesPayload = {
+export type ClassPayload = {
   [Types.Classes]: {
-    rombel_name: string;
-    id: number;
-    name: string;
-    description: string;
-    teacher_avatar: string;
-    teacher_id?: number;
-    teacher_name?: string;
-  }[];
+    classList:
+      | [
+          {
+            rombel_name: string;
+            id: number;
+            name: string;
+            description: string;
+            teacher_avatar: string;
+            teacher_id?: number;
+            teacher_name?: string;
+          }
+        ]
+      | undefined;
+  };
 };
 
 export type DeleteSuccessPayload = {

@@ -1,22 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { HiPlus } from 'react-icons/hi';
 import Loading from '../../../component/loading/Loading';
 
 import CardClass from '../../../component/teacher/home/Card';
-import { MyContext } from '../../../context/context';
-import { useFetch } from '../../../hooks/useFetch';
-import { Types } from '../../../types/reducer-type';
+import useClasses from '../../../hooks/useClasses';
 
 const DashboardTeacher = () => {
-  const { dispatch } = useContext(MyContext);
-  const { isLoading, data } = useFetch('/api/teacher/online-classes');
-
-  useEffect(() => {
-    dispatch({
-      type: Types.Classes,
-      payload: data,
-    });
-  }, [dispatch, data]);
+  const { isLoading, classList } = useClasses();
 
   return (
     <>
@@ -27,7 +17,19 @@ const DashboardTeacher = () => {
         <HiPlus className="text-xl" />
       </label>
 
-      {isLoading ? <Loading /> : <CardClass classes={data} />}
+      {isLoading ? (
+        <Loading />
+      ) : classList?.length ? (
+        <CardClass classes={classList} />
+      ) : (
+        <div className="flex h-[40rem]">
+          <div className="m-auto flex flex-col">
+            <button className="btn btn-ghost font-extrabold text-5xl">
+              Tambah Kelas
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

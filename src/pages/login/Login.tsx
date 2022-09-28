@@ -30,9 +30,9 @@ const Login = () => {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>Login</title>
-      </Helmet>
+      </Helmet> */}
       <div className="flex w-screen h-screen">
         <div className="m-auto w-full flex flex-col justify-center content-center items-center">
           <form onSubmit={(e) => authLogin(e, input.username, input.password)}>
