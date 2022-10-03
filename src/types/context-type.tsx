@@ -10,22 +10,52 @@ export type LoginType = {
   token: string;
 };
 
-export type TheT = {
-  hasil: string;
+export type CreateUserType = {
+  role: number;
+  name: string;
+  username: string;
+  email: string;
+  gender: string;
+  password: string;
+  confirm_password: string;
 };
 
-export type ClassesType = {
-  rombel_name: string;
-  id: number;
+export type UpdateUserType = {
   name: string;
-  description: string;
-  teacher_avatar: string;
-  teacher_id?: number;
-  teacher_name?: string;
+  username: string;
+  email: string;
+  gender: string;
+  religion: string;
+  birthday: string;
+  telpon: string;
+  status: number;
+  address: string;
+  password?: string;
+  confirm_password?: string;
+};
+
+export type ClassListType = {
+  classList:
+    | [
+        {
+          rombel_name: string;
+          id: number;
+          name: string;
+          description: string;
+          teacher_avatar: string;
+          teacher_id?: number;
+          teacher_name?: string;
+        },
+      ]
+    | undefined;
+};
+
+export type DeleteSuccessType = {
+  success: boolean;
 };
 
 export type InitialStateType = {
   login: LoginType;
-  ngetes: TheT;
-  classes: ClassesType[];
+  classes: ClassListType;
+  deleteSuccess: DeleteSuccessType;
 };

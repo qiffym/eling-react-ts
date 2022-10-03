@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import LayoutIndex from '../component/layout';
 import Appbar from '../component/layout/Appbar';
 import Home from '../pages/home/Home';
-import Login from '../pages/admin/login/Login';
+import Login from '../pages/login/Login';
 import CreateUser from '../pages/admin/users/CreateUser';
 import EditUser from '../pages/admin/users/EditUser';
 import Users from '../pages/admin/users/Users';
@@ -25,11 +25,9 @@ const AppRoutes = () => {
                 <Route path="users">
                   <Route index element={<Users />} />
                   <Route path="new" element={<CreateUser />} />
+                  <Route path=":id/edit" element={<EditUser />} />
 
-                  {/* <Route path=":id/edit" element={<EditUser />} /> */}
-                  <Route path="edit" element={<EditUser />} />
                   <Route path=":id" element={<ViewUser />} />
-                  {/* <Route path="user" element={<ViewUser />} /> */}
                 </Route>
                 <Route path="motivational" element={<Users />} />
                 <Route path="classes" element={<Users />} />

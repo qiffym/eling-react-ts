@@ -7,12 +7,12 @@ import React, {
   useReducer,
 } from 'react';
 import {
-  ClassesAction,
-  classesReducer,
+  ClassListAction,
+  classReducer,
+  DeleteSuccessAction,
+  deleteSuccessReducer,
   LoginAction,
   loginReducer,
-  NgetesAction,
-  ngetesReducer,
 } from '../reducers/reducers';
 import { InitialStateType } from '../types/context-type';
 
@@ -32,27 +32,40 @@ const contextInitialState: InitialStateType = {
     },
     token: '',
   },
-  ngetes: {
-    hasil: '',
+
+  classes: {
+    classList: [
+      {
+        rombel_name: '',
+        id: 0,
+        name: '',
+        description: '',
+        teacher_avatar: '',
+        teacher_id: 0,
+        teacher_name: '',
+      },
+    ],
   },
-  classes: [],
+  deleteSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<LoginAction | ClassesAction | NgetesAction>;
+  dispatch: Dispatch<LoginAction | ClassListAction | DeleteSuccessAction>;
 }>({
   state: contextInitialState,
   dispatch: () => {},
 });
 
 const mainReducer = (
-  { login, classes, ngetes }: InitialStateType,
+  { login, classes, deleteSuccess }: InitialStateType,
   action: any
 ) => ({
   login: loginReducer(login, action),
-  classes: classesReducer(classes, action),
-  ngetes: ngetesReducer(ngetes, action),
+  classes: classReducer(classes, action),
+  deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

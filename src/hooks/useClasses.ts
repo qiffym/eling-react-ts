@@ -1,17 +1,19 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
+import { Classes } from '../types/class-type';
+import { Types } from '../types/reducer-type';
 
-export const useFetch = (url: string) => {
-  const [data, setData] = useState<any>([]);
+const useClasses = () => {
+  const [classList, setClassList] = useState<Classes[]>();
   const [isLoading, setLoading] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
-  const { state } = useContext(MyContext);
+  const { dispatch } = useContext(MyContext);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${baseURL}${url}`, {
+      const response = await fetch(`${baseURL}/api/teacher/online-classes`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -21,14 +23,20 @@ export const useFetch = (url: string) => {
         },
       });
       const result = await response.json();
-      setData(result.data);
+      setClassList(result.data);
+      dispatch({
+        type: Types.Classes,
+        payload: {
+          classList: result.data,
+        },
+      });
       setLoading(false);
     } catch (e) {
       console.log(e);
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [baseURL, url, user.token, state.deleteSuccess.success]);
+  }, [baseURL, user.token]);
 
   useEffect(() => {
     fetchData();
@@ -36,6 +44,8 @@ export const useFetch = (url: string) => {
 
   return {
     isLoading,
-    data,
+    classList,
   };
 };
+
+export default useClasses;
