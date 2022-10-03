@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDeleteUser } from '../../hooks/useDeleteUser';
-import { UserType } from '../../types/user-type';
-import Modal from '../modal/Modal';
+import { useDeleteUser } from '../../../hooks/useDeleteUser';
+import { UserType } from '../../../types/user-type';
+import Modal from '../../modal/Modal';
+import { HiTrash, HiPencilAlt, HiEye } from 'react-icons/hi';
 
 type Props = {
   userData: UserType[];
@@ -32,9 +33,9 @@ const Table: FC<Props> = ({ userData }) => {
           </thead>
           <tbody>
             {userData
-              .filter((usr) => usr.username !== user.user.username)
+              .filter(usr => usr.username !== user.user.username)
               .sort((a, b) => a.role.localeCompare(b.role))
-              .map((item) => (
+              .map(item => (
                 <React.Fragment key={item.id}>
                   <tr>
                     <td>{item.role}</td>
@@ -70,15 +71,20 @@ const Table: FC<Props> = ({ userData }) => {
                             },
                           })
                         }
-                        className="btn btn-xs"
-                      >
-                        details
+                        className="btn btn-xs space-x-1">
+                        <HiEye className="text-md" /> <span>View</span>
                       </button>
                       <button
-                        onClick={() => navigate('edit')}
-                        className="btn btn-warning btn-xs mx-2"
-                      >
-                        Edit
+                        onClick={() =>
+                          navigate(`${item.id}/edit`, {
+                            state: {
+                              user: item,
+                            },
+                          })
+                        }
+                        className="btn btn-warning btn-xs mx-2 space-x-1">
+                        <HiPencilAlt className="text-md" />
+                        <span>Edit</span>
                       </button>
                       <button
                         onClick={() => {
@@ -88,9 +94,8 @@ const Table: FC<Props> = ({ userData }) => {
                             username: item.username,
                           });
                         }}
-                        className="btn btn-error btn-xs text-white"
-                      >
-                        Delete
+                        className="btn btn-error btn-xs text-white space-x-1">
+                        <HiTrash className="text-md" /> <span>Delete</span>
                       </button>
                     </th>
                   </tr>

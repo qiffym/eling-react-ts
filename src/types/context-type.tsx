@@ -20,6 +20,20 @@ export type CreateUserType = {
   confirm_password: string;
 };
 
+export type UpdateUserType = {
+  name: string;
+  username: string;
+  email: string;
+  gender: string;
+  religion: string;
+  birthday: string;
+  telpon: string;
+  status: number;
+  address: string;
+  password?: string;
+  confirm_password?: string;
+};
+
 export type ClassListType = {
   classList:
     | [
@@ -31,7 +45,7 @@ export type ClassListType = {
           teacher_avatar: string;
           teacher_id?: number;
           teacher_name?: string;
-        }
+        },
       ]
     | undefined;
 };

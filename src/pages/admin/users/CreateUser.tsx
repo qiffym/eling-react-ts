@@ -13,13 +13,6 @@ import { useCreateUser } from '../../../hooks/useCreateUser';
 import { createUserReducer } from '../../../reducers/reducers';
 import { Types } from '../../../types/reducer-type';
 
-//       state.role === 0 ||
-// state.gender === '' ||
-// state.name === '' ||
-// state.email === '' ||
-// state.password === '' ||
-// state.confirm_password === ''
-
 const CreateUser = () => {
   const navigate = useNavigate();
   const [isDisable, setDisable] = useState(false);
@@ -73,7 +66,7 @@ const CreateUser = () => {
       <div className=" px-6 py-14">
         <Header>Create User</Header>
         <form
-          onSubmit={(e) => {
+          onSubmit={e => {
             createUser(e, {
               role: state.role,
               name: state.name,
@@ -82,22 +75,21 @@ const CreateUser = () => {
               username: state.username,
               password: state.password,
             });
-          }}
-        >
+          }}>
           <div className="flex flex-col space-y-3 bg-white p-4 py-8 rounded-lg">
             <label className="text-sm font-semibold text-slate-400">Role</label>
             <select
               defaultValue={'DEFAULT'}
-              onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                console.log(e.target.value);
                 dispatch({
                   type: Types.Role,
                   payload: {
                     role: Number(e.target.value),
                   },
-                })
-              }
-              className="select select-bordered w-full max-w-2xl bg-gray-50"
-            >
+                });
+              }}
+              className="select select-bordered w-full max-w-2xl bg-gray-50">
               <option value="DEFAULT" disabled>
                 -- Select Role --
               </option>
@@ -226,8 +218,7 @@ const CreateUser = () => {
             </button>
             <button
               className="btn btn-primary px-12 text-white"
-              disabled={isDisable}
-            >
+              disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}
             </button>
           </div>

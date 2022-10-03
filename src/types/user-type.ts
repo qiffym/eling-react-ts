@@ -7,4 +7,9 @@ export interface UserType {
   role: string;
   username: string;
   verified: boolean;
+  status: string;
+  religion: string;
+  birthday: string;
+  address: string;
+  telpon: string;
 }

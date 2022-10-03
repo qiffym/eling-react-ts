@@ -25,11 +25,9 @@ const AppRoutes = () => {
                 <Route path="users">
                   <Route index element={<Users />} />
                   <Route path="new" element={<CreateUser />} />
+                  <Route path=":id/edit" element={<EditUser />} />
 
-                  {/* <Route path=":id/edit" element={<EditUser />} /> */}
-                  <Route path="edit" element={<EditUser />} />
                   <Route path=":id" element={<ViewUser />} />
-                  {/* <Route path="user" element={<ViewUser />} /> */}
                 </Route>
                 <Route path="motivational" element={<Users />} />
                 <Route path="classes" element={<Users />} />

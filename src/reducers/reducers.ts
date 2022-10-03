@@ -3,6 +3,7 @@ import {
   CreateUserType,
   DeleteSuccessType,
   LoginType,
+  UpdateUserType,
 } from '../types/context-type';
 import {
   ActionMap,
@@ -10,6 +11,7 @@ import {
   CreateUserPayload,
   DeleteSuccessPayload,
   LoginPayload,
+  UpdateUserPayload,
 } from '../types/reducer-type';
 
 export type LoginAction =
@@ -50,7 +52,7 @@ export type DeleteSuccessAction =
 
 export const deleteSuccessReducer = (
   state: DeleteSuccessType,
-  action: DeleteSuccessAction
+  action: DeleteSuccessAction,
 ) => {
   switch (action.type) {
     case 'SUCCESS':
@@ -69,7 +71,7 @@ export type CreateUserAction =
 
 export const createUserReducer = (
   state: CreateUserType,
-  action: CreateUserAction
+  action: CreateUserAction,
 ) => {
   switch (action.type) {
     case 'ROLE':
@@ -107,6 +109,72 @@ export const createUserReducer = (
         ...state,
         confirm_password: action.payload.confirm_password,
       };
+    default:
+      return state;
+  }
+};
+
+export type UpdateUserAction =
+  ActionMap<UpdateUserPayload>[keyof ActionMap<UpdateUserPayload>];
+
+export const updateUserReducer = (
+  state: UpdateUserType,
+  action: UpdateUserAction,
+) => {
+  switch (action.type) {
+    case 'UPDATE_NAME':
+      return {
+        ...state,
+        name: action.payload.name,
+      };
+    case 'UPDATE_USERNAME':
+      return {
+        ...state,
+        username: action.payload.username,
+      };
+    case 'UPDATE_EMAIL':
+      return {
+        ...state,
+        email: action.payload.email,
+      };
+
+    case 'UPDATE_GENDER':
+      return {
+        ...state,
+        gender: action.payload.gender,
+      };
+    case 'UPDATE_RELIGION':
+      return {
+        ...state,
+        religion: action.payload.religion,
+      };
+    case 'UPDATE_BIRTHDAY':
+      return {
+        ...state,
+        birthday: action.payload.birthday,
+      };
+    case 'UPDATE_ADDRESS':
+      return {
+        ...state,
+        address: action.payload.address,
+      };
+
+    case 'UPDATE_STATUS':
+      return {
+        ...state,
+        status: action.payload.status,
+      };
+    case 'UPDATE_TELPON':
+      return {
+        ...state,
+        telpon: action.payload.telpon,
+      };
+    case 'UPDATE_CONFIRM_PASSWORD':
+      return {
+        ...state,
+        confirm_password: action.payload?.confirm_password,
+      };
+
     default:
       return state;
   }
