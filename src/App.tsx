@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+import ContextProvider from './context/context';
+import AppRoutes from './routes/AppRoutes';
+import './App.css';
 
 function App() {
   return (
-    <div>
-      <h1 className=" text-orange-800">NAMA SAYA PIKRI</h1>
-    </div>
+    <ContextProvider>
+      <AppRoutes />
+    </ContextProvider>
   );
 }
 
