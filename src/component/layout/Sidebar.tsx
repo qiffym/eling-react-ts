@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MyContext } from '../../context/context';
+import logosmk from '../../assets/images/smkn3mlg150x150.png';
 
 const LinkNavItems = [
   { name: 'Users', path: 'resources/users' },
@@ -18,11 +19,10 @@ const Sidebar = () => {
         return (
           <>
             <label className="px-6 text-gray-400 text-sm">Resources</label>
-            {LinkNavItems.map((item) => (
+            {LinkNavItems.map(item => (
               <ul
                 key={item.name}
-                className="menu p-4 py-2 overflow-y-auto w-64 bg-base-100 text-base-content text-center"
-              >
+                className="menu p-4 py-2 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
                 <li>
                   <NavLink to={item.path}>{item.name}</NavLink>
                 </li>
@@ -36,11 +36,10 @@ const Sidebar = () => {
           <>
             <label className="px-6 text-gray-400 text-sm">My Class</label>
             {state.classes?.classList?.length
-              ? state.classes?.classList?.map((item) => (
+              ? state.classes?.classList?.map(item => (
                   <ul
                     key={item.id}
-                    className="menu p-4 py-2 text-sm overflow-y-auto w-64 bg-base-100 text-base-content"
-                  >
+                    className="menu p-4 py-2 text-sm overflow-y-auto w-64 bg-base-100 text-base-content">
                     <li>
                       <NavLink to={'/'}>{item.name}</NavLink>
                     </li>
@@ -72,6 +71,8 @@ const Sidebar = () => {
   return (
     <div className="drawer-side bg-white overflow-auto h-screen">
       {/* {dashborad(user.user.role)} */}
+      <img src={logosmk} alt="logo_smk" width={120} className="mx-auto my-2" />
+      <div className="border-t-2 w-full border-slate-600 inline-block "></div>
 
       <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
         <li>
