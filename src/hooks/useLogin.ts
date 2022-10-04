@@ -9,7 +9,7 @@ const useLogin = () => {
   const authLogin = async (
     e: FormEvent<HTMLFormElement>,
     username: string,
-    password: string
+    password: string,
   ) => {
     setLoading(true);
     try {
@@ -33,7 +33,7 @@ const useLogin = () => {
         setLoading(false);
         navigate('/');
       } else {
-        alert('Username dan passsword salah');
+        alert('Username atau passsword salah');
         setLoading(false);
       }
     } catch (e) {
