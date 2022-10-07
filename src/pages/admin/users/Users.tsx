@@ -5,10 +5,14 @@ import Header from '../../../component/header/Header';
 import Loading from '../../../component/loading/Loading';
 import Table from '../../../component/admin/users/Table';
 import { useFetch } from '../../../hooks/useFetch';
+import Paginate from '../../../component/paginate/Paginate';
 
 const Users = () => {
   const { isLoading, data } = useFetch('/api/admin/resources/users');
   const [searchData, setSearchData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(3);
+
   const navigate = useNavigate();
 
   const searchUser = (value: string) => {
@@ -23,12 +27,18 @@ const Users = () => {
     setSearchData(data);
   }, [data]);
 
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = searchData.slice(indexOfFirstPost, indexOfLastPost);
+
+  const pagination = (pageNumber: any) => setCurrentPage(pageNumber);
+
   return (
     <>
       <Helmet>
         <title>Users</title>
       </Helmet>
-      <div className=" px-6 py-14">
+      <div className="px-6 py-14">
         <Header>Users</Header>
         <div className="flex flex-row justify-between mb-4">
           <input
@@ -43,7 +53,13 @@ const Users = () => {
             Create User
           </button>
         </div>
-        {isLoading ? <Loading /> : <Table userData={searchData} />}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <Table userData={searchData} />
+          </>
+        )}
       </div>
     </>
   );
