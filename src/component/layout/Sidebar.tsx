@@ -72,9 +72,9 @@ const Sidebar = () => {
     <div className="drawer-side bg-white overflow-auto h-screen">
       {/* {dashborad(user.user.role)} */}
       <img src={logosmk} alt="logo_smk" width={120} className="mx-auto my-2" />
-      <div className="border-t-2 w-full border-slate-600 inline-block "></div>
+      {/* <div className="border-t-2 w-full border-slate-600 inline-block "></div> */}
 
-      <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
+      <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center mt-5">
         <li>
           <NavLink to="dashboard">Dashboard</NavLink>
         </li>
