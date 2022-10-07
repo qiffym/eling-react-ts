@@ -19,7 +19,7 @@ export const useDeleteUser = () => {
             'Access-Control-Allow-Origin': '*',
             Authorization: `Bearer ${user.token}`,
           },
-        }
+        },
       );
       const result = await response.json();
       dispatch({

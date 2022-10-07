@@ -9,8 +9,8 @@ type ListClass = {
 const CardClass: FC<ListClass> = ({ classes }) => {
   return (
     <>
-      <div className="grid grid-cols-3">
-        {classes?.map((item) => (
+      <div className="grid grid-cols-3 gap-10">
+        {classes?.map(item => (
           <div key={item.id} className="card w-80 bg-base-100 shadow-xl">
             <div className="card-body">
               <p className="font-semibold">{item.rombel_name}</p>

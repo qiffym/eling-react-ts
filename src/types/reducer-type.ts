@@ -13,6 +13,7 @@ export enum Types {
   Login = 'LOGIN',
   Classes = 'CLASSES',
   DeleteSuccess = 'SUCCESS',
+  CreateClassSuccess = 'CLASS_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -35,6 +36,11 @@ export enum Types {
   UpdateTelpon = 'UPDATE_TELPON',
   UpdatePassword = 'UPDATE_PASSWORD',
   UpdateConfirmPassword = 'UPDATE_CONFIRM_PASSWORD',
+
+  // Payload Create Class
+  ClassName = 'CLASS_NAME',
+  ClassDescription = 'CLASS_DESCRIPTION',
+  RombelID = 'ROMBEL_CLASS_ID',
 }
 
 export type LoginPayload = {
@@ -71,6 +77,12 @@ export type ClassPayload = {
 
 export type DeleteSuccessPayload = {
   [Types.DeleteSuccess]: {
+    success: boolean;
+  };
+};
+
+export type CreateClassSuccessPayload = {
+  [Types.CreateClassSuccess]: {
     success: boolean;
   };
 };
@@ -137,5 +149,17 @@ export type UpdateUserPayload = {
   };
   [Types.UpdateConfirmPassword]: {
     confirm_password?: string;
+  };
+};
+
+export type CreateClassPayload = {
+  [Types.ClassName]: {
+    name: string;
+  };
+  [Types.ClassDescription]: {
+    description: string;
+  };
+  [Types.RombelID]: {
+    rombel_class_id: number;
   };
 };

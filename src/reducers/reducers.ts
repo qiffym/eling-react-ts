@@ -1,5 +1,7 @@
 import {
   ClassListType,
+  CreateClassSuccessType,
+  CreateClassType,
   CreateUserType,
   DeleteSuccessType,
   LoginType,
@@ -8,6 +10,8 @@ import {
 import {
   ActionMap,
   ClassPayload,
+  CreateClassPayload,
+  CreateClassSuccessPayload,
   CreateUserPayload,
   DeleteSuccessPayload,
   LoginPayload,
@@ -56,6 +60,25 @@ export const deleteSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type CreateClassSuccessAction =
+  ActionMap<CreateClassSuccessPayload>[keyof ActionMap<CreateClassSuccessPayload>];
+
+export const createClassSuccessReducer = (
+  state: CreateClassSuccessType,
+  action: CreateClassSuccessAction,
+) => {
+  switch (action.type) {
+    case 'CLASS_SUCCESS':
       return {
         ...state,
         success: action.payload.success,
@@ -175,6 +198,34 @@ export const updateUserReducer = (
         confirm_password: action.payload?.confirm_password,
       };
 
+    default:
+      return state;
+  }
+};
+
+export type CreateClassAction =
+  ActionMap<CreateClassPayload>[keyof ActionMap<CreateClassPayload>];
+
+export const createClassReducer = (
+  state: CreateClassType,
+  action: CreateClassAction,
+) => {
+  switch (action.type) {
+    case 'CLASS_NAME':
+      return {
+        ...state,
+        name: action.payload.name,
+      };
+    case 'CLASS_DESCRIPTION':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+    case 'ROMBEL_CLASS_ID':
+      return {
+        ...state,
+        rombel_class_id: action.payload.rombel_class_id,
+      };
     default:
       return state;
   }
