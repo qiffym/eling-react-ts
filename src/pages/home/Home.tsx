@@ -18,7 +18,6 @@ const Home = () => {
         return (
           <>
             <Header>student</Header>
-            {/* <Stat /> */}
           </>
         );
       default:

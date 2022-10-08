@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { HiPlus } from 'react-icons/hi';
 import Loading from '../../../component/loading/Loading';
 import CreateClassModal from '../../../component/modal/CreateClassModal';
 import Modal from '../../../component/modal/Modal';
+import Header from '../../../component/header/Header';
 
 import CardClass from '../../../component/teacher/home/Card';
 import { MyContext } from '../../../context/context';
@@ -14,6 +16,10 @@ const DashboardTeacher = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Dashboard</title>
+      </Helmet>
+      <Header>Dashboard</Header>
       <button
         onClick={() => setOpenModal(true)}
         className="btn flex w-14 h-14 btn-primary rounded-full fixed z-10 right-5 bottom-5 items-center content-center justify-center drop-shadow-md">
