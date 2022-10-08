@@ -1,5 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Classes } from '../../../types/class-type';
 
 type ListClass = {
@@ -7,6 +8,8 @@ type ListClass = {
 };
 
 const CardClass: FC<ListClass> = ({ classes }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="grid grid-cols-3 gap-10">
@@ -25,7 +28,13 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                   />
                   <p className="font-semibold">{item.teacher_name}</p>
                 </div>
-                <button className="btn btn-ghost px-4">View</button>
+                <button
+                  onClick={() =>
+                    navigate(`/online-class/${item.id}`, { replace: true })
+                  }
+                  className="btn btn-ghost px-4">
+                  View
+                </button>
               </div>
             </div>
           </div>

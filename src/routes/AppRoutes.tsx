@@ -11,6 +11,8 @@ import PermissionDenied from '../pages/not-found-page/PermissionDenied';
 import ProtectedRoutes from './ProtectedRoutes';
 import PublicRoutes from './PublicRoutes';
 import NotFound from '../pages/not-found-page/NotFound';
+import ClassDetail from '../pages/teacher/classes/ClassDetail';
+import DashboardTeacher from '../pages/teacher/dashboard/DashboardTeacher';
 
 const AppRoutes = () => {
   return (
@@ -20,13 +22,19 @@ const AppRoutes = () => {
           <Route path="/" element={<Appbar />}>
             <Route path="/" element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Home />} />
+            <Route
+              path="/"
+              element={<ProtectedRoutes roleRequired="teacher" />}>
+              <Route path="online-class">
+                <Route path=":id" element={<ClassDetail />} />
+              </Route>
+            </Route>
             <Route path="/" element={<ProtectedRoutes roleRequired="admin" />}>
               <Route path="resources">
                 <Route path="users">
                   <Route index element={<Users />} />
                   <Route path="new" element={<CreateUser />} />
                   <Route path=":id/edit" element={<EditUser />} />
-
                   <Route path=":id" element={<ViewUser />} />
                 </Route>
                 <Route path="motivational" element={<Users />} />
