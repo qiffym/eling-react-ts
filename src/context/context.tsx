@@ -9,6 +9,8 @@ import React, {
 import {
   ClassListAction,
   classReducer,
+  CreateClassSuccessAction,
+  createClassSuccessReducer,
   DeleteSuccessAction,
   deleteSuccessReducer,
   LoginAction,
@@ -49,22 +51,31 @@ const contextInitialState: InitialStateType = {
   deleteSuccess: {
     success: false,
   },
+  createClassSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<LoginAction | ClassListAction | DeleteSuccessAction>;
+  dispatch: Dispatch<
+    | LoginAction
+    | ClassListAction
+    | DeleteSuccessAction
+    | CreateClassSuccessAction
+  >;
 }>({
   state: contextInitialState,
   dispatch: () => {},
 });
 
 const mainReducer = (
-  { login, classes, deleteSuccess }: InitialStateType,
-  action: any
+  { login, classes, deleteSuccess, createClassSuccess }: InitialStateType,
+  action: any,
 ) => ({
   login: loginReducer(login, action),
   classes: classReducer(classes, action),
+  createClassSuccess: createClassSuccessReducer(createClassSuccess, action),
   deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
 });
 

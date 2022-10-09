@@ -1,3 +1,5 @@
+// Global Reducer Type
+
 export type LoginType = {
   user: {
     id: number;
@@ -9,6 +11,32 @@ export type LoginType = {
   };
   token: string;
 };
+
+export type ClassListType = {
+  classList:
+    | [
+        {
+          rombel_name: string;
+          id: number;
+          name: string;
+          description: string;
+          teacher_avatar: string;
+          teacher_id?: number;
+          teacher_name?: string;
+        },
+      ]
+    | undefined;
+};
+
+export type DeleteSuccessType = {
+  success: boolean;
+};
+
+export type CreateClassSuccessType = {
+  success: boolean;
+};
+
+// Local Reducer Type
 
 export type CreateUserType = {
   role: number;
@@ -34,28 +62,17 @@ export type UpdateUserType = {
   confirm_password?: string;
 };
 
-export type ClassListType = {
-  classList:
-    | [
-        {
-          rombel_name: string;
-          id: number;
-          name: string;
-          description: string;
-          teacher_avatar: string;
-          teacher_id?: number;
-          teacher_name?: string;
-        },
-      ]
-    | undefined;
+export type CreateClassType = {
+  name: string;
+  description: string;
+  rombel_class_id: number;
 };
 
-export type DeleteSuccessType = {
-  success: boolean;
-};
+// Store to initial state Type for Global
 
 export type InitialStateType = {
   login: LoginType;
   classes: ClassListType;
   deleteSuccess: DeleteSuccessType;
+  createClassSuccess: CreateClassSuccessType;
 };

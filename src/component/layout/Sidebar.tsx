@@ -39,9 +39,11 @@ const Sidebar = () => {
               ? state.classes?.classList?.map(item => (
                   <ul
                     key={item.id}
-                    className="menu p-4 py-2 text-sm overflow-y-auto w-64 bg-base-100 text-base-content">
+                    className="menu pl-4 text-sm overflow-y-auto w-64 bg-base-100 text-base-content">
                     <li>
-                      <NavLink to={'/'}>{item.name}</NavLink>
+                      <NavLink to={`online-class/${item.id}`}>
+                        {item.name}
+                      </NavLink>
                     </li>
                   </ul>
                 ))
