@@ -4,6 +4,7 @@ import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { HiPlusCircle } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import ryujin from '../../../assets/ryujin1.jpg';
+import Footer from '../../../component/layout/Footer';
 
 const ClassDetail = () => {
   const navigate = useNavigate();
@@ -170,6 +171,8 @@ const ClassDetail = () => {
             </div>
           </div>
         </section>
+
+        <Footer />
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import Loading from '../../../component/loading/Loading';
 import CreateClassModal from '../../../component/modal/CreateClassModal';
 import Modal from '../../../component/modal/Modal';
 import Header from '../../../component/header/Header';
+import Footer from '../../../component/layout/Footer';
 
 import CardClass from '../../../component/teacher/home/Card';
 import { MyContext } from '../../../context/context';
@@ -49,6 +50,8 @@ const DashboardTeacher = () => {
           modalAction={() => setOpenModal(false)}
         />
       ) : null}
+
+      <Footer />
     </>
   );
 };
