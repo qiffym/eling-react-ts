@@ -15,15 +15,11 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
   const [state, dispatch] = useReducer(createClassReducer, {
     name: '',
     description: '',
-    rombel_class_id: 0,
+    rombel_class_id: 1,
   });
 
   useEffect(() => {
-    if (
-      state.rombel_class_id === 0 ||
-      state.name === '' ||
-      state.description === ''
-    ) {
+    if (state.name === '' || state.description === '') {
       setDisable(true);
     } else {
       setDisable(false);
@@ -56,20 +52,26 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
               <label htmlFor="romble-textinput" className="font-medium">
                 Romble ID
               </label>
-              <input
-                type="text"
-                placeholder="Type here"
-                name="romble-textinput"
-                className="input input-bordered w-full "
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              <select
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                   dispatch({
                     type: Types.RombelID,
                     payload: {
                       rombel_class_id: Number(e.target.value),
                     },
-                  })
-                }
-              />
+                  });
+                }}
+                className="select select-bordered w-full ">
+                <option value="DEFAULT" disabled>
+                  -- Rombel ID --
+                </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">

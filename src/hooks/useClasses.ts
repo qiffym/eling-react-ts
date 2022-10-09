@@ -1,10 +1,10 @@
 import { FormEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
-import { Classes } from '../types/class-type';
+import { ClassesType } from '../types/class-type';
 import { Types } from '../types/reducer-type';
 
 export const useClasses = () => {
-  const [classList, setClassList] = useState<Classes[]>();
+  const [classList, setClassList] = useState<ClassesType[]>();
   const [isLoading, setLoading] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
