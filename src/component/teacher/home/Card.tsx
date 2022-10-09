@@ -1,6 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Classes } from '../../../types/class-type';
 
 type ListClass = {
