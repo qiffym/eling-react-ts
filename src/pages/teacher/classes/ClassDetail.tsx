@@ -72,6 +72,7 @@ const ClassDetail = () => {
             <div
               tabIndex={0}
               className="collapse collapse-arrow border-4 border-slate-200 rounded-box bg-slate-200 mb-4">
+              <input type="checkbox" />
               {/* Title Collapse */}
               <div className="collapse-title text-xl font-medium">
                 <h3>Pembelajaran 1</h3>
@@ -106,6 +107,7 @@ const ClassDetail = () => {
             <div
               tabIndex={0}
               className="collapse collapse-arrow border-4 border-slate-200 rounded-box bg-slate-200 mb-4">
+              <input type="checkbox" />
               {/* Title Collapse */}
               <div className="collapse-title text-xl font-medium">
                 <h3>Pembelajaran 2</h3>
@@ -138,6 +140,7 @@ const ClassDetail = () => {
             <div
               tabIndex={0}
               className="collapse collapse-arrow border-4 border-slate-200 rounded-box bg-slate-200 mb-4">
+              <input type="checkbox" />
               {/* Title Collapse */}
               <div className="collapse-title text-xl font-medium">
                 <h3>Pembelajaran 3</h3>
