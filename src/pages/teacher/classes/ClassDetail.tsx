@@ -18,7 +18,7 @@ const ClassDetail = () => {
   return (
     <>
       <Helmet>
-        <title>(Nama Kelas)</title>
+        <title>{classData.name}</title>
       </Helmet>
       {isLoading ? (
         <Loading />
