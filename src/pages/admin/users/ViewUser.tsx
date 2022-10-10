@@ -49,6 +49,29 @@ const ViewUser = () => {
               </tr>
 
               <tr>
+                <td className="text-gray-400">Birthday</td>
+                <td></td>
+                <td></td>
+                <td className="font-semibold">{user.birthday}</td>
+              </tr>
+
+              <tr>
+                <td className="text-gray-400">Religion</td>
+                <td></td>
+                <td></td>
+                <td className="font-semibold">{user.religion}</td>
+              </tr>
+
+              <tr>
+                <td className="text-gray-400">Gender</td>
+                <td></td>
+                <td></td>
+                <td className="font-semibold">
+                  {user.gender === 'L' ? 'Laki-Laki' : 'Perempuan'}
+                </td>
+              </tr>
+
+              <tr>
                 <td className="text-gray-400">Email</td>
                 <td></td>
                 <td></td>

@@ -18,11 +18,11 @@ const Sidebar = () => {
       case 'admin':
         return (
           <>
-            <label className="px-6 text-gray-400 text-sm">Resources</label>
+            <label className="px-6 text-gray-400 text-sm mb-2">Resources</label>
             {LinkNavItems.map(item => (
               <ul
                 key={item.name}
-                className="menu  p-4 py-2 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
+                className="menu  p-4 py-0 w-64 bg-base-100 text-sm text-center">
                 <li>
                   <NavLink to={item.path}>{item.name}</NavLink>
                 </li>
@@ -41,7 +41,7 @@ const Sidebar = () => {
                     key={item.id}
                     className="menu pl-4 text-sm overflow-y-auto w-64 bg-base-100 text-base-content">
                     <li>
-                      <NavLink to={`online-class/${item.id}`}>
+                      <NavLink to={`online-class/${item.id}`} state={item}>
                         {item.name}
                       </NavLink>
                     </li>
