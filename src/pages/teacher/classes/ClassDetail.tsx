@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { HiPlusCircle } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ryujin from '../../../assets/ryujin1.jpg';
 import Footer from '../../../component/layout/Footer';
 import Loading from '../../../component/loading/Loading';
 import { useFetch } from '../../../hooks/useFetch';
@@ -32,13 +31,13 @@ const ClassDetail = () => {
               </button>
               <h3 className="text-xl font-bold">{classData.rombel_name}</h3>
               <h2 className="text-2xl font-bold mb-2">{classData?.name}</h2>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
                 <div>
-                  <h5 className="font-bold">oleh</h5>
+                  <h5 className="font-bold">Pengajar: </h5>
                 </div>
                 <div className="avatar">
                   <div className="mask mask-circle w-8 h-8">
-                    <img src={ryujin} alt="Avatar Tailwind CSS Component" />
+                    <img src={classData.teacher?.avatar} alt="teacher_avatar" />
                   </div>
                 </div>
                 <div>
