@@ -20,7 +20,9 @@ const CardClass: FC<ListClass> = ({ classes }) => {
               <h2 className="font-bold text-xl">{item.rombel_name}</h2>
               <h2
                 onClick={() =>
-                  navigate(`/online-class/${item.id}`, { replace: true })
+                  navigate(`/online-class/${item.id}`, {
+                    state: item,
+                  })
                 }
                 className="card-title cursor-pointer">
                 {item.name}
