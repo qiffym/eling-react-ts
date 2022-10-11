@@ -71,7 +71,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="drawer-side bg-white overflow-auto h-screen">
+    <div className="drawer-side bg-slate-600 overflow-auto h-screen">
       {/* {dashborad(user.user.role)} */}
       <img src={logosmk} alt="logo_smk" width={120} className="mx-auto my-2" />
       {/* <div className="border-t-2 w-full border-slate-600 inline-block "></div> */}
