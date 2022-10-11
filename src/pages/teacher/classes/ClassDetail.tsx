@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { useFetch } from '../../../hooks/useFetch';
 import { ClassesDetailType, ClassesType } from '../../../types/class-type';
 
 const ClassDetail = () => {
+  const [tab, setTab] = useState(0);
   const { id } = useLocation().state as ClassesType;
   const { isLoading, data } = useFetch(`/api/teacher/online-classes/${id}`);
   const navigate = useNavigate();
@@ -53,13 +54,27 @@ const ClassDetail = () => {
             <div className="container mx-auto w-11/12">
               <div className="flex items-center space-x-2 mb-2">
                 <div>
-                  <button className="btn btn-sm btn-ghost">
+                  <button
+                    onClick={() => setTab(0)}
+                    className={`${
+                      tab === 0
+                        ? 'btn btn-sm btn-primary'
+                        : 'btn btn-sm btn-ghost'
+                    }`}>
                     Konten Pembelajaran
                   </button>
                 </div>
                 <span>|</span>
                 <div>
-                  <button className="btn btn-sm btn-ghost">Tentang</button>
+                  <button
+                    onClick={() => setTab(1)}
+                    className={`${
+                      tab === 1
+                        ? 'btn btn-sm btn-primary'
+                        : 'btn btn-sm btn-ghost'
+                    }`}>
+                    Tentang
+                  </button>
                 </div>
               </div>
               <hr className="bg-gray-400 mb-3 h-[0.1rem]" />
@@ -68,10 +83,9 @@ const ClassDetail = () => {
           </section>
 
           {/* Konten Pembelajaran */}
-          <ClassContent></ClassContent>
+          {tab === 0 ? <ClassContent /> : <AboutClass />}
 
           {/* Tentang */}
-          <AboutClass></AboutClass>
 
           <Footer />
         </div>
