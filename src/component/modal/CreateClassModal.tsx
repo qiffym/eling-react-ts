@@ -65,12 +65,12 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
                 <option value="DEFAULT" disabled>
                   -- Rombel ID --
                 </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
+                <option value="1">X TKJ 1</option>
+                <option value="3">X TKJ 2</option>
+                <option value="2">XI TKJ 1</option>
+                <option value="4">XI TKJ 2</option>
+                <option value="5">XII TKJ 1</option>
+                <option value="6">XII TKJ 2</option>
               </select>
             </div>
             <div className="flex flex-col space-y-1">
