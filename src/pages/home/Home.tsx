@@ -1,12 +1,10 @@
 import Header from '../../component/header/Header';
-import Stat from '../../component/home/Stat';
+
 import DashboardAdmin from '../admin/dashboard/DashboardAdmin';
 import DashboardTeacher from '../teacher/dashboard/DashboardTeacher';
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem('user') || '');
-
-  console.log(user.token);
 
   const dashboardRole = (role: string) => {
     switch (role) {

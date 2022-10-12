@@ -1,26 +1,25 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import MotivationalWordsTable from '../../../component/admin/motivational-words/MotivationalWordsTable';
 import Header from '../../../component/header/Header';
 import Loading from '../../../component/loading/Loading';
-import Table from '../../../component/admin/users/Table';
 import { useFetch } from '../../../hooks/useFetch';
 
-const Users = () => {
-  const { isLoading, data } = useFetch('/api/admin/resources/users');
+const MotivationalWords = () => {
+  const { isLoading, data } = useFetch(
+    '/api/admin/resources/motivational-words',
+  );
   const [searchData, setSearchData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(3);
-
   const navigate = useNavigate();
 
   const searchUser = (value: string) => {
     setSearchData(
       data.filter((item: any) => {
         return (
-          item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.username.toLowerCase().includes(value.toLowerCase()) ||
-          item.email.toLowerCase().includes(value.toLowerCase())
+          item.title.toLowerCase().includes(value.toLowerCase()) ||
+          item.body.toLowerCase().includes(value.toLowerCase()) ||
+          item.from.toLowerCase().includes(value.toLowerCase())
         );
       }),
     );
@@ -29,12 +28,6 @@ const Users = () => {
   useEffect(() => {
     setSearchData(data);
   }, [data]);
-
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = searchData.slice(indexOfFirstPost, indexOfLastPost);
-
-  const pagination = (pageNumber: any) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -53,19 +46,17 @@ const Users = () => {
             }
           />
           <button onClick={() => navigate('new')} className="btn btn-primary">
-            Add User
+            Add Motivational
           </button>
         </div>
         {isLoading ? (
           <Loading />
         ) : (
-          <>
-            <Table userData={searchData} />
-          </>
+          <MotivationalWordsTable motivationalData={searchData} />
         )}
       </div>
     </>
   );
 };
 
-export default Users;
+export default MotivationalWords;

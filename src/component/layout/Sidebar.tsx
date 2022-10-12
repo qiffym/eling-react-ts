@@ -5,8 +5,8 @@ import logosmk from '../../assets/images/smkn3mlg150x150.png';
 
 const LinkNavItems = [
   { name: 'Users', path: 'resources/users' },
-  { name: 'Rombel Classes', path: 'resources/tes' },
-  { name: 'Motivational Words', path: 'resources/motivational' },
+  { name: 'Rombel Classes', path: 'resources/rombel-class' },
+  { name: 'Motivational Words', path: 'resources/motivational-words' },
 ];
 
 const Sidebar = () => {
@@ -22,7 +22,7 @@ const Sidebar = () => {
             {LinkNavItems.map(item => (
               <ul
                 key={item.name}
-                className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm text-center">
+                className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm">
                 <li>
                   <NavLink to={item.path}>{item.name}</NavLink>
                 </li>
@@ -39,7 +39,7 @@ const Sidebar = () => {
               ? state.classes?.classList?.map(item => (
                   <ul
                     key={item.id}
-                    className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm text-center">
+                    className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm">
                     <li>
                       <NavLink to={`online-class/${item.id}`} state={item}>
                         {item.name}

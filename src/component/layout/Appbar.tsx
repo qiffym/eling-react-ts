@@ -11,7 +11,7 @@ const Appbar = () => {
 
   return (
     <>
-      <nav className="flex flex-row fixed w-[82%] justify-end items-center h-16 px-6 space-x-5 z-50">
+      <nav className="flex flex-row fixed w-[82%] 2xl:w-[87.5%] justify-end items-center h-16 px-6 space-x-5 z-50">
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost m-1 space-x-3">
             <div className="flex flex-row items-center space-x-2">

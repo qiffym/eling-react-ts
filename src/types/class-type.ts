@@ -16,7 +16,13 @@ export type ClassesDetailType = {
   name?: string;
   rombel_name?: string;
   students?: {
-    data: [];
+    data: [
+      {
+        avatar: string;
+        nama: string;
+        nis: string;
+      },
+    ];
     total: number;
   };
   teacher?: {
@@ -26,4 +32,44 @@ export type ClassesDetailType = {
     nik: string;
     nip: string;
   };
+};
+
+export type ContentType = {
+  id?: number;
+  title?: string;
+  description?: string;
+  created_at?: string;
+};
+
+export type ContentDetailType = {
+  id?: number;
+  online_class_id?: number;
+  title?: string;
+  description?: string;
+  created_at?: string;
+  materials?: [
+    {
+      id: number;
+      title: string;
+      file: string;
+    },
+  ];
+  forum?: [
+    {
+      id: number;
+      content_id: number;
+      content_of: string;
+      topic: string;
+      created_at: string;
+    },
+  ];
+  assignment?: [
+    {
+      id: number;
+      title: string;
+      description: string;
+      deadline: string;
+      created_at: string;
+    },
+  ];
 };

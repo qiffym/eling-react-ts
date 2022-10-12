@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import logosmk from '../../../../assets/images/smkn3mlg150x150.png';
 
-export const AboutClass = () => {
+type Props = {
+  about?: string;
+  student?: [
+    {
+      avatar?: string;
+      name?: string;
+      nis?: string;
+    },
+  ];
+  total?: number;
+};
+
+export const AboutClass: FC<Props> = ({ about, student, total }) => {
   return (
     <>
       <section id="about-class">
@@ -32,14 +44,7 @@ export const AboutClass = () => {
               <h2 className="title text-2xl font-bold mb-4">
                 Tentang Kelas Online
               </h2>
-              <p className="w-4/5">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Suscipit explicabo ut corporis placeat rerum odit aut beatae
-                officia veritatis similique commodi, laudantium recusandae sunt
-                eos officiis tenetur quod nulla inventore et, consequatur libero
-                voluptatibus. Sequi autem suscipit earum exercitationem sunt
-                libero eveniet necessitatibus.
-              </p>
+              <p className="w-4/5">{about ?? 'No Description'}</p>
             </div>
 
             <hr className="border-t-2 border-slate-400 w-4/5 my-3" />
@@ -48,60 +53,43 @@ export const AboutClass = () => {
               <h2 className="title text-2xl font-bold mb-4">Siswa</h2>
               <p className="mb-3">
                 Total siswa:{' '}
-                <span className="badge badge-lg bg-teal-600 font-bold">30</span>
+                <span className="badge badge-lg bg-teal-600 font-bold">
+                  {total}
+                </span>
               </p>
 
               {/* Data Siswa */}
               <div className="overflow-x-auto w-4/5">
                 <table className="table table-compact w-full">
                   <tbody>
-                    {/* List Pertema */}
-                    <tr className="hover">
-                      {/* Nomor */}
-                      <th className="text-center">1</th>
-
-                      {/* Avatar + Nama */}
-                      <td>
-                        <div className="flex items-center space-x-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                              <img
-                                src={logosmk}
-                                alt="Avatar Tailwind CSS Component"
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="font-bold">Hart Hagerty</div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-
                     {/* List Kedua */}
-                    <tr className="hover">
-                      {/* Nomor */}
-                      <th className="text-center">2</th>
+                    {student?.map((item, index) => (
+                      <tr key={index} className="hover">
+                        {/* Nomor */}
+                        <th className="text-center">{index + 1}</th>
 
-                      {/* Avatar + Nama */}
-                      <td>
-                        <div className="flex items-center space-x-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                              <img
-                                src={logosmk}
-                                alt="Avatar Tailwind CSS Component"
-                              />
+                        {/* Avatar + Nama */}
+                        <td>
+                          <div className="flex items-center space-x-3">
+                            <div className="avatar">
+                              <div className="mask mask-squircle w-12 h-12">
+                                <img
+                                  src={item.avatar}
+                                  alt="Avatar Tailwind CSS Component"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="font-bold">{item.name}</div>
+                              <div className="text-sm opacity-50">
+                                {item.nis}
+                              </div>
                             </div>
                           </div>
-                          <div>
-                            <div className="font-bold">
-                              Qiff Ya Muhammad bin Fardan bin Muhammad Abadan
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                        <td></td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

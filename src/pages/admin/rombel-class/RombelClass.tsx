@@ -1,17 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import RombelTable from '../../../component/admin/rombel/RombelTable';
+
 import Header from '../../../component/header/Header';
 import Loading from '../../../component/loading/Loading';
-import Table from '../../../component/admin/users/Table';
 import { useFetch } from '../../../hooks/useFetch';
 
-const Users = () => {
-  const { isLoading, data } = useFetch('/api/admin/resources/users');
+const RombelClass = () => {
+  const { isLoading, data } = useFetch('/api/admin/resources/rombel-classes');
   const [searchData, setSearchData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(3);
-
   const navigate = useNavigate();
 
   const searchUser = (value: string) => {
@@ -19,8 +17,7 @@ const Users = () => {
       data.filter((item: any) => {
         return (
           item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.username.toLowerCase().includes(value.toLowerCase()) ||
-          item.email.toLowerCase().includes(value.toLowerCase())
+          item.grade.includes(value)
         );
       }),
     );
@@ -29,12 +26,6 @@ const Users = () => {
   useEffect(() => {
     setSearchData(data);
   }, [data]);
-
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = searchData.slice(indexOfFirstPost, indexOfLastPost);
-
-  const pagination = (pageNumber: any) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -53,19 +44,13 @@ const Users = () => {
             }
           />
           <button onClick={() => navigate('new')} className="btn btn-primary">
-            Add User
+            Add Rombel
           </button>
         </div>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            <Table userData={searchData} />
-          </>
-        )}
+        {isLoading ? <Loading /> : <RombelTable rombelData={searchData} />}
       </div>
     </>
   );
 };
 
-export default Users;
+export default RombelClass;

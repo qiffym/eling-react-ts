@@ -12,6 +12,17 @@ const ViewUser = () => {
   const navigate = useNavigate();
   const { user } = useLocation().state as LocationParams;
 
+  const convertGender = () => {
+    switch (user.gender) {
+      case 'L':
+        return 'Laki-laki';
+      case 'P':
+        return 'Perempuan';
+      default:
+        return 'No Gender';
+    }
+  };
+
   return (
     <>
       <div className="px-6 py-14">
@@ -66,9 +77,7 @@ const ViewUser = () => {
                 <td className="text-gray-400">Gender</td>
                 <td></td>
                 <td></td>
-                <td className="font-semibold">
-                  {user.gender === 'L' ? 'Laki-Laki' : 'Perempuan'}
-                </td>
+                <td className="font-semibold">{convertGender()}</td>
               </tr>
 
               <tr>

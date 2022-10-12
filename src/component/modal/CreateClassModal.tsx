@@ -19,7 +19,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
   });
 
   useEffect(() => {
-    if (state.name === '' || state.description === '') {
+    if (state.name === '') {
       setDisable(true);
     } else {
       setDisable(false);

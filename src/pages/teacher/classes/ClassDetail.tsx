@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
+import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../../../component/layout/Footer';
 import Loading from '../../../component/loading/Loading';
@@ -27,12 +27,17 @@ const ClassDetail = () => {
         <div className="pt-20">
           {/* Section Title Class */}
           <section id="title-class" className="mb-5">
-            <div className="container mx-auto bg-primary w-11/12 px-5 py-3 rounded-box">
-              <button onClick={() => navigate('/')} className="mb-3">
-                <BsFillArrowLeftCircleFill className="text-4xl" />
-              </button>
-              <h3 className="text-xl font-bold">{classData.rombel_name}</h3>
-              <h2 className="text-2xl font-bold mb-2">{classData?.name}</h2>
+            <div className="container space-y-5 mx-auto bg-primary w-11/12 px-5 py-3 rounded-box">
+              <div className="flex flex-row items-center space-x-2">
+                <button
+                  onClick={() => navigate('/')}
+                  className="btn btn-ghost btn-square h-8 w-12">
+                  <HiChevronLeft className="text-2xl" />
+                </button>
+                <h3 className="text-lg font-medium">{classData.rombel_name}</h3>
+              </div>
+
+              <h2 className="text-6xl font-bold mb-2">{classData?.name}</h2>
               <div className="flex items-center space-x-2">
                 <div className="avatar">
                   <div className="mask mask-circle w-8 h-8">
@@ -79,7 +84,15 @@ const ClassDetail = () => {
           </section>
 
           {/* Konten */}
-          {tab === 0 ? <ClassContent /> : <AboutClass />}
+          {tab === 0 ? (
+            <ClassContent classId={id} />
+          ) : (
+            <AboutClass
+              about={classData.description}
+              student={classData.students?.data}
+              total={classData.students?.total}
+            />
+          )}
 
           {/* Footer */}
           <Footer />

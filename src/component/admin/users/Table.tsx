@@ -62,7 +62,7 @@ const Table: FC<Props> = ({ userData }) => {
                         {item.email}
                       </span>
                     </td>
-                    <th>
+                    <td>
                       <button
                         onClick={() =>
                           navigate(`${item.id}`, {
@@ -97,7 +97,7 @@ const Table: FC<Props> = ({ userData }) => {
                         className="btn btn-error btn-xs text-white space-x-1">
                         <HiTrash className="text-md" /> <span>Delete</span>
                       </button>
-                    </th>
+                    </td>
                   </tr>
                 </React.Fragment>
               ))}
