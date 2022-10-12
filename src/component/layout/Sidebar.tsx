@@ -22,7 +22,7 @@ const Sidebar = () => {
             {LinkNavItems.map(item => (
               <ul
                 key={item.name}
-                className="menu  p-4 py-0 w-64 bg-base-100 text-sm text-center">
+                className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm text-center">
                 <li>
                   <NavLink to={item.path}>{item.name}</NavLink>
                 </li>
@@ -39,7 +39,7 @@ const Sidebar = () => {
               ? state.classes?.classList?.map(item => (
                   <ul
                     key={item.id}
-                    className="menu pl-4 text-sm overflow-y-auto w-64 bg-base-100 text-base-content">
+                    className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm text-center">
                     <li>
                       <NavLink to={`online-class/${item.id}`} state={item}>
                         {item.name}
@@ -53,7 +53,7 @@ const Sidebar = () => {
 
       case 'student':
         return (
-          <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
+          <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
             <li>
               <NavLink to="dashboard">Siswa</NavLink>
             </li>
@@ -61,7 +61,7 @@ const Sidebar = () => {
         );
       default:
         return (
-          <ul className="rounded-md menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
+          <ul className="rounded-md menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
             <li>
               <NavLink to="dashboard">Dashboard</NavLink>
             </li>
@@ -76,7 +76,7 @@ const Sidebar = () => {
       <img src={logosmk} alt="logo_smk" width={120} className="mx-auto my-2" />
       {/* <div className="border-t-2 w-full border-slate-600 inline-block "></div> */}
 
-      <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center mt-5">
+      <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center mt-5">
         <li>
           <NavLink to="dashboard">Dashboard</NavLink>
         </li>

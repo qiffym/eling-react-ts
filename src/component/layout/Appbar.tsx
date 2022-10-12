@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { LoginType } from '../../types/context-type';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
@@ -29,7 +29,7 @@ const Appbar = () => {
             tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <p>My Profile</p>
+              <NavLink to={'me'}>My Profile</NavLink>
             </li>
             <hr />
             <li className="font-bold hover:text-red-500">

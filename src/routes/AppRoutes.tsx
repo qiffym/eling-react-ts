@@ -12,7 +12,7 @@ import ProtectedRoutes from './ProtectedRoutes';
 import PublicRoutes from './PublicRoutes';
 import NotFound from '../pages/not-found-page/NotFound';
 import ClassDetail from '../pages/teacher/classes/ClassDetail';
-import DashboardTeacher from '../pages/teacher/dashboard/DashboardTeacher';
+import Profile from '../pages/profile/Profile';
 
 const AppRoutes = () => {
   return (
@@ -22,6 +22,7 @@ const AppRoutes = () => {
           <Route path="/" element={<Appbar />}>
             <Route path="/" element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Home />} />
+            <Route path="me" element={<Profile />} />
             <Route
               path="/"
               element={<ProtectedRoutes roleRequired="teacher" />}>
