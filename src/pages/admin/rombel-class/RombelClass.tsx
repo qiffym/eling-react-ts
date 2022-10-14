@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import RombelTable from '../../../component/admin/rombel/RombelTable';
 
 import Header from '../../../component/header/Header';
-import Footer from '../../../component/layout/Footer';
 import Loading from '../../../component/loading/Loading';
 import { useFetch } from '../../../hooks/useFetch';
 

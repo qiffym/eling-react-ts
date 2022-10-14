@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Footer from '../../../component/layout/Footer';
 import Loading from '../../../component/loading/Loading';
 import { AboutClass } from '../../../component/teacher/home/online_class/AboutClass';
 import { ClassContent } from '../../../component/teacher/home/online_class/ClassContent';
