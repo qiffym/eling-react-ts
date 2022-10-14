@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MyContext } from '../../context/context';
+import { MdDashboard } from 'react-icons/md';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
 
 const LinkNavItems = [
@@ -18,7 +19,9 @@ const Sidebar = () => {
       case 'admin':
         return (
           <>
-            <label className="px-6 text-gray-400 text-sm mb-2">Resources</label>
+            <label className="px-6 text-gray-400 text-sm font-bold">
+              Resources
+            </label>
             {LinkNavItems.map(item => (
               <ul
                 key={item.name}
@@ -34,12 +37,14 @@ const Sidebar = () => {
       case 'teacher':
         return (
           <>
-            <label className="px-6 text-gray-400 text-sm">My Class</label>
+            <label className="px-6 text-gray-400 text-sm font-bold">
+              My Class
+            </label>
             {state.classes?.classList?.length
               ? state.classes?.classList?.map(item => (
                   <ul
                     key={item.id}
-                    className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm">
+                    className="menu menu-compact p-4 py-0 w-64 bg-slate-600 text-white">
                     <li>
                       <NavLink to={`online-class/${item.id}`} state={item}>
                         {item.name}
@@ -72,13 +77,28 @@ const Sidebar = () => {
 
   return (
     <div className="drawer-side bg-slate-600 overflow-auto h-screen">
-      {/* {dashborad(user.user.role)} */}
-      <img src={logosmk} alt="logo_smk" width={120} className="mx-auto my-2" />
-      {/* <div className="border-t-2 w-full border-slate-600 inline-block "></div> */}
+      {/* Logo */}
+      <div className="flex justify-center items-center space-x-2 p-3">
+        <div className="mask mask-circle w-20 h-20">
+          <img src={logosmk} alt="logo_smk" />
+        </div>
+        <div className="flex flex-col -space-y-1 text-slate-200">
+          <p>e-Learning</p>
+          <p className="font-semibold">
+            <span className="text-[#eaea72]">SMEKA</span>NEGAMA
+          </p>
+        </div>
+      </div>
 
-      <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center mt-5">
+      <hr />
+
+      {/* Dashboard List*/}
+      <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
         <li>
-          <NavLink to="dashboard">Dashboard</NavLink>
+          <NavLink to="dashboard">
+            <MdDashboard className="-mr-2" />
+            Dashboard
+          </NavLink>
         </li>
       </ul>
 

@@ -40,7 +40,7 @@ const ClassDetail = () => {
               <h2 className="text-6xl font-bold mb-2">{classData?.name}</h2>
               <div className="flex items-center space-x-2">
                 <div className="avatar">
-                  <div className="mask mask-circle w-8 h-8">
+                  <div className="w-8 rounded-full ring ring-slate-100">
                     <img src={classData.teacher?.avatar} alt="teacher_avatar" />
                   </div>
                 </div>
@@ -93,9 +93,6 @@ const ClassDetail = () => {
               total={classData.students?.total}
             />
           )}
-
-          {/* Footer */}
-          <Footer />
         </div>
       )}
     </>

@@ -32,10 +32,10 @@ const MotivationalWords = () => {
   return (
     <>
       <Helmet>
-        <title>Users</title>
+        <title>Kelola Kata Motivasi</title>
       </Helmet>
       <div className="px-6 py-14">
-        <Header>Users</Header>
+        <Header>Motivational Words</Header>
         <div className="flex flex-row justify-between mb-4">
           <input
             type="text"

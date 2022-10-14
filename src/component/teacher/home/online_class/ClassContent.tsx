@@ -38,16 +38,19 @@ export const ClassContent: FC<Props> = ({ classId }) => {
           {isLoading ? (
             <Loading />
           ) : (
-            contentList.map(item => (
+            contentList.map((item, index) => (
               <div
                 key={item.id}
                 tabIndex={0}
-                className="collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary">
+                className="collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary bg-white">
                 <input type="checkbox" />
                 {/* Title Collapse */}
                 <div className="collapse-title text-xl font-medium">
-                  <h5 className="text-sm text-slate-600">{item.title}</h5>
-                  <h2 className="font-bold">{item.description}</h2>
+                  <h5 className="text-sm text-slate-600">
+                    {`Pembelajaran ${index + 1}`}
+                  </h5>
+                  <h2 className="font-bold">{item.title}</h2>
+                  <p className="text-sm">{item.description ?? ''}</p>
                 </div>
 
                 {/* Content Collapse */}
