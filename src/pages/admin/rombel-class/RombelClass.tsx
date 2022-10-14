@@ -30,10 +30,10 @@ const RombelClass = () => {
   return (
     <>
       <Helmet>
-        <title>Users</title>
+        <title>Kelola Rombel</title>
       </Helmet>
       <div className="px-6 py-14">
-        <Header>Users</Header>
+        <Header>Rombel Classes</Header>
         <div className="flex flex-row justify-between mb-4">
           <input
             type="text"

@@ -4,7 +4,6 @@ import { HiPlus } from 'react-icons/hi';
 import Loading from '../../../component/loading/Loading';
 import CreateClassModal from '../../../component/modal/CreateClassModal';
 import Header from '../../../component/header/Header';
-import Footer from '../../../component/layout/Footer';
 import CardClass from '../../../component/teacher/home/Card';
 import { useClasses } from '../../../hooks/useClasses';
 
@@ -23,12 +22,29 @@ const DashboardTeacher = () => {
           <div>
             <h2 className="text-2xl font-medium">My Class</h2>
           </div>
-          <div>
-            <input
-              type="search"
-              placeholder="Search"
-              className="input input-bordered w-96 max-w-xs rounded-full"
-            />
+          <div className="form-control">
+            <div className="input-group">
+              <input
+                type="search"
+                placeholder="Search…"
+                className="input input-bordered w-72"
+              />
+              <button className="btn btn-square">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
         <hr className="border-t border-gray-300 my-4" />
@@ -62,7 +78,6 @@ const DashboardTeacher = () => {
           />
         ) : null}
       </section>
-      <Footer />
     </>
   );
 };

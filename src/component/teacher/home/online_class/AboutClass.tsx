@@ -17,16 +17,18 @@ export const AboutClass: FC<Props> = ({ about, student, total }) => {
   return (
     <>
       <section id="about-class">
-        <div className="container mx-auto bg-slate-200 w-11/12 px-5 py-3 border-4 border-slate-200 rounded-box">
+        <div className="container mx-auto w-11/12 px-5 py-3 shadow-xl border-l-4 border-l-primary rounded-box bg-white">
           {/* Tentang Aplikasi */}
           <section id="about-app" className="mb-8">
-            <div className="flex items-center space-x-2 mb-3">
-              <div>
-                <img src={logosmk} alt="logo_smk" width={75} />
+            <div className="flex items-center space-x-2 p-3">
+              <div className="mask mask-circle w-20 h-20">
+                <img src={logosmk} alt="logo_smk" />
               </div>
-              <div className="flex flex-col text-lg">
+              <div className="flex flex-col -space-y-1">
                 <p>e-Learning</p>
-                <p className="font-semibold">SMK Negeri 3 Malang</p>
+                <p className="font-semibold">
+                  <span>SMEKA</span>NEGAMA
+                </p>
               </div>
             </div>
             <p className="w-4/5">
@@ -72,7 +74,7 @@ export const AboutClass: FC<Props> = ({ about, student, total }) => {
                         <td>
                           <div className="flex items-center space-x-3">
                             <div className="avatar">
-                              <div className="mask mask-squircle w-12 h-12">
+                              <div className="mask mask-circle w-12 h-12">
                                 <img
                                   src={item.avatar}
                                   alt="Avatar Tailwind CSS Component"
