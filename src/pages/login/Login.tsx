@@ -78,13 +78,13 @@ const Login = () => {
                       {/* Username */}
                       <div className="form-control mb-2">
                         <label className="input-group">
-                          <span className="bg-slate-100">
+                          <span className="bg-slate-100 -mr-4">
                             <FaUserAlt className="text-gray-500" />
                           </span>
                           <input
                             type="text"
                             placeholder="username / email"
-                            className="input input-bordered w-[244px]"
+                            className="input input-bordered bg-slate-100 focus:outline-none border-slate-100 w-[244px]"
                             name="username"
                             id="username"
                             value={input.username}
@@ -93,29 +93,16 @@ const Login = () => {
                         </label>
                       </div>
 
-                      {/* <div className="bg-slate-100 w-72 p-2 flex items-center rounded-xl mb-2">
-                        <FaUserAlt className="mr-3 text-gray-400 text-sm" />
-                        <input
-                          type="text"
-                          placeholder="username / email"
-                          name="username"
-                          id="username"
-                          className="outline-none text-sm bg-slate-100"
-                          value={input.username}
-                          onChange={handleChange}
-                        />
-                      </div> */}
-
                       {/* Password */}
                       <div className="form-control">
                         <label className="input-group">
-                          <span className="bg-slate-100">
+                          <span className="bg-slate-100 -mr-4">
                             <FaLock className="text-gray-500" />
                           </span>
                           <input
                             type="password"
                             placeholder="password"
-                            className="input input-bordered w-[244px]"
+                            className="input input-bordered bg-slate-100 focus:outline-none border-slate-100 w-[244px]"
                             name="password"
                             id="password"
                             value={input.password}
@@ -123,20 +110,6 @@ const Login = () => {
                           />
                         </label>
                       </div>
-
-                      {/* <div className="bg-slate-100 w-72 p-2 flex items-center rounded-xl">
-                        <FaLock className="mr-3 text-gray-400 text-sm" />
-                        <input
-                          type="password"
-                          placeholder="*********"
-                          name="password"
-                          id="password"
-                          autoComplete="on"
-                          className="outline-none text-sm bg-slate-100"
-                          value={input.password}
-                          onChange={handleChange}
-                        />
-                      </div> */}
 
                       {/* Remember Me & Forget Password */}
                       <div className="w-72 flex justify-between mb-5 mt-1">
