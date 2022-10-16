@@ -4,8 +4,14 @@ import ryujin2 from '../../../assets/ryujin2.jpg';
 const Forum = () => {
   return (
     <>
+      <section id="header" className="mt-20">
+        <div className="container ml-16 w-9/12 rounded-box">
+          <h1 className="text-3xl font-bold">Forum Diskusi</h1>
+          <hr className="mb-4 border-t-2" />
+        </div>
+      </section>
       {/* Threat Section */}
-      <section id="threat" className="mt-20 mb-5">
+      <section id="threat" className="mb-5">
         <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box">
           <div className="flex items-start space-x-4">
             <div className="avatar">
@@ -27,7 +33,7 @@ const Forum = () => {
               </div>
               {/* Topik dan Deskripsi */}
               <div>
-                <div className="container mx-auto p-4 mb-2 bg-slate-200 rounded-box font-medium text-black">
+                <div className="container mx-auto p-4 mb-2 bg-slate-200 rounded-box font-medium text-black text-lg">
                   <p>Ini adalah topik diskusinya</p>
                 </div>
                 <p>
