@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { HiPlusCircle, HiTrash, HiPencilAlt, HiBookOpen } from 'react-icons/hi';
 import { MdAssignment, MdForum } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { useFetch } from '../../../../hooks/useFetch';
 import { ContentDetailType } from '../../../../types/class-type';
 
@@ -70,14 +71,14 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                       <button
                         name="edit-materi"
                         className="btn btn-xs btn-warning btn-square">
-                        <HiPencilAlt></HiPencilAlt>
+                        <HiPencilAlt />
                       </button>
                     </div>
                     <div className="tooltip" data-tip="delete materi">
                       <button
                         name="delete-materi"
                         className="btn btn-xs btn-error btn-square">
-                        <HiTrash></HiTrash>
+                        <HiTrash />
                       </button>
                     </div>
                   </div>
@@ -99,21 +100,22 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
           <div className="flex justify-between items-center mx-4">
             <div className="flex flex-col w-full">
               <div className="flex flex-row justify-between">
-                <a href="#!">Forum 1</a>
+                {/* <a href="#!">Forum 1</a> */}
+                <Link to={`forums/${contentId}`}>Forum 1</Link>
                 {/* TODO: Buat btn disini hanya pada role guru*/}
                 <div className="editable space-x-1">
                   <div className="tooltip" data-tip="edit forum">
                     <button
                       name="edit-forum"
                       className="btn btn-xs btn-warning btn-square">
-                      <HiPencilAlt></HiPencilAlt>
+                      <HiPencilAlt />
                     </button>
                   </div>
                   <div className="tooltip" data-tip="delete forum">
                     <button
                       name="delete-forum"
                       className="btn btn-xs btn-error btn-square">
-                      <HiTrash></HiTrash>
+                      <HiTrash />
                     </button>
                   </div>
                 </div>
@@ -126,14 +128,14 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                     <button
                       name="edit-forum"
                       className="btn btn-xs btn-warning btn-square">
-                      <HiPencilAlt></HiPencilAlt>
+                      <HiPencilAlt />
                     </button>
                   </div>
                   <div className="tooltip" data-tip="delete forum">
                     <button
                       name="delete-forum"
                       className="btn btn-xs btn-error btn-square">
-                      <HiTrash></HiTrash>
+                      <HiTrash />
                     </button>
                   </div>
                 </div>

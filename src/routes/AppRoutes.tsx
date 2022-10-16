@@ -17,6 +17,7 @@ import RombelClass from '../pages/admin/rombel-class/RombelClass';
 import MotivationalWords from '../pages/admin/motivational-words/MotivationalWords';
 import AddMotivational from '../pages/admin/motivational-words/AddMotivational';
 import AddRombel from '../pages/admin/rombel-class/AddRombel';
+import Forum from '../pages/teacher/forum/Forum';
 
 const AppRoutes = () => {
   return (
@@ -35,6 +36,7 @@ const AppRoutes = () => {
               element={<ProtectedRoutes roleRequired="teacher" />}>
               <Route path="online-class">
                 <Route path=":id" element={<ClassDetail />} />
+                <Route path=":id/forums/:id" element={<Forum />} />
               </Route>
             </Route>
             <Route path="/" element={<ProtectedRoutes roleRequired="admin" />}>
