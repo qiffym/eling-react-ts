@@ -9,6 +9,7 @@ type Props = {
 
 const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
   const navigate = useNavigate();
+
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra w-full">

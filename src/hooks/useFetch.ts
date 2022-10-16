@@ -28,7 +28,13 @@ export const useFetch = (url: string) => {
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [baseURL, url, user.token, state.deleteSuccess.success]);
+  }, [
+    baseURL,
+    url,
+    user.token,
+    state.deleteSuccess.success,
+    state.addContentSucces.success,
+  ]);
 
   useEffect(() => {
     fetchData();

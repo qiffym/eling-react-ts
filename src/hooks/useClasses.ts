@@ -97,3 +97,55 @@ export const useCreateClass = () => {
     createClass,
   };
 };
+
+export const useAddContent = () => {
+  const [isLoading, setLoading] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
+
+  const addContent = async (
+    e: FormEvent<HTMLFormElement>,
+    idClasses: number,
+    input: {
+      title: string;
+      description: string;
+    },
+  ) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${idClasses}/contents`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            title: input.title,
+            description: input.description,
+          }),
+        },
+      );
+      const result = await response.json();
+      dispatch({
+        type: Types.AddContentSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    addContent,
+  };
+};

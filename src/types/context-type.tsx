@@ -36,6 +36,10 @@ export type CreateClassSuccessType = {
   success: boolean;
 };
 
+export type AddContentSuccesType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -68,6 +72,11 @@ export type CreateClassType = {
   rombel_class_id: number;
 };
 
+export type AddContentType = {
+  title: string;
+  description: string;
+};
+
 // Store to initial state Type for Global
 
 export type InitialStateType = {
@@ -75,4 +84,5 @@ export type InitialStateType = {
   classes: ClassListType;
   deleteSuccess: DeleteSuccessType;
   createClassSuccess: CreateClassSuccessType;
+  addContentSucces: AddContentSuccesType;
 };

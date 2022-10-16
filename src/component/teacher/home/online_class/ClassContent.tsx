@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { HiPlusCircle } from 'react-icons/hi';
 import { useFetch } from '../../../../hooks/useFetch';
 import { ContentType } from '../../../../types/class-type';
 import Loading from '../../../loading/Loading';
+import AddContentModal from '../../../modal/AddContentModal';
 import ContentDetail from './ContentDetail';
 
 type Props = {
@@ -13,7 +14,7 @@ export const ClassContent: FC<Props> = ({ classId }) => {
   const { isLoading, data } = useFetch(
     `/api/teacher/online-classes/${classId}/contents`,
   );
-
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const contentList: ContentType[] = data;
 
   return (
@@ -22,7 +23,9 @@ export const ClassContent: FC<Props> = ({ classId }) => {
       <section id="content-class">
         <div className="container mx-auto w-11/12">
           {/* TODO: Buat btn create ini hanya pada role guru*/}
-          <button className="btn btn-md normal-case px-3 mb-4">
+          <button
+            onClick={() => setOpenModal(true)}
+            className="btn btn-md normal-case px-3 mb-4">
             <HiPlusCircle className="text-3xl mr-1" />
             <span className="text-md">Tambah konten</span>
           </button>
@@ -58,12 +61,18 @@ export const ClassContent: FC<Props> = ({ classId }) => {
               </div>
             ))
           )}
-
-          {/* Collapse Content #2 */}
-
-          {/* Collapse Content #3 */}
         </div>
       </section>
+
+      {openModal ? (
+        <AddContentModal
+          idClasses={classId}
+          actionSave={() => {
+            setOpenModal(false);
+          }}
+          modalAction={() => setOpenModal(false)}
+        />
+      ) : null}
     </>
   );
 };

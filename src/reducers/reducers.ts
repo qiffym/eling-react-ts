@@ -1,4 +1,6 @@
 import {
+  AddContentSuccesType,
+  AddContentType,
   ClassListType,
   CreateClassSuccessType,
   CreateClassType,
@@ -9,6 +11,8 @@ import {
 } from '../types/context-type';
 import {
   ActionMap,
+  AddContentPayload,
+  AddContentSuccessPayload,
   ClassPayload,
   CreateClassPayload,
   CreateClassSuccessPayload,
@@ -79,6 +83,25 @@ export const createClassSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'CLASS_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddContentSuccessAction =
+  ActionMap<AddContentSuccessPayload>[keyof ActionMap<AddContentSuccessPayload>];
+
+export const addContentSuccessReducer = (
+  state: AddContentSuccesType,
+  action: AddContentSuccessAction,
+) => {
+  switch (action.type) {
+    case 'CONTENT_SUCCESS':
       return {
         ...state,
         success: action.payload.success,
@@ -226,6 +249,31 @@ export const createClassReducer = (
         ...state,
         rombel_class_id: action.payload.rombel_class_id,
       };
+    default:
+      return state;
+  }
+};
+
+export type AddContentAction =
+  ActionMap<AddContentPayload>[keyof ActionMap<AddContentPayload>];
+
+export const addContentReducer = (
+  state: AddContentType,
+  action: AddContentAction,
+) => {
+  switch (action.type) {
+    case 'CONTENT_TITLE':
+      return {
+        ...state,
+        title: action.payload.title,
+      };
+
+    case 'CONTENT_DESC':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+
     default:
       return state;
   }

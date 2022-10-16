@@ -14,6 +14,7 @@ export enum Types {
   Classes = 'CLASSES',
   DeleteSuccess = 'SUCCESS',
   CreateClassSuccess = 'CLASS_SUCCESS',
+  AddContentSuccess = 'CONTENT_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -41,6 +42,10 @@ export enum Types {
   ClassName = 'CLASS_NAME',
   ClassDescription = 'CLASS_DESCRIPTION',
   RombelID = 'ROMBEL_CLASS_ID',
+
+  // Payload Add Content
+  ContentTitle = 'CONTENT_TITLE',
+  ContentDesc = 'CONTENT_DESC',
 }
 
 export type LoginPayload = {
@@ -83,6 +88,12 @@ export type DeleteSuccessPayload = {
 
 export type CreateClassSuccessPayload = {
   [Types.CreateClassSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddContentSuccessPayload = {
+  [Types.AddContentSuccess]: {
     success: boolean;
   };
 };
@@ -161,5 +172,14 @@ export type CreateClassPayload = {
   };
   [Types.RombelID]: {
     rombel_class_id: number;
+  };
+};
+
+export type AddContentPayload = {
+  [Types.ContentTitle]: {
+    title: string;
+  };
+  [Types.ContentDesc]: {
+    description: string;
   };
 };

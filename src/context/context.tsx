@@ -7,6 +7,9 @@ import React, {
   useReducer,
 } from 'react';
 import {
+  addContentReducer,
+  AddContentSuccessAction,
+  addContentSuccessReducer,
   ClassListAction,
   classReducer,
   CreateClassSuccessAction,
@@ -54,6 +57,9 @@ const contextInitialState: InitialStateType = {
   createClassSuccess: {
     success: false,
   },
+  addContentSucces: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -63,6 +69,7 @@ export const MyContext = createContext<{
     | ClassListAction
     | DeleteSuccessAction
     | CreateClassSuccessAction
+    | AddContentSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -70,13 +77,20 @@ export const MyContext = createContext<{
 });
 
 const mainReducer = (
-  { login, classes, deleteSuccess, createClassSuccess }: InitialStateType,
+  {
+    login,
+    classes,
+    deleteSuccess,
+    createClassSuccess,
+    addContentSucces,
+  }: InitialStateType,
   action: any,
 ) => ({
   login: loginReducer(login, action),
   classes: classReducer(classes, action),
   createClassSuccess: createClassSuccessReducer(createClassSuccess, action),
   deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
+  addContentSucces: addContentSuccessReducer(addContentSucces, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {
