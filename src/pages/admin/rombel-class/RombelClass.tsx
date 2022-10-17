@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
 import RombelTable from '../../../component/admin/rombel/RombelTable';
 
 import Header from '../../../component/header/Header';
@@ -12,7 +11,6 @@ const RombelClass = () => {
   const { isLoading, data } = useFetch('/api/admin/resources/rombel-classes');
   const [searchData, setSearchData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const navigate = useNavigate();
 
   const searchUser = (value: string) => {
     setSearchData(
