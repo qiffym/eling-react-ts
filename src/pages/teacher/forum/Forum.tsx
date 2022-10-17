@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaComment } from 'react-icons/fa';
 import ryujin from '../../../assets/ryujin1.jpg';
 import ryujin2 from '../../../assets/ryujin2.jpg';
 const Forum = () => {
@@ -21,14 +22,19 @@ const Forum = () => {
             </div>
             <div className="grow">
               {/* Nama dan Waktu dibuat */}
-              <div className="mb-2">
-                <p className="font-bold">Ryujin </p>
-                <div className="flex items-center space-x-1 font-semibold text-2xs">
-                  <span className="text-teal-700">Guru</span>
-                  <span>|</span>
-                  <span className="text-slate-700">
-                    Diposting 3 menit yang lalu
-                  </span>
+              <div className="flex justify-between items-start">
+                <div className="mb-2">
+                  <p className="font-bold">Ryujin </p>
+                  <div className="flex items-center space-x-1 font-semibold text-2xs">
+                    <span className="text-teal-700">Guru</span>
+                    <span>|</span>
+                    <span className="text-slate-700">
+                      Diposting 3 menit yang lalu
+                    </span>
+                  </div>
+                </div>
+                <div className="flex font-medium items-center space-x-1 mr-5">
+                  <FaComment /> <span className="text-sm">2</span>
                 </div>
               </div>
               {/* Topik dan Deskripsi */}

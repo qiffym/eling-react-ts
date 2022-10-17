@@ -5,11 +5,13 @@ import RombelTable from '../../../component/admin/rombel/RombelTable';
 
 import Header from '../../../component/header/Header';
 import Loading from '../../../component/loading/Loading';
+import AddRombelModal from '../../../component/modal/AddRombelModal';
 import { useFetch } from '../../../hooks/useFetch';
 
 const RombelClass = () => {
   const { isLoading, data } = useFetch('/api/admin/resources/rombel-classes');
   const [searchData, setSearchData] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
   const searchUser = (value: string) => {
@@ -43,11 +45,21 @@ const RombelClass = () => {
               searchUser(e.target.value)
             }
           />
-          <button onClick={() => navigate('new')} className="btn btn-primary">
+          <button
+            onClick={() => setOpenModal(true)}
+            className="btn btn-primary">
             Add Rombel
           </button>
         </div>
         {isLoading ? <Loading /> : <RombelTable rombelData={searchData} />}
+        {openModal ? (
+          <AddRombelModal
+            actionSave={() => {
+              setOpenModal(false);
+            }}
+            modalAction={() => setOpenModal(false)}
+          />
+        ) : null}
       </div>
     </>
   );
