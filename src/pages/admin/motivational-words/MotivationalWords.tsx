@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import MotivationalWordsTable from '../../../component/admin/motivational-words/MotivationalWordsTable';
 import Header from '../../../component/header/Header';
 import Loading from '../../../component/loading/Loading';
+import AddMotivationalModal from '../../../component/modal/AddMotivationalModal';
 import { useFetch } from '../../../hooks/useFetch';
 
 const MotivationalWords = () => {
@@ -11,7 +12,8 @@ const MotivationalWords = () => {
     '/api/admin/resources/motivational-words',
   );
   const [searchData, setSearchData] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
 
   const searchUser = (value: string) => {
     setSearchData(
@@ -45,7 +47,9 @@ const MotivationalWords = () => {
               searchUser(e.target.value)
             }
           />
-          <button onClick={() => navigate('new')} className="btn btn-primary">
+          <button
+            onClick={() => setOpenModal(true)}
+            className="btn btn-primary">
             Add Motivational
           </button>
         </div>
@@ -54,6 +58,14 @@ const MotivationalWords = () => {
         ) : (
           <MotivationalWordsTable motivationalData={searchData} />
         )}
+        {openModal ? (
+          <AddMotivationalModal
+            actionSave={() => {
+              setOpenModal(false);
+            }}
+            modalAction={() => setOpenModal(false)}
+          />
+        ) : null}
       </div>
     </>
   );
