@@ -154,7 +154,8 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
             </div>
           </label>
           <div className="flex justify-between items-center mx-4">
-            <a href="#!">Tugas 1</a>
+            {/* <a href="#!">Tugas 1</a> */}
+            <Link to={`contents/${contentId}/assignment`}>Tugas 1</Link>
             {/* TODO: Buat btn disini hanya pada role guru*/}
             <div className="editable space-x-1">
               <div className="tooltip" data-tip="edit tugas">

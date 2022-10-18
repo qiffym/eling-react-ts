@@ -45,7 +45,7 @@ export const ClassContent: FC<Props> = ({ classId }) => {
               <div
                 key={item.id}
                 tabIndex={0}
-                className="collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary bg-white">
+                className="collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary bg-white p-1">
                 <input type="checkbox" />
                 {/* Title Collapse */}
                 <div className="collapse-title text-xl font-medium">
@@ -53,7 +53,9 @@ export const ClassContent: FC<Props> = ({ classId }) => {
                     {`Pembelajaran ${index + 1}`}
                   </h5>
                   <h2 className="font-bold">{item.title}</h2>
-                  <p className="text-sm">{item.description ?? ''}</p>
+                  <p className="text-xs font-semibold text-slate-600">
+                    Dibuat {item.created_at ?? ''}
+                  </p>
                 </div>
 
                 {/* Content Collapse */}
