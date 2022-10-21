@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useReducer, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 type Props = {
   actionSave: () => void;

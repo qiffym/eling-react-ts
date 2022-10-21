@@ -132,6 +132,7 @@ export const useAddContent = () => {
         },
       );
       const result = await response.json();
+      console.log(result);
       dispatch({
         type: Types.AddContentSuccess,
         payload: {
@@ -147,5 +148,60 @@ export const useAddContent = () => {
   return {
     isLoading,
     addContent,
+  };
+};
+
+export const useAddMaterial = () => {
+  const [isLoading, setLoading] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
+
+  const addMaterial = async (
+    e: FormEvent<HTMLFormElement>,
+    idClasses: number,
+    idContent: number,
+    input: {
+      title: string;
+      file: any;
+    },
+  ) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('title', input.title);
+    data.append('file', input.file);
+    setLoading(true);
+
+    console.log(data.entries());
+
+    try {
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${idClasses}/contents/${idContent}/materials`,
+        {
+          method: 'POST',
+          body: data,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
+      );
+      const result = await response.json();
+      console.log(result);
+      dispatch({
+        type: Types.AddContentSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    addMaterial,
   };
 };

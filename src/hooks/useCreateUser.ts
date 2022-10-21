@@ -16,7 +16,7 @@ export const useCreateUser = () => {
       email: string;
       username: string;
       password: string;
-    }
+    },
   ) => {
     e.preventDefault();
     setLoading(true);

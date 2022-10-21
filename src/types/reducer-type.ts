@@ -46,6 +46,10 @@ export enum Types {
   // Payload Add Content
   ContentTitle = 'CONTENT_TITLE',
   ContentDesc = 'CONTENT_DESC',
+
+  // Payload Add Material
+  MaterialTitle = 'MATERIAL_TITLE',
+  MaterialFile = 'MATERIAL_FILE',
 }
 
 export type LoginPayload = {
@@ -181,5 +185,14 @@ export type AddContentPayload = {
   };
   [Types.ContentDesc]: {
     description: string;
+  };
+};
+
+export type AddMaterialPayload = {
+  [Types.MaterialTitle]: {
+    title: string;
+  };
+  [Types.MaterialFile]: {
+    file: FileList | null;
   };
 };

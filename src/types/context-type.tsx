@@ -77,6 +77,11 @@ export type AddContentType = {
   description: string;
 };
 
+export type AddMaterialType = {
+  title: string;
+  file: FileList | null;
+};
+
 // Store to initial state Type for Global
 
 export type InitialStateType = {

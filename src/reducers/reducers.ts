@@ -1,6 +1,7 @@
 import {
   AddContentSuccesType,
   AddContentType,
+  AddMaterialType,
   ClassListType,
   CreateClassSuccessType,
   CreateClassType,
@@ -13,6 +14,7 @@ import {
   ActionMap,
   AddContentPayload,
   AddContentSuccessPayload,
+  AddMaterialPayload,
   ClassPayload,
   CreateClassPayload,
   CreateClassSuccessPayload,
@@ -272,6 +274,31 @@ export const addContentReducer = (
       return {
         ...state,
         description: action.payload.description,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddMaterialAction =
+  ActionMap<AddMaterialPayload>[keyof ActionMap<AddMaterialPayload>];
+
+export const addMaterialReducer = (
+  state: AddMaterialType,
+  action: AddMaterialAction,
+) => {
+  switch (action.type) {
+    case 'MATERIAL_TITLE':
+      return {
+        ...state,
+        title: action.payload.title,
+      };
+
+    case 'MATERIAL_FILE':
+      return {
+        ...state,
+        file: action.payload.file,
       };
 
     default:

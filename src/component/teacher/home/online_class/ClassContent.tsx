@@ -1,7 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { HiPlusCircle } from 'react-icons/hi';
+import { MyContext } from '../../../../context/context';
 import { useFetch } from '../../../../hooks/useFetch';
 import { ContentType } from '../../../../types/class-type';
+import { Types } from '../../../../types/reducer-type';
 import Loading from '../../../loading/Loading';
 import AddContentModal from '../../../modal/AddContentModal';
 import ContentDetail from './ContentDetail';
@@ -14,6 +16,7 @@ export const ClassContent: FC<Props> = ({ classId }) => {
   const { isLoading, data } = useFetch(
     `/api/teacher/online-classes/${classId}/contents`,
   );
+  const { dispatch } = useContext(MyContext);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const contentList: ContentType[] = data;
 
@@ -70,6 +73,12 @@ export const ClassContent: FC<Props> = ({ classId }) => {
         <AddContentModal
           idClasses={classId}
           actionSave={() => {
+            dispatch({
+              type: Types.AddContentSuccess,
+              payload: {
+                success: false,
+              },
+            });
             setOpenModal(false);
           }}
           modalAction={() => setOpenModal(false)}

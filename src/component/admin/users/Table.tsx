@@ -1,9 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteUser } from '../../../hooks/useDeleteUser';
 import { UserType } from '../../../types/user-type';
 import Modal from '../../modal/Modal';
 import { HiTrash, HiPencilAlt, HiEye } from 'react-icons/hi';
+import { MyContext } from '../../../context/context';
+import { Types } from '../../../types/reducer-type';
 
 type Props = {
   userData: UserType[];
@@ -16,6 +18,7 @@ const Table: FC<Props> = ({ userData }) => {
     id: 0,
     username: '',
   });
+  const { dispatch } = useContext(MyContext);
   const navigate = useNavigate();
   const deleteUser = useDeleteUser();
 
@@ -110,6 +113,12 @@ const Table: FC<Props> = ({ userData }) => {
           userData={deleteID.username}
           actionDelete={() => {
             deleteUser(deleteID.id);
+            dispatch({
+              type: Types.DeleteSuccess,
+              payload: {
+                success: false,
+              },
+            });
             setOpenModal(false);
           }}
           modalAction={() => setOpenModal(false)}
