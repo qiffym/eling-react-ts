@@ -254,16 +254,16 @@ export const useAddMaterial = () => {
 
 export const useFetchForum = (classId: number, contentId?: number) => {
   const [forumData, setForumData] = useState<any>([]);
-  const [isLoading, setLoading] = useState(false);
+  const [loadingForum, setLoadingForum] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
   const { state } = useContext(MyContext);
 
   const fetchForum = useCallback(async () => {
-    setLoading(true);
+    setLoadingForum(true);
     try {
       const response = await fetch(
-        `${baseURL}/api/teacher/online-classes/${classId}/contents/${contentId}/forums`,
+        `${baseURL}/api/teacher/online-classes/${classId}/contents/${contentId}`,
         {
           method: 'GET',
           headers: {
@@ -276,25 +276,19 @@ export const useFetchForum = (classId: number, contentId?: number) => {
       );
       const result = await response.json();
       setForumData(result.data);
-      setLoading(false);
+      setLoadingForum(false);
     } catch (e) {
       console.log(e);
-      setLoading(false);
+      setLoadingForum(false);
     }
-  }, [
-    baseURL,
-    classId,
-    contentId,
-    user.token,
-    state.addMaterialSuccess.success,
-  ]);
+  }, [baseURL, classId, contentId, user.token, state.addForumSuccess.success]);
 
   useEffect(() => {
     fetchForum();
   }, [fetchForum]);
 
   return {
-    isLoading,
+    loadingForum,
     forumData,
   };
 };
@@ -336,7 +330,7 @@ export const useAddForum = () => {
       const result = await response.json();
       console.log(result);
       dispatch({
-        type: Types.AddContentSuccess,
+        type: Types.AddForumSuccess,
         payload: {
           success: result.success,
         },

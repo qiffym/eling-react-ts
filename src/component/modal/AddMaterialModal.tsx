@@ -52,7 +52,6 @@ const AddMaterialModal: FC<Props> = ({
                 title: state.title,
                 file: state.file,
               });
-
               actionSave();
             }}>
             <div className="flex flex-col space-y-1">

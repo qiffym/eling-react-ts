@@ -4,7 +4,7 @@ import { HiPlusCircle, HiTrash, HiPencilAlt, HiBookOpen } from 'react-icons/hi';
 import { MdAssignment, MdForum } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { MyContext } from '../../../../context/context';
-import { useFetchMaterial } from '../../../../hooks/useClasses';
+import { useFetchForum, useFetchMaterial } from '../../../../hooks/useClasses';
 import { ContentDetailType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
 import Loading2ND from '../../../loading/Loading2nd';
@@ -19,10 +19,13 @@ type Props = {
 const ContentDetail: FC<Props> = ({ classId, contentId }) => {
   const { isLoading, data } = useFetchMaterial(classId, contentId);
 
+  const { loadingForum, forumData } = useFetchForum(classId, contentId);
+
   const [openModal, setOpenModal] = useState(false);
   const [openModalForum, setOpenModalForum] = useState(false);
   const { dispatch } = useContext(MyContext);
   const contentData: ContentDetailType = data;
+  const forumList: ContentDetailType = forumData;
 
   return (
     <>
@@ -116,7 +119,39 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
               </div>
             </label>
             <div className="flex justify-between items-center mx-4">
-              <div className="flex flex-col w-full" />
+              <div className="flex flex-col w-full">
+                {loadingForum ? (
+                  <div className="flex flex-row items-center justify-center">
+                    <Loading2ND />
+                  </div>
+                ) : (
+                  forumList.forums?.map(item => (
+                    <div className="flex flex-row justify-between">
+                      {/* <a href="#!">Forum 1</a> */}
+                      <Link to={`forums/${contentId}`}>{item.topic}</Link>
+                      {/* TODO: Buat btn disini hanya pada role guru */}
+                      <div className="editable space-x-1">
+                        <div className="tooltip" data-tip="edit forum">
+                          <button
+                            type="button"
+                            name="edit-forum"
+                            className="btn btn-xs btn-warning btn-square">
+                            <HiPencilAlt />
+                          </button>
+                        </div>
+                        <div className="tooltip" data-tip="delete forum">
+                          <button
+                            type="button"
+                            name="delete-forum"
+                            className="btn btn-xs btn-error btn-square">
+                            <HiTrash />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
 
@@ -177,14 +212,14 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
         <AddForumModal
           actionSave={() => {
             dispatch({
-              type: Types.AddContentSuccess,
+              type: Types.AddForumSuccess,
               payload: {
                 success: false,
               },
             });
-            setOpenModal(false);
+            setOpenModalForum(false);
           }}
-          modalAction={() => setOpenModal(false)}
+          modalAction={() => setOpenModalForum(false)}
           idClasses={classId}
           idContent={contentId!}
         />
