@@ -320,7 +320,7 @@ const EditUser = () => {
             Cancel
           </button>
           <button
-            type="button"
+            type="submit"
             className="btn btn-primary px-12 text-white"
             disabled={isDisable}>
             {isLoading ? <LoadingButton /> : 'Save'}

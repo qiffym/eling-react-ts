@@ -91,7 +91,7 @@ const AddForumModal: FC<Props> = ({
               />
             </div>
             <button
-              type="button"
+              type="submit"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}

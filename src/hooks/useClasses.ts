@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable-next-line react-hooks/exhaustive-deps */
 import { FormEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
 import { ClassesType } from '../types/class-type';
@@ -36,7 +37,6 @@ export const useClasses = () => {
       console.log(error);
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseURL, user.token, state.createClassSuccess.success]);
 
   useEffect(() => {
@@ -181,7 +181,6 @@ export const useFetchMaterial = (classId: number, contentId?: number) => {
       console.log(e);
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     baseURL,
     classId,
@@ -236,7 +235,7 @@ export const useAddMaterial = () => {
       const result = await response.json();
       console.log(result);
       dispatch({
-        type: Types.AddContentSuccess,
+        type: Types.AddMaterialSuccess,
         payload: {
           success: result.success,
         },
@@ -282,7 +281,6 @@ export const useFetchForum = (classId: number, contentId?: number) => {
       console.log(e);
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     baseURL,
     classId,

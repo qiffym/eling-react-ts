@@ -52,6 +52,7 @@ const AddMaterialModal: FC<Props> = ({
                 title: state.title,
                 file: state.file,
               });
+
               actionSave();
             }}>
             <div className="flex flex-col space-y-1">
@@ -96,7 +97,7 @@ const AddMaterialModal: FC<Props> = ({
               />
             </div>
             <button
-              type="button"
+              type="submit"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}
