@@ -15,6 +15,7 @@ export enum Types {
   DeleteSuccess = 'SUCCESS',
   CreateClassSuccess = 'CLASS_SUCCESS',
   AddContentSuccess = 'CONTENT_SUCCESS',
+  AddMaterialSuccess = 'MATERIAL_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -50,6 +51,10 @@ export enum Types {
   // Payload Add Material
   MaterialTitle = 'MATERIAL_TITLE',
   MaterialFile = 'MATERIAL_FILE',
+
+  // Payload Add Forum
+  ForumTopic = 'FORUM_TOPIC',
+  ForumDesc = 'FORUM_DESC',
 }
 
 export type LoginPayload = {
@@ -98,6 +103,12 @@ export type CreateClassSuccessPayload = {
 
 export type AddContentSuccessPayload = {
   [Types.AddContentSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddMaterialSuccessPayload = {
+  [Types.AddMaterialSuccess]: {
     success: boolean;
   };
 };
@@ -194,5 +205,14 @@ export type AddMaterialPayload = {
   };
   [Types.MaterialFile]: {
     file: FileList | null;
+  };
+};
+
+export type AddForumPayload = {
+  [Types.ForumTopic]: {
+    topic: string;
+  };
+  [Types.ForumDesc]: {
+    description: string;
   };
 };

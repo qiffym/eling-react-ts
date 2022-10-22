@@ -36,7 +36,11 @@ export type CreateClassSuccessType = {
   success: boolean;
 };
 
-export type AddContentSuccesType = {
+export type AddContentSuccessType = {
+  success: boolean;
+};
+
+export type AddMaterialSuccessType = {
   success: boolean;
 };
 
@@ -82,6 +86,11 @@ export type AddMaterialType = {
   file: FileList | null;
 };
 
+export type AddForumType = {
+  topic: string;
+  description: string;
+};
+
 // Store to initial state Type for Global
 
 export type InitialStateType = {
@@ -89,5 +98,6 @@ export type InitialStateType = {
   classes: ClassListType;
   deleteSuccess: DeleteSuccessType;
   createClassSuccess: CreateClassSuccessType;
-  addContentSucces: AddContentSuccesType;
+  addContentSuccess: AddContentSuccessType;
+  addMaterialSuccess: AddMaterialSuccessType;
 };

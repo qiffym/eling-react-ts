@@ -10,6 +10,8 @@ import {
   addContentReducer,
   AddContentSuccessAction,
   addContentSuccessReducer,
+  AddMaterialSuccessAction,
+  addMaterialSuccessReducer,
   ClassListAction,
   classReducer,
   CreateClassSuccessAction,
@@ -57,7 +59,10 @@ const contextInitialState: InitialStateType = {
   createClassSuccess: {
     success: false,
   },
-  addContentSucces: {
+  addContentSuccess: {
+    success: false,
+  },
+  addMaterialSuccess: {
     success: false,
   },
 };
@@ -70,6 +75,7 @@ export const MyContext = createContext<{
     | DeleteSuccessAction
     | CreateClassSuccessAction
     | AddContentSuccessAction
+    | AddMaterialSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -82,7 +88,8 @@ const mainReducer = (
     classes,
     deleteSuccess,
     createClassSuccess,
-    addContentSucces,
+    addContentSuccess,
+    addMaterialSuccess,
   }: InitialStateType,
   action: any,
 ) => ({
@@ -90,7 +97,8 @@ const mainReducer = (
   classes: classReducer(classes, action),
   createClassSuccess: createClassSuccessReducer(createClassSuccess, action),
   deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
-  addContentSucces: addContentSuccessReducer(addContentSucces, action),
+  addContentSuccess: addContentSuccessReducer(addContentSuccess, action),
+  addMaterialSuccess: addMaterialSuccessReducer(addMaterialSuccess, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

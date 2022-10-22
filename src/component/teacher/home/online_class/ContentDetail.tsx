@@ -3,9 +3,10 @@ import { HiPlusCircle, HiTrash, HiPencilAlt, HiBookOpen } from 'react-icons/hi';
 import { MdAssignment, MdForum } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { MyContext } from '../../../../context/context';
-import { useFetch } from '../../../../hooks/useFetch';
+import { useFetchMaterial } from '../../../../hooks/useClasses';
 import { ContentDetailType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
+import AddForumModal from '../../../modal/AddForumModal';
 import AddMaterialModal from '../../../modal/AddMaterialModal';
 
 type Props = {
@@ -14,11 +15,10 @@ type Props = {
 };
 
 const ContentDetail: FC<Props> = ({ classId, contentId }) => {
-  const { data } = useFetch(
-    `/api/teacher/online-classes/${classId}/contents/${contentId}`,
-  );
+  const { data } = useFetchMaterial(classId, contentId);
 
   const [openModal, setOpenModal] = useState(false);
+  const [openModalForum, setOpenModalForum] = useState(false);
   const { dispatch } = useContext(MyContext);
   const contentData: ContentDetailType = data;
 
@@ -41,16 +41,16 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
               </button>
             </li>
             <li>
-              <a href="#!">
+              <button onClick={() => console.log('hehe')}>
                 <MdAssignment />
                 Add Assignment
-              </a>
+              </button>
             </li>
             <li>
-              <a href="#!">
+              <button onClick={() => setOpenModalForum(true)}>
                 <MdForum />
                 Add Forum
-              </a>
+              </button>
             </li>
           </ul>
         </div>
@@ -105,47 +105,29 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
             </label>
             <div className="flex justify-between items-center mx-4">
               <div className="flex flex-col w-full">
-                <div className="flex flex-row justify-between">
-                  {/* <a href="#!">Forum 1</a> */}
-                  <Link to={`forums/${contentId}`}>Forum 1</Link>
-                  {/* TODO: Buat btn disini hanya pada role guru*/}
-                  <div className="editable space-x-1">
-                    <div className="tooltip" data-tip="edit forum">
-                      <button
-                        name="edit-forum"
-                        className="btn btn-xs btn-warning btn-square">
-                        <HiPencilAlt />
-                      </button>
-                    </div>
-                    <div className="tooltip" data-tip="delete forum">
-                      <button
-                        name="delete-forum"
-                        className="btn btn-xs btn-error btn-square">
-                        <HiTrash />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row justify-between">
-                  <a href="#!">Forum 2</a>
-                  {/* TODO: Buat btn disini hanya pada role guru*/}
-                  <div className="editable space-x-1">
-                    <div className="tooltip" data-tip="edit forum">
-                      <button
-                        name="edit-forum"
-                        className="btn btn-xs btn-warning btn-square">
-                        <HiPencilAlt />
-                      </button>
-                    </div>
-                    <div className="tooltip" data-tip="delete forum">
-                      <button
-                        name="delete-forum"
-                        className="btn btn-xs btn-error btn-square">
-                        <HiTrash />
-                      </button>
+                {contentData.forums?.map(item => (
+                  <div className="flex flex-row justify-between">
+                    {/* <a href="#!">Forum 1</a> */}
+                    <Link to={`forums/${contentId}`}>{item.topic}</Link>
+                    {/* TODO: Buat btn disini hanya pada role guru*/}
+                    <div className="editable space-x-1">
+                      <div className="tooltip" data-tip="edit forum">
+                        <button
+                          name="edit-forum"
+                          className="btn btn-xs btn-warning btn-square">
+                          <HiPencilAlt />
+                        </button>
+                      </div>
+                      <div className="tooltip" data-tip="delete forum">
+                        <button
+                          name="delete-forum"
+                          className="btn btn-xs btn-error btn-square">
+                          <HiTrash />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -188,7 +170,24 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
         <AddMaterialModal
           actionSave={() => {
             dispatch({
-              type: Types.AddContentSuccess,
+              type: Types.AddMaterialSuccess,
+              payload: {
+                success: false,
+              },
+            });
+            setOpenModal(false);
+          }}
+          modalAction={() => setOpenModal(false)}
+          idClasses={classId}
+          idContent={contentId!}
+        />
+      ) : null}
+
+      {openModalForum ? (
+        <AddForumModal
+          actionSave={() => {
+            dispatch({
+              type: Types.AddMaterialSuccess,
               payload: {
                 success: false,
               },

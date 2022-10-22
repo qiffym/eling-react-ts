@@ -151,6 +151,54 @@ export const useAddContent = () => {
   };
 };
 
+export const useFetchMaterial = (classId: number, contentId?: number) => {
+  const [data, setData] = useState<any>([]);
+  const [isLoading, setLoading] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { state } = useContext(MyContext);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${classId}/contents/${contentId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
+      );
+      const result = await response.json();
+      setData(result.data);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    baseURL,
+    classId,
+    contentId,
+    user.token,
+    state.addMaterialSuccess.success,
+  ]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return {
+    isLoading,
+    data,
+  };
+};
+
 export const useAddMaterial = () => {
   const [isLoading, setLoading] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
@@ -171,8 +219,6 @@ export const useAddMaterial = () => {
     data.append('title', input.title);
     data.append('file', input.file);
     setLoading(true);
-
-    console.log(data.entries());
 
     try {
       const response = await fetch(
@@ -203,5 +249,107 @@ export const useAddMaterial = () => {
   return {
     isLoading,
     addMaterial,
+  };
+};
+
+export const useFetchForum = (classId: number, contentId?: number) => {
+  const [forumData, setForumData] = useState<any>([]);
+  const [isLoading, setLoading] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { state } = useContext(MyContext);
+
+  const fetchForum = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${classId}/contents/${contentId}/forums`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
+      );
+      const result = await response.json();
+      setForumData(result.data);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    baseURL,
+    classId,
+    contentId,
+    user.token,
+    state.addMaterialSuccess.success,
+  ]);
+
+  useEffect(() => {
+    fetchForum();
+  }, [fetchForum]);
+
+  return {
+    isLoading,
+    forumData,
+  };
+};
+
+export const useAddForum = () => {
+  const [isLoading, setLoading] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
+
+  const addForum = async (
+    e: FormEvent<HTMLFormElement>,
+    idClasses: number,
+    idContent: number,
+    input: {
+      topic: string;
+      description: string;
+    },
+  ) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${idClasses}/contents/${idContent}/forums`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            topic: input.topic,
+            description: input.description,
+          }),
+        },
+      );
+      const result = await response.json();
+      console.log(result);
+      dispatch({
+        type: Types.AddContentSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    addForum,
   };
 };

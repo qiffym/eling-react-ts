@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useReducer, useState } from 'react';
-import { useAddMaterial } from '../../hooks/useClasses';
-import { addMaterialReducer } from '../../reducers/reducers';
+import { useAddForum } from '../../hooks/useClasses';
+import { addForumReducer } from '../../reducers/reducers';
 import { Types } from '../../types/reducer-type';
 import LoadingButton from '../loading/LoadingButton';
 
@@ -11,21 +11,21 @@ type Props = {
   idContent: number;
 };
 
-const AddMaterialModal: FC<Props> = ({
+const AddForumModal: FC<Props> = ({
   actionSave,
   modalAction,
   idClasses,
   idContent,
 }) => {
-  const { isLoading, addMaterial } = useAddMaterial();
+  const { isLoading, addForum } = useAddForum();
   const [isDisable, setDisable] = useState(false);
-  const [state, dispatch] = useReducer(addMaterialReducer, {
-    title: '',
-    file: null,
+  const [state, dispatch] = useReducer(addForumReducer, {
+    topic: '',
+    description: '',
   });
 
   useEffect(() => {
-    if (state.title === '' || state.file === null) {
+    if (state.topic === '') {
       setDisable(true);
     } else {
       setDisable(false);
@@ -42,20 +42,20 @@ const AddMaterialModal: FC<Props> = ({
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
             </button>
-            <h3 className="text-lg font-bold">Tambah Materi</h3>
+            <h3 className="text-lg font-bold">Buat Forum</h3>
           </div>
           <form
             className="mt-4 flex flex-col space-y-5 w-full"
             onSubmit={e => {
-              addMaterial(e, idClasses, idContent, {
-                title: state.title,
-                file: state.file,
+              addForum(e, idClasses, idContent, {
+                topic: state.topic,
+                description: state.description,
               });
               actionSave();
             }}>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">
-                Nama Materi
+                Topik
               </label>
               <input
                 type="text"
@@ -64,9 +64,9 @@ const AddMaterialModal: FC<Props> = ({
                 className="input input-bordered w-full "
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   dispatch({
-                    type: Types.MaterialTitle,
+                    type: Types.ForumTopic,
                     payload: {
-                      title: e.target.value,
+                      topic: e.target.value,
                     },
                   })
                 }
@@ -74,21 +74,16 @@ const AddMaterialModal: FC<Props> = ({
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="desc-textarea" className="font-medium">
-                Material File
+                Description
               </label>
-              <input
-                type="file"
-                className="file:cursor-pointer block w-full text-sm text-slate-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-full file:border-0
-                file:text-sm file:font-semibold
-                file:bg-violet-50 file:text-violet-700
-                hover:file:bg-violet-100 file:transition-all"
-                onChange={(e: any) =>
+              <textarea
+                name="desc-textarea"
+                className="textarea textarea-bordered w-full resize-none"
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                   dispatch({
-                    type: Types.MaterialFile,
+                    type: Types.ForumDesc,
                     payload: {
-                      file: e.target.files[0],
+                      description: e.target.value,
                     },
                   })
                 }
@@ -107,4 +102,4 @@ const AddMaterialModal: FC<Props> = ({
   );
 };
 
-export default AddMaterialModal;
+export default AddForumModal;

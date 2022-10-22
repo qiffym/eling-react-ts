@@ -33,7 +33,7 @@ export const useFetch = (url: string) => {
     url,
     user.token,
     state.deleteSuccess.success,
-    state.addContentSucces.success,
+    state.addContentSuccess.success,
   ]);
 
   useEffect(() => {

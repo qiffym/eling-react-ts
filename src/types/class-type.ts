@@ -41,6 +41,15 @@ export type ContentType = {
   created_at?: string;
 };
 
+export type ForumType = {
+  content_id?: number;
+  content_of: string;
+  created_at: string;
+  description: string;
+  id: number;
+  topic: string;
+};
+
 export type ContentDetailType = {
   id?: number;
   online_class_id?: number;
@@ -54,7 +63,7 @@ export type ContentDetailType = {
       file: string;
     },
   ];
-  forum?: [
+  forums?: [
     {
       id: number;
       content_id: number;
