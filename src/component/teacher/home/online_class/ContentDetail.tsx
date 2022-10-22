@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
 import { HiPlusCircle, HiTrash, HiPencilAlt, HiBookOpen } from 'react-icons/hi';
 import { MdAssignment, MdForum } from 'react-icons/md';
@@ -25,7 +26,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
   return (
     <>
       <div className="collapse-content text-lg font-medium mt-2">
-        {/* TODO: Buat btn create ini hanya pada role guru*/}
+        {/* TODO: Buat btn create ini hanya pada role guru */}
         <div className="dropdown dropdown-right mb-4">
           <label tabIndex={0} className="btn btn-sm normal-case px-3">
             <HiPlusCircle className="text-xl mr-1" />
@@ -35,19 +36,19 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
             tabIndex={0}
             className="dropdown-content menu shadow bg-base-100 rounded-box w-52 text-xs">
             <li>
-              <button onClick={() => setOpenModal(true)}>
+              <button type="button" onClick={() => setOpenModal(true)}>
                 <HiBookOpen />
                 Add Material
               </button>
             </li>
             <li>
-              <button onClick={() => console.log('hehe')}>
+              <button type="button">
                 <MdAssignment />
                 Add Assignment
               </button>
             </li>
             <li>
-              <button onClick={() => setOpenModalForum(true)}>
+              <button type="button" onClick={() => setOpenModalForum(true)}>
                 <MdForum />
                 Add Forum
               </button>
@@ -75,6 +76,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                     <div className="editable space-x-1">
                       <div className="tooltip" data-tip="edit materi">
                         <button
+                          type="button"
                           name="edit-materi"
                           className="btn btn-xs btn-warning btn-square">
                           <HiPencilAlt />
@@ -82,6 +84,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                       </div>
                       <div className="tooltip" data-tip="delete materi">
                         <button
+                          type="button"
                           name="delete-materi"
                           className="btn btn-xs btn-error btn-square">
                           <HiTrash />
@@ -109,10 +112,11 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                   <div className="flex flex-row justify-between">
                     {/* <a href="#!">Forum 1</a> */}
                     <Link to={`forums/${contentId}`}>{item.topic}</Link>
-                    {/* TODO: Buat btn disini hanya pada role guru*/}
+                    {/* TODO: Buat btn disini hanya pada role guru */}
                     <div className="editable space-x-1">
                       <div className="tooltip" data-tip="edit forum">
                         <button
+                          type="button"
                           name="edit-forum"
                           className="btn btn-xs btn-warning btn-square">
                           <HiPencilAlt />
@@ -120,6 +124,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                       </div>
                       <div className="tooltip" data-tip="delete forum">
                         <button
+                          type="button"
                           name="delete-forum"
                           className="btn btn-xs btn-error btn-square">
                           <HiTrash />
@@ -144,17 +149,19 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
             <div className="flex justify-between items-center mx-4">
               {/* <a href="#!">Tugas 1</a> */}
               <Link to={`contents/${contentId}/assignment`}>Tugas 1</Link>
-              {/* TODO: Buat btn disini hanya pada role guru*/}
+              {/* TODO: Buat btn disini hanya pada role guru */}
               <div className="editable space-x-1">
                 <div className="tooltip" data-tip="edit tugas">
                   <button
+                    type="button"
                     name="edit-tugas"
                     className="btn btn-xs btn-warning btn-square">
-                    <HiPencilAlt></HiPencilAlt>
+                    <HiPencilAlt />
                   </button>
                 </div>
                 <div className="tooltip" data-tip="delete tugas">
                   <button
+                    type="button"
                     name="delete-tugas"
                     className="btn btn-xs btn-error btn-square">
                     <HiTrash />

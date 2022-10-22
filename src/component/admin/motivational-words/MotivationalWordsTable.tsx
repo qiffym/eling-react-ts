@@ -35,6 +35,7 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
                 <td>{item.active}</td>
                 <td>
                   <button
+                    type="button"
                     onClick={() =>
                       navigate(`${item.id}`, {
                         state: {
@@ -46,6 +47,7 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
                     <HiEye className="text-md" /> <span>View</span>
                   </button>
                   <button
+                    type="button"
                     onClick={() =>
                       navigate(`${item.id}/edit`, {
                         state: {
@@ -57,7 +59,9 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
                     <HiPencilAlt className="text-md" />
                     <span>Edit</span>
                   </button>
-                  <button className="btn btn-error btn-xs text-white space-x-1">
+                  <button
+                    type="button"
+                    className="btn btn-error btn-xs text-white space-x-1">
                     <HiTrash className="text-md" /> <span>Delete</span>
                   </button>
                 </td>

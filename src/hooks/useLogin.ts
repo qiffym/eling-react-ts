@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,8 +38,8 @@ const useLogin = () => {
         alert('Username atau passsword salah');
         setLoading(false);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };

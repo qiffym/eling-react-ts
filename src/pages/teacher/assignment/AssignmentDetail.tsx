@@ -11,6 +11,7 @@ const AssignmentDetail = () => {
         <div className="container mx-auto w-[95%] rounded-box">
           <div className="tabs flex justify-start">
             <button
+              type="button"
               onClick={() => setTab(0)}
               className={`${
                 tab === 0
@@ -20,6 +21,7 @@ const AssignmentDetail = () => {
               Instruksi Tugas
             </button>
             <button
+              type="button"
               onClick={() => setTab(1)}
               className={`${
                 tab === 1

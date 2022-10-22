@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClassesType } from '../../../types/class-type';
 
@@ -18,7 +17,8 @@ const CardClass: FC<ListClass> = ({ classes }) => {
           <div key={item.id} className="card w-[21rem] bg-base-100 shadow-xl">
             <div className="card-body">
               <h2 className="font-bold text-xl">{item.rombel_name}</h2>
-              <h2
+              <button
+                type="button"
                 onClick={() =>
                   navigate(`/online-class/${item.id}`, {
                     state: item,
@@ -26,7 +26,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                 }
                 className="card-title cursor-pointer">
                 {item.name}
-              </h2>
+              </button>
               <p className="font-medium text-sm text-slate-600">
                 <span>Senin</span> | <span>07.30 - 09.00 WIB</span>
               </p>
@@ -46,6 +46,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                   <p className="font-semibold text-sm">{item.teacher_name}</p>
                 </div>
                 <button
+                  type="button"
                   onClick={() =>
                     navigate(`/online-class/${item.id}`, {
                       state: item,

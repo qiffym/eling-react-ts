@@ -7,7 +7,6 @@ import React, {
   useReducer,
 } from 'react';
 import {
-  addContentReducer,
   AddContentSuccessAction,
   addContentSuccessReducer,
   AddMaterialSuccessAction,

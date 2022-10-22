@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { FormEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
 import { ClassesType } from '../types/class-type';
@@ -31,8 +32,8 @@ export const useClasses = () => {
         },
       });
       setLoading(false);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,8 +87,8 @@ export const useCreateClass = () => {
           success: result.success,
         },
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };
@@ -139,8 +140,8 @@ export const useAddContent = () => {
           success: result.success,
         },
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };
@@ -240,8 +241,8 @@ export const useAddMaterial = () => {
           success: result.success,
         },
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };
@@ -342,8 +343,8 @@ export const useAddForum = () => {
           success: result.success,
         },
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };

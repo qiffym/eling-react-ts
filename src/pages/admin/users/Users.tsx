@@ -9,20 +9,19 @@ import { useFetch } from '../../../hooks/useFetch';
 const Users = () => {
   const { isLoading, data } = useFetch('/api/admin/resources/users');
   const [searchData, setSearchData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(3);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [postPerPage] = useState(3);
 
   const navigate = useNavigate();
 
   const searchUser = (value: string) => {
     setSearchData(
-      data.filter((item: any) => {
-        return (
+      data.filter(
+        (item: any) =>
           item.name.toLowerCase().includes(value.toLowerCase()) ||
           item.username.toLowerCase().includes(value.toLowerCase()) ||
-          item.email.toLowerCase().includes(value.toLowerCase())
-        );
-      }),
+          item.email.toLowerCase().includes(value.toLowerCase()),
+      ),
     );
   };
 
@@ -30,11 +29,11 @@ const Users = () => {
     setSearchData(data);
   }, [data]);
 
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = searchData.slice(indexOfFirstPost, indexOfLastPost);
+  // const indexOfLastPost = currentPage * postPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postPerPage;
+  // const currentPosts = searchData.slice(indexOfFirstPost, indexOfLastPost);
 
-  const pagination = (pageNumber: any) => setCurrentPage(pageNumber);
+  // const pagination = (pageNumber: any) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -52,17 +51,14 @@ const Users = () => {
               searchUser(e.target.value)
             }
           />
-          <button onClick={() => navigate('new')} className="btn btn-primary">
+          <button
+            type="button"
+            onClick={() => navigate('new')}
+            className="btn btn-primary">
             Add User
           </button>
         </div>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            <Table userData={searchData} />
-          </>
-        )}
+        {isLoading ? <Loading /> : <Table userData={searchData} />}
       </div>
     </>
   );

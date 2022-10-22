@@ -93,7 +93,7 @@ const EditUser = () => {
                   name="radio-2"
                   className="radio radio-primary"
                   value="L"
-                  defaultChecked={user.gender === 'L' ? true : false}
+                  defaultChecked={user.gender === 'L'}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     dispatch({
                       type: Types.UpdateGender,
@@ -111,7 +111,7 @@ const EditUser = () => {
                   name="radio-2"
                   className="radio radio-primary"
                   value="P"
-                  defaultChecked={user.gender === 'P' ? true : false}
+                  defaultChecked={user.gender === 'P'}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     dispatch({
                       type: Types.UpdateGender,
@@ -178,7 +178,6 @@ const EditUser = () => {
             <select
               defaultValue={user.religion === null ? 'DEFAULT' : user.religion}
               onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                console.log(e.target.value);
                 dispatch({
                   type: Types.UpdateReligion,
                   payload: {
@@ -240,7 +239,7 @@ const EditUser = () => {
                   name="radio-status"
                   className="radio radio-primary"
                   value={1}
-                  defaultChecked={user.status === 'Active' ? true : false}
+                  defaultChecked={user.status === 'Active'}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     dispatch({
                       type: Types.UpdateStatus,
@@ -258,7 +257,7 @@ const EditUser = () => {
                   name="radio-status"
                   className="radio radio-primary"
                   value={0}
-                  defaultChecked={user.status === 'Deactive' ? true : false}
+                  defaultChecked={user.status === 'Deactive'}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     dispatch({
                       type: Types.UpdateStatus,
@@ -314,10 +313,14 @@ const EditUser = () => {
           </div>
         </div>
         <div className="my-8 flex flex-row justify-end space-x-4">
-          <button onClick={cancelAction} className="btn btn-ghost px-12">
+          <button
+            type="button"
+            onClick={cancelAction}
+            className="btn btn-ghost px-12">
             Cancel
           </button>
           <button
+            type="button"
             className="btn btn-primary px-12 text-white"
             disabled={isDisable}>
             {isLoading ? <LoadingButton /> : 'Save'}

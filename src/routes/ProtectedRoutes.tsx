@@ -22,29 +22,40 @@ const ProtectedRoutes: FC<ProtectedRouteRole> = ({ roleRequired }) => {
         auth: true,
         roles: user.user.role,
       };
-    } else {
-      return {
-        auth: false,
-        roles: null,
-      };
     }
+    return {
+      auth: false,
+      roles: null,
+    };
   };
 
   const { auth, roles } = useAuth();
 
+  // if (roleRequired) {
+  //   return auth ? (
+  //     roleRequired === roles ? (
+  //       <Outlet />
+  //     ) : (
+  //       <Navigate to="/permissiondenied" />
+  //     )
+  //   ) : (
+  //     <Navigate to="/login" />
+  //   );
+  // }
+
   if (roleRequired) {
-    return auth ? (
-      roleRequired === roles ? (
-        <Outlet />
-      ) : (
-        <Navigate to="/permissiondenied" />
-      )
-    ) : (
-      <Navigate to="/login" />
-    );
-  } else {
-    return auth ? <Outlet /> : <Navigate to="/login" />;
+    if (auth) {
+      if (roleRequired === roles) {
+        <Outlet />;
+      } else {
+        <Navigate to="/permissiondenied" />;
+      }
+    } else {
+      <Navigate to="/login" />;
+    }
   }
+
+  return auth ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoutes;

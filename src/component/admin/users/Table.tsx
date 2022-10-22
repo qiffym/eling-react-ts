@@ -1,9 +1,9 @@
 import React, { FC, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { HiTrash, HiPencilAlt, HiEye } from 'react-icons/hi';
 import { useDeleteUser } from '../../../hooks/useDeleteUser';
 import { UserType } from '../../../types/user-type';
 import Modal from '../../modal/Modal';
-import { HiTrash, HiPencilAlt, HiEye } from 'react-icons/hi';
 import { MyContext } from '../../../context/context';
 import { Types } from '../../../types/reducer-type';
 
@@ -31,7 +31,7 @@ const Table: FC<Props> = ({ userData }) => {
               <th>Role</th>
               <th>Name</th>
               <th>Username/Email</th>
-              <th></th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -67,6 +67,7 @@ const Table: FC<Props> = ({ userData }) => {
                     </td>
                     <td>
                       <button
+                        type="button"
                         onClick={() =>
                           navigate(`${item.id}`, {
                             state: {
@@ -78,6 +79,7 @@ const Table: FC<Props> = ({ userData }) => {
                         <HiEye className="text-md" /> <span>View</span>
                       </button>
                       <button
+                        type="button"
                         onClick={() =>
                           navigate(`${item.id}/edit`, {
                             state: {
@@ -90,6 +92,7 @@ const Table: FC<Props> = ({ userData }) => {
                         <span>Edit</span>
                       </button>
                       <button
+                        type="button"
                         onClick={() => {
                           setOpenModal(true);
                           setDeleteID({

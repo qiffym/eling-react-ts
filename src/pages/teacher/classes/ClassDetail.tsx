@@ -29,6 +29,7 @@ const ClassDetail = () => {
             <div className="container space-y-5 mx-auto bg-primary w-11/12 px-5 py-3 rounded-box">
               <div className="flex flex-row items-center space-x-2">
                 <button
+                  type="button"
                   onClick={() => navigate('/')}
                   className="btn btn-ghost btn-square h-8 w-12">
                   <HiChevronLeft className="text-2xl" />
@@ -56,6 +57,7 @@ const ClassDetail = () => {
               <div className="flex items-center space-x-1">
                 <div>
                   <button
+                    type="button"
                     onClick={() => setTab(0)}
                     className={`${
                       tab === 0
@@ -67,6 +69,7 @@ const ClassDetail = () => {
                 </div>
                 <div>
                   <button
+                    type="button"
                     onClick={() => setTab(1)}
                     className={`${
                       tab === 1

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import LoadingButton from '../../component/loading/LoadingButton';
-import useLogin from '../../hooks/useLogin';
 import { Helmet } from 'react-helmet';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
+import LoadingButton from '../../component/loading/LoadingButton';
+import useLogin from '../../hooks/useLogin';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
 
 const Login = () => {
@@ -69,7 +69,7 @@ const Login = () => {
                   <h3 className="text-lg font-semibold">
                     e-Learning SMK Negeri 3 Malang
                   </h3>
-                  <div className="border-t-2 w-16 border-teal-600 inline-block mb-2"></div>
+                  <div className="border-t-2 w-16 border-teal-600 inline-block mb-2" />
                   <form
                     onSubmit={e =>
                       authLogin(e, input.username, input.password)
@@ -143,7 +143,7 @@ const Login = () => {
                   </form>
 
                   {/* Footer */}
-                  <div className="border-t-2 w-72 border-slate-400 inline-block mb-2"></div>
+                  <div className="border-t-2 w-72 border-slate-400 inline-block mb-2" />
                   <br />
                   <div className="inline-block">
                     <h3 className="italic font-semibold text-slate-500 hover:text-slate-700 hover:font-bold">
@@ -171,6 +171,6 @@ const Login = () => {
       </section>
     </>
   );
-};
+}
 
 export default Login;

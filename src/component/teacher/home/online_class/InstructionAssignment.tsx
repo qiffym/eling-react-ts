@@ -32,6 +32,7 @@ const InstructionAssignment = () => {
                 <div className="space-x-2">
                   <div className="tooltip" data-tip="Edit">
                     <button
+                      type="button"
                       onClick={() => setOpenEditModal(true)}
                       className="btn btn-sm btn-square btn-warning text-lg">
                       <HiPencilAlt />
@@ -39,6 +40,7 @@ const InstructionAssignment = () => {
                   </div>
                   <div className="tooltip" data-tip="Delete">
                     <button
+                      type="button"
                       onClick={() => setOpenDelModal(true)}
                       className="btn btn-sm btn-square btn-error text-lg">
                       <HiTrash />

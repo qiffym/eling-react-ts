@@ -3,8 +3,7 @@ import { FaUsers } from 'react-icons/fa';
 import { MdKeyboardReturn } from 'react-icons/md';
 import ryujin from '../../../../assets/ryujin1.jpg';
 
-const GradingAssignment = () => {
-  return (
+const GradingAssignment = () => (
     <section id="content" className="-mb-10">
       <div className="container mx-auto w-[95%] rounded-box">
         <div className="flex items-start space-x-3">
@@ -187,7 +186,7 @@ const GradingAssignment = () => {
                         <input
                           type="text"
                           placeholder="0"
-                          value={'80'}
+                          value="80"
                           className="w-9 border-b-gray-500 font-bold hover:border-b-2 group-hover:bg-slate-100 focus:outline-none focus:border-b-2"
                         />
                         <span className="mr-2 text-slate-600">/100</span>
@@ -227,7 +226,7 @@ const GradingAssignment = () => {
                         <input
                           type="text"
                           placeholder="0"
-                          value={'100'}
+                          value="100"
                           className="w-9 border-b-gray-500 font-bold hover:border-b-2 group-hover:bg-slate-100 focus:outline-none focus:border-b-2"
                         />
                         <span className="mr-2 text-slate-600">/100</span>
@@ -270,7 +269,6 @@ const GradingAssignment = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
 
 export default GradingAssignment;

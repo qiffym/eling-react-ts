@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { LoginType } from '../../types/context-type';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
+import { LoginType } from '../../types/context-type';
 import useLogout from '../../hooks/useLogout';
 import Footer from './Footer';
 
@@ -30,11 +31,12 @@ const Appbar = () => {
             tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <NavLink to={'me'}>My Profile</NavLink>
+              <NavLink to="me">My Profile</NavLink>
             </li>
             <hr />
             <li className="font-bold hover:text-red-500">
-              <p
+              <button
+                type="button"
                 onClick={() => {
                   authLogout();
                   localStorage.clear();
@@ -42,7 +44,7 @@ const Appbar = () => {
                 }}>
                 <BiLogOut className="text-lg" />
                 Keluar
-              </p>
+              </button>
             </li>
           </ul>
         </div>

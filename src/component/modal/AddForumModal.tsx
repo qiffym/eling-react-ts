@@ -38,6 +38,7 @@ const AddForumModal: FC<Props> = ({
         <div className="modal-box w-[40%] max-w-5xl">
           <div className="felx flex-row justify-between items-center">
             <button
+              type="button"
               onClick={modalAction}
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
@@ -90,6 +91,7 @@ const AddForumModal: FC<Props> = ({
               />
             </div>
             <button
+              type="button"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}

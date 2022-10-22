@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
 import { HiPlusCircle } from 'react-icons/hi';
 import { MyContext } from '../../../../context/context';
@@ -25,8 +26,9 @@ export const ClassContent: FC<Props> = ({ classId }) => {
       {/* Section Content Class */}
       <section id="content-class">
         <div className="container mx-auto w-11/12">
-          {/* TODO: Buat btn create ini hanya pada role guru*/}
+          {/* TODO: Buat btn create ini hanya pada role guru */}
           <button
+            type="button"
             onClick={() => setOpenModal(true)}
             className="btn btn-md normal-case px-3 mb-4">
             <HiPlusCircle className="text-3xl mr-1" />

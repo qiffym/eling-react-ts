@@ -5,8 +5,7 @@ type Props = {
   statData: StatisticType;
 };
 
-const Stat: FC<Props> = ({ statData }) => {
-  return (
+const Stat: FC<Props> = ({ statData }) => (
     <div className="stats shadow">
       <div className="stat">
         <div className="stat-figure text-primary">
@@ -93,6 +92,5 @@ const Stat: FC<Props> = ({ statData }) => {
       </div>
     </div>
   );
-};
 
 export default Stat;
