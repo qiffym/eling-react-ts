@@ -126,7 +126,9 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                   </div>
                 ) : (
                   forumList.forums?.map(item => (
-                    <div className="flex flex-row justify-between">
+                    <div
+                      key={item.id}
+                      className="flex flex-row justify-between">
                       {/* <a href="#!">Forum 1</a> */}
                       <Link to={`forums/${contentId}`}>{item.topic}</Link>
                       {/* TODO: Buat btn disini hanya pada role guru */}
