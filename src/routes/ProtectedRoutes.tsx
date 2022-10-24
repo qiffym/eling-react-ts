@@ -1,3 +1,4 @@
+/* eslint-disable react/function-component-definition */
 import { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { LoginType } from '../types/context-type';

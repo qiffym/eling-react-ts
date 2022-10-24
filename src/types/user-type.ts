@@ -12,4 +12,10 @@ export interface UserType {
   birthday: string;
   address: string;
   telpon: string;
+  teacher?: {
+    id: number;
+    nik: string;
+    nip: string;
+    user_id: number;
+  };
 }

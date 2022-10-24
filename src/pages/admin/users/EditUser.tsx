@@ -53,7 +53,7 @@ const EditUser = () => {
     <div className=" px-6 py-14">
       <Header>Edit User</Header>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           updateUser(e, user.id, {
             name: state.name,
             username: state.username,
