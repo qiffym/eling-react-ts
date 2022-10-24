@@ -40,7 +40,7 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
             <h3 className="text-lg font-bold">Tambah Konten</h3>
           </div>
           <form
-            onSubmit={e => {
+            onSubmit={(e) => {
               addContent(e, idClasses, {
                 title: state.title,
                 description: state.description,
@@ -83,7 +83,7 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
               />
             </div>
             <button
-              type="button"
+              type="submit"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}

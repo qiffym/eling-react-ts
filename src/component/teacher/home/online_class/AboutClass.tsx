@@ -64,7 +64,7 @@ export const AboutClass: FC<Props> = ({ about, student, total }) => (
               <tbody>
                 {/* List Kedua */}
                 {student?.map((item, index) => (
-                  <tr key={item.nis} className="hover">
+                  <tr key={item.name} className="hover">
                     {/* Nomor */}
                     <th className="text-center">{index + 1}</th>
 

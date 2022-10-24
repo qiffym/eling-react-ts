@@ -48,6 +48,10 @@ export type AddForumSuccessType = {
   success: boolean;
 };
 
+export type AddAssignmentSuccessType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -95,6 +99,12 @@ export type AddForumType = {
   description: string;
 };
 
+export type AddAssignmentType = {
+  title: string;
+  description: string;
+  deadline: string;
+};
+
 // Store to initial state Type for Global
 
 export type InitialStateType = {
@@ -105,4 +115,5 @@ export type InitialStateType = {
   addContentSuccess: AddContentSuccessType;
   addMaterialSuccess: AddMaterialSuccessType;
   addForumSuccess: AddForumSuccessType;
+  addAssignmentSuccess: AddAssignmentSuccessType;
 };

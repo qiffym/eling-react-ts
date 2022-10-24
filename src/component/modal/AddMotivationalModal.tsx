@@ -77,7 +77,7 @@ const AddMotivationalModal: FC<Props> = ({ modalAction }) => (
             </div>
           </div>
           <hr />
-          <button type="button" className="btn btn-primary px-12 text-white">
+          <button type="submit" className="btn btn-primary px-12 text-white">
             Save
           </button>
         </form>
