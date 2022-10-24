@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiPlus } from 'react-icons/hi';
 import Loading from '../../../component/loading/Loading';
@@ -8,11 +8,26 @@ import Header from '../../../component/header/Header';
 import CardClass from '../../../component/teacher/home/Card';
 import { useClasses } from '../../../hooks/useClasses';
 import { LoginType } from '../../../types/context-type';
+import { ClassesType } from '../../../types/class-type';
 
 const DashboardTeacher = () => {
   const { isLoading, classList } = useClasses();
+  const [searchData, setSearchData] = useState<ClassesType[] | undefined>();
   const [openModal, setOpenModal] = useState(false);
+
   const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
+
+  const searchClass = (value: string) => {
+    setSearchData(
+      classList?.filter((item: any) =>
+        item.name.toLowerCase().includes(value.toLowerCase()),
+      ),
+    );
+  };
+
+  useEffect(() => {
+    setSearchData(classList);
+  }, [classList]);
 
   return (
     <>
@@ -50,6 +65,9 @@ const DashboardTeacher = () => {
                 type="search"
                 placeholder="Search…"
                 className="input input-bordered w-full sm:w-72"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  searchClass(e.target.value)
+                }
               />
               <button type="button" className="btn btn-square">
                 <svg
@@ -79,8 +97,8 @@ const DashboardTeacher = () => {
 
         {isLoading ? (
           <Loading />
-        ) : classList?.length ? (
-          <CardClass classes={classList} />
+        ) : searchData?.length ? (
+          <CardClass classes={searchData} />
         ) : (
           <div className="flex h-[40rem]">
             <div className="m-auto flex flex-col">
