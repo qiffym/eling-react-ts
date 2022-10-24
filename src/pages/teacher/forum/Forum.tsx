@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaComment } from 'react-icons/fa';
+import { HiPencilAlt, HiTrash } from 'react-icons/hi';
 import ryujin from '../../../assets/ryujin1.jpg';
 import ryujin2 from '../../../assets/ryujin2.jpg';
 
@@ -50,6 +51,25 @@ const Forum = () => (
                 nostrum quis nobis debitis vel.
               </p>
             </div>
+          </div>
+        </div>
+        {/* Hanya dapat dilihat guru */}
+        <div className="editable flex justify-end items-center space-x-2 mt-4">
+          <div className="tooltip" data-tip="edit forum">
+            <button
+              type="button"
+              name="edit-forum"
+              className="btn btn-sm btn-warning btn-square text-lg">
+              <HiPencilAlt />
+            </button>
+          </div>
+          <div className="tooltip" data-tip="delete forum">
+            <button
+              type="button"
+              name="delete-forum"
+              className="btn btn-sm btn-error btn-square text-lg">
+              <HiTrash />
+            </button>
           </div>
         </div>
       </div>

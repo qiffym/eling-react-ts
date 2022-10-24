@@ -28,6 +28,13 @@ const Profile = () => {
     }
   }
 
+  function checkNull(check?: string) {
+    if (check === null) {
+      return '-';
+    }
+    return check;
+  }
+
   return (
     <section
       id="me"
@@ -69,9 +76,9 @@ const Profile = () => {
 
       {/* Form Edit Profile */}
       <form>
-        <div className="flex justify-start items-start space-x-10">
+        <div className="xl:flex justify-start items-start xl:space-x-10">
           {/* Informasi Umum */}
-          <div className="w-5/12">
+          <div className="w-full xl:w-5/12">
             {/* Nama Lengkap */}
             <div className="form-control">
               <label className="label">
@@ -82,7 +89,7 @@ const Profile = () => {
                 name="name"
                 placeholder="nama"
                 className="input input-bordered input-sm w-full"
-                value={profileData.name}
+                defaultValue={profileData.name}
                 disabled
               />
             </div>
@@ -96,7 +103,7 @@ const Profile = () => {
                 name="gender"
                 placeholder="jenis kelamin"
                 className="input input-bordered input-sm w-full"
-                value={nullGender(profileData.gender)}
+                defaultValue={nullGender(profileData.gender)}
                 disabled
               />
             </div>
@@ -114,7 +121,7 @@ const Profile = () => {
                   name="username"
                   placeholder="info@site.com"
                   className="input input-bordered input-sm w-full"
-                  value={profileData.username}
+                  defaultValue={profileData.username}
                   disabled
                 />
               </label>
@@ -133,7 +140,7 @@ const Profile = () => {
                   name="email"
                   placeholder="ryojino@example.com"
                   className="input input-bordered input-sm w-full"
-                  value={profileData.email}
+                  defaultValue={checkNull(profileData.email)}
                   disabled
                 />
               </label>
@@ -152,7 +159,7 @@ const Profile = () => {
                   type="date"
                   name="birthday"
                   className="input input-bordered input-sm w-full"
-                  value={profileData.birthday}
+                  defaultValue={checkNull(profileData.birthday)}
                 />
               </label>
             </div>
@@ -164,12 +171,10 @@ const Profile = () => {
               <select
                 className="select select-bordered select-sm"
                 name="religion"
-                value={profileData.religion}
+                value={checkNull(profileData.religion)}
                 disabled>
-                <option>-- Pilih Agama --</option>
-                <option selected value="Islam">
-                  Islam
-                </option>
+                <option disabled>-- Pilih Agama --</option>
+                <option value="Islam">Islam</option>
                 <option value="Kristen">Kristen</option>
                 <option value="Katolik">Katolik</option>
                 <option value="Hindu">Hindu</option>
@@ -186,14 +191,14 @@ const Profile = () => {
                 className="textarea textarea-bordered h-24"
                 name="address"
                 placeholder="Alamat"
-                value={profileData.address}
+                defaultValue={checkNull(profileData.address)}
                 disabled
               />
             </div>
           </div>
 
           {/* Informasi Specific */}
-          <div className="w-4/12">
+          <div className="w-full xl:w-4/12">
             {/* NIP */}
             <div className="form-control">
               <label className="label">
@@ -205,7 +210,7 @@ const Profile = () => {
                   type="text"
                   name="nip"
                   className="input input-bordered w-full"
-                  value={profileData.teacher?.nip}
+                  defaultValue={checkNull(profileData.teacher?.nip)}
                   disabled
                 />
               </label>
@@ -222,7 +227,7 @@ const Profile = () => {
                   type="text"
                   name="nik"
                   className="input input-bordered w-full"
-                  value={profileData.teacher?.nik}
+                  defaultValue={checkNull(profileData.teacher?.nik)}
                   disabled
                 />
               </label>

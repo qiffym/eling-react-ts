@@ -1,25 +1,32 @@
 import React, { ChangeEvent, FC, useEffect, useReducer, useState } from 'react';
-import { useCreateClass } from '../../hooks/useClasses';
-import { createClassReducer } from '../../reducers/reducers';
+import { useAddAssignment } from '../../hooks/useClasses';
+import { addAssignmentReducer } from '../../reducers/reducers';
 import { Types } from '../../types/reducer-type';
 import LoadingButton from '../loading/LoadingButton';
 
 type Props = {
   actionSave: () => void;
   modalAction: () => void;
+  idClasses: number;
+  idContent: number;
 };
 
-const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
-  const { isLoading, createClass } = useCreateClass();
+const AddAssignmentModal: FC<Props> = ({
+  actionSave,
+  modalAction,
+  idClasses,
+  idContent,
+}) => {
+  const { isLoading, addAssignment } = useAddAssignment();
   const [isDisable, setDisable] = useState(false);
-  const [state, dispatch] = useReducer(createClassReducer, {
-    name: '',
+  const [state, dispatch] = useReducer(addAssignmentReducer, {
+    title: '',
     description: '',
-    rombel_class_id: 1,
+    deadline: '',
   });
 
   useEffect(() => {
-    if (state.name === '') {
+    if (state.title === '' || state.deadline === '') {
       setDisable(true);
     } else {
       setDisable(false);
@@ -29,7 +36,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none transition-all ease-in-out">
-        <div className="modal-box relative">
+        <div className="modal-box w-[40%] max-w-5xl">
           <div className="felx flex-row justify-between items-center">
             <button
               type="button"
@@ -37,57 +44,51 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
             </button>
-            <h3 className="text-lg font-bold">Tambah Kelas</h3>
+            <h3 className="text-lg font-bold">Buat Assignment</h3>
           </div>
           <form
+            className="mt-4 flex flex-col space-y-5 w-full"
             onSubmit={(e) => {
-              createClass(e, {
-                name: state.name,
-                rombel_class_id: state.rombel_class_id,
+              addAssignment(e, idClasses, idContent, {
+                title: state.title,
+                deadline: state.deadline,
                 description: state.description,
               });
               actionSave();
-            }}
-            className="mt-4 flex flex-col space-y-5 w-full">
-            <div className="flex flex-col space-y-1">
-              <label htmlFor="romble-textinput" className="font-medium">
-                Romble ID
-              </label>
-              <select
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  dispatch({
-                    type: Types.RombelID,
-                    payload: {
-                      rombel_class_id: Number(e.target.value),
-                    },
-                  });
-                }}
-                className="select select-bordered w-full ">
-                <option value="DEFAULT" disabled>
-                  -- Rombel ID --
-                </option>
-                <option value="1">X TKJ 1</option>
-                <option value="3">X TKJ 2</option>
-                <option value="2">XI TKJ 1</option>
-                <option value="4">XI TKJ 2</option>
-                <option value="5">XII TKJ 1</option>
-                <option value="6">XII TKJ 2</option>
-              </select>
-            </div>
+            }}>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">
-                Nama Kelas
+                Judul
               </label>
               <input
                 type="text"
-                placeholder="Pemrograman Dasar"
+                placeholder="Bab 1"
                 name="class-textinput"
                 className="input input-bordered w-full "
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   dispatch({
-                    type: Types.ClassName,
+                    type: Types.AssignmentTitle,
                     payload: {
-                      name: e.target.value,
+                      title: e.target.value,
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="flex flex-col space-y-1">
+              <label htmlFor="class-textinput" className="font-medium">
+                Set Deadline
+              </label>
+              <input
+                type="datetime-local"
+                placeholder="Bab 1"
+                name="class-textinput"
+                className="input input-bordered w-full "
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  dispatch({
+                    type: Types.AssignmentDeadline,
+                    payload: {
+                      deadline: e.target.value,
                     },
                   })
                 }
@@ -102,7 +103,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
                 className="textarea textarea-bordered w-full resize-none"
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                   dispatch({
-                    type: Types.ClassDescription,
+                    type: Types.AssignmentDesc,
                     payload: {
                       description: e.target.value,
                     },
@@ -124,4 +125,4 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
   );
 };
 
-export default CreateClassModal;
+export default AddAssignmentModal;

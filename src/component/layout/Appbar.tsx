@@ -1,19 +1,23 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
 import { LoginType } from '../../types/context-type';
 import useLogout from '../../hooks/useLogout';
 import Footer from './Footer';
+import BottomBar from './BottomBar';
 
 const Appbar = () => {
   const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
   const authLogout = useLogout();
+  const pathLoc = useLocation().pathname;
+
+  const realPath = pathLoc.split('/');
 
   return (
     <>
-      <nav className="flex flex-row fixed w-[82%] 2xl:w-[86.5%] justify-end items-center h-16 px-6 space-x-5 z-50">
+      <nav className="hidden sm:flex flex-row fixed w-[82%] 2xl:w-[86.5%] justify-end items-center h-16 px-6 space-x-5 z-50">
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost m-1 space-x-3">
             <div className="flex flex-row items-center space-x-2">
@@ -49,7 +53,20 @@ const Appbar = () => {
           </ul>
         </div>
       </nav>
+
+      {/* Mobile AppBar */}
+      {/* <nav className="sm:hidden flex flex-row justify-between bg-white w-full h-16 fixed items-center px-4 z-50 border-b">
+        <h2 className="font-semibold text-xl">Dashboard</h2>
+        <button
+          type="button"
+          // onClick={() => setOpenModal(true)}
+          className="btn btn-ghost btn-circle">
+          <HiPlus className="text-xl" />
+        </button>
+      </nav> */}
+
       <Outlet />
+      {realPath[1] === 'online-class' ? '' : <BottomBar />}
       <Footer />
     </>
   );

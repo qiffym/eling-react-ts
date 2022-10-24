@@ -7,6 +7,8 @@ import React, {
   useReducer,
 } from 'react';
 import {
+  AddAssignmentSuccessAction,
+  addAssignmentSuccessReducer,
   AddContentSuccessAction,
   addContentSuccessReducer,
   AddForumSuccessAction,
@@ -69,6 +71,9 @@ const contextInitialState: InitialStateType = {
   addForumSuccess: {
     success: false,
   },
+  addAssignmentSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -81,6 +86,7 @@ export const MyContext = createContext<{
     | AddContentSuccessAction
     | AddMaterialSuccessAction
     | AddForumSuccessAction
+    | AddAssignmentSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -96,6 +102,7 @@ const mainReducer = (
     addContentSuccess,
     addMaterialSuccess,
     addForumSuccess,
+    addAssignmentSuccess,
   }: InitialStateType,
   action: any,
 ) => ({
@@ -106,6 +113,10 @@ const mainReducer = (
   addContentSuccess: addContentSuccessReducer(addContentSuccess, action),
   addMaterialSuccess: addMaterialSuccessReducer(addMaterialSuccess, action),
   addForumSuccess: addForumSuccessReducer(addForumSuccess, action),
+  addAssignmentSuccess: addAssignmentSuccessReducer(
+    addAssignmentSuccess,
+    action,
+  ),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

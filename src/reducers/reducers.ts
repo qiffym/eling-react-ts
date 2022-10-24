@@ -1,4 +1,6 @@
 import {
+  AddAssignmentSuccessType,
+  AddAssignmentType,
   AddContentSuccessType,
   AddContentType,
   AddForumSuccessType,
@@ -15,6 +17,8 @@ import {
 } from '../types/context-type';
 import {
   ActionMap,
+  AddAssignmentPayload,
+  AddAssignmentSuccessPayload,
   AddContentPayload,
   AddContentSuccessPayload,
   AddForumPayload,
@@ -148,6 +152,25 @@ export const addForumSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'FORUM_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddAssignmentSuccessAction =
+  ActionMap<AddAssignmentSuccessPayload>[keyof ActionMap<AddAssignmentSuccessPayload>];
+
+export const addAssignmentSuccessReducer = (
+  state: AddAssignmentSuccessType,
+  action: AddAssignmentSuccessAction,
+) => {
+  switch (action.type) {
+    case 'ASSIGNMENT_SUCCESS':
       return {
         ...state,
         success: action.payload.success,
@@ -368,6 +391,37 @@ export const addForumReducer = (
       return {
         ...state,
         description: action.payload.description,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddAssignmentAction =
+  ActionMap<AddAssignmentPayload>[keyof ActionMap<AddAssignmentPayload>];
+
+export const addAssignmentReducer = (
+  state: AddAssignmentType,
+  action: AddAssignmentAction,
+) => {
+  switch (action.type) {
+    case 'ASSIGNMENT_TITLE':
+      return {
+        ...state,
+        title: action.payload.title,
+      };
+
+    case 'ASSIGNMENT_DESC':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+
+    case 'ASSIGNMENT_DEADLINE':
+      return {
+        ...state,
+        deadline: action.payload.deadline,
       };
 
     default:
