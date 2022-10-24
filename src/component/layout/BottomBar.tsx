@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const BottomBar = () => {
   const activeClassName = 'active';
   return (
-    <div className="btm-nav lg:hidden">
+    <div className="btm-nav border-t sm:hidden">
       <NavLink
         to="/dashboard"
         className={({ isActive }) => (isActive ? activeClassName : '')}>
@@ -23,7 +23,7 @@ const BottomBar = () => {
         </svg>
       </NavLink>
       <NavLink
-        to="/resources/users"
+        to="/me"
         className={({ isActive }) => (isActive ? activeClassName : '')}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

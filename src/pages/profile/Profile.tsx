@@ -28,6 +28,13 @@ const Profile = () => {
     }
   }
 
+  function checkNull(check?: string) {
+    if (check === null) {
+      return '-';
+    }
+    return check;
+  }
+
   return (
     <section
       id="me"
@@ -133,7 +140,7 @@ const Profile = () => {
                   name="email"
                   placeholder="ryojino@example.com"
                   className="input input-bordered input-sm w-full"
-                  value={profileData.email}
+                  value={checkNull(profileData.email)}
                   disabled
                 />
               </label>
@@ -152,7 +159,7 @@ const Profile = () => {
                   type="date"
                   name="birthday"
                   className="input input-bordered input-sm w-full"
-                  value={profileData.birthday}
+                  value={checkNull(profileData.birthday)}
                 />
               </label>
             </div>
@@ -164,7 +171,7 @@ const Profile = () => {
               <select
                 className="select select-bordered select-sm"
                 name="religion"
-                value={profileData.religion}
+                value={checkNull(profileData.religion)}
                 disabled>
                 <option>-- Pilih Agama --</option>
                 <option selected value="Islam">
@@ -186,7 +193,7 @@ const Profile = () => {
                 className="textarea textarea-bordered h-24"
                 name="address"
                 placeholder="Alamat"
-                value={profileData.address}
+                value={checkNull(profileData.address)}
                 disabled
               />
             </div>
@@ -205,7 +212,7 @@ const Profile = () => {
                   type="text"
                   name="nip"
                   className="input input-bordered w-full"
-                  value={profileData.teacher?.nip}
+                  value={checkNull(profileData.teacher?.nip)}
                   disabled
                 />
               </label>
@@ -222,7 +229,7 @@ const Profile = () => {
                   type="text"
                   name="nik"
                   className="input input-bordered w-full"
-                  value={profileData.teacher?.nik}
+                  value={checkNull(profileData.teacher?.nik)}
                   disabled
                 />
               </label>

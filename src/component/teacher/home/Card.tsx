@@ -12,9 +12,11 @@ const CardClass: FC<ListClass> = ({ classes }) => {
   return (
     <>
       {/* Card Class */}
-      <div className="grid grid-cols-3 gap-5 2xl:grid-cols-4">
-        {classes?.map(item => (
-          <div key={item.id} className="card w-[21rem] bg-base-100 shadow-xl">
+      <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-3 sm:place-items-stretch sm:gap-5 2xl:grid-cols-4">
+        {classes?.map((item) => (
+          <div
+            key={item.id}
+            className="card w-[21rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
             <div className="card-body">
               <h2 className="font-bold text-xl">{item.rombel_name}</h2>
               <button

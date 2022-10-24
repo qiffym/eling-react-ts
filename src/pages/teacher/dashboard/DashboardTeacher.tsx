@@ -7,10 +7,12 @@ import CreateClassModal from '../../../component/modal/CreateClassModal';
 import Header from '../../../component/header/Header';
 import CardClass from '../../../component/teacher/home/Card';
 import { useClasses } from '../../../hooks/useClasses';
+import { LoginType } from '../../../types/context-type';
 
 const DashboardTeacher = () => {
   const { isLoading, classList } = useClasses();
   const [openModal, setOpenModal] = useState(false);
+  const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
 
   return (
     <>
@@ -18,17 +20,36 @@ const DashboardTeacher = () => {
         <title>Dashboard</title>
       </Helmet>
       <Header>Dashboard</Header>
+      <div className="px-3 flex flex-row justify-between sm:hidden">
+        <div className="flex flex-row items-center space-x-3">
+          <div className="avatar ">
+            <div className="w-12 rounded-full ring-2 ring-slate-300 ring-offset-base-100 ring-offset-1">
+              <img src={user.user.avatar} alt={user.user.name} />
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <h1 className="font-medium text-base">{user.user.name}</h1>
+            <h3 className="font-medium text-base">{user.user.role}</h3>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => setOpenModal(true)}
+          className="btn btn-ghost btn-circle sm:hidden">
+          <HiPlus className="text-2xl" />
+        </button>
+      </div>
       <>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col space-y-3 px-3 py-3 sm:py-0 sm:space-y-0 sm:px-3 sm:flex-row sm:justify-between sm:items-center">
           <div>
-            <h2 className="text-2xl font-medium">My Class</h2>
+            <h2 className="hidden sm:block text-2xl font-medium">My Class</h2>
           </div>
           <div className="form-control">
-            <div className="input-group">
+            <div className="input-group sm:px-0">
               <input
                 type="search"
                 placeholder="Search…"
-                className="input input-bordered w-72"
+                className="input input-bordered w-full sm:w-72"
               />
               <button type="button" className="btn btn-square">
                 <svg
@@ -52,7 +73,7 @@ const DashboardTeacher = () => {
         <button
           type="button"
           onClick={() => setOpenModal(true)}
-          className="btn flex w-14 h-14 btn-primary rounded-full fixed z-10 right-5 bottom-5 items-center content-center justify-center drop-shadow-md">
+          className="hidden sm:flex btn w-14 h-14 btn-primary rounded-full fixed z-10 right-5 bottom-5 items-center content-center justify-center drop-shadow-md">
           <HiPlus className="text-xl" />
         </button>
 
