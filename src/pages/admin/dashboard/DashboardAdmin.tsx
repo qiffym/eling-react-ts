@@ -17,6 +17,6 @@ const DashboardAdmin = () => {
       {isLoading ? <Loading /> : <Stat statData={data} />}
     </>
   );
-};
+}
 
 export default DashboardAdmin;

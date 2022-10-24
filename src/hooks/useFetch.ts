@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
 
@@ -27,8 +29,13 @@ export const useFetch = (url: string) => {
       console.log(e);
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [baseURL, url, user.token, state.deleteSuccess.success]);
+  }, [
+    baseURL,
+    url,
+    user.token,
+    state.deleteSuccess.success,
+    state.addContentSuccess.success,
+  ]);
 
   useEffect(() => {
     fetchData();

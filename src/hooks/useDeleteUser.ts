@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useContext } from 'react';
 import { MyContext } from '../context/context';
 import { Types } from '../types/reducer-type';
@@ -19,7 +20,7 @@ export const useDeleteUser = () => {
             'Access-Control-Allow-Origin': '*',
             Authorization: `Bearer ${user.token}`,
           },
-        }
+        },
       );
       const result = await response.json();
       dispatch({

@@ -13,6 +13,11 @@ export enum Types {
   Login = 'LOGIN',
   Classes = 'CLASSES',
   DeleteSuccess = 'SUCCESS',
+  CreateClassSuccess = 'CLASS_SUCCESS',
+  AddContentSuccess = 'CONTENT_SUCCESS',
+  AddMaterialSuccess = 'MATERIAL_SUCCESS',
+  AddForumSuccess = 'FORUM_SUCCESS',
+  AddAssignmentSuccess = 'ASSIGNMENT_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -35,6 +40,28 @@ export enum Types {
   UpdateTelpon = 'UPDATE_TELPON',
   UpdatePassword = 'UPDATE_PASSWORD',
   UpdateConfirmPassword = 'UPDATE_CONFIRM_PASSWORD',
+
+  // Payload Create Class
+  ClassName = 'CLASS_NAME',
+  ClassDescription = 'CLASS_DESCRIPTION',
+  RombelID = 'ROMBEL_CLASS_ID',
+
+  // Payload Add Content
+  ContentTitle = 'CONTENT_TITLE',
+  ContentDesc = 'CONTENT_DESC',
+
+  // Payload Add Material
+  MaterialTitle = 'MATERIAL_TITLE',
+  MaterialFile = 'MATERIAL_FILE',
+
+  // Payload Add Forum
+  ForumTopic = 'FORUM_TOPIC',
+  ForumDesc = 'FORUM_DESC',
+
+  // Payload Add Assignment
+  AssignmentTitle = 'ASSIGNMENT_TITLE',
+  AssignmentDesc = 'ASSIGNMENT_DESC',
+  AssignmentDeadline = 'ASSIGNMENT_DEADLINE',
 }
 
 export type LoginPayload = {
@@ -71,6 +98,36 @@ export type ClassPayload = {
 
 export type DeleteSuccessPayload = {
   [Types.DeleteSuccess]: {
+    success: boolean;
+  };
+};
+
+export type CreateClassSuccessPayload = {
+  [Types.CreateClassSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddContentSuccessPayload = {
+  [Types.AddContentSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddMaterialSuccessPayload = {
+  [Types.AddMaterialSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddForumSuccessPayload = {
+  [Types.AddForumSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddAssignmentSuccessPayload = {
+  [Types.AddAssignmentSuccess]: {
     success: boolean;
   };
 };
@@ -137,5 +194,56 @@ export type UpdateUserPayload = {
   };
   [Types.UpdateConfirmPassword]: {
     confirm_password?: string;
+  };
+};
+
+export type CreateClassPayload = {
+  [Types.ClassName]: {
+    name: string;
+  };
+  [Types.ClassDescription]: {
+    description: string;
+  };
+  [Types.RombelID]: {
+    rombel_class_id: number;
+  };
+};
+
+export type AddContentPayload = {
+  [Types.ContentTitle]: {
+    title: string;
+  };
+  [Types.ContentDesc]: {
+    description: string;
+  };
+};
+
+export type AddMaterialPayload = {
+  [Types.MaterialTitle]: {
+    title: string;
+  };
+  [Types.MaterialFile]: {
+    file: FileList | null;
+  };
+};
+
+export type AddForumPayload = {
+  [Types.ForumTopic]: {
+    topic: string;
+  };
+  [Types.ForumDesc]: {
+    description: string;
+  };
+};
+
+export type AddAssignmentPayload = {
+  [Types.AssignmentTitle]: {
+    title: string;
+  };
+  [Types.AssignmentDesc]: {
+    description: string;
+  };
+  [Types.AssignmentDeadline]: {
+    deadline: string;
   };
 };

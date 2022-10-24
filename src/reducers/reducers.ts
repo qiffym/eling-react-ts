@@ -1,5 +1,15 @@
 import {
+  AddAssignmentSuccessType,
+  AddAssignmentType,
+  AddContentSuccessType,
+  AddContentType,
+  AddForumSuccessType,
+  AddForumType,
+  AddMaterialSuccessType,
+  AddMaterialType,
   ClassListType,
+  CreateClassSuccessType,
+  CreateClassType,
   CreateUserType,
   DeleteSuccessType,
   LoginType,
@@ -7,7 +17,17 @@ import {
 } from '../types/context-type';
 import {
   ActionMap,
+  AddAssignmentPayload,
+  AddAssignmentSuccessPayload,
+  AddContentPayload,
+  AddContentSuccessPayload,
+  AddForumPayload,
+  AddForumSuccessPayload,
+  AddMaterialPayload,
+  AddMaterialSuccessPayload,
   ClassPayload,
+  CreateClassPayload,
+  CreateClassSuccessPayload,
   CreateUserPayload,
   DeleteSuccessPayload,
   LoginPayload,
@@ -56,6 +76,101 @@ export const deleteSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type CreateClassSuccessAction =
+  ActionMap<CreateClassSuccessPayload>[keyof ActionMap<CreateClassSuccessPayload>];
+
+export const createClassSuccessReducer = (
+  state: CreateClassSuccessType,
+  action: CreateClassSuccessAction,
+) => {
+  switch (action.type) {
+    case 'CLASS_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddContentSuccessAction =
+  ActionMap<AddContentSuccessPayload>[keyof ActionMap<AddContentSuccessPayload>];
+
+export const addContentSuccessReducer = (
+  state: AddContentSuccessType,
+  action: AddContentSuccessAction,
+) => {
+  switch (action.type) {
+    case 'CONTENT_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddMaterialSuccessAction =
+  ActionMap<AddMaterialSuccessPayload>[keyof ActionMap<AddMaterialSuccessPayload>];
+
+export const addMaterialSuccessReducer = (
+  state: AddMaterialSuccessType,
+  action: AddMaterialSuccessAction,
+) => {
+  switch (action.type) {
+    case 'MATERIAL_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddForumSuccessAction =
+  ActionMap<AddForumSuccessPayload>[keyof ActionMap<AddForumSuccessPayload>];
+
+export const addForumSuccessReducer = (
+  state: AddForumSuccessType,
+  action: AddForumSuccessAction,
+) => {
+  switch (action.type) {
+    case 'FORUM_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddAssignmentSuccessAction =
+  ActionMap<AddAssignmentSuccessPayload>[keyof ActionMap<AddAssignmentSuccessPayload>];
+
+export const addAssignmentSuccessReducer = (
+  state: AddAssignmentSuccessType,
+  action: AddAssignmentSuccessAction,
+) => {
+  switch (action.type) {
+    case 'ASSIGNMENT_SUCCESS':
       return {
         ...state,
         success: action.payload.success,
@@ -173,6 +288,140 @@ export const updateUserReducer = (
       return {
         ...state,
         confirm_password: action.payload?.confirm_password,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type CreateClassAction =
+  ActionMap<CreateClassPayload>[keyof ActionMap<CreateClassPayload>];
+
+export const createClassReducer = (
+  state: CreateClassType,
+  action: CreateClassAction,
+) => {
+  switch (action.type) {
+    case 'CLASS_NAME':
+      return {
+        ...state,
+        name: action.payload.name,
+      };
+    case 'CLASS_DESCRIPTION':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+    case 'ROMBEL_CLASS_ID':
+      return {
+        ...state,
+        rombel_class_id: action.payload.rombel_class_id,
+      };
+    default:
+      return state;
+  }
+};
+
+export type AddContentAction =
+  ActionMap<AddContentPayload>[keyof ActionMap<AddContentPayload>];
+
+export const addContentReducer = (
+  state: AddContentType,
+  action: AddContentAction,
+) => {
+  switch (action.type) {
+    case 'CONTENT_TITLE':
+      return {
+        ...state,
+        title: action.payload.title,
+      };
+
+    case 'CONTENT_DESC':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddMaterialAction =
+  ActionMap<AddMaterialPayload>[keyof ActionMap<AddMaterialPayload>];
+
+export const addMaterialReducer = (
+  state: AddMaterialType,
+  action: AddMaterialAction,
+) => {
+  switch (action.type) {
+    case 'MATERIAL_TITLE':
+      return {
+        ...state,
+        title: action.payload.title,
+      };
+
+    case 'MATERIAL_FILE':
+      return {
+        ...state,
+        file: action.payload.file,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddForumAction =
+  ActionMap<AddForumPayload>[keyof ActionMap<AddForumPayload>];
+
+export const addForumReducer = (
+  state: AddForumType,
+  action: AddForumAction,
+) => {
+  switch (action.type) {
+    case 'FORUM_TOPIC':
+      return {
+        ...state,
+        topic: action.payload.topic,
+      };
+
+    case 'FORUM_DESC':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddAssignmentAction =
+  ActionMap<AddAssignmentPayload>[keyof ActionMap<AddAssignmentPayload>];
+
+export const addAssignmentReducer = (
+  state: AddAssignmentType,
+  action: AddAssignmentAction,
+) => {
+  switch (action.type) {
+    case 'ASSIGNMENT_TITLE':
+      return {
+        ...state,
+        title: action.payload.title,
+      };
+
+    case 'ASSIGNMENT_DESC':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+
+    case 'ASSIGNMENT_DEADLINE':
+      return {
+        ...state,
+        deadline: action.payload.deadline,
       };
 
     default:

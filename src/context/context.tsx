@@ -7,8 +7,18 @@ import React, {
   useReducer,
 } from 'react';
 import {
+  AddAssignmentSuccessAction,
+  addAssignmentSuccessReducer,
+  AddContentSuccessAction,
+  addContentSuccessReducer,
+  AddForumSuccessAction,
+  addForumSuccessReducer,
+  AddMaterialSuccessAction,
+  addMaterialSuccessReducer,
   ClassListAction,
   classReducer,
+  CreateClassSuccessAction,
+  createClassSuccessReducer,
   DeleteSuccessAction,
   deleteSuccessReducer,
   LoginAction,
@@ -49,23 +59,64 @@ const contextInitialState: InitialStateType = {
   deleteSuccess: {
     success: false,
   },
+  createClassSuccess: {
+    success: false,
+  },
+  addContentSuccess: {
+    success: false,
+  },
+  addMaterialSuccess: {
+    success: false,
+  },
+  addForumSuccess: {
+    success: false,
+  },
+  addAssignmentSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<LoginAction | ClassListAction | DeleteSuccessAction>;
+  dispatch: Dispatch<
+    | LoginAction
+    | ClassListAction
+    | DeleteSuccessAction
+    | CreateClassSuccessAction
+    | AddContentSuccessAction
+    | AddMaterialSuccessAction
+    | AddForumSuccessAction
+    | AddAssignmentSuccessAction
+  >;
 }>({
   state: contextInitialState,
   dispatch: () => {},
 });
 
 const mainReducer = (
-  { login, classes, deleteSuccess }: InitialStateType,
-  action: any
+  {
+    login,
+    classes,
+    deleteSuccess,
+    createClassSuccess,
+    addContentSuccess,
+    addMaterialSuccess,
+    addForumSuccess,
+    addAssignmentSuccess,
+  }: InitialStateType,
+  action: any,
 ) => ({
   login: loginReducer(login, action),
   classes: classReducer(classes, action),
+  createClassSuccess: createClassSuccessReducer(createClassSuccess, action),
   deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
+  addContentSuccess: addContentSuccessReducer(addContentSuccess, action),
+  addMaterialSuccess: addMaterialSuccessReducer(addMaterialSuccess, action),
+  addForumSuccess: addForumSuccessReducer(addForumSuccess, action),
+  addAssignmentSuccess: addAssignmentSuccessReducer(
+    addAssignmentSuccess,
+    action,
+  ),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

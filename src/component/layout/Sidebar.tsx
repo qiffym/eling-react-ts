@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { MdDashboard } from 'react-icons/md';
 import { MyContext } from '../../context/context';
+import logosmk from '../../assets/images/smkn3mlg150x150.png';
 
 const LinkNavItems = [
   { name: 'Users', path: 'resources/users' },
-  { name: 'Rombel Classes', path: 'resources/tes' },
-  { name: 'Motivational Words', path: 'resources/motivational' },
+  { name: 'Rombel Classes', path: 'resources/rombel-class' },
+  { name: 'Motivational Words', path: 'resources/motivational-words' },
 ];
 
 const Sidebar = () => {
@@ -17,12 +19,13 @@ const Sidebar = () => {
       case 'admin':
         return (
           <>
-            <label className="px-6 text-gray-400 text-sm">Resources</label>
+            <label className="px-6 text-gray-400 text-sm font-bold">
+              Resources
+            </label>
             {LinkNavItems.map((item) => (
               <ul
                 key={item.name}
-                className="menu p-4 py-2 overflow-y-auto w-64 bg-base-100 text-base-content text-center"
-              >
+                className="menu p-4 py-0 w-64 bg-slate-600 text-white text-sm">
                 <li>
                   <NavLink to={item.path}>{item.name}</NavLink>
                 </li>
@@ -34,15 +37,18 @@ const Sidebar = () => {
       case 'teacher':
         return (
           <>
-            <label className="px-6 text-gray-400 text-sm">My Class</label>
+            <label className="px-6 text-gray-400 text-sm font-bold">
+              My Class
+            </label>
             {state.classes?.classList?.length
               ? state.classes?.classList?.map((item) => (
                   <ul
                     key={item.id}
-                    className="menu p-4 py-2 text-sm overflow-y-auto w-64 bg-base-100 text-base-content"
-                  >
+                    className="menu menu-compact p-4 py-0 w-64 bg-slate-600 text-white">
                     <li>
-                      <NavLink to={'/'}>{item.name}</NavLink>
+                      <NavLink to={`online-class/${item.id}`} state={item}>
+                        {item.name}
+                      </NavLink>
                     </li>
                   </ul>
                 ))
@@ -52,7 +58,7 @@ const Sidebar = () => {
 
       case 'student':
         return (
-          <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
+          <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
             <li>
               <NavLink to="dashboard">Siswa</NavLink>
             </li>
@@ -60,7 +66,7 @@ const Sidebar = () => {
         );
       default:
         return (
-          <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
+          <ul className="rounded-md menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
             <li>
               <NavLink to="dashboard">Dashboard</NavLink>
             </li>
@@ -70,48 +76,33 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="drawer-side bg-white overflow-auto h-screen">
-      {/* {dashborad(user.user.role)} */}
+    <div className="hidden sm:block drawer-side bg-slate-600 overflow-auto h-screen">
+      {/* Logo */}
+      <div className="flex justify-center items-center space-x-2 p-3">
+        <div className="mask mask-circle w-20 h-20">
+          <img src={logosmk} alt="logo_smk" />
+        </div>
+        <div className="flex flex-col -space-y-1 text-slate-200">
+          <p>e-Learning</p>
+          <p className="font-semibold">
+            <span className="text-[#eaea72]">SMEKA</span>NEGAMA
+          </p>
+        </div>
+      </div>
 
-      <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content text-center">
+      <hr />
+
+      {/* Dashboard List */}
+      <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
         <li>
-          <NavLink to="dashboard">Dashboard</NavLink>
+          <NavLink to="dashboard">
+            <MdDashboard className="-mr-2" />
+            Dashboard
+          </NavLink>
         </li>
       </ul>
 
-      {/* {user.user.role === 'admin' ? (
-        <>
-          <label className="px-6 text-gray-400 text-sm">Resources</label>
-          {LinkNavItems.map((item) => (
-            <ul
-              key={item.name}
-              className="menu p-4 py-2 overflow-y-auto w-64 bg-base-100 text-base-content text-center"
-            >
-              <li>
-                <NavLink to={item.path}>{item.name}</NavLink>
-              </li>
-            </ul>
-          ))}
-        </>
-      ) : (
-        <label className="px-6 text-gray-400 text-sm">My Class</label>
-      )} */}
-
       {subNav(user.user.role)}
-
-      {/* <hr className="mx-6" />
-      <div className="menu py-4 px-8 bg-base-100 text-base-content cursor-pointer">
-        <h3 className=" inline-block text-gray-400 hover:text-black transition-colors">
-          <p
-            onClick={() => {
-              localStorage.clear();
-              window.location.reload();
-            }}
-          >
-            Logout
-          </p>
-        </h3>
-      </div> */}
     </div>
   );
 };

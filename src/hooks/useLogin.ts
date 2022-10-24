@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +11,7 @@ const useLogin = () => {
   const authLogin = async (
     e: FormEvent<HTMLFormElement>,
     username: string,
-    password: string
+    password: string,
   ) => {
     setLoading(true);
     try {
@@ -33,11 +35,11 @@ const useLogin = () => {
         setLoading(false);
         navigate('/');
       } else {
-        alert('Username dan passsword salah');
+        alert('Username atau passsword salah');
         setLoading(false);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };

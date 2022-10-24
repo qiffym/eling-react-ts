@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +17,7 @@ export const useCreateUser = () => {
       email: string;
       username: string;
       password: string;
-    }
+    },
   ) => {
     e.preventDefault();
     setLoading(true);
@@ -41,8 +42,8 @@ export const useCreateUser = () => {
       const result = await response.json();
       console.log(result);
       navigate(-1);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };

@@ -1,12 +1,10 @@
 import Header from '../../component/header/Header';
-import Stat from '../../component/home/Stat';
+
 import DashboardAdmin from '../admin/dashboard/DashboardAdmin';
 import DashboardTeacher from '../teacher/dashboard/DashboardTeacher';
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem('user') || '');
-
-  console.log(user.token);
 
   const dashboardRole = (role: string) => {
     switch (role) {
@@ -15,12 +13,7 @@ const Home = () => {
       case 'teacher':
         return <DashboardTeacher />;
       case 'student':
-        return (
-          <>
-            <Header>student</Header>
-            {/* <Stat /> */}
-          </>
-        );
+        return <Header>student</Header>;
       default:
         return (
           <>
@@ -31,7 +24,11 @@ const Home = () => {
     }
   };
 
-  return <div className="px-6 py-20">{dashboardRole(user.user.role)}</div>;
+  return (
+    <div className="px-2 py-8 sm:px-6 sm:py-20">
+      {dashboardRole(user.user.role)}
+    </div>
+  );
 };
 
 export default Home;

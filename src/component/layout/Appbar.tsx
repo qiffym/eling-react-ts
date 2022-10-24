@@ -1,21 +1,28 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import { LoginType } from '../../types/context-type';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
+import { BiLogOut } from 'react-icons/bi';
+import { LoginType } from '../../types/context-type';
 import useLogout from '../../hooks/useLogout';
+import Footer from './Footer';
+import BottomBar from './BottomBar';
 
 const Appbar = () => {
   const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
   const authLogout = useLogout();
+  const pathLoc = useLocation().pathname;
+
+  const realPath = pathLoc.split('/');
 
   return (
     <>
-      <nav className="flex flex-row fixed w-[82%] justify-end items-center h-16 px-6 space-x-5 z-50">
+      <nav className="hidden sm:flex flex-row fixed w-[82%] 2xl:w-[86.5%] justify-end items-center h-16 px-6 space-x-5 z-50">
         <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn m-1 space-x-3">
+          <label tabIndex={0} className="btn btn-ghost m-1 space-x-3">
             <div className="flex flex-row items-center space-x-2">
               <div className="avatar ">
-                <div className="w-8 rounded-full ring ring-gray-400 ring-offset-base-100 ring-offset-0">
+                <div className="w-9 rounded-full ring-2 ring-slate-300 ring-offset-base-100 ring-offset-1">
                   <img src={user.user.avatar} alt={user.user.name} />
                 </div>
               </div>
@@ -26,26 +33,41 @@ const Appbar = () => {
 
           <ul
             tabIndex={0}
-            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-          >
+            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <p>Options</p>
+              <NavLink to="me">My Profile</NavLink>
             </li>
-            <li>
-              <p
+            <hr />
+            <li className="font-bold hover:text-red-500">
+              <button
+                type="button"
                 onClick={() => {
                   authLogout();
                   localStorage.clear();
                   window.location.reload();
-                }}
-              >
-                Logout
-              </p>
+                }}>
+                <BiLogOut className="text-lg -mr-1" />
+                Keluar
+              </button>
             </li>
           </ul>
         </div>
       </nav>
+
+      {/* Mobile AppBar */}
+      {/* <nav className="sm:hidden flex flex-row justify-between bg-white w-full h-16 fixed items-center px-4 z-50 border-b">
+        <h2 className="font-semibold text-xl">Dashboard</h2>
+        <button
+          type="button"
+          // onClick={() => setOpenModal(true)}
+          className="btn btn-ghost btn-circle">
+          <HiPlus className="text-xl" />
+        </button>
+      </nav> */}
+
       <Outlet />
+      {realPath[1] === 'online-class' ? '' : <BottomBar />}
+      <Footer />
     </>
   );
 };
