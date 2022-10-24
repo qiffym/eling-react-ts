@@ -63,7 +63,7 @@ const ClassDetail = () => {
                       ? 'tab tab-lifted text-lg tab-active text-teal-500 font-bold'
                       : 'tab tab-lifted text-lg'
                   }`}>
-                  Konten Pembelajaran
+                  Konten
                 </button>
                 <button
                   type="button"
@@ -73,7 +73,7 @@ const ClassDetail = () => {
                       ? 'tab tab-lifted text-lg tab-active text-teal-500 font-bold'
                       : 'tab tab-lifted text-lg'
                   }`}>
-                  Tentang Kelas
+                  Tentang
                 </button>
               </div>
               <hr className="border-t border-gray-400 mb-3 mt-0" />

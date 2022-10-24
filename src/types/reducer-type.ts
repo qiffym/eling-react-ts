@@ -17,6 +17,7 @@ export enum Types {
   AddContentSuccess = 'CONTENT_SUCCESS',
   AddMaterialSuccess = 'MATERIAL_SUCCESS',
   AddForumSuccess = 'FORUM_SUCCESS',
+  AddAssignmentSuccess = 'ASSIGNMENT_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -56,6 +57,11 @@ export enum Types {
   // Payload Add Forum
   ForumTopic = 'FORUM_TOPIC',
   ForumDesc = 'FORUM_DESC',
+
+  // Payload Add Assignment
+  AssignmentTitle = 'ASSIGNMENT_TITLE',
+  AssignmentDesc = 'ASSIGNMENT_DESC',
+  AssignmentDeadline = 'ASSIGNMENT_DEADLINE',
 }
 
 export type LoginPayload = {
@@ -116,6 +122,12 @@ export type AddMaterialSuccessPayload = {
 
 export type AddForumSuccessPayload = {
   [Types.AddForumSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddAssignmentSuccessPayload = {
+  [Types.AddAssignmentSuccess]: {
     success: boolean;
   };
 };
@@ -221,5 +233,17 @@ export type AddForumPayload = {
   };
   [Types.ForumDesc]: {
     description: string;
+  };
+};
+
+export type AddAssignmentPayload = {
+  [Types.AssignmentTitle]: {
+    title: string;
+  };
+  [Types.AssignmentDesc]: {
+    description: string;
+  };
+  [Types.AssignmentDeadline]: {
+    deadline: string;
   };
 };

@@ -346,3 +346,106 @@ export const useAddForum = () => {
     addForum,
   };
 };
+
+export const useFetchAssignment = (classId: number, contentId?: number) => {
+  const [assignmentData, setAssignmentData] = useState<any>([]);
+  const [loadingAssignment, setLoadingAssignment] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { state } = useContext(MyContext);
+
+  const fetchAssignment = useCallback(async () => {
+    setLoadingAssignment(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${classId}/contents/${contentId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
+      );
+      const result = await response.json();
+      setAssignmentData(result.data);
+      setLoadingAssignment(false);
+    } catch (e) {
+      console.log(e);
+      setLoadingAssignment(false);
+    }
+  }, [
+    baseURL,
+    classId,
+    contentId,
+    user.token,
+    state.addAssignmentSuccess.success,
+  ]);
+
+  useEffect(() => {
+    fetchAssignment();
+  }, [fetchAssignment]);
+
+  return {
+    loadingAssignment,
+    assignmentData,
+  };
+};
+
+export const useAddAssignment = () => {
+  const [isLoading, setLoading] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
+
+  const addAssignment = async (
+    e: FormEvent<HTMLFormElement>,
+    idClasses: number,
+    idContent: number,
+    input: {
+      title: string;
+      description: string;
+      deadline: string;
+    },
+  ) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${idClasses}/contents/${idContent}/assignments`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            title: input.title,
+            description: input.description,
+            deadline: input.deadline,
+          }),
+        },
+      );
+      const result = await response.json();
+      console.log(result);
+      dispatch({
+        type: Types.AddAssignmentSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    addAssignment,
+  };
+};
