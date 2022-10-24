@@ -79,9 +79,8 @@ const CreateUser = () => {
           <div className="flex flex-col space-y-3 bg-white p-4 py-8 rounded-lg">
             <label className="text-sm font-semibold text-slate-400">Role</label>
             <select
-              defaultValue={'DEFAULT'}
+              defaultValue="DEFAULT"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                console.log(e.target.value);
                 dispatch({
                   type: Types.Role,
                   payload: {
@@ -213,10 +212,14 @@ const CreateUser = () => {
             />
           </div>
           <div className="my-8 flex flex-row justify-end space-x-4">
-            <button onClick={cancelAction} className="btn btn-ghost px-12">
+            <button
+              type="button"
+              onClick={cancelAction}
+              className="btn btn-ghost px-12">
               Cancel
             </button>
             <button
+              type="submit"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}

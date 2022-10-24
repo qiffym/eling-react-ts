@@ -44,6 +44,10 @@ export type AddMaterialSuccessType = {
   success: boolean;
 };
 
+export type AddForumSuccessType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -100,4 +104,5 @@ export type InitialStateType = {
   createClassSuccess: CreateClassSuccessType;
   addContentSuccess: AddContentSuccessType;
   addMaterialSuccess: AddMaterialSuccessType;
+  addForumSuccess: AddForumSuccessType;
 };

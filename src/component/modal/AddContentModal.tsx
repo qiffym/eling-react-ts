@@ -32,6 +32,7 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
         <div className="modal-box w-[50%] max-w-5xl">
           <div className="felx flex-row justify-between items-center">
             <button
+              type="button"
               onClick={modalAction}
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
@@ -48,7 +49,7 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
             }}
             className="mt-4 flex flex-col space-y-5 w-full">
             <div className="flex flex-col space-y-1">
-              <label htmlFor="class-textinput" className="font-medium"></label>
+              <label htmlFor="class-textinput" className="font-medium" />
               <input
                 type="text"
                 placeholder="Nama Materi"
@@ -82,6 +83,7 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
               />
             </div>
             <button
+              type="button"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}
@@ -89,7 +91,7 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
           </form>
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      <div className="opacity-25 fixed inset-0 z-40 bg-black" />
     </>
   );
 };

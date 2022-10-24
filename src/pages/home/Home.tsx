@@ -14,9 +14,7 @@ const Home = () => {
         return <DashboardTeacher />;
       case 'student':
         return (
-          <>
-            <Header>student</Header>
-          </>
+          <Header>student</Header>
         );
       default:
         return (
@@ -29,6 +27,6 @@ const Home = () => {
   };
 
   return <div className="px-6 py-20">{dashboardRole(user.user.role)}</div>;
-};
+}
 
 export default Home;

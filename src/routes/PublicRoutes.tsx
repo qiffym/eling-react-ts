@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { LoginType } from '../types/context-type';
 
-function PublicRoutes() {
+const PublicRoutes = () => {
   const getUser = localStorage.getItem('user');
   let token: string;
   let user: LoginType;

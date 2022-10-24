@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useContext } from 'react';
 import { MyContext } from '../context/context';
 import { Types } from '../types/reducer-type';

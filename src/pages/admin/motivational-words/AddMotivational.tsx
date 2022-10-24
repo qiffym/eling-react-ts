@@ -1,7 +1,5 @@
 import React from 'react';
 
-const AddMotivational = () => {
-  return <div>AddMotivational</div>;
-};
+const AddMotivational = () => <div>AddMotivational</div>
 
 export default AddMotivational;

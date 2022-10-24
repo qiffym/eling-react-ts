@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -53,8 +54,8 @@ const useUpdateUser = () => {
       const result = await response.json();
       console.log(result);
       navigate(-1);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };

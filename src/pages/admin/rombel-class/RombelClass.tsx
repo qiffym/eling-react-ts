@@ -14,12 +14,11 @@ const RombelClass = () => {
 
   const searchUser = (value: string) => {
     setSearchData(
-      data.filter((item: any) => {
-        return (
+      data.filter(
+        (item: any) =>
           item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.grade.includes(value)
-        );
-      }),
+          item.grade.includes(value),
+      ),
     );
   };
 
@@ -44,6 +43,7 @@ const RombelClass = () => {
             }
           />
           <button
+            type="button"
             onClick={() => setOpenModal(true)}
             className="btn btn-primary">
             Add Rombel
@@ -51,12 +51,7 @@ const RombelClass = () => {
         </div>
         {isLoading ? <Loading /> : <RombelTable rombelData={searchData} />}
         {openModal ? (
-          <AddRombelModal
-            actionSave={() => {
-              setOpenModal(false);
-            }}
-            modalAction={() => setOpenModal(false)}
-          />
+          <AddRombelModal modalAction={() => setOpenModal(false)} />
         ) : null}
       </div>
     </>

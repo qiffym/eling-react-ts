@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RombelType } from '../../../types/rombel-type';
 import { HiTrash, HiPencilAlt, HiEye } from 'react-icons/hi';
+import { RombelType } from '../../../types/rombel-type';
 
 type Props = {
   rombelData: RombelType[];
@@ -30,6 +30,7 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
               <td>{item.grade}</td>
               <td>
                 <button
+                  type="button"
                   onClick={() =>
                     navigate(`${item.id}`, {
                       state: {
@@ -41,6 +42,7 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
                   <HiEye className="text-md" /> <span>View</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() =>
                     navigate(`${item.id}/edit`, {
                       state: {
@@ -52,7 +54,9 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
                   <HiPencilAlt className="text-md" />
                   <span>Edit</span>
                 </button>
-                <button className="btn btn-error btn-xs text-white space-x-1">
+                <button
+                  type="button"
+                  className="btn btn-error btn-xs text-white space-x-1">
                   <HiTrash className="text-md" /> <span>Delete</span>
                 </button>
               </td>

@@ -32,6 +32,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
         <div className="modal-box relative">
           <div className="felx flex-row justify-between items-center">
             <button
+              type="button"
               onClick={modalAction}
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
@@ -110,6 +111,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
               />
             </div>
             <button
+              type="button"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
               {isLoading ? <LoadingButton /> : 'Save'}
@@ -117,7 +119,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
           </form>
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      <div className="opacity-25 fixed inset-0 z-40 bg-black" />
     </>
   );
 };

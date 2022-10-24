@@ -17,13 +17,12 @@ const MotivationalWords = () => {
 
   const searchUser = (value: string) => {
     setSearchData(
-      data.filter((item: any) => {
-        return (
+      data.filter(
+        (item: any) =>
           item.title.toLowerCase().includes(value.toLowerCase()) ||
           item.body.toLowerCase().includes(value.toLowerCase()) ||
-          item.from.toLowerCase().includes(value.toLowerCase())
-        );
-      }),
+          item.from.toLowerCase().includes(value.toLowerCase()),
+      ),
     );
   };
 
@@ -48,6 +47,7 @@ const MotivationalWords = () => {
             }
           />
           <button
+            type="button"
             onClick={() => setOpenModal(true)}
             className="btn btn-primary">
             Add Motivational
@@ -59,12 +59,7 @@ const MotivationalWords = () => {
           <MotivationalWordsTable motivationalData={searchData} />
         )}
         {openModal ? (
-          <AddMotivationalModal
-            actionSave={() => {
-              setOpenModal(false);
-            }}
-            modalAction={() => setOpenModal(false)}
-          />
+          <AddMotivationalModal modalAction={() => setOpenModal(false)} />
         ) : null}
       </div>
     </>

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiPlus } from 'react-icons/hi';
@@ -17,7 +18,7 @@ const DashboardTeacher = () => {
         <title>Dashboard</title>
       </Helmet>
       <Header>Dashboard</Header>
-      <section>
+      <>
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-medium">My Class</h2>
@@ -29,7 +30,7 @@ const DashboardTeacher = () => {
                 placeholder="Search…"
                 className="input input-bordered w-72"
               />
-              <button className="btn btn-square">
+              <button type="button" className="btn btn-square">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -49,6 +50,7 @@ const DashboardTeacher = () => {
         </div>
         <hr className="border-t border-gray-300 my-4" />
         <button
+          type="button"
           onClick={() => setOpenModal(true)}
           className="btn flex w-14 h-14 btn-primary rounded-full fixed z-10 right-5 bottom-5 items-center content-center justify-center drop-shadow-md">
           <HiPlus className="text-xl" />
@@ -62,6 +64,7 @@ const DashboardTeacher = () => {
           <div className="flex h-[40rem]">
             <div className="m-auto flex flex-col">
               <button
+                type="button"
                 onClick={() => setOpenModal(true)}
                 className="btn btn-ghost font-extrabold text-5xl">
                 Tambah Kelas
@@ -69,6 +72,7 @@ const DashboardTeacher = () => {
             </div>
           </div>
         )}
+
         {openModal ? (
           <CreateClassModal
             actionSave={() => {
@@ -77,7 +81,7 @@ const DashboardTeacher = () => {
             modalAction={() => setOpenModal(false)}
           />
         ) : null}
-      </section>
+      </>
     </>
   );
 };

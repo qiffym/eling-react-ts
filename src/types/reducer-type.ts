@@ -16,6 +16,7 @@ export enum Types {
   CreateClassSuccess = 'CLASS_SUCCESS',
   AddContentSuccess = 'CONTENT_SUCCESS',
   AddMaterialSuccess = 'MATERIAL_SUCCESS',
+  AddForumSuccess = 'FORUM_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -109,6 +110,12 @@ export type AddContentSuccessPayload = {
 
 export type AddMaterialSuccessPayload = {
   [Types.AddMaterialSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddForumSuccessPayload = {
+  [Types.AddForumSuccess]: {
     success: boolean;
   };
 };

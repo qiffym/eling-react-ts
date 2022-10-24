@@ -3,12 +3,10 @@ import ContextProvider from './context/context';
 import AppRoutes from './routes/AppRoutes';
 import './App.css';
 
-function App() {
-  return (
+const App = () => (
     <ContextProvider>
       <AppRoutes />
     </ContextProvider>
-  );
-}
+  )
 
 export default App;

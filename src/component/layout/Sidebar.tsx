@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { MyContext } from '../../context/context';
 import { MdDashboard } from 'react-icons/md';
+import { MyContext } from '../../context/context';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
 
 const LinkNavItems = [
@@ -92,7 +92,7 @@ const Sidebar = () => {
 
       <hr />
 
-      {/* Dashboard List*/}
+      {/* Dashboard List */}
       <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
         <li>
           <NavLink to="dashboard">
@@ -105,6 +105,6 @@ const Sidebar = () => {
       {subNav(user.user.role)}
     </div>
   );
-};
+}
 
 export default Sidebar;

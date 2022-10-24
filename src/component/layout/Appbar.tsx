@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { LoginType } from '../../types/context-type';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
+import { LoginType } from '../../types/context-type';
 import useLogout from '../../hooks/useLogout';
 import Footer from './Footer';
 
@@ -17,7 +18,7 @@ const Appbar = () => {
           <label tabIndex={0} className="btn btn-ghost m-1 space-x-3">
             <div className="flex flex-row items-center space-x-2">
               <div className="avatar ">
-                <div className="w-8 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1">
+                <div className="w-9 rounded-full ring-2 ring-slate-300 ring-offset-base-100 ring-offset-1">
                   <img src={user.user.avatar} alt={user.user.name} />
                 </div>
               </div>
@@ -30,19 +31,20 @@ const Appbar = () => {
             tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <NavLink to={'me'}>My Profile</NavLink>
+              <NavLink to="me">My Profile</NavLink>
             </li>
             <hr />
             <li className="font-bold hover:text-red-500">
-              <p
+              <button
+                type="button"
                 onClick={() => {
                   authLogout();
                   localStorage.clear();
                   window.location.reload();
                 }}>
-                <BiLogOut className="text-lg" />
+                <BiLogOut className="text-lg -mr-1" />
                 Keluar
-              </p>
+              </button>
             </li>
           </ul>
         </div>

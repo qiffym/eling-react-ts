@@ -9,14 +9,18 @@ type Props = {
 const Paginate: FC<Props> = ({ postPerPage, totalPosts, pagination }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalPosts / postPerPage); i += 1) {
     pageNumbers.push(i);
   }
 
   return (
     <div className="btn-group">
       {pageNumbers.map(item => (
-        <button onClick={() => pagination(item)} key={item} className="btn">
+        <button
+          type="button"
+          onClick={() => pagination(item)}
+          key={item}
+          className="btn">
           {item}
         </button>
       ))}

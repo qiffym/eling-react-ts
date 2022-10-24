@@ -1,6 +1,7 @@
 import {
   AddContentSuccessType,
   AddContentType,
+  AddForumSuccessType,
   AddForumType,
   AddMaterialSuccessType,
   AddMaterialType,
@@ -17,6 +18,7 @@ import {
   AddContentPayload,
   AddContentSuccessPayload,
   AddForumPayload,
+  AddForumSuccessPayload,
   AddMaterialPayload,
   AddMaterialSuccessPayload,
   ClassPayload,
@@ -127,6 +129,25 @@ export const addMaterialSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'MATERIAL_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddForumSuccessAction =
+  ActionMap<AddForumSuccessPayload>[keyof ActionMap<AddForumSuccessPayload>];
+
+export const addForumSuccessReducer = (
+  state: AddForumSuccessType,
+  action: AddForumSuccessAction,
+) => {
+  switch (action.type) {
+    case 'FORUM_SUCCESS':
       return {
         ...state,
         success: action.payload.success,
