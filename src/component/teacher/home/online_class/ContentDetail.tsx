@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
-import { HiPlusCircle, HiTrash, HiPencilAlt, HiBookOpen } from 'react-icons/hi';
+import { HiPlusCircle, HiTrash, HiBookOpen } from 'react-icons/hi';
 import { MdAssignment, MdForum } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { MyContext } from '../../../../context/context';
@@ -77,7 +77,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                     <Loading2ND />
                   </div>
                 ) : (
-                  contentData.materials?.map(item => (
+                  contentData.materials?.map((item) => (
                     <div
                       key={item.id}
                       className="flex flex-row justify-between">
@@ -85,14 +85,6 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                         {item.title}
                       </a>
                       <div className="editable space-x-1">
-                        <div className="tooltip" data-tip="edit materi">
-                          <button
-                            type="button"
-                            name="edit-materi"
-                            className="btn btn-xs btn-warning btn-square">
-                            <HiPencilAlt />
-                          </button>
-                        </div>
                         <div className="tooltip" data-tip="delete materi">
                           <button
                             type="button"
@@ -125,7 +117,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                     <Loading2ND />
                   </div>
                 ) : (
-                  forumList.forums?.map(item => (
+                  forumList.forums?.map((item) => (
                     <div
                       key={item.id}
                       className="flex flex-row justify-between">
@@ -134,24 +126,6 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                         {item.topic}
                       </Link>
                       {/* TODO: Buat btn disini hanya pada role guru */}
-                      <div className="editable space-x-1">
-                        <div className="tooltip" data-tip="edit forum">
-                          <button
-                            type="button"
-                            name="edit-forum"
-                            className="btn btn-xs btn-warning btn-square">
-                            <HiPencilAlt />
-                          </button>
-                        </div>
-                        <div className="tooltip" data-tip="delete forum">
-                          <button
-                            type="button"
-                            name="delete-forum"
-                            className="btn btn-xs btn-error btn-square">
-                            <HiTrash />
-                          </button>
-                        </div>
-                      </div>
                     </div>
                   ))
                 )}
@@ -172,7 +146,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
               {/* <a href="#!">Tugas 1</a> */}
               <Link to={`contents/${contentId}/assignment`}>Tugas 1</Link>
               {/* TODO: Buat btn disini hanya pada role guru */}
-              <div className="editable space-x-1">
+              {/* <div className="editable space-x-1">
                 <div className="tooltip" data-tip="edit tugas">
                   <button
                     type="button"
@@ -189,7 +163,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                     <HiTrash />
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -76,9 +76,9 @@ const Profile = () => {
 
       {/* Form Edit Profile */}
       <form>
-        <div className="flex justify-start items-start space-x-10">
+        <div className="xl:flex justify-start items-start xl:space-x-10">
           {/* Informasi Umum */}
-          <div className="w-5/12">
+          <div className="w-full xl:w-5/12">
             {/* Nama Lengkap */}
             <div className="form-control">
               <label className="label">
@@ -198,7 +198,7 @@ const Profile = () => {
           </div>
 
           {/* Informasi Specific */}
-          <div className="w-4/12">
+          <div className="w-full xl:w-4/12">
             {/* NIP */}
             <div className="form-control">
               <label className="label">
