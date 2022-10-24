@@ -130,7 +130,9 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                       key={item.id}
                       className="flex flex-row justify-between">
                       {/* <a href="#!">Forum 1</a> */}
-                      <Link to={`forums/${contentId}`}>{item.topic}</Link>
+                      <Link to={`contents/${contentId}/forums`}>
+                        {item.topic}
+                      </Link>
                       {/* TODO: Buat btn disini hanya pada role guru */}
                       <div className="editable space-x-1">
                         <div className="tooltip" data-tip="edit forum">

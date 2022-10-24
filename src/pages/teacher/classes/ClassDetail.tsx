@@ -54,31 +54,27 @@ const ClassDetail = () => {
           {/* Navigasi Content */}
           <section id="content-navigation">
             <div className="container mx-auto w-11/12">
-              <div className="flex items-center space-x-1">
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => setTab(0)}
-                    className={`${
-                      tab === 0
-                        ? 'btn btn-sm btn-outline font-bold border-b-2 border-b-primary rounded-none text-primary hover:bg-inherit hover:text-primary hover:border-current hover:border-b-current'
-                        : 'btn btn-sm btn-ghost'
-                    }`}>
-                    Konten Kelas
-                  </button>
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => setTab(1)}
-                    className={`${
-                      tab === 1
-                        ? 'btn btn-sm btn-outline font-bold border-b-2 border-b-primary rounded-none text-primary hover:bg-inherit hover:text-primary hover:border-current hover:border-b-current'
-                        : 'btn btn-sm btn-ghost'
-                    }`}>
-                    Tentang
-                  </button>
-                </div>
+              <div className="tabs flex justify-start">
+                <button
+                  type="button"
+                  onClick={() => setTab(0)}
+                  className={`${
+                    tab === 0
+                      ? 'tab tab-lifted text-lg tab-active text-teal-500 font-bold'
+                      : 'tab tab-lifted text-lg'
+                  }`}>
+                  Konten Pembelajaran
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTab(1)}
+                  className={`${
+                    tab === 1
+                      ? 'tab tab-lifted text-lg tab-active text-teal-500 font-bold'
+                      : 'tab tab-lifted text-lg'
+                  }`}>
+                  Tentang Kelas
+                </button>
               </div>
               <hr className="border-t border-gray-400 mb-3 mt-0" />
               {/* <div className="border-t w-full border-black inline-block mb-3"></div> */}

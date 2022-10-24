@@ -18,7 +18,7 @@ const Appbar = () => {
           <label tabIndex={0} className="btn btn-ghost m-1 space-x-3">
             <div className="flex flex-row items-center space-x-2">
               <div className="avatar ">
-                <div className="w-8 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1">
+                <div className="w-9 rounded-full ring-2 ring-slate-300 ring-offset-base-100 ring-offset-1">
                   <img src={user.user.avatar} alt={user.user.name} />
                 </div>
               </div>
@@ -42,7 +42,7 @@ const Appbar = () => {
                   localStorage.clear();
                   window.location.reload();
                 }}>
-                <BiLogOut className="text-lg" />
+                <BiLogOut className="text-lg -mr-1" />
                 Keluar
               </button>
             </li>
