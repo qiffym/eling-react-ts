@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiPlus } from 'react-icons/hi';
 import Loading from '../../../component/loading/Loading';
@@ -9,11 +9,14 @@ import CardClass from '../../../component/teacher/home/Card';
 import { useClasses } from '../../../hooks/useClasses';
 import { LoginType } from '../../../types/context-type';
 import { ClassesType } from '../../../types/class-type';
+import { MyContext } from '../../../context/context';
+import { Types } from '../../../types/reducer-type';
 
 const DashboardTeacher = () => {
   const { isLoading, classList } = useClasses();
   const [searchData, setSearchData] = useState<ClassesType[] | undefined>();
   const [openModal, setOpenModal] = useState(false);
+  const { dispatch } = useContext(MyContext);
 
   const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
 
@@ -115,6 +118,12 @@ const DashboardTeacher = () => {
         {openModal ? (
           <CreateClassModal
             actionSave={() => {
+              dispatch({
+                type: Types.CreateClassSuccess,
+                payload: {
+                  success: false,
+                },
+              });
               setOpenModal(false);
             }}
             modalAction={() => setOpenModal(false)}
