@@ -19,6 +19,7 @@ export enum Types {
   AddAssignmentSuccess = 'ASSIGNMENT_SUCCESS',
   DeleteSuccess = 'SUCCESS',
   DeleteMaterialSuccess = 'DELETE_MATERIAL_SUCCESS',
+  UpdateSuccess = 'UPDATE_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -135,6 +136,12 @@ export type DeleteSuccessPayload = {
 
 export type DeleteMaterialSuccessPayload = {
   [Types.DeleteMaterialSuccess]: {
+    success: boolean;
+  };
+};
+
+export type UpdateSuccessPayload = {
+  [Types.UpdateSuccess]: {
     success: boolean;
   };
 };

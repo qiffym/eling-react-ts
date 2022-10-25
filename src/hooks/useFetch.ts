@@ -35,6 +35,7 @@ export const useFetch = (url: string) => {
     user.token,
     state.deleteSuccess.success,
     state.addContentSuccess.success,
+    state.updateSuccess.success,
   ]);
 
   useEffect(() => {

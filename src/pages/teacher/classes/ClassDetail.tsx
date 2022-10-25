@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../../component/loading/Loading';
+import EditClassModal from '../../../component/modal/EditClassModal';
 import { AboutClass } from '../../../component/teacher/home/online_class/AboutClass';
 import { ClassContent } from '../../../component/teacher/home/online_class/ClassContent';
+import { MyContext } from '../../../context/context';
 import { useFetch } from '../../../hooks/useFetch';
 import { ClassesDetailType, ClassesType } from '../../../types/class-type';
+import { Types } from '../../../types/reducer-type';
 
 const ClassDetail = () => {
   const [tab, setTab] = useState(0);
   const { id } = useLocation().state as ClassesType;
   const { isLoading, data } = useFetch(`/api/teacher/online-classes/${id}`);
+  const [openEditName, setOpenEditName] = useState(false);
+  const { dispatch } = useContext(MyContext);
   const navigate = useNavigate();
   const classData: ClassesDetailType = data;
 
@@ -37,7 +42,11 @@ const ClassDetail = () => {
                 <h3 className="text-lg font-medium">{classData.rombel_name}</h3>
               </div>
 
-              <h2 className="text-6xl font-bold mb-2">{classData?.name}</h2>
+              <h2
+                onClick={() => setOpenEditName(true)}
+                className="text-6xl font-bold mb-2 cursor-pointer">
+                {classData?.name}
+              </h2>
               <div className="flex items-center space-x-2">
                 <div className="avatar">
                   <div className="w-8 rounded-full ring ring-slate-100">
@@ -91,6 +100,24 @@ const ClassDetail = () => {
               total={classData.students?.total}
             />
           )}
+
+          {openEditName ? (
+            <EditClassModal
+              classesID={id}
+              classesName={classData.name}
+              classesDesc={classData.description}
+              actionSave={() => {
+                dispatch({
+                  type: Types.UpdateSuccess,
+                  payload: {
+                    success: false,
+                  },
+                });
+                setOpenEditName(false);
+              }}
+              modalAction={() => setOpenEditName(false)}
+            />
+          ) : null}
         </div>
       )}
     </>

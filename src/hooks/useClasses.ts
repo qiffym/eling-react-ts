@@ -37,7 +37,12 @@ export const useClasses = () => {
       console.log(error);
       setLoading(false);
     }
-  }, [baseURL, user.token, state.createClassSuccess.success]);
+  }, [
+    baseURL,
+    user.token,
+    state.createClassSuccess.success,
+    state.updateSuccess.success,
+  ]);
 
   useEffect(() => {
     fetchData();
@@ -96,6 +101,67 @@ export const useCreateClass = () => {
   return {
     isLoading,
     createClass,
+  };
+};
+
+export const useEditClass = () => {
+  const [loadingClass, setLoadingClass] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
+
+  const updateClass = async (
+    e: FormEvent<HTMLFormElement>,
+    id: number | undefined,
+    input: {
+      name: string;
+      description: string;
+      rombel_class_id: number;
+    },
+  ) => {
+    try {
+      e.preventDefault();
+      setLoadingClass(true);
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            name: input.name,
+            description: input.description,
+            rombel_class_id: input.rombel_class_id,
+          }),
+        },
+      );
+      const result = await response.json();
+      console.log(result.success);
+      dispatch({
+        type: Types.DeleteSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+      dispatch({
+        type: Types.UpdateSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      setLoadingClass(false);
+    }
+  };
+
+  return {
+    loadingClass,
+    updateClass,
   };
 };
 

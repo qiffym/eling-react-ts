@@ -56,6 +56,10 @@ export type AddAssignmentSuccessType = {
   success: boolean;
 };
 
+export type UpdateSuccessType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -121,4 +125,5 @@ export type InitialStateType = {
   addAssignmentSuccess: AddAssignmentSuccessType;
   deleteSuccess: DeleteSuccessType;
   deleteMaterialSuccess: DeleteMaterialSuccessType;
+  updateSuccess: UpdateSuccessType;
 };

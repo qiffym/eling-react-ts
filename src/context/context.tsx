@@ -25,6 +25,8 @@ import {
   deleteSuccessReducer,
   LoginAction,
   loginReducer,
+  UpdateSuccessAction,
+  updateSuccessReducer,
 } from '../reducers/reducers';
 import { InitialStateType } from '../types/context-type';
 
@@ -79,6 +81,9 @@ const contextInitialState: InitialStateType = {
   deleteMaterialSuccess: {
     success: false,
   },
+  updateSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -93,6 +98,7 @@ export const MyContext = createContext<{
     | AddMaterialSuccessAction
     | AddForumSuccessAction
     | AddAssignmentSuccessAction
+    | UpdateSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -110,6 +116,7 @@ const mainReducer = (
     addMaterialSuccess,
     addForumSuccess,
     addAssignmentSuccess,
+    updateSuccess,
   }: InitialStateType,
   action: any,
 ) => ({
@@ -128,6 +135,7 @@ const mainReducer = (
     addAssignmentSuccess,
     action,
   ),
+  updateSuccess: updateSuccessReducer(updateSuccess, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {
