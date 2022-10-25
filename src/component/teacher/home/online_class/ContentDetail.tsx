@@ -9,6 +9,7 @@ import {
   useFetchForum,
   useFetchMaterial,
 } from '../../../../hooks/useClasses';
+import useDeleteMaterial from '../../../../hooks/useDeleteClasses';
 import { ContentDetailType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
 import Loading2ND from '../../../loading/Loading2nd';
@@ -27,6 +28,9 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
   const { loadingAssignment, assignmentData } = useFetchAssignment(
     classId,
     contentId,
+  );
+  const deleteMaterial = useDeleteMaterial(
+    `/teacher/online-classes/${classId}/contents/${contentId}/materials/`,
   );
 
   const [openModal, setOpenModal] = useState(false);
@@ -101,7 +105,8 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                           <button
                             type="button"
                             name="delete-materi"
-                            className="btn btn-xs btn-error btn-square">
+                            className="btn btn-xs btn-error btn-square"
+                            onClick={() => deleteMaterial(item.id)}>
                             <HiTrash />
                           </button>
                         </div>
@@ -133,7 +138,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                     <div
                       key={item.id}
                       className="flex flex-row justify-between">
-                      <Link to={`contents/${contentId}/forums`}>
+                      <Link to={`contents/${contentId}/forums/${item.id}`}>
                         {item.topic}
                       </Link>
                       {/* TODO: Buat btn disini hanya pada role guru */}
@@ -162,7 +167,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                 <div
                   key={item.id}
                   className="flex justify-between items-center mx-4">
-                  <Link to={`contents/${contentId}/assignment`}>
+                  <Link to={`contents/${contentId}/assignment/${item.id}`}>
                     {item.title}
                   </Link>
                 </div>

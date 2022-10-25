@@ -26,7 +26,11 @@ const AddAssignmentModal: FC<Props> = ({
   });
 
   useEffect(() => {
-    if (state.title === '' || state.deadline === '') {
+    if (
+      state.title === '' ||
+      state.deadline === '' ||
+      state.description === ''
+    ) {
       setDisable(true);
     } else {
       setDisable(false);

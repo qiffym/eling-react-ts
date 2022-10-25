@@ -36,9 +36,9 @@ const Table: FC<Props> = ({ userData }) => {
           </thead>
           <tbody>
             {userData
-              .filter(usr => usr.username !== user.user.username)
+              .filter((usr) => usr.username !== user.user.username)
               .sort((a, b) => a.role.localeCompare(b.role))
-              .map(item => (
+              .map((item) => (
                 <React.Fragment key={item.id}>
                   <tr>
                     <td>{item.role}</td>
