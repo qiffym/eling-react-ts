@@ -37,12 +37,12 @@ const AppRoutes = () => (
               {/* TODO: Pakai path comment dibawah */}
               {/* path=":id/contents/:id/assignment/:id" */}
               <Route
-                path=":id/contents/:id/assignment"
+                path=":id/contents/:id/assignment/:id"
                 element={<AssignmentDetail />}
               />
               {/* TODO: Pakai path comment dibawah */}
               {/* path=":id/contents/:id/forums/:id" */}
-              <Route path=":id/contents/:id/forums" element={<Forum />} />
+              <Route path=":id/contents/:id/forums/:id" element={<Forum />} />
             </Route>
           </Route>
           <Route path="/" element={<ProtectedRoutes roleRequired="admin" />}>
