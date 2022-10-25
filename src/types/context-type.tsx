@@ -32,6 +32,10 @@ export type DeleteSuccessType = {
   success: boolean;
 };
 
+export type DeleteMaterialSuccessType = {
+  success: boolean;
+};
+
 export type CreateClassSuccessType = {
   success: boolean;
 };
@@ -110,10 +114,11 @@ export type AddAssignmentType = {
 export type InitialStateType = {
   login: LoginType;
   classes: ClassListType;
-  deleteSuccess: DeleteSuccessType;
   createClassSuccess: CreateClassSuccessType;
   addContentSuccess: AddContentSuccessType;
   addMaterialSuccess: AddMaterialSuccessType;
   addForumSuccess: AddForumSuccessType;
   addAssignmentSuccess: AddAssignmentSuccessType;
+  deleteSuccess: DeleteSuccessType;
+  deleteMaterialSuccess: DeleteMaterialSuccessType;
 };

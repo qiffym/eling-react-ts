@@ -19,6 +19,8 @@ import {
   classReducer,
   CreateClassSuccessAction,
   createClassSuccessReducer,
+  DeleteMaterialSuccessAction,
+  deleteMaterialSuccessReducer,
   DeleteSuccessAction,
   deleteSuccessReducer,
   LoginAction,
@@ -56,9 +58,6 @@ const contextInitialState: InitialStateType = {
       },
     ],
   },
-  deleteSuccess: {
-    success: false,
-  },
   createClassSuccess: {
     success: false,
   },
@@ -74,6 +73,12 @@ const contextInitialState: InitialStateType = {
   addAssignmentSuccess: {
     success: false,
   },
+  deleteSuccess: {
+    success: false,
+  },
+  deleteMaterialSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -82,6 +87,7 @@ export const MyContext = createContext<{
     | LoginAction
     | ClassListAction
     | DeleteSuccessAction
+    | DeleteMaterialSuccessAction
     | CreateClassSuccessAction
     | AddContentSuccessAction
     | AddMaterialSuccessAction
@@ -98,6 +104,7 @@ const mainReducer = (
     login,
     classes,
     deleteSuccess,
+    deleteMaterialSuccess,
     createClassSuccess,
     addContentSuccess,
     addMaterialSuccess,
@@ -110,6 +117,10 @@ const mainReducer = (
   classes: classReducer(classes, action),
   createClassSuccess: createClassSuccessReducer(createClassSuccess, action),
   deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
+  deleteMaterialSuccess: deleteMaterialSuccessReducer(
+    deleteMaterialSuccess,
+    action,
+  ),
   addContentSuccess: addContentSuccessReducer(addContentSuccess, action),
   addMaterialSuccess: addMaterialSuccessReducer(addMaterialSuccess, action),
   addForumSuccess: addForumSuccessReducer(addForumSuccess, action),

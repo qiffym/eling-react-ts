@@ -187,6 +187,7 @@ export const useFetchMaterial = (classId: number, contentId?: number) => {
     contentId,
     user.token,
     state.addMaterialSuccess.success,
+    state.deleteMaterialSuccess.success,
   ]);
 
   useEffect(() => {

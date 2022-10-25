@@ -12,12 +12,13 @@ export type ActionMap<M extends { [index: string]: any }> = {
 export enum Types {
   Login = 'LOGIN',
   Classes = 'CLASSES',
-  DeleteSuccess = 'SUCCESS',
   CreateClassSuccess = 'CLASS_SUCCESS',
   AddContentSuccess = 'CONTENT_SUCCESS',
   AddMaterialSuccess = 'MATERIAL_SUCCESS',
   AddForumSuccess = 'FORUM_SUCCESS',
   AddAssignmentSuccess = 'ASSIGNMENT_SUCCESS',
+  DeleteSuccess = 'SUCCESS',
+  DeleteMaterialSuccess = 'DELETE_MATERIAL_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -96,12 +97,6 @@ export type ClassPayload = {
   };
 };
 
-export type DeleteSuccessPayload = {
-  [Types.DeleteSuccess]: {
-    success: boolean;
-  };
-};
-
 export type CreateClassSuccessPayload = {
   [Types.CreateClassSuccess]: {
     success: boolean;
@@ -128,6 +123,18 @@ export type AddForumSuccessPayload = {
 
 export type AddAssignmentSuccessPayload = {
   [Types.AddAssignmentSuccess]: {
+    success: boolean;
+  };
+};
+
+export type DeleteSuccessPayload = {
+  [Types.DeleteSuccess]: {
+    success: boolean;
+  };
+};
+
+export type DeleteMaterialSuccessPayload = {
+  [Types.DeleteMaterialSuccess]: {
     success: boolean;
   };
 };
