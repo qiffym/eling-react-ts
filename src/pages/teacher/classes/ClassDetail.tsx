@@ -44,7 +44,7 @@ const ClassDetail = () => {
 
               <h2
                 onClick={() => setOpenEditName(true)}
-                className="text-6xl font-bold mb-2 cursor-pointer">
+                className="text-6xl w-max btn-ghost px-3 rounded-md font-bold mb-2 cursor-pointer transition-all duration-75">
                 {classData?.name}
               </h2>
               <div className="flex items-center space-x-2">
