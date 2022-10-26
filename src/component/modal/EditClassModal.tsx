@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import React, { ChangeEvent, FC, useEffect, useReducer, useState } from 'react';
 import { useEditClass } from '../../hooks/useClasses';
 import { createClassReducer } from '../../reducers/reducers';
@@ -5,17 +6,23 @@ import { Types } from '../../types/reducer-type';
 import LoadingButton from '../loading/LoadingButton';
 
 type Props = {
+  classesRombelID: number;
   classesID?: number;
   classesName?: string;
   classesDesc?: string;
+  focusInputName?: boolean;
+  focusInputDesc?: boolean;
   actionSave: () => void;
   modalAction: () => void;
 };
 
 const EditClassModal: FC<Props> = ({
+  classesRombelID,
   classesID,
   classesName,
   classesDesc,
+  focusInputName,
+  focusInputDesc,
   actionSave,
   modalAction,
 }) => {
@@ -24,7 +31,7 @@ const EditClassModal: FC<Props> = ({
   const [state, dispatch] = useReducer(createClassReducer, {
     name: classesName!,
     description: classesDesc!,
-    rombel_class_id: 1,
+    rombel_class_id: classesRombelID,
   });
 
   useEffect(() => {
@@ -71,6 +78,7 @@ const EditClassModal: FC<Props> = ({
                     },
                   });
                 }}
+                defaultValue={state.rombel_class_id}
                 className="select select-bordered w-full ">
                 <option value="DEFAULT" disabled>
                   -- Rombel ID --
@@ -88,10 +96,11 @@ const EditClassModal: FC<Props> = ({
                 Nama Kelas
               </label>
               <input
+                autoFocus={focusInputName}
                 type="text"
                 placeholder="Pemrograman Dasar"
                 name="class-textinput"
-                defaultValue={classesName}
+                defaultValue={state.name}
                 className="input input-bordered w-full "
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   dispatch({
@@ -108,8 +117,9 @@ const EditClassModal: FC<Props> = ({
                 Description
               </label>
               <textarea
+                autoFocus={focusInputDesc}
                 name="desc-textarea"
-                defaultValue={classesDesc}
+                defaultValue={state.description}
                 className="textarea textarea-bordered w-full resize-none"
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                   dispatch({

@@ -4,7 +4,7 @@ import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../../component/loading/Loading';
 import EditClassModal from '../../../component/modal/EditClassModal';
-import { AboutClass } from '../../../component/teacher/home/online_class/AboutClass';
+import AboutClass from '../../../component/teacher/home/online_class/AboutClass';
 import { ClassContent } from '../../../component/teacher/home/online_class/ClassContent';
 import { MyContext } from '../../../context/context';
 import { useFetch } from '../../../hooks/useFetch';
@@ -95,6 +95,10 @@ const ClassDetail = () => {
             <ClassContent classId={id} />
           ) : (
             <AboutClass
+              classesRombelID={classData.rombel_id}
+              classesID={id}
+              classesName={classData.name}
+              classesDesc={classData.description}
               about={classData.description}
               student={classData.students?.data}
               total={classData.students?.total}
@@ -103,6 +107,8 @@ const ClassDetail = () => {
 
           {openEditName ? (
             <EditClassModal
+              focusInputName
+              classesRombelID={classData.rombel_id}
               classesID={id}
               classesName={classData.name}
               classesDesc={classData.description}

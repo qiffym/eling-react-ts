@@ -15,6 +15,7 @@ export type ClassesDetailType = {
   id?: number;
   name?: string;
   rombel_name?: string;
+  rombel_id: number;
   students?: {
     data: [
       {
