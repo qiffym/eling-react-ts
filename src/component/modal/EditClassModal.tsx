@@ -84,8 +84,8 @@ const EditClassModal: FC<Props> = ({
                   -- Rombel ID --
                 </option>
                 <option value="1">X TKJ 1</option>
-                <option value="3">X TKJ 2</option>
-                <option value="2">XI TKJ 1</option>
+                <option value="2">X TKJ 2</option>
+                <option value="3">XI TKJ 1</option>
                 <option value="4">XI TKJ 2</option>
                 <option value="5">XII TKJ 1</option>
                 <option value="6">XII TKJ 2</option>
