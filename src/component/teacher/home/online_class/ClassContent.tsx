@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
-import { HiPlusCircle } from 'react-icons/hi';
+import { HiPlusCircle, HiDotsHorizontal } from 'react-icons/hi';
 import { MyContext } from '../../../../context/context';
 import { useFetch } from '../../../../hooks/useFetch';
 import { ContentType } from '../../../../types/class-type';
@@ -20,6 +20,21 @@ export const ClassContent: FC<Props> = ({ classId }) => {
   const { dispatch } = useContext(MyContext);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const contentList: ContentType[] = data;
+  const [display, setDisplay] = useState('hidden');
+
+  const [show, setShow] = useState(0);
+
+  const showButton = (e: any, id: number | undefined) => {
+    e.preventDefault();
+    setShow(id!);
+    setDisplay('block');
+  };
+
+  const hideButton = (e: any) => {
+    e.preventDefault();
+    setShow(0);
+    setDisplay('hidden');
+  };
 
   return (
     <>
@@ -50,14 +65,45 @@ export const ClassContent: FC<Props> = ({ classId }) => {
               <div
                 key={item.id}
                 tabIndex={0}
-                className="collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary bg-white p-1">
+                onMouseEnter={(e) => showButton(e, item.id)}
+                onMouseLeave={(e) => hideButton(e)}
+                className="hover:btn-ghost overflow-visible transition-all collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary bg-white p-1">
                 <input type="checkbox" />
                 {/* Title Collapse */}
                 <div className="collapse-title text-xl font-medium">
                   <h5 className="text-sm text-slate-600">
                     {`Pembelajaran ${index + 1}`}
                   </h5>
-                  <h2 className="font-bold">{item.title}</h2>
+                  <div className="flex flex-row w-full justify-between items-center cursor-pointer">
+                    <h2 className="font-bold">{item.title}</h2>
+                    {show === item.id && (
+                      <div className="dropdown dropdown-end">
+                        <label
+                          tabIndex={0}
+                          className={`${display} cursor-pointer`}>
+                          <HiDotsHorizontal />
+                        </label>
+                        <ul
+                          tabIndex={0}
+                          className="dropdown-content menu p-2 shadow bg-base-100 rounded-lg w-32">
+                          <li>
+                            <button
+                              type="button"
+                              className="btn btn-ghost text-xs py-0">
+                              Edit
+                            </button>
+                          </li>
+                          <li>
+                            <label
+                              tabIndex={0}
+                              className="btn btn-ghost hover:btn-error text-xs py-0">
+                              Delete
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                   <p className="text-xs font-semibold text-slate-600">
                     Dibuat {item.created_at ?? ''}
                   </p>

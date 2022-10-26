@@ -13,8 +13,6 @@ const Sidebar = () => {
   const { classList } = useClasses();
   const user = JSON.parse(localStorage.getItem('user') || '');
 
-  console.log(classList);
-
   const subNav = (role: string) => {
     switch (role) {
       case 'admin':
@@ -90,7 +88,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="hidden sm:block drawer-side bg-slate-600 overflow-auto h-screen">
+    <div className="hidden fixed sm:block drawer-side bg-slate-600 overflow-auto h-screen z-50">
       {/* Logo */}
       <div className="flex justify-center items-center space-x-2 p-3">
         <div className="mask mask-circle w-20 h-20">

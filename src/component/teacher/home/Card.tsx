@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { HiDotsVertical } from 'react-icons/hi';
 import { ClassesType } from '../../../types/class-type';
 
 type ListClass = {
@@ -20,9 +22,34 @@ const CardClass: FC<ListClass> = ({ classes }) => {
           .map((item) => (
             <div
               key={item.id}
-              className="card w-[21rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
-              <div className="card-body">
-                <h2 className="font-bold text-xl">{item.rombel_name}</h2>
+              className="card overflow-visible static w-[21rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
+              <div className="card-body py-5 overflow-visible">
+                <div className="flex flex-row justify-between items-center">
+                  <h2 className="font-bold text-xl">{item.rombel_name}</h2>
+                  <div className="dropdown dropdown-end">
+                    <label tabIndex={0} className="btn btn-ghost m-1">
+                      <HiDotsVertical />
+                    </label>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-lg w-32">
+                      <li>
+                        <button
+                          type="button"
+                          className="btn btn-ghost text-xs py-0">
+                          Edit
+                        </button>
+                      </li>
+                      <li>
+                        <label
+                          tabIndex={0}
+                          className="btn btn-ghost hover:btn-error text-xs py-0">
+                          Delete
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
                 <button
                   type="button"
                   onClick={() =>

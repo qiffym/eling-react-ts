@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
+import AppBarClass from '../../../component/layout/AppBarClass';
 import Loading from '../../../component/loading/Loading';
 import EditClassModal from '../../../component/modal/EditClassModal';
 import AboutClass from '../../../component/teacher/home/online_class/AboutClass';
@@ -25,6 +26,7 @@ const ClassDetail = () => {
       <Helmet>
         <title>{classData.name}</title>
       </Helmet>
+      <AppBarClass headerTitle={classData.name} />
       {isLoading ? (
         <Loading />
       ) : (
