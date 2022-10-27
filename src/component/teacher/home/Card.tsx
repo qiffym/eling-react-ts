@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HiDotsVertical } from 'react-icons/hi';
+import { HiDotsVertical, HiPencilAlt, HiTrash } from 'react-icons/hi';
 import { ClassesType } from '../../../types/class-type';
 
 type ListClass = {
@@ -27,7 +27,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                 <div className="flex flex-row justify-between items-center">
                   <h2 className="font-bold text-xl">{item.rombel_name}</h2>
                   <div className="dropdown dropdown-end">
-                    <label tabIndex={0} className="btn btn-ghost m-1">
+                    <label tabIndex={0} className="btn btn-sm btn-ghost m-1">
                       <HiDotsVertical />
                     </label>
                     <ul
@@ -37,14 +37,14 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                         <button
                           type="button"
                           className="btn btn-ghost text-xs py-0">
-                          Edit
+                          <HiPencilAlt /> Edit
                         </button>
                       </li>
                       <li>
                         <label
                           tabIndex={0}
                           className="btn btn-ghost hover:btn-error text-xs py-0">
-                          Delete
+                          <HiTrash /> DELETE
                         </label>
                       </li>
                     </ul>

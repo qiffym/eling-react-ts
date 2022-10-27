@@ -1,6 +1,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
-import { HiPlusCircle, HiDotsHorizontal } from 'react-icons/hi';
+import {
+  HiPlusCircle,
+  HiDotsHorizontal,
+  HiPencilAlt,
+  HiTrash,
+} from 'react-icons/hi';
 import { MyContext } from '../../../../context/context';
 import { useFetch } from '../../../../hooks/useFetch';
 import { ContentType } from '../../../../types/class-type';
@@ -90,14 +95,14 @@ export const ClassContent: FC<Props> = ({ classId }) => {
                             <button
                               type="button"
                               className="btn btn-ghost text-xs py-0">
-                              Edit
+                              <HiPencilAlt /> Edit
                             </button>
                           </li>
                           <li>
                             <label
                               tabIndex={0}
                               className="btn btn-ghost hover:btn-error text-xs py-0">
-                              Delete
+                              <HiTrash /> DELETE
                             </label>
                           </li>
                         </ul>
