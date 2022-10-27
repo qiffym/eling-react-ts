@@ -118,9 +118,10 @@ const EditClassModal: FC<Props> = ({
               </label>
               <textarea
                 autoFocus={focusInputDesc}
+                rows={4}
                 name="desc-textarea"
                 defaultValue={state.description}
-                className="textarea textarea-bordered w-full resize-none"
+                className="textarea textarea-bordered w-full"
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                   dispatch({
                     type: Types.ClassDescription,
