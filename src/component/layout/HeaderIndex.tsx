@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import useNetwork from '../../hooks/useNetwork';
 import Appbar from './Appbar';
 
 import BottomBar from './BottomBar';
@@ -11,7 +12,7 @@ const HeaderIndex = () => {
 
   const realPath = pathLoc.split('/');
 
-  // w-[82%] 2xl:w-[86.5%]
+  const isOnline = useNetwork();
 
   return (
     <>
@@ -26,8 +27,13 @@ const HeaderIndex = () => {
             <HiPlus className="text-xl" />
           </button>
         </nav> */}
-
+      {isOnline ? null : (
+        <div className="bg-red-500 px-3 font-medium fixed z-50 w-screen text-white transition-all duration-100">
+          No Connection
+        </div>
+      )}
       <Outlet />
+
       {realPath[1] === 'online-class' ? '' : <BottomBar />}
       <Footer />
     </>
