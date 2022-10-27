@@ -32,6 +32,18 @@ export type DeleteSuccessType = {
   success: boolean;
 };
 
+export type DeleteMaterialSuccessType = {
+  success: boolean;
+};
+
+export type DeleteClassSuccessType = {
+  success: boolean;
+};
+
+export type DeleteContentSuccessType = {
+  success: boolean;
+};
+
 export type CreateClassSuccessType = {
   success: boolean;
 };
@@ -49,6 +61,10 @@ export type AddForumSuccessType = {
 };
 
 export type AddAssignmentSuccessType = {
+  success: boolean;
+};
+
+export type UpdateSuccessType = {
   success: boolean;
 };
 
@@ -110,10 +126,14 @@ export type AddAssignmentType = {
 export type InitialStateType = {
   login: LoginType;
   classes: ClassListType;
-  deleteSuccess: DeleteSuccessType;
   createClassSuccess: CreateClassSuccessType;
   addContentSuccess: AddContentSuccessType;
   addMaterialSuccess: AddMaterialSuccessType;
   addForumSuccess: AddForumSuccessType;
   addAssignmentSuccess: AddAssignmentSuccessType;
+  deleteSuccess: DeleteSuccessType;
+  deleteMaterialSuccess: DeleteMaterialSuccessType;
+  deleteClassSuccess: DeleteClassSuccessType;
+  deleteContentSuccess: DeleteContentSuccessType;
+  updateSuccess: UpdateSuccessType;
 };

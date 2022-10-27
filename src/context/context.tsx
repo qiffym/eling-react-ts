@@ -19,10 +19,18 @@ import {
   classReducer,
   CreateClassSuccessAction,
   createClassSuccessReducer,
+  DeleteClassSuccessAction,
+  deleteClassSuccessReducer,
+  DeleteContentSuccessAction,
+  DeleteContentSuccessReducer,
+  DeleteMaterialSuccessAction,
+  deleteMaterialSuccessReducer,
   DeleteSuccessAction,
   deleteSuccessReducer,
   LoginAction,
   loginReducer,
+  UpdateSuccessAction,
+  updateSuccessReducer,
 } from '../reducers/reducers';
 import { InitialStateType } from '../types/context-type';
 
@@ -56,9 +64,6 @@ const contextInitialState: InitialStateType = {
       },
     ],
   },
-  deleteSuccess: {
-    success: false,
-  },
   createClassSuccess: {
     success: false,
   },
@@ -74,6 +79,21 @@ const contextInitialState: InitialStateType = {
   addAssignmentSuccess: {
     success: false,
   },
+  deleteSuccess: {
+    success: false,
+  },
+  deleteMaterialSuccess: {
+    success: false,
+  },
+  deleteClassSuccess: {
+    success: false,
+  },
+  deleteContentSuccess: {
+    success: false,
+  },
+  updateSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -82,11 +102,15 @@ export const MyContext = createContext<{
     | LoginAction
     | ClassListAction
     | DeleteSuccessAction
+    | DeleteMaterialSuccessAction
+    | DeleteClassSuccessAction
+    | DeleteContentSuccessAction
     | CreateClassSuccessAction
     | AddContentSuccessAction
     | AddMaterialSuccessAction
     | AddForumSuccessAction
     | AddAssignmentSuccessAction
+    | UpdateSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -98,11 +122,15 @@ const mainReducer = (
     login,
     classes,
     deleteSuccess,
+    deleteMaterialSuccess,
+    deleteClassSuccess,
+    deleteContentSuccess,
     createClassSuccess,
     addContentSuccess,
     addMaterialSuccess,
     addForumSuccess,
     addAssignmentSuccess,
+    updateSuccess,
   }: InitialStateType,
   action: any,
 ) => ({
@@ -110,6 +138,15 @@ const mainReducer = (
   classes: classReducer(classes, action),
   createClassSuccess: createClassSuccessReducer(createClassSuccess, action),
   deleteSuccess: deleteSuccessReducer(deleteSuccess, action),
+  deleteMaterialSuccess: deleteMaterialSuccessReducer(
+    deleteMaterialSuccess,
+    action,
+  ),
+  deleteClassSuccess: deleteClassSuccessReducer(deleteClassSuccess, action),
+  deleteContentSuccess: DeleteContentSuccessReducer(
+    deleteContentSuccess,
+    action,
+  ),
   addContentSuccess: addContentSuccessReducer(addContentSuccess, action),
   addMaterialSuccess: addMaterialSuccessReducer(addMaterialSuccess, action),
   addForumSuccess: addForumSuccessReducer(addForumSuccess, action),
@@ -117,6 +154,7 @@ const mainReducer = (
     addAssignmentSuccess,
     action,
   ),
+  updateSuccess: updateSuccessReducer(updateSuccess, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

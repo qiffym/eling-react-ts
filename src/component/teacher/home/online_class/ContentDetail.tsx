@@ -9,7 +9,7 @@ import {
   useFetchForum,
   useFetchMaterial,
 } from '../../../../hooks/useClasses';
-import useDeleteMaterial from '../../../../hooks/useDeleteClasses';
+import { useDeleteMaterial } from '../../../../hooks/useDeleteClasses';
 import { ContentDetailType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
 import Loading2ND from '../../../loading/Loading2nd';
@@ -30,7 +30,7 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
     contentId,
   );
   const deleteMaterial = useDeleteMaterial(
-    `/teacher/online-classes/${classId}/contents/${contentId}/materials/`,
+    `/api/teacher/online-classes/${classId}/contents/${contentId}/materials/`,
   );
 
   const [openModal, setOpenModal] = useState(false);
@@ -106,7 +106,15 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                             type="button"
                             name="delete-materi"
                             className="btn btn-xs btn-error btn-square"
-                            onClick={() => deleteMaterial(item.id)}>
+                            onClick={() => {
+                              deleteMaterial(item.id);
+                              dispatch({
+                                type: Types.DeleteMaterialSuccess,
+                                payload: {
+                                  success: false,
+                                },
+                              });
+                            }}>
                             <HiTrash />
                           </button>
                         </div>

@@ -11,8 +11,12 @@ import {
   CreateClassSuccessType,
   CreateClassType,
   CreateUserType,
+  DeleteClassSuccessType,
+  DeleteContentSuccessType,
+  DeleteMaterialSuccessType,
   DeleteSuccessType,
   LoginType,
+  UpdateSuccessType,
   UpdateUserType,
 } from '../types/context-type';
 import {
@@ -29,8 +33,12 @@ import {
   CreateClassPayload,
   CreateClassSuccessPayload,
   CreateUserPayload,
+  DeleteClassSuccessPayload,
+  DeleteContentSuccessPayload,
+  DeleteMaterialSuccessPayload,
   DeleteSuccessPayload,
   LoginPayload,
+  UpdateSuccessPayload,
   UpdateUserPayload,
 } from '../types/reducer-type';
 
@@ -60,25 +68,6 @@ export const classReducer = (state: ClassListType, action: ClassListAction) => {
       return {
         ...state,
         classList: action.payload.classList,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export type DeleteSuccessAction =
-  ActionMap<DeleteSuccessPayload>[keyof ActionMap<DeleteSuccessPayload>];
-
-export const deleteSuccessReducer = (
-  state: DeleteSuccessType,
-  action: DeleteSuccessAction,
-) => {
-  switch (action.type) {
-    case 'SUCCESS':
-      return {
-        ...state,
-        success: action.payload.success,
       };
 
     default:
@@ -422,6 +411,101 @@ export const addAssignmentReducer = (
       return {
         ...state,
         deadline: action.payload.deadline,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type DeleteSuccessAction =
+  ActionMap<DeleteSuccessPayload>[keyof ActionMap<DeleteSuccessPayload>];
+
+export const deleteSuccessReducer = (
+  state: DeleteSuccessType,
+  action: DeleteSuccessAction,
+) => {
+  switch (action.type) {
+    case 'SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type DeleteMaterialSuccessAction =
+  ActionMap<DeleteMaterialSuccessPayload>[keyof ActionMap<DeleteMaterialSuccessPayload>];
+
+export const deleteMaterialSuccessReducer = (
+  state: DeleteMaterialSuccessType,
+  action: DeleteMaterialSuccessAction,
+) => {
+  switch (action.type) {
+    case 'DELETE_MATERIAL_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type DeleteClassSuccessAction =
+  ActionMap<DeleteClassSuccessPayload>[keyof ActionMap<DeleteClassSuccessPayload>];
+
+export const deleteClassSuccessReducer = (
+  state: DeleteClassSuccessType,
+  action: DeleteClassSuccessAction,
+) => {
+  switch (action.type) {
+    case 'DELETE_CLASS_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type DeleteContentSuccessAction =
+  ActionMap<DeleteContentSuccessPayload>[keyof ActionMap<DeleteContentSuccessPayload>];
+
+export const DeleteContentSuccessReducer = (
+  state: DeleteContentSuccessType,
+  action: DeleteContentSuccessAction,
+) => {
+  switch (action.type) {
+    case 'DELETE_CONTENT_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type UpdateSuccessAction =
+  ActionMap<UpdateSuccessPayload>[keyof ActionMap<UpdateSuccessPayload>];
+
+export const updateSuccessReducer = (
+  state: UpdateSuccessType,
+  action: UpdateSuccessAction,
+) => {
+  switch (action.type) {
+    case 'UPDATE_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
       };
 
     default:
