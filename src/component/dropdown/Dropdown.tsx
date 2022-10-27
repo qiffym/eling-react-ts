@@ -1,19 +1,29 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-import { HiDotsVertical, HiPencilAlt, HiTrash } from 'react-icons/hi';
+import { Fragment, ReactNode } from 'react';
+import { HiPencilAlt, HiTrash } from 'react-icons/hi';
 
 type Props = {
+  typeBtn?: string;
+  icon: ReactNode;
+  display?: string;
   onEdit: () => void;
   onDelete: () => void;
 };
 
-export default function DropdownOptions({ onEdit, onDelete }: Props) {
+export default function DropdownOptions({
+  typeBtn,
+  icon,
+  display,
+  onEdit,
+  onDelete,
+}: Props) {
   return (
-    <div className="text-right overflow-visible z-50">
+    <div className={`${display} text-right overflow-visible z-50`}>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="btn btn-ghost inline-flex w-full justify-center rounded-md  px-4 py-2 text-sm font-medium text-black hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            <HiDotsVertical />
+          <Menu.Button
+            className={`${typeBtn} btn-ghost inline-flex w-full justify-center rounded-md  px-4 py-2 text-sm font-medium text-black hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}>
+            {icon}
           </Menu.Button>
         </div>
         <Transition

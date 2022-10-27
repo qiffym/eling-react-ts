@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { HiDotsVertical } from 'react-icons/hi';
 import { MyContext } from '../../../context/context';
 import { useDeleteClass } from '../../../hooks/useDeleteClasses';
 import { ClassesType } from '../../../types/class-type';
 import { Types } from '../../../types/reducer-type';
 import DropdownOptions from '../../dropdown/Dropdown';
 import EditClassModal from '../../modal/EditClassModal';
-// import EditAssignmentModal from './online_class/modal/EditAssignmentModal';
 
 type ListClass = {
   classes: ClassesType[] | undefined;
@@ -40,6 +40,8 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                 <div className="flex flex-row justify-between items-center">
                   <h2 className="font-bold text-xl">{item.rombel_name}</h2>
                   <DropdownOptions
+                    typeBtn="btn"
+                    icon={<HiDotsVertical />}
                     onEdit={() => {
                       setOpenModal(true);
                       setClassData({

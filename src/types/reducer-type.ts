@@ -20,6 +20,7 @@ export enum Types {
   DeleteSuccess = 'SUCCESS',
   DeleteMaterialSuccess = 'DELETE_MATERIAL_SUCCESS',
   DeleteClassSuccess = 'DELETE_CLASS_SUCCESS',
+  DeleteContentSuccess = 'DELETE_CONTENT_SUCCESS',
   UpdateSuccess = 'UPDATE_SUCCESS',
 
   // Payload Create User
@@ -143,6 +144,12 @@ export type DeleteMaterialSuccessPayload = {
 
 export type DeleteClassSuccessPayload = {
   [Types.DeleteClassSuccess]: {
+    success: boolean;
+  };
+};
+
+export type DeleteContentSuccessPayload = {
+  [Types.DeleteContentSuccess]: {
     success: boolean;
   };
 };

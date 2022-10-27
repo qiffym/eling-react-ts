@@ -1,15 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
-import {
-  HiPlusCircle,
-  HiDotsHorizontal,
-  HiPencilAlt,
-  HiTrash,
-} from 'react-icons/hi';
+import { HiPlusCircle, HiDotsHorizontal } from 'react-icons/hi';
 import { MyContext } from '../../../../context/context';
+import { useDeleteContent } from '../../../../hooks/useDeleteClasses';
 import { useFetch } from '../../../../hooks/useFetch';
 import { ContentType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
+import DropdownOptions from '../../../dropdown/Dropdown';
 import Loading from '../../../loading/Loading';
 import AddContentModal from '../../../modal/AddContentModal';
 import ContentDetail from './ContentDetail';
@@ -26,6 +23,9 @@ export const ClassContent: FC<Props> = ({ classId }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const contentList: ContentType[] = data;
   const [display, setDisplay] = useState('hidden');
+  const deleteContent = useDeleteContent(
+    `/api/teacher/online-classes/${classId}/contents/`,
+  );
 
   const [show, setShow] = useState(0);
 
@@ -82,31 +82,20 @@ export const ClassContent: FC<Props> = ({ classId }) => {
                   <div className="flex flex-row w-full justify-between items-center cursor-pointer">
                     <h2 className="font-bold">{item.title}</h2>
                     {show === item.id && (
-                      <div className="dropdown dropdown-end">
-                        <label
-                          tabIndex={0}
-                          className={`${display} cursor-pointer`}>
-                          <HiDotsHorizontal />
-                        </label>
-                        <ul
-                          tabIndex={0}
-                          className="dropdown-content menu p-2 shadow bg-base-100 rounded-lg w-32">
-                          <li>
-                            <button
-                              type="button"
-                              className="btn btn-ghost text-xs py-0">
-                              <HiPencilAlt /> Edit
-                            </button>
-                          </li>
-                          <li>
-                            <label
-                              tabIndex={0}
-                              className="btn btn-ghost hover:btn-error text-xs py-0">
-                              <HiTrash /> DELETE
-                            </label>
-                          </li>
-                        </ul>
-                      </div>
+                      <DropdownOptions
+                        icon={<HiDotsHorizontal />}
+                        display={display}
+                        onEdit={() => console.log('edit')}
+                        onDelete={() => {
+                          deleteContent(item.id!);
+                          dispatch({
+                            type: Types.DeleteContentSuccess,
+                            payload: {
+                              success: false,
+                            },
+                          });
+                        }}
+                      />
                     )}
                   </div>
                   <p className="text-xs font-semibold text-slate-600">

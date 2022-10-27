@@ -21,6 +21,8 @@ import {
   createClassSuccessReducer,
   DeleteClassSuccessAction,
   deleteClassSuccessReducer,
+  DeleteContentSuccessAction,
+  DeleteContentSuccessReducer,
   DeleteMaterialSuccessAction,
   deleteMaterialSuccessReducer,
   DeleteSuccessAction,
@@ -86,6 +88,9 @@ const contextInitialState: InitialStateType = {
   deleteClassSuccess: {
     success: false,
   },
+  deleteContentSuccess: {
+    success: false,
+  },
   updateSuccess: {
     success: false,
   },
@@ -99,6 +104,7 @@ export const MyContext = createContext<{
     | DeleteSuccessAction
     | DeleteMaterialSuccessAction
     | DeleteClassSuccessAction
+    | DeleteContentSuccessAction
     | CreateClassSuccessAction
     | AddContentSuccessAction
     | AddMaterialSuccessAction
@@ -118,6 +124,7 @@ const mainReducer = (
     deleteSuccess,
     deleteMaterialSuccess,
     deleteClassSuccess,
+    deleteContentSuccess,
     createClassSuccess,
     addContentSuccess,
     addMaterialSuccess,
@@ -136,6 +143,10 @@ const mainReducer = (
     action,
   ),
   deleteClassSuccess: deleteClassSuccessReducer(deleteClassSuccess, action),
+  deleteContentSuccess: DeleteContentSuccessReducer(
+    deleteContentSuccess,
+    action,
+  ),
   addContentSuccess: addContentSuccessReducer(addContentSuccess, action),
   addMaterialSuccess: addMaterialSuccessReducer(addMaterialSuccess, action),
   addForumSuccess: addForumSuccessReducer(addForumSuccess, action),

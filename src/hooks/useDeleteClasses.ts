@@ -67,3 +67,35 @@ export const useDeleteClass = (url: string) => {
 
   return deleteClass;
 };
+
+export const useDeleteContent = (url: string) => {
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
+
+  const deleteContent = async (id: number) => {
+    try {
+      const response = await fetch(`${baseURL}${url}${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      dispatch({
+        type: Types.DeleteContentSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return deleteContent;
+};
