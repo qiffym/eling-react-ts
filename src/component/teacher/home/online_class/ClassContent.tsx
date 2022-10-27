@@ -9,6 +9,7 @@ import { Types } from '../../../../types/reducer-type';
 import DropdownOptions from '../../../dropdown/Dropdown';
 import Loading from '../../../loading/Loading';
 import AddContentModal from '../../../modal/AddContentModal';
+import EditContentModal from '../../../modal/EditContentModal';
 import ContentDetail from './ContentDetail';
 
 type Props = {
@@ -21,8 +22,14 @@ export const ClassContent: FC<Props> = ({ classId }) => {
   );
   const { dispatch } = useContext(MyContext);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
   const contentList: ContentType[] = data;
   const [display, setDisplay] = useState('hidden');
+  const [contentData, setContentData] = useState({
+    id: 0,
+    title: '',
+    desc: '',
+  });
   const deleteContent = useDeleteContent(
     `/api/teacher/online-classes/${classId}/contents/`,
   );
@@ -85,7 +92,14 @@ export const ClassContent: FC<Props> = ({ classId }) => {
                       <DropdownOptions
                         icon={<HiDotsHorizontal />}
                         display={display}
-                        onEdit={() => console.log('edit')}
+                        onEdit={() => {
+                          setContentData({
+                            id: item.id!,
+                            title: item.title!,
+                            desc: item.description!,
+                          });
+                          setOpenModalEdit(true);
+                        }}
                         onDelete={() => {
                           deleteContent(item.id!);
                           dispatch({
@@ -124,6 +138,25 @@ export const ClassContent: FC<Props> = ({ classId }) => {
             setOpenModal(false);
           }}
           modalAction={() => setOpenModal(false)}
+        />
+      ) : null}
+
+      {openModalEdit ? (
+        <EditContentModal
+          idClasses={classId}
+          idContent={contentData.id}
+          titleContent={contentData.title}
+          descContent={contentData.desc}
+          actionSave={() => {
+            dispatch({
+              type: Types.UpdateSuccess,
+              payload: {
+                success: false,
+              },
+            });
+            setOpenModalEdit(false);
+          }}
+          modalAction={() => setOpenModalEdit(false)}
         />
       ) : null}
     </>

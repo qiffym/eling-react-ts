@@ -2,6 +2,7 @@ export type ClassesType = {
   rombel_name: string;
   id: number;
   name: string;
+  rombel_id: number;
   description: string;
   teacher_avatar: string;
   teacher_id?: number;

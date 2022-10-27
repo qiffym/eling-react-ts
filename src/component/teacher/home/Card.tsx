@@ -18,6 +18,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
   const [openModal, setOpenModal] = useState(false);
   const [classData, setClassData] = useState({
     id: 0,
+    rombel_id: 0,
     name: '',
     desc: '',
   });
@@ -46,6 +47,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                       setOpenModal(true);
                       setClassData({
                         id: item.id,
+                        rombel_id: item.rombel_id,
                         name: item.name,
                         desc: item.description,
                       });
@@ -111,7 +113,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
 
       {openModal ? (
         <EditClassModal
-          classesRombelID={1}
+          classesRombelID={classData.rombel_id}
           classesID={classData.id}
           classesName={classData.name}
           classesDesc={classData.desc}

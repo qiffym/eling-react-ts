@@ -213,6 +213,60 @@ export const useAddContent = () => {
   };
 };
 
+export const useEditContent = () => {
+  const [loadingContent, setLoadingContent] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
+
+  const updateContent = async (
+    e: FormEvent<HTMLFormElement>,
+    idClass: number | undefined,
+    id: number | undefined,
+    input: {
+      title: string;
+      description: string;
+    },
+  ) => {
+    try {
+      e.preventDefault();
+      setLoadingContent(true);
+      const response = await fetch(
+        `${baseURL}/api/teacher/online-classes/${idClass}/contents/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            title: input.title,
+            description: input.description,
+          }),
+        },
+      );
+      const result = await response.json();
+      console.log(result.success);
+      dispatch({
+        type: Types.UpdateSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      setLoadingContent(false);
+    }
+  };
+
+  return {
+    loadingContent,
+    updateContent,
+  };
+};
+
 export const useFetchMaterial = (classId: number, contentId?: number) => {
   const [data, setData] = useState<any>([]);
   const [isLoading, setLoading] = useState(false);
