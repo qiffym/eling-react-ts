@@ -1,8 +1,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React, { FC } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HiDotsVertical, HiPencilAlt, HiTrash } from 'react-icons/hi';
+import { MyContext } from '../../../context/context';
+import { useDeleteClass } from '../../../hooks/useDeleteClasses';
 import { ClassesType } from '../../../types/class-type';
+import { Types } from '../../../types/reducer-type';
+import DropdownOptions from '../../dropdown/Dropdown';
+import EditClassModal from '../../modal/EditClassModal';
+// import EditAssignmentModal from './online_class/modal/EditAssignmentModal';
 
 type ListClass = {
   classes: ClassesType[] | undefined;
@@ -10,6 +15,14 @@ type ListClass = {
 
 const CardClass: FC<ListClass> = ({ classes }) => {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+  const [classData, setClassData] = useState({
+    id: 0,
+    name: '',
+    desc: '',
+  });
+  const deleteClass = useDeleteClass('/api/teacher/online-classes/');
+  const { dispatch } = useContext(MyContext);
 
   return (
     <>
@@ -26,29 +39,25 @@ const CardClass: FC<ListClass> = ({ classes }) => {
               <div className="card-body py-5 overflow-visible">
                 <div className="flex flex-row justify-between items-center">
                   <h2 className="font-bold text-xl">{item.rombel_name}</h2>
-                  <div className="dropdown dropdown-end">
-                    <label tabIndex={0} className="btn btn-sm btn-ghost m-1">
-                      <HiDotsVertical />
-                    </label>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-lg w-32">
-                      <li>
-                        <button
-                          type="button"
-                          className="btn btn-ghost text-xs py-0">
-                          <HiPencilAlt /> Edit
-                        </button>
-                      </li>
-                      <li>
-                        <label
-                          tabIndex={0}
-                          className="btn btn-ghost hover:btn-error text-xs py-0">
-                          <HiTrash /> DELETE
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
+                  <DropdownOptions
+                    onEdit={() => {
+                      setOpenModal(true);
+                      setClassData({
+                        id: item.id,
+                        name: item.name,
+                        desc: item.description,
+                      });
+                    }}
+                    onDelete={() => {
+                      deleteClass(item.id);
+                      dispatch({
+                        type: Types.DeleteClassSuccess,
+                        payload: {
+                          success: false,
+                        },
+                      });
+                    }}
+                  />
                 </div>
                 <button
                   type="button"
@@ -97,6 +106,25 @@ const CardClass: FC<ListClass> = ({ classes }) => {
             </div>
           ))}
       </div>
+
+      {openModal ? (
+        <EditClassModal
+          classesRombelID={1}
+          classesID={classData.id}
+          classesName={classData.name}
+          classesDesc={classData.desc}
+          actionSave={() => {
+            dispatch({
+              type: Types.UpdateSuccess,
+              payload: {
+                success: false,
+              },
+            });
+            setOpenModal(false);
+          }}
+          modalAction={() => setOpenModal(false)}
+        />
+      ) : null}
     </>
   );
 };

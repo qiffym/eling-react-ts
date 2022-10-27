@@ -36,6 +36,10 @@ export type DeleteMaterialSuccessType = {
   success: boolean;
 };
 
+export type DeleteClassSuccessType = {
+  success: boolean;
+};
+
 export type CreateClassSuccessType = {
   success: boolean;
 };
@@ -125,5 +129,6 @@ export type InitialStateType = {
   addAssignmentSuccess: AddAssignmentSuccessType;
   deleteSuccess: DeleteSuccessType;
   deleteMaterialSuccess: DeleteMaterialSuccessType;
+  deleteClassSuccess: DeleteClassSuccessType;
   updateSuccess: UpdateSuccessType;
 };

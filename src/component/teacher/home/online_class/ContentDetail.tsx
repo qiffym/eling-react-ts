@@ -9,7 +9,7 @@ import {
   useFetchForum,
   useFetchMaterial,
 } from '../../../../hooks/useClasses';
-import useDeleteMaterial from '../../../../hooks/useDeleteClasses';
+import { useDeleteMaterial } from '../../../../hooks/useDeleteClasses';
 import { ContentDetailType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
 import Loading2ND from '../../../loading/Loading2nd';

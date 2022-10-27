@@ -11,16 +11,12 @@ import { LoginType } from '../../../types/context-type';
 import { ClassesType } from '../../../types/class-type';
 import { MyContext } from '../../../context/context';
 import { Types } from '../../../types/reducer-type';
-import useNetwork from '../../../hooks/useNetwork';
 
 const DashboardTeacher = () => {
   const { isLoading, classList } = useClasses();
   const [searchData, setSearchData] = useState<ClassesType[] | undefined>();
   const [openModal, setOpenModal] = useState(false);
   const { dispatch } = useContext(MyContext);
-  const isOnline = useNetwork();
-
-  console.log(isOnline);
 
   const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
 

@@ -42,6 +42,7 @@ export const useClasses = () => {
     user.token,
     state.createClassSuccess.success,
     state.updateSuccess.success,
+    state.deleteClassSuccess.success,
   ]);
 
   useEffect(() => {
@@ -141,12 +142,6 @@ export const useEditClass = () => {
       );
       const result = await response.json();
       console.log(result.success);
-      dispatch({
-        type: Types.DeleteSuccess,
-        payload: {
-          success: result.success,
-        },
-      });
       dispatch({
         type: Types.UpdateSuccess,
         payload: {

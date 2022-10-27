@@ -11,6 +11,7 @@ import {
   CreateClassSuccessType,
   CreateClassType,
   CreateUserType,
+  DeleteClassSuccessType,
   DeleteMaterialSuccessType,
   DeleteSuccessType,
   LoginType,
@@ -31,6 +32,7 @@ import {
   CreateClassPayload,
   CreateClassSuccessPayload,
   CreateUserPayload,
+  DeleteClassSuccessPayload,
   DeleteMaterialSuccessPayload,
   DeleteSuccessPayload,
   LoginPayload,
@@ -442,6 +444,25 @@ export const deleteMaterialSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'DELETE_MATERIAL_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type DeleteClassSuccessAction =
+  ActionMap<DeleteClassSuccessPayload>[keyof ActionMap<DeleteClassSuccessPayload>];
+
+export const deleteClassSuccessReducer = (
+  state: DeleteClassSuccessType,
+  action: DeleteClassSuccessAction,
+) => {
+  switch (action.type) {
+    case 'DELETE_CLASS_SUCCESS':
       return {
         ...state,
         success: action.payload.success,
