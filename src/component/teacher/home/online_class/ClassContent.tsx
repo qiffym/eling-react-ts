@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC, useContext, useState } from 'react';
-import { HiPlusCircle } from 'react-icons/hi';
+import { HiPlusCircle, HiDotsHorizontal } from 'react-icons/hi';
 import { MyContext } from '../../../../context/context';
+import { useDeleteContent } from '../../../../hooks/useDeleteClasses';
 import { useFetch } from '../../../../hooks/useFetch';
 import { ContentType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
+import DropdownOptions from '../../../dropdown/Dropdown';
 import Loading from '../../../loading/Loading';
 import AddContentModal from '../../../modal/AddContentModal';
+import EditContentModal from '../../../modal/EditContentModal';
 import ContentDetail from './ContentDetail';
 
 type Props = {
@@ -19,7 +22,31 @@ export const ClassContent: FC<Props> = ({ classId }) => {
   );
   const { dispatch } = useContext(MyContext);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
   const contentList: ContentType[] = data;
+  const [display, setDisplay] = useState('hidden');
+  const [contentData, setContentData] = useState({
+    id: 0,
+    title: '',
+    desc: '',
+  });
+  const deleteContent = useDeleteContent(
+    `/api/teacher/online-classes/${classId}/contents/`,
+  );
+
+  const [show, setShow] = useState(0);
+
+  const showButton = (e: any, id: number | undefined) => {
+    e.preventDefault();
+    setShow(id!);
+    setDisplay('block');
+  };
+
+  const hideButton = (e: any) => {
+    e.preventDefault();
+    setShow(0);
+    setDisplay('hidden');
+  };
 
   return (
     <>
@@ -50,14 +77,41 @@ export const ClassContent: FC<Props> = ({ classId }) => {
               <div
                 key={item.id}
                 tabIndex={0}
-                className="collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary bg-white p-1">
+                onMouseEnter={(e) => showButton(e, item.id)}
+                onMouseLeave={(e) => hideButton(e)}
+                className="hover:btn-ghost overflow-visible transition-all collapse collapse-arrow rounded-box shadow-md mb-4 border-l-4 border-l-primary bg-white p-1">
                 <input type="checkbox" />
                 {/* Title Collapse */}
                 <div className="collapse-title text-xl font-medium">
                   <h5 className="text-sm text-slate-600">
                     {`Pembelajaran ${index + 1}`}
                   </h5>
-                  <h2 className="font-bold">{item.title}</h2>
+                  <div className="flex flex-row w-full justify-between items-center cursor-pointer">
+                    <h2 className="font-bold">{item.title}</h2>
+                    {show === item.id && (
+                      <DropdownOptions
+                        icon={<HiDotsHorizontal />}
+                        display={display}
+                        onEdit={() => {
+                          setContentData({
+                            id: item.id!,
+                            title: item.title!,
+                            desc: item.description!,
+                          });
+                          setOpenModalEdit(true);
+                        }}
+                        onDelete={() => {
+                          deleteContent(item.id!);
+                          dispatch({
+                            type: Types.DeleteContentSuccess,
+                            payload: {
+                              success: false,
+                            },
+                          });
+                        }}
+                      />
+                    )}
+                  </div>
                   <p className="text-xs font-semibold text-slate-600">
                     Dibuat {item.created_at ?? ''}
                   </p>
@@ -84,6 +138,25 @@ export const ClassContent: FC<Props> = ({ classId }) => {
             setOpenModal(false);
           }}
           modalAction={() => setOpenModal(false)}
+        />
+      ) : null}
+
+      {openModalEdit ? (
+        <EditContentModal
+          idClasses={classId}
+          idContent={contentData.id}
+          titleContent={contentData.title}
+          descContent={contentData.desc}
+          actionSave={() => {
+            dispatch({
+              type: Types.UpdateSuccess,
+              payload: {
+                success: false,
+              },
+            });
+            setOpenModalEdit(false);
+          }}
+          modalAction={() => setOpenModalEdit(false)}
         />
       ) : null}
     </>

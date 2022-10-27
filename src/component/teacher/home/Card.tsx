@@ -1,6 +1,13 @@
-import React, { FC } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+import React, { FC, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { HiDotsVertical } from 'react-icons/hi';
+import { MyContext } from '../../../context/context';
+import { useDeleteClass } from '../../../hooks/useDeleteClasses';
 import { ClassesType } from '../../../types/class-type';
+import { Types } from '../../../types/reducer-type';
+import DropdownOptions from '../../dropdown/Dropdown';
+import EditClassModal from '../../modal/EditClassModal';
 
 type ListClass = {
   classes: ClassesType[] | undefined;
@@ -8,6 +15,15 @@ type ListClass = {
 
 const CardClass: FC<ListClass> = ({ classes }) => {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+  const [classData, setClassData] = useState({
+    id: 0,
+    rombel_id: 0,
+    name: '',
+    desc: '',
+  });
+  const deleteClass = useDeleteClass('/api/teacher/online-classes/');
+  const { dispatch } = useContext(MyContext);
 
   return (
     <>
@@ -20,9 +36,33 @@ const CardClass: FC<ListClass> = ({ classes }) => {
           .map((item) => (
             <div
               key={item.id}
-              className="card w-[21rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
-              <div className="card-body">
-                <h2 className="font-bold text-xl">{item.rombel_name}</h2>
+              className="card overflow-visible static w-[21rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
+              <div className="card-body py-5 overflow-visible">
+                <div className="flex flex-row justify-between items-center">
+                  <h2 className="font-bold text-xl">{item.rombel_name}</h2>
+                  <DropdownOptions
+                    typeBtn="btn"
+                    icon={<HiDotsVertical />}
+                    onEdit={() => {
+                      setOpenModal(true);
+                      setClassData({
+                        id: item.id,
+                        rombel_id: item.rombel_id,
+                        name: item.name,
+                        desc: item.description,
+                      });
+                    }}
+                    onDelete={() => {
+                      deleteClass(item.id);
+                      dispatch({
+                        type: Types.DeleteClassSuccess,
+                        payload: {
+                          success: false,
+                        },
+                      });
+                    }}
+                  />
+                </div>
                 <button
                   type="button"
                   onClick={() =>
@@ -70,6 +110,25 @@ const CardClass: FC<ListClass> = ({ classes }) => {
             </div>
           ))}
       </div>
+
+      {openModal ? (
+        <EditClassModal
+          classesRombelID={classData.rombel_id}
+          classesID={classData.id}
+          classesName={classData.name}
+          classesDesc={classData.desc}
+          actionSave={() => {
+            dispatch({
+              type: Types.UpdateSuccess,
+              payload: {
+                success: false,
+              },
+            });
+            setOpenModal(false);
+          }}
+          modalAction={() => setOpenModal(false)}
+        />
+      ) : null}
     </>
   );
 };

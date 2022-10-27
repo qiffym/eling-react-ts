@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MdDashboard } from 'react-icons/md';
-import { MyContext } from '../../context/context';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
+import { useClasses } from '../../hooks/useClasses';
 
 const LinkNavItems = [
   { name: 'Users', path: 'resources/users' },
@@ -11,7 +10,7 @@ const LinkNavItems = [
 ];
 
 const Sidebar = () => {
-  const { state } = useContext(MyContext);
+  const { classList } = useClasses();
   const user = JSON.parse(localStorage.getItem('user') || '');
 
   const subNav = (role: string) => {
@@ -40,8 +39,21 @@ const Sidebar = () => {
             <label className="px-6 text-gray-400 text-sm font-bold">
               My Class
             </label>
-            {state.classes?.classList?.length
+            {/* {state.classes?.classList?.length
               ? state.classes?.classList?.map((item) => (
+                  <ul
+                    key={item.id}
+                    className="menu menu-compact p-4 py-0 w-64 bg-slate-600 text-white">
+                    <li>
+                      <NavLink to={`online-class/${item.id}`} state={item}>
+                        {item.name}
+                      </NavLink>
+                    </li>
+                  </ul>
+                ))
+              : null} */}
+            {classList?.length
+              ? classList.map((item) => (
                   <ul
                     key={item.id}
                     className="menu menu-compact p-4 py-0 w-64 bg-slate-600 text-white">
@@ -76,7 +88,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="hidden sm:block drawer-side bg-slate-600 overflow-auto h-screen">
+    <div className="hidden fixed sm:block drawer-side bg-slate-600 overflow-auto h-screen z-50">
       {/* Logo */}
       <div className="flex justify-center items-center space-x-2 p-3">
         <div className="mask mask-circle w-20 h-20">

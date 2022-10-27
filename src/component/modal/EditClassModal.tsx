@@ -1,21 +1,37 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import React, { ChangeEvent, FC, useEffect, useReducer, useState } from 'react';
-import { useCreateClass } from '../../hooks/useClasses';
+import { useEditClass } from '../../hooks/useClasses';
 import { createClassReducer } from '../../reducers/reducers';
 import { Types } from '../../types/reducer-type';
 import LoadingButton from '../loading/LoadingButton';
 
 type Props = {
+  classesRombelID: number;
+  classesID?: number;
+  classesName?: string;
+  classesDesc?: string;
+  focusInputName?: boolean;
+  focusInputDesc?: boolean;
   actionSave: () => void;
   modalAction: () => void;
 };
 
-const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
-  const { isLoading, createClass } = useCreateClass();
+const EditClassModal: FC<Props> = ({
+  classesRombelID,
+  classesID,
+  classesName,
+  classesDesc,
+  focusInputName,
+  focusInputDesc,
+  actionSave,
+  modalAction,
+}) => {
+  const { loadingClass, updateClass } = useEditClass();
   const [isDisable, setDisable] = useState(false);
   const [state, dispatch] = useReducer(createClassReducer, {
-    name: '',
-    description: '',
-    rombel_class_id: 1,
+    name: classesName!,
+    description: classesDesc!,
+    rombel_class_id: classesRombelID,
   });
 
   useEffect(() => {
@@ -37,11 +53,11 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
             </button>
-            <h3 className="text-lg font-bold">Tambah Kelas</h3>
+            <h3 className="text-lg font-bold">Edit Kelas</h3>
           </div>
           <form
             onSubmit={(e) => {
-              createClass(e, {
+              updateClass(e, classesID, {
                 name: state.name,
                 rombel_class_id: state.rombel_class_id,
                 description: state.description,
@@ -62,6 +78,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
                     },
                   });
                 }}
+                defaultValue={state.rombel_class_id}
                 className="select select-bordered w-full ">
                 <option value="DEFAULT" disabled>
                   -- Rombel ID --
@@ -79,9 +96,11 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
                 Nama Kelas
               </label>
               <input
+                autoFocus={focusInputName}
                 type="text"
                 placeholder="Pemrograman Dasar"
                 name="class-textinput"
+                defaultValue={state.name}
                 className="input input-bordered w-full "
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   dispatch({
@@ -98,8 +117,11 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
                 Description
               </label>
               <textarea
+                autoFocus={focusInputDesc}
+                rows={4}
                 name="desc-textarea"
-                className="textarea textarea-bordered w-full resize-none"
+                defaultValue={state.description}
+                className="textarea textarea-bordered w-full"
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                   dispatch({
                     type: Types.ClassDescription,
@@ -114,7 +136,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
               type="submit"
               className="btn btn-primary px-12 text-white"
               disabled={isDisable}>
-              {isLoading ? <LoadingButton /> : 'Save'}
+              {loadingClass ? <LoadingButton /> : 'Save'}
             </button>
           </form>
         </div>
@@ -124,4 +146,4 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
   );
 };
 
-export default CreateClassModal;
+export default EditClassModal;
