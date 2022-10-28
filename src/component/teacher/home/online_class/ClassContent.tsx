@@ -13,10 +13,12 @@ import EditContentModal from '../../../modal/EditContentModal';
 import ContentDetail from './ContentDetail';
 
 type Props = {
+  teacherName?: string;
+  role?: string;
   classId: number;
 };
 
-export const ClassContent: FC<Props> = ({ classId }) => {
+export const ClassContent: FC<Props> = ({ teacherName, role, classId }) => {
   const { isLoading, data } = useFetch(
     `/api/teacher/online-classes/${classId}/contents`,
   );
@@ -118,7 +120,12 @@ export const ClassContent: FC<Props> = ({ classId }) => {
                 </div>
 
                 {/* Content Collapse */}
-                <ContentDetail classId={classId} contentId={item.id} />
+                <ContentDetail
+                  teacherName={teacherName}
+                  role={role}
+                  classId={classId}
+                  contentId={item.id}
+                />
               </div>
             ))
           )}

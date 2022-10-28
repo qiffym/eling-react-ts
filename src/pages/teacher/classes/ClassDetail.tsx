@@ -94,7 +94,7 @@ const ClassDetail = () => {
 
           {/* Konten */}
           {tab === 0 ? (
-            <ClassContent classId={id} />
+            <ClassContent teacherName={classData.teacher?.name} classId={id} />
           ) : (
             <AboutClass
               classesRombelID={classData.rombel_id}

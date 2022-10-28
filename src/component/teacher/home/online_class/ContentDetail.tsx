@@ -20,9 +20,16 @@ import AddMaterialModal from '../../../modal/AddMaterialModal';
 type Props = {
   classId: number;
   contentId?: number;
+  teacherName?: string;
+  role?: string;
 };
 
-const ContentDetail: FC<Props> = ({ classId, contentId }) => {
+const ContentDetail: FC<Props> = ({
+  classId,
+  contentId,
+  teacherName,
+  role,
+}) => {
   const { isLoading, data } = useFetchMaterial(classId, contentId);
   const { loadingForum, forumData } = useFetchForum(classId, contentId);
   const { loadingAssignment, assignmentData } = useFetchAssignment(
@@ -146,7 +153,13 @@ const ContentDetail: FC<Props> = ({ classId, contentId }) => {
                     <div
                       key={item.id}
                       className="flex flex-row justify-between">
-                      <Link to={`contents/${contentId}/forums/${item.id}`}>
+                      <Link
+                        to={`contents/${contentId}/forums/${item.id}`}
+                        state={{
+                          classID: classId,
+                          forum: item,
+                          teacher: { name: teacherName, role },
+                        }}>
                         {item.topic}
                       </Link>
                       {/* TODO: Buat btn disini hanya pada role guru */}

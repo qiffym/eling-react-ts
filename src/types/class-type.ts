@@ -52,6 +52,15 @@ export type ForumType = {
   topic: string;
 };
 
+export type ForumDetailType = {
+  comments: [];
+  content_id?: number;
+  content_of: string;
+  description: string;
+  id: number;
+  topic: string;
+};
+
 export type ContentDetailType = {
   id?: number;
   online_class_id?: number;

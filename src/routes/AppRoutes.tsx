@@ -31,17 +31,18 @@ const AppRoutes = () => (
           <Route path="/" element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Home />} />
           <Route path="me" element={<Profile />} />
+          <Route
+            path="/"
+            element={<ProtectedRoutes roleRequired="student" />}
+          />
+
           <Route path="/" element={<ProtectedRoutes roleRequired="teacher" />}>
             <Route path="online-class">
               <Route path=":id" element={<ClassDetail />} />
-              {/* TODO: Pakai path comment dibawah */}
-              {/* path=":id/contents/:id/assignment/:id" */}
               <Route
                 path=":id/contents/:id/assignment/:id"
                 element={<AssignmentDetail />}
               />
-              {/* TODO: Pakai path comment dibawah */}
-              {/* path=":id/contents/:id/forums/:id" */}
               <Route path=":id/contents/:id/forums/:id" element={<Forum />} />
             </Route>
           </Route>

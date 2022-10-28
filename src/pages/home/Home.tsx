@@ -1,6 +1,7 @@
 import Header from '../../component/header/Header';
 
 import DashboardAdmin from '../admin/dashboard/DashboardAdmin';
+import DashboardStudent from '../student/dashboard/DashboardStudent';
 import DashboardTeacher from '../teacher/dashboard/DashboardTeacher';
 
 const Home = () => {
@@ -13,7 +14,7 @@ const Home = () => {
       case 'teacher':
         return <DashboardTeacher />;
       case 'student':
-        return <Header>student</Header>;
+        return <DashboardStudent />;
       default:
         return (
           <>
