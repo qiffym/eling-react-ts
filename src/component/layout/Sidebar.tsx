@@ -39,19 +39,6 @@ const Sidebar = () => {
             <label className="px-6 text-gray-400 text-sm font-bold">
               My Class
             </label>
-            {/* {state.classes?.classList?.length
-              ? state.classes?.classList?.map((item) => (
-                  <ul
-                    key={item.id}
-                    className="menu menu-compact p-4 py-0 w-64 bg-slate-600 text-white">
-                    <li>
-                      <NavLink to={`online-class/${item.id}`} state={item}>
-                        {item.name}
-                      </NavLink>
-                    </li>
-                  </ul>
-                ))
-              : null} */}
             {classList?.length
               ? classList.map((item) => (
                   <ul
@@ -72,7 +59,7 @@ const Sidebar = () => {
         return (
           <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
             <li>
-              <NavLink to="dashboard">Siswa</NavLink>
+              <NavLink to="dashboard">Belum ada</NavLink>
             </li>
           </ul>
         );
