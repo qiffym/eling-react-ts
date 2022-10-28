@@ -35,7 +35,7 @@ const DashboardTeacher = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard</title>
+        <title>Teacher | Dashboard</title>
       </Helmet>
       <Header>Dashboard</Header>
       <div className="px-3 flex flex-row justify-between sm:hidden">
