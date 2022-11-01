@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom';
 import { MdDashboard } from 'react-icons/md';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
 import { useClasses } from '../../hooks/useClasses';
+import { useFetch } from '../../hooks/useFetch';
+import { StudentClasses } from '../../types/student-type';
 
 const LinkNavItems = [
   { name: 'Users', path: 'resources/users' },
@@ -12,6 +14,8 @@ const LinkNavItems = [
 const Sidebar = () => {
   const { classList } = useClasses();
   const user = JSON.parse(localStorage.getItem('user') || '');
+  const { data } = useFetch('/api/student/my-classes');
+  const studentClassList: StudentClasses[] = data;
 
   const subNav = (role: string) => {
     switch (role) {
@@ -57,11 +61,24 @@ const Sidebar = () => {
 
       case 'student':
         return (
-          <ul className="menu p-4 overflow-y-auto w-64 bg-slate-600 text-white text-center">
-            <li>
-              <NavLink to="dashboard">Belum ada</NavLink>
-            </li>
-          </ul>
+          <>
+            <label className="px-6 text-gray-400 text-sm font-bold">
+              My Class
+            </label>
+            {studentClassList?.length
+              ? studentClassList.map((item) => (
+                  <ul
+                    key={item.id}
+                    className="menu menu-compact p-4 py-0 w-64 bg-slate-600 text-white">
+                    <li>
+                      <NavLink to={`online-class/${item.id}`} state={item}>
+                        {item.name}
+                      </NavLink>
+                    </li>
+                  </ul>
+                ))
+              : null}
+          </>
         );
       default:
         return (

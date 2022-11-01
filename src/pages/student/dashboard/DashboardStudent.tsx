@@ -5,12 +5,13 @@ import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 import Loading from '../../../component/loading/Loading';
 import Header from '../../../component/header/Header';
 import CardClass from '../../../component/student/CardClass';
-import { ClassesType } from '../../../types/class-type';
-import { useClasses } from '../../../hooks/useClasses';
+import { useFetch } from '../../../hooks/useFetch';
+import { StudentClasses } from '../../../types/student-type';
 
 const DashboardStudent = () => {
-  const { isLoading, classList } = useClasses();
-  const [searchData, setSearchData] = useState<ClassesType[] | undefined>();
+  const { isLoading, data } = useFetch('/api/student/my-classes');
+  const [searchData, setSearchData] = useState<StudentClasses[] | undefined>();
+  const classList: StudentClasses[] = data;
 
   const searchClass = (value: string) => {
     setSearchData(
