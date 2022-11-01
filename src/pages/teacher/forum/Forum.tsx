@@ -3,7 +3,6 @@ import { FaComment } from 'react-icons/fa';
 import { HiPencilAlt, HiTrash, HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ryujin from '../../../assets/ryujin1.jpg';
-import ryujin2 from '../../../assets/ryujin2.jpg';
 import Loading2ND from '../../../component/loading/Loading2nd';
 import { useFetch } from '../../../hooks/useFetch';
 import { ForumDetailType, ForumType } from '../../../types/class-type';
@@ -17,6 +16,19 @@ const Forum = () => {
     `/api/teacher/online-classes/${idClass}/contents/${forumData.content_id}/forums/${forumData.id}`,
   );
   const forumDetailData: ForumDetailType = data;
+
+  const changeLanguage = (word: string) => {
+    switch (word) {
+      case 'Student':
+        return 'Siswa';
+
+      case 'Teacher':
+        return 'Guru';
+
+      default:
+        return word;
+    }
+  };
 
   return (
     <>
@@ -48,7 +60,7 @@ const Forum = () => {
               <div className="flex items-start space-x-4">
                 <div className="avatar">
                   <div className="w-16 mask mask-squircle">
-                    <img src={ryujin2} alt="avatar" />
+                    <img src={forumDetailData.avatar} alt="avatar" />
                   </div>
                 </div>
                 <div className="grow">
@@ -57,7 +69,9 @@ const Forum = () => {
                     <div className="mb-2">
                       <p className="font-bold">{teacher.name}</p>
                       <div className="flex items-center space-x-1 font-semibold text-2xs">
-                        <span className="text-teal-700">Guru</span>
+                        <span className="text-teal-700">
+                          {changeLanguage(forumDetailData.author_role)}
+                        </span>
                         <span>|</span>
                         <span className="text-slate-700">
                           {forumData.created_at}
@@ -99,81 +113,80 @@ const Forum = () => {
             </div>
           </section>
           {/* Comment Section */}
-          <section id="comment" className="mb-5">
-            <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box">
-              <div className="flex items-start space-x-4">
-                <div className="avatar">
-                  <div className="w-16 mask mask-squircle">
-                    <img src={ryujin} alt="avatar" />
-                  </div>
-                </div>
-                <div className="grow">
-                  {/* Nama dan Waktu dibuat */}
-                  <div className="mb-2">
-                    <p className="font-bold">Tao Tsuchiya </p>
-                    <div className="flex items-center space-x-1 font-semibold text-2xs">
-                      <span className="text-teal-700">Siswa</span>
-                      <span>|</span>
-                      <span className="text-slate-700">
-                        Diposting 5 menit yang lalu
-                      </span>
+          {forumDetailData?.comments?.map((item) => (
+            <>
+              <section key={item.id} id="comment" className="mb-5">
+                <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box">
+                  <div className="flex items-start space-x-4">
+                    <div className="avatar">
+                      <div className="w-16 mask mask-squircle">
+                        <img src={item.avatar} alt="avatar" />
+                      </div>
+                    </div>
+                    <div className="grow">
+                      {/* Nama dan Waktu dibuat */}
+                      <div className="mb-2">
+                        <p className="font-bold">{item.author}</p>
+                        <div className="flex items-center space-x-1 font-semibold text-2xs">
+                          <span className="text-teal-700">
+                            {changeLanguage(item.author_role)}
+                          </span>
+                          <span>|</span>
+                          <span className="text-slate-700">
+                            {item.created_at}
+                          </span>
+                        </div>
+                      </div>
+                      {/* Comment */}
+                      <div className="mb-2">
+                        <p>{item.comment}</p>
+                      </div>
+                      {/* Button Reply */}
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline normal-case">
+                        Reply
+                      </button>
                     </div>
                   </div>
-                  {/* Comment */}
-                  <div className="mb-2">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Amet ullam neque cum earum velit corporis tempore quo
-                      excepturi veritatis laborum? Consequuntur, earum officia
-                      fugit magnam asperiores impedit, fugiat rem suscipit
-                      consectetur nemo illum nostrum quis nobis debitis vel.
-                    </p>
-                  </div>
-                  {/* Button Reply */}
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline normal-case">
-                    Reply
-                  </button>
                 </div>
-              </div>
-            </div>
-          </section>
-          {/* Sub-Comment */}
-          <section id="comment" className="mb-5">
-            <div className="container ml-28 p-4 w-[72%] bg-white drop-shadow rounded-box">
-              <div className="flex items-start space-x-4">
-                <div className="avatar">
-                  <div className="w-16 mask mask-squircle">
-                    <img src={ryujin2} alt="avatar" />
-                  </div>
-                </div>
-                <div className="grow">
-                  {/* Nama dan Waktu dibuat */}
-                  <div className="mb-2">
-                    <p className="font-bold">Bang Askar </p>
-                    <div className="flex items-center space-x-1 font-semibold text-2xs">
-                      <span className="text-teal-700">Siswa</span>
-                      <span>|</span>
-                      <span className="text-slate-700">
-                        Diposting 7 menit yang lalu
-                      </span>
+              </section>
+
+              {/* Sub-Comment */}
+              {item.sub_comments.map((subComments) => (
+                <section id="comment" className="mb-5">
+                  <div className="container ml-28 p-4 w-[72%] bg-white drop-shadow rounded-box">
+                    <div className="flex items-start space-x-4">
+                      <div className="avatar">
+                        <div className="w-16 mask mask-squircle">
+                          <img src={subComments.avatar} alt="avatar" />
+                        </div>
+                      </div>
+                      <div className="grow">
+                        {/* Nama dan Waktu dibuat */}
+                        <div className="mb-2">
+                          <p className="font-bold">{subComments.author}</p>
+                          <div className="flex items-center space-x-1 font-semibold text-2xs">
+                            <span className="text-teal-700">
+                              {changeLanguage(subComments.author_role)}
+                            </span>
+                            <span>|</span>
+                            <span className="text-slate-700">
+                              {subComments.created_at}
+                            </span>
+                          </div>
+                        </div>
+                        {/* Comment */}
+                        <div className="mb-2">
+                          <p>{subComments.comment}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  {/* Comment */}
-                  <div className="mb-2">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Amet ullam neque cum earum velit corporis tempore quo
-                      excepturi veritatis laborum? Consequuntur, earum officia
-                      fugit magnam asperiores impedit, fugiat rem suscipit
-                      consectetur nemo illum nostrum quis nobis debitis vel.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+                </section>
+              ))}
+            </>
+          ))}
           {/* Reply Section */}
           <section>
             <div className="container ml-16 w-9/12 drop-shadow rounded-box text-left">
