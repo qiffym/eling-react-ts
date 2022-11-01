@@ -71,7 +71,7 @@ const Sidebar = () => {
                     key={item.id}
                     className="menu menu-compact p-4 py-0 w-64 bg-slate-600 text-white">
                     <li>
-                      <NavLink to={`online-class/${item.id}`} state={item}>
+                      <NavLink to={`my-classes/${item.id}`} state={item}>
                         {item.name}
                       </NavLink>
                     </li>

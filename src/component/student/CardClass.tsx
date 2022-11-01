@@ -28,7 +28,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                 <button
                   type="button"
                   onClick={() =>
-                    navigate(`/online-class/${item.id}`, {
+                    navigate(`/my-classes/${item.id}`, {
                       state: item,
                     })
                   }
@@ -59,7 +59,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                     <button
                       type="button"
                       onClick={() =>
-                        navigate(`/online-class/${item.id}`, {
+                        navigate(`/my-classes/${item.id}`, {
                           state: item,
                         })
                       }
