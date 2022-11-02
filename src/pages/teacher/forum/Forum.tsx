@@ -74,7 +74,7 @@ const Forum = () => {
                         </span>
                         <span>|</span>
                         <span className="text-slate-700">
-                          {forumData.created_at}
+                          Diposting {forumData.created_at}
                         </span>
                       </div>
                     </div>
@@ -133,7 +133,7 @@ const Forum = () => {
                           </span>
                           <span>|</span>
                           <span className="text-slate-700">
-                            {item.created_at}
+                            Diposting {item.created_at}
                           </span>
                         </div>
                       </div>
@@ -172,7 +172,7 @@ const Forum = () => {
                             </span>
                             <span>|</span>
                             <span className="text-slate-700">
-                              {subComments.created_at}
+                              Diposting {subComments.created_at}
                             </span>
                           </div>
                         </div>
