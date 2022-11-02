@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import logosmk from '../../../../assets/images/smkn3mlg150x150.png';
+import logosmk from '../../../assets/images/smkn3mlg150x150.png';
 
 type Props = {
   about?: string;

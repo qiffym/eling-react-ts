@@ -1,17 +1,16 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React, { FC, useContext, useState } from 'react';
-import { useFetch } from '../../../../hooks/useFetch';
-import { ContentType } from '../../../../types/class-type';
-import Loading from '../../../loading/Loading';
+import React, { FC } from 'react';
+import { useFetch } from '../../../hooks/useFetch';
+import { ContentType } from '../../../types/class-type';
+import Loading from '../../loading/Loading';
+
 import ContentDetail from './ContentDetail';
 
 type Props = {
-  teacherName?: string;
-  role?: string;
   classId: number;
 };
 
-export const ClassContent: FC<Props> = ({ teacherName, role, classId }) => {
+export const ClassContent: FC<Props> = ({ classId }) => {
   const { isLoading, data } = useFetch(
     `/api/student/my-classes/${classId}/contents`,
   );
@@ -53,12 +52,7 @@ export const ClassContent: FC<Props> = ({ teacherName, role, classId }) => {
                 </div>
 
                 {/* Content Collapse */}
-                <ContentDetail
-                  teacherName={teacherName}
-                  role={role}
-                  classId={classId}
-                  contentId={item.id}
-                />
+                <ContentDetail classID={classId} contentID={item.id!} />
               </div>
             ))
           )}

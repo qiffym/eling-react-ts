@@ -12,3 +12,17 @@ export interface StudentClasses {
     avatar: string;
   };
 }
+
+export interface StudentContentDetail {
+  assignment: [];
+  created_at: string;
+  description: string;
+  forums: [];
+  id: number;
+  materials: [];
+  online_class: string;
+  online_class_id: string;
+  rombel: string;
+  title: string;
+  updated_at: string;
+}

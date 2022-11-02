@@ -4,8 +4,8 @@ import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AppBarClass from '../../../component/layout/AppBarClass';
 import Loading from '../../../component/loading/Loading';
-import AboutClass from '../../../component/student/my_class/AboutClass';
-import { ClassContent } from '../../../component/student/my_class/ClassContent';
+import AboutClass from '../../../component/student/my-class/AboutClass';
+import { ClassContent } from '../../../component/student/my-class/ClassContent';
 import { useFetch } from '../../../hooks/useFetch';
 import { ClassesDetailType, ClassesType } from '../../../types/class-type';
 
@@ -39,7 +39,7 @@ const StudentDetailClass = () => {
                 <h3 className="text-lg font-medium">{classData.rombel_name}</h3>
               </div>
 
-              <h2 className="text-6xl w-max btn-ghost px-3 rounded-md font-bold mb-2 cursor-pointer transition-all duration-75">
+              <h2 className="text-6xl w-max  px-3 rounded-md font-bold mb-2 ">
                 {classData?.name}
               </h2>
               <div className="flex items-center space-x-2">
@@ -87,7 +87,7 @@ const StudentDetailClass = () => {
 
           {/* Konten */}
           {tab === 0 ? (
-            <ClassContent teacherName={classData.teacher?.name} classId={id} />
+            <ClassContent classId={id} />
           ) : (
             <AboutClass
               about={classData.description}
