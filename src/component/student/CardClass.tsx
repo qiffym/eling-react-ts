@@ -12,7 +12,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
   return (
     <section>
       {/* Card Class */}
-      <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-2 sm:place-items-stretch sm:gap-5 2xl:grid-cols-3">
+      <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-3 sm:place-items-stretch sm:gap-5 2xl:grid-cols-3">
         {classes
           ?.sort((rombA, rombB) =>
             rombA.rombel_class.localeCompare(rombB.rombel_class),
@@ -20,7 +20,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
           .map((item) => (
             <div
               key={item.id}
-              className="card overflow-visible static w-[21rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
+              className="card overflow-visible static w-[17rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
               <div className="card-body py-5 overflow-visible">
                 <div>
                   <h2 className="font-bold text-xl">{item.rombel_class}</h2>
