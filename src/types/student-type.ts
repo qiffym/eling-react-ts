@@ -9,5 +9,6 @@ export interface StudentClasses {
   teacher: {
     id: number;
     name: string;
+    avatar: string;
   };
 }

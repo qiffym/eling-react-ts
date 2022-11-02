@@ -10,9 +10,9 @@ type ListClass = {
 const CardClass: FC<ListClass> = ({ classes }) => {
   const navigate = useNavigate();
   return (
-    <>
+    <section>
       {/* Card Class */}
-      <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-3 sm:place-items-stretch sm:gap-5 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-2 sm:place-items-stretch sm:gap-5 2xl:grid-cols-3">
         {classes
           ?.sort((rombA, rombB) =>
             rombA.rombel_class.localeCompare(rombB.rombel_class),
@@ -43,15 +43,15 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                 <div className="flex flex-col">
                   <div className="card-actions flex flex-row justify-between items-center">
                     <div className="flex items-center space-x-2">
-                      {/* <div className="avatar">
+                      <div className="avatar">
                         <div className="mask mask-circle w-7 h-7">
                           <img
                             className="w-10 rounded-full"
-                            src={item.teacher_avatar}
+                            src={item.teacher.avatar}
                             alt="teacher"
                           />
                         </div>
-                      </div> */}
+                      </div>
                       <p className="font-semibold text-sm">
                         {item.teacher.name}
                       </p>
@@ -72,7 +72,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
             </div>
           ))}
       </div>
-    </>
+    </section>
   );
 };
 
