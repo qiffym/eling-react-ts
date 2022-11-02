@@ -4,8 +4,8 @@ import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AppBarClass from '../../../component/layout/AppBarClass';
 import Loading from '../../../component/loading/Loading';
-import AboutClass from '../../../component/teacher/home/online_class/AboutClass';
-import { ClassContent } from '../../../component/teacher/home/online_class/ClassContent';
+import AboutClass from '../../../component/student/my_class/AboutClass';
+import { ClassContent } from '../../../component/student/my_class/ClassContent';
 import { useFetch } from '../../../hooks/useFetch';
 import { ClassesDetailType, ClassesType } from '../../../types/class-type';
 
@@ -90,10 +90,6 @@ const StudentDetailClass = () => {
             <ClassContent teacherName={classData.teacher?.name} classId={id} />
           ) : (
             <AboutClass
-              classesRombelID={classData.rombel_id}
-              classesID={id}
-              classesName={classData.name}
-              classesDesc={classData.description}
               about={classData.description}
               student={classData.students?.data}
               total={classData.students?.total}
