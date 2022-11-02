@@ -4,9 +4,11 @@ import { FormEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
 import { ClassesType } from '../types/class-type';
 import { Types } from '../types/reducer-type';
+import { StudentClasses } from '../types/student-type';
 
 export const useClasses = () => {
   const [classList, setClassList] = useState<ClassesType[]>();
+  const [studentClassList, setStudentClassList] = useState<StudentClasses[]>();
   const [isLoading, setLoading] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
@@ -45,13 +47,47 @@ export const useClasses = () => {
     state.deleteClassSuccess.success,
   ]);
 
+  const fetchStudentClass = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${baseURL}/api/student/my-classes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const result = await response.json();
+      setStudentClassList(result.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }, [
+    baseURL,
+    user.token,
+    state.createClassSuccess.success,
+    state.updateSuccess.success,
+    state.deleteClassSuccess.success,
+  ]);
+
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (user.user.role === 'teacher') {
+      fetchData();
+    } else if (user.user.role === 'student') {
+      fetchStudentClass();
+    } else {
+      console.log('Admin');
+    }
+  }, [fetchData, fetchStudentClass]);
 
   return {
     isLoading,
     classList,
+    studentClassList,
   };
 };
 
