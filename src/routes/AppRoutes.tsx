@@ -19,6 +19,7 @@ import AddRombel from '../pages/admin/rombel-class/AddRombel';
 import Forum from '../pages/teacher/forum/Forum';
 import AssignmentDetail from '../pages/teacher/assignment/AssignmentDetail';
 import HeaderIndex from '../component/layout/HeaderIndex';
+import StudentDetailClass from '../pages/student/classes/StudentDetailClass';
 
 const AppRoutes = () => (
   <Routes>
@@ -31,10 +32,11 @@ const AppRoutes = () => (
           <Route path="/" element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Home />} />
           <Route path="me" element={<Profile />} />
-          <Route
-            path="/"
-            element={<ProtectedRoutes roleRequired="student" />}
-          />
+          <Route path="/" element={<ProtectedRoutes roleRequired="student" />}>
+            <Route path="my-classes">
+              <Route path=":id" element={<StudentDetailClass />} />
+            </Route>
+          </Route>
 
           <Route path="/" element={<ProtectedRoutes roleRequired="teacher" />}>
             <Route path="online-class">

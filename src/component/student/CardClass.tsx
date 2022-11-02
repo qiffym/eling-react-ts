@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ClassesType } from '../../types/class-type';
+import { StudentClasses } from '../../types/student-type';
 
 type ListClass = {
-  classes: ClassesType[] | undefined;
+  classes: StudentClasses[] | undefined;
 };
 
 const CardClass: FC<ListClass> = ({ classes }) => {
@@ -15,7 +15,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
       <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-3 sm:place-items-stretch sm:gap-5 2xl:grid-cols-4">
         {classes
           ?.sort((rombA, rombB) =>
-            rombA.rombel_name.localeCompare(rombB.rombel_name),
+            rombA.rombel_class.localeCompare(rombB.rombel_class),
           )
           .map((item) => (
             <div
@@ -23,12 +23,12 @@ const CardClass: FC<ListClass> = ({ classes }) => {
               className="card overflow-visible static w-[21rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
               <div className="card-body py-5 overflow-visible">
                 <div>
-                  <h2 className="font-bold text-xl">{item.rombel_name}</h2>
+                  <h2 className="font-bold text-xl">{item.rombel_class}</h2>
                 </div>
                 <button
                   type="button"
                   onClick={() =>
-                    navigate(`/online-class/${item.id}`, {
+                    navigate(`/my-classes/${item.id}`, {
                       state: item,
                     })
                   }
@@ -43,7 +43,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                 <div className="flex flex-col">
                   <div className="card-actions flex flex-row justify-between items-center">
                     <div className="flex items-center space-x-2">
-                      <div className="avatar">
+                      {/* <div className="avatar">
                         <div className="mask mask-circle w-7 h-7">
                           <img
                             className="w-10 rounded-full"
@@ -51,15 +51,15 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                             alt="teacher"
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <p className="font-semibold text-sm">
-                        {item.teacher_name}
+                        {item.teacher.name}
                       </p>
                     </div>
                     <button
                       type="button"
                       onClick={() =>
-                        navigate(`/online-class/${item.id}`, {
+                        navigate(`/my-classes/${item.id}`, {
                           state: item,
                         })
                       }

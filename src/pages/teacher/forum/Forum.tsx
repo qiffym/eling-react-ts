@@ -192,7 +192,7 @@ const Forum = () => {
             <div className="container ml-16 w-9/12 drop-shadow rounded-box text-left">
               <button
                 type="button"
-                className="rounded-box border border-[#3d4451] border-dashed w-full py-5 px-8 hover:bg-[#3d4451] hover:border-white hover:text-white active:scale-[0.95]">
+                className="rounded-box border border-[#3d4451] border-dashed w-full py-5 px-8 hover:bg-[#3d4451] hover:border-white hover:text-white active:scale-[0.95] transition-all">
                 <div className="flex justify-start items-center space-x-4">
                   <div className="avatar">
                     <div className="w-10 mask mask-squircle">
