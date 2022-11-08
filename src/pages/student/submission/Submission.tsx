@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-// import CreateSubmissionModal from '../../../component/student/modal/CreateSubmissionModal';
-import InstructionAssignment from '../../../component/teacher/home/online_class/InstructionAssignment';
+
+// import InstructionAssignment from '../../../component/teacher/home/online_class/InstructionAssignment';
 
 const Submission = () => {
   const [openModal, setOpenModal] = useState(false);
+
+  console.log(openModal);
+
   return (
     <div className="mt-20 mb-4">
-      <InstructionAssignment />
+      {/* <InstructionAssignment isLoading={false} /> */}
 
       <section className="mt-10 ml-20">
         <div className="container lg:mx-auto xl:ml-16 w-11/12">

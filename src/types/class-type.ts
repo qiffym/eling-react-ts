@@ -116,3 +116,27 @@ export type ContentDetailType = {
     },
   ];
 };
+
+export type AssignmentDetailType = {
+  created_at: string;
+  deadline: string;
+  description: string;
+  id: number;
+  submission: {
+    assignment: {
+      file: string;
+      score: any;
+      status: string;
+      submitted_at: string;
+    };
+    avatar: string;
+    email: string;
+    id: number;
+    join_at: string;
+    name: string;
+    nis: string;
+    nisn: string;
+    username: string;
+  }[];
+  title: string;
+};
