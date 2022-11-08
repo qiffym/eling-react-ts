@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { FaComment } from 'react-icons/fa';
 import { HiPencilAlt, HiTrash, HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ryujin from '../../../assets/ryujin1.jpg';
 import Loading2ND from '../../../component/loading/Loading2nd';
 import { useFetch } from '../../../hooks/useFetch';
 import { ForumDetailType, ForumType } from '../../../types/class-type';
+import AddCommentForum from '../../../component/modal/AddCommentForum';
+import { MyContext } from '../../../context/context';
+import { Types } from '../../../types/reducer-type';
+import {
+  useTeacherComment,
+  useTeacherReplyComment,
+} from '../../../hooks/useTeacher';
 
 const Forum = () => {
   const { classID, forum, teacher } = useLocation().state as any;
@@ -15,7 +21,17 @@ const Forum = () => {
   const { isLoading, data } = useFetch(
     `/api/teacher/online-classes/${idClass}/contents/${forumData.content_id}/forums/${forumData.id}`,
   );
+  const user = JSON.parse(localStorage.getItem('user') || '');
   const forumDetailData: ForumDetailType = data;
+  const [isOpenComment, setOpenComment] = useState(false);
+  const [isOpenReply, setOpenReply] = useState(false);
+  const { dispatch } = useContext(MyContext);
+  const { isLoadingComment, addComment } = useTeacherComment();
+  const { isLoadingReply, addReplyComment } = useTeacherReplyComment();
+  const [IDComment, setIDComment] = useState(0);
+  const [isComment, setComment] = useState('');
+  const [isReply, setReply] = useState('');
+  const [authorComment, setAuthorComment] = useState('');
 
   const changeLanguage = (word: string) => {
     switch (word) {
@@ -114,8 +130,8 @@ const Forum = () => {
           </section>
           {/* Comment Section */}
           {forumDetailData?.comments?.map((item) => (
-            <>
-              <section key={item.id} id="comment" className="mb-5">
+            <React.Fragment key={item.id}>
+              <section id="comment" className="mb-5">
                 <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box">
                   <div className="flex items-start space-x-4">
                     <div className="avatar">
@@ -144,6 +160,11 @@ const Forum = () => {
                       {/* Button Reply */}
                       <button
                         type="button"
+                        onClick={() => {
+                          setOpenReply(true);
+                          setAuthorComment(item.author);
+                          setIDComment(item.id);
+                        }}
                         className="btn btn-sm btn-outline normal-case">
                         Reply
                       </button>
@@ -154,7 +175,7 @@ const Forum = () => {
 
               {/* Sub-Comment */}
               {item.sub_comments.map((subComments) => (
-                <section id="comment" className="mb-5">
+                <section key={subComments.id} id="comment" className="mb-5">
                   <div className="container ml-28 p-4 w-[72%] bg-white drop-shadow rounded-box">
                     <div className="flex items-start space-x-4">
                       <div className="avatar">
@@ -185,18 +206,19 @@ const Forum = () => {
                   </div>
                 </section>
               ))}
-            </>
+            </React.Fragment>
           ))}
           {/* Reply Section */}
           <section>
             <div className="container ml-16 w-9/12 drop-shadow rounded-box text-left">
               <button
                 type="button"
+                onClick={() => setOpenComment(true)}
                 className="rounded-box border border-[#3d4451] border-dashed w-full py-5 px-8 hover:bg-[#3d4451] hover:border-white hover:text-white active:scale-[0.95] transition-all">
                 <div className="flex justify-start items-center space-x-4">
                   <div className="avatar">
                     <div className="w-10 mask mask-squircle">
-                      <img src={ryujin} alt="avatar" />
+                      <img src={user.user.avatar} alt="avatar" />
                     </div>
                   </div>
                   <p>Write your reply.</p>
@@ -204,6 +226,57 @@ const Forum = () => {
               </button>
             </div>
           </section>
+
+          {isOpenComment ? (
+            <AddCommentForum
+              isLoading={isLoadingComment}
+              onChange={setComment}
+              isOpen={isOpenComment}
+              title="Comment"
+              modalAction={() => setOpenComment(false)}
+              actionSave={(e) => {
+                addComment(e, idClass, forumData.content_id!, forumData.id, {
+                  comment: isComment,
+                });
+                dispatch({
+                  type: Types.ReplyCommentSuccess,
+                  payload: {
+                    success: false,
+                  },
+                });
+                setOpenComment(false);
+              }}
+            />
+          ) : null}
+
+          {isOpenReply ? (
+            <AddCommentForum
+              title={`Reply ${authorComment}`}
+              isLoading={isLoadingReply}
+              onChange={setReply}
+              isOpen={isOpenReply}
+              modalAction={() => setOpenReply(false)}
+              actionSave={(e) => {
+                addReplyComment(
+                  e,
+                  idClass,
+                  forumData.content_id!,
+                  forumData.id,
+                  IDComment,
+                  {
+                    comment: isReply,
+                  },
+                );
+                dispatch({
+                  type: Types.ReplyCommentSuccess,
+                  payload: {
+                    success: false,
+                  },
+                });
+                setOpenReply(false);
+              }}
+            />
+          ) : null}
         </>
       )}
     </>

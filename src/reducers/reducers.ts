@@ -16,6 +16,7 @@ import {
   DeleteMaterialSuccessType,
   DeleteSuccessType,
   LoginType,
+  ReplyCommentSuccessType,
   UpdateSuccessType,
   UpdateUserType,
 } from '../types/context-type';
@@ -38,6 +39,7 @@ import {
   DeleteMaterialSuccessPayload,
   DeleteSuccessPayload,
   LoginPayload,
+  ReplyCommentSuccessPayload,
   UpdateSuccessPayload,
   UpdateUserPayload,
 } from '../types/reducer-type';
@@ -503,6 +505,25 @@ export const updateSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'UPDATE_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type ReplyCommentSuccessAction =
+  ActionMap<ReplyCommentSuccessPayload>[keyof ActionMap<ReplyCommentSuccessPayload>];
+
+export const replyCommentSuccessReducer = (
+  state: ReplyCommentSuccessType,
+  action: ReplyCommentSuccessAction,
+) => {
+  switch (action.type) {
+    case 'REPLY_COMMENT_SUCCESS':
       return {
         ...state,
         success: action.payload.success,

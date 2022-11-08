@@ -22,6 +22,7 @@ export enum Types {
   DeleteClassSuccess = 'DELETE_CLASS_SUCCESS',
   DeleteContentSuccess = 'DELETE_CONTENT_SUCCESS',
   UpdateSuccess = 'UPDATE_SUCCESS',
+  ReplyCommentSuccess = 'REPLY_COMMENT_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -156,6 +157,12 @@ export type DeleteContentSuccessPayload = {
 
 export type UpdateSuccessPayload = {
   [Types.UpdateSuccess]: {
+    success: boolean;
+  };
+};
+
+export type ReplyCommentSuccessPayload = {
+  [Types.ReplyCommentSuccess]: {
     success: boolean;
   };
 };

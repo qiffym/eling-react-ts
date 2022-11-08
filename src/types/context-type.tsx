@@ -68,6 +68,10 @@ export type UpdateSuccessType = {
   success: boolean;
 };
 
+export type ReplyCommentSuccessType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -136,4 +140,5 @@ export type InitialStateType = {
   deleteClassSuccess: DeleteClassSuccessType;
   deleteContentSuccess: DeleteContentSuccessType;
   updateSuccess: UpdateSuccessType;
+  replyCommentSuccess: ReplyCommentSuccessType;
 };

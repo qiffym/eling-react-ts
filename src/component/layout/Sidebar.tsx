@@ -12,8 +12,6 @@ const LinkNavItems = [
 const Sidebar = () => {
   const { classList, studentClassList } = useClasses();
   const user = JSON.parse(localStorage.getItem('user') || '');
-  // const { data } = useFetch('/api/student/my-classes');
-  // const studentClassList: StudentClasses[] = data;
 
   const subNav = (role: string) => {
     switch (role) {

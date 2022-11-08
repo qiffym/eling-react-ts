@@ -37,6 +37,7 @@ export const useFetch = (url: string) => {
     state.addContentSuccess.success,
     state.updateSuccess.success,
     state.deleteContentSuccess.success,
+    state.replyCommentSuccess.success,
   ]);
 
   useEffect(() => {

@@ -29,6 +29,8 @@ import {
   deleteSuccessReducer,
   LoginAction,
   loginReducer,
+  ReplyCommentSuccessAction,
+  replyCommentSuccessReducer,
   UpdateSuccessAction,
   updateSuccessReducer,
 } from '../reducers/reducers';
@@ -94,6 +96,9 @@ const contextInitialState: InitialStateType = {
   updateSuccess: {
     success: false,
   },
+  replyCommentSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -111,6 +116,7 @@ export const MyContext = createContext<{
     | AddForumSuccessAction
     | AddAssignmentSuccessAction
     | UpdateSuccessAction
+    | ReplyCommentSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -131,6 +137,7 @@ const mainReducer = (
     addForumSuccess,
     addAssignmentSuccess,
     updateSuccess,
+    replyCommentSuccess,
   }: InitialStateType,
   action: any,
 ) => ({
@@ -155,6 +162,7 @@ const mainReducer = (
     action,
   ),
   updateSuccess: updateSuccessReducer(updateSuccess, action),
+  replyCommentSuccess: replyCommentSuccessReducer(replyCommentSuccess, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {
