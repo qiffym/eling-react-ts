@@ -2,16 +2,19 @@ import React, { useContext, useState } from 'react';
 import { FaComment } from 'react-icons/fa';
 import { HiPencilAlt, HiTrash, HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Loading2ND from '../../../component/loading/Loading2nd';
+import Loading2ND from '../../../components/loading/Loading2nd';
 import { useFetch } from '../../../hooks/useFetch';
 import { ForumDetailType, ForumType } from '../../../types/class-type';
-import AddCommentForum from '../../../component/modal/AddCommentForum';
+import AddCommentForum from '../../../components/modal/AddCommentForum';
 import { MyContext } from '../../../context/context';
 import { Types } from '../../../types/reducer-type';
 import {
   useTeacherComment,
   useTeacherReplyComment,
 } from '../../../hooks/useTeacher';
+import EditForum from '../../../components/teacher/home/online_class/modal/EditForum';
+import ModalDelete from '../../../components/modal/ModalDelete';
+import { useDeleteForum } from '../../../hooks/useDeleteClasses';
 
 const Forum = () => {
   const { classID, forum, teacher } = useLocation().state as any;
@@ -25,9 +28,14 @@ const Forum = () => {
   const forumDetailData: ForumDetailType = data;
   const [isOpenComment, setOpenComment] = useState(false);
   const [isOpenReply, setOpenReply] = useState(false);
+  const [isOpenEdit, setOpenEdit] = useState(false);
+  const [isOpenDelete, setOpenDelete] = useState(false);
+
   const { dispatch } = useContext(MyContext);
   const { isLoadingComment, addComment } = useTeacherComment();
   const { isLoadingReply, addReplyComment } = useTeacherReplyComment();
+  const deleteForum = useDeleteForum(idClass, forumDetailData.content_id!);
+
   const [IDComment, setIDComment] = useState(0);
   const [isComment, setComment] = useState('');
   const [isReply, setReply] = useState('');
@@ -113,6 +121,7 @@ const Forum = () => {
                   <button
                     type="button"
                     name="edit-forum"
+                    onClick={() => setOpenEdit(true)}
                     className="btn btn-sm btn-warning btn-square text-lg">
                     <HiPencilAlt />
                   </button>
@@ -121,6 +130,7 @@ const Forum = () => {
                   <button
                     type="button"
                     name="delete-forum"
+                    onClick={() => setOpenDelete(true)}
                     className="btn btn-sm btn-error btn-square text-lg">
                     <HiTrash />
                   </button>
@@ -279,6 +289,40 @@ const Forum = () => {
           ) : null}
         </>
       )}
+
+      {isOpenEdit ? (
+        <EditForum
+          topic={forumDetailData.topic}
+          desc={forumDetailData.description}
+          isOpen={isOpenEdit}
+          modalAction={() => setOpenEdit(false)}
+          actionSave={() => {
+            dispatch({
+              type: Types.EditForumSuccess,
+              payload: {
+                success: false,
+              },
+            });
+            setOpenEdit(false);
+          }}
+          title="Edit Forum"
+          classID={classID}
+          contentID={forumDetailData.content_id!}
+          forumID={forumDetailData.id}
+        />
+      ) : null}
+
+      {isOpenDelete ? (
+        <ModalDelete
+          isOpen={isOpenDelete}
+          actionDelete={() => {
+            deleteForum(forumDetailData.id);
+            navigate(-1);
+          }}
+          data={forumDetailData.topic}
+          modalAction={() => setOpenDelete(false)}
+        />
+      ) : null}
     </>
   );
 };

@@ -7,8 +7,8 @@ import React, {
 } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../../component/header/Header';
-import LoadingButton from '../../../component/loading/LoadingButton';
+import Header from '../../../components/header/Header';
+import LoadingButton from '../../../components/loading/LoadingButton';
 import { useCreateUser } from '../../../hooks/useCreateUser';
 import { createUserReducer } from '../../../reducers/reducers';
 import { Types } from '../../../types/reducer-type';
@@ -66,7 +66,7 @@ const CreateUser = () => {
       <div className=" px-6 py-14">
         <Header>Create User</Header>
         <form
-          onSubmit={e => {
+          onSubmit={(e) => {
             createUser(e, {
               role: state.role,
               name: state.name,

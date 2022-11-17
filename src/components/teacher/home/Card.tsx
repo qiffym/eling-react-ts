@@ -8,6 +8,7 @@ import { ClassesType } from '../../../types/class-type';
 import { Types } from '../../../types/reducer-type';
 import DropdownOptions from '../../dropdown/Dropdown';
 import EditClassModal from '../../modal/EditClassModal';
+import ModalDelete from '../../modal/ModalDelete';
 
 type ListClass = {
   classes: ClassesType[] | undefined;
@@ -16,12 +17,19 @@ type ListClass = {
 const CardClass: FC<ListClass> = ({ classes }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [classData, setClassData] = useState({
     id: 0,
     rombel_id: 0,
     name: '',
     desc: '',
   });
+
+  const [deleteDataClass, setDeleteDataClass] = useState({
+    id: 0,
+    name: '',
+  });
+
   const deleteClass = useDeleteClass('/api/teacher/online-classes/');
   const { dispatch } = useContext(MyContext);
 
@@ -53,13 +61,11 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                       });
                     }}
                     onDelete={() => {
-                      deleteClass(item.id);
-                      dispatch({
-                        type: Types.DeleteClassSuccess,
-                        payload: {
-                          success: false,
-                        },
+                      setDeleteDataClass({
+                        id: item.id,
+                        name: item.name,
                       });
+                      setOpenDelete(true);
                     }}
                   />
                 </div>
@@ -129,8 +135,33 @@ const CardClass: FC<ListClass> = ({ classes }) => {
           modalAction={() => setOpenModal(false)}
         />
       ) : null}
+
+      {openDelete ? (
+        <ModalDelete
+          isOpen={openDelete}
+          modalAction={() => setOpenDelete(false)}
+          actionDelete={() => {
+            deleteClass(deleteDataClass.id);
+            dispatch({
+              type: Types.DeleteClassSuccess,
+              payload: {
+                success: false,
+              },
+            });
+          }}
+          data={deleteDataClass.name}
+        />
+      ) : null}
     </>
   );
 };
 
 export default CardClass;
+
+// deleteClass(item.id);
+// dispatch({
+//   type: Types.DeleteClassSuccess,
+//   payload: {
+//     success: false,
+//   },
+// });

@@ -23,6 +23,7 @@ export enum Types {
   DeleteContentSuccess = 'DELETE_CONTENT_SUCCESS',
   UpdateSuccess = 'UPDATE_SUCCESS',
   ReplyCommentSuccess = 'REPLY_COMMENT_SUCCESS',
+  EditForumSuccess = 'EDIT_FORUM_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -67,6 +68,10 @@ export enum Types {
   AssignmentTitle = 'ASSIGNMENT_TITLE',
   AssignmentDesc = 'ASSIGNMENT_DESC',
   AssignmentDeadline = 'ASSIGNMENT_DEADLINE',
+
+  // Payload Edit Forum
+  EditForumTopic = 'EDIT_FORUM_TOPIC',
+  EditForumDesc = 'EDIT_FORUM_DESC',
 }
 
 export type LoginPayload = {
@@ -166,6 +171,14 @@ export type ReplyCommentSuccessPayload = {
     success: boolean;
   };
 };
+
+export type EditForumSuccessPayload = {
+  [Types.EditForumSuccess]: {
+    success: boolean;
+  };
+};
+
+// Local Reducer
 
 export type CreateUserPayload = {
   [Types.Role]: {
@@ -280,5 +293,14 @@ export type AddAssignmentPayload = {
   };
   [Types.AssignmentDeadline]: {
     deadline: string;
+  };
+};
+
+export type EditForumPayload = {
+  [Types.EditForumTopic]: {
+    topic: string;
+  };
+  [Types.EditForumDesc]: {
+    description: string;
   };
 };

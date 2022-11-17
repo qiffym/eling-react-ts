@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import LayoutIndex from '../component/layout';
+import LayoutIndex from '../components/layout';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import CreateUser from '../pages/admin/users/CreateUser';
@@ -18,7 +18,7 @@ import AddMotivational from '../pages/admin/motivational-words/AddMotivational';
 import AddRombel from '../pages/admin/rombel-class/AddRombel';
 import Forum from '../pages/teacher/forum/Forum';
 import AssignmentDetail from '../pages/teacher/assignment/AssignmentDetail';
-import HeaderIndex from '../component/layout/HeaderIndex';
+import HeaderIndex from '../components/layout/HeaderIndex';
 import StudentDetailClass from '../pages/student/classes/StudentDetailClass';
 import Submission from '../pages/student/submission/Submission';
 
