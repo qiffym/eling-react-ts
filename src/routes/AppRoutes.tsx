@@ -21,6 +21,7 @@ import AssignmentDetail from '../pages/teacher/assignment/AssignmentDetail';
 import HeaderIndex from '../component/layout/HeaderIndex';
 import StudentDetailClass from '../pages/student/classes/StudentDetailClass';
 import Submission from '../pages/student/submission/Submission';
+import StudentForum from '../pages/student/forum/StudentForum';
 
 const AppRoutes = () => (
   <Routes>
@@ -38,7 +39,10 @@ const AppRoutes = () => (
               <Route path=":id" element={<StudentDetailClass />} />
               <Route path=":id/submissions" element={<Submission />} />
               {/* <Route path=":id/submissions/:id" element={<Submission />} /> */}
-              <Route path=":id/contents/:id/forums/:id" element={<Forum />} />
+              <Route
+                path=":id/contents/:id/forums/:id"
+                element={<StudentForum />}
+              />
               {/* <Route path=":id/contents/:id/forums/:id" element={<Forum />} /> */}
             </Route>
           </Route>
