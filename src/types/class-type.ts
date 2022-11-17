@@ -52,6 +52,38 @@ export type ForumType = {
   topic: string;
 };
 
+export type ForumDetailType = {
+  comments: ForumCommentType[];
+  content_id?: number;
+  content_of: string;
+  description: string;
+  id: number;
+  topic: string;
+  author_role: string;
+  avatar: string;
+};
+
+export type ForumCommentType = {
+  id: number;
+  avatar: string;
+  author: string;
+  author_role: string;
+  comment: string;
+  edited: boolean;
+  created_at: string;
+  sub_comments: ForumSubCommentType[];
+};
+
+export type ForumSubCommentType = {
+  author: string;
+  author_role: string;
+  avatar: string;
+  comment: string;
+  created_at: string;
+  edited: boolean;
+  id: number;
+};
+
 export type ContentDetailType = {
   id?: number;
   online_class_id?: number;
@@ -84,3 +116,42 @@ export type ContentDetailType = {
     },
   ];
 };
+
+export type AssignmentDetailType = {
+  created_at: string;
+  deadline: string;
+  description: string;
+  id: number;
+  submission: {
+    assignment: {
+      file: string;
+      score: any;
+      status: string;
+      submitted_at: string;
+    };
+    avatar: string;
+    email: string;
+    id: number;
+    join_at: string;
+    name: string;
+    nis: string;
+    nisn: string;
+    username: string;
+  }[];
+  title: string;
+};
+
+export interface GradingAssignmentType {
+  user_id: string;
+  student_id: number;
+  name: string;
+  avatar: string;
+  nis: string;
+  nisn: string;
+  submission: {
+    assignment_id: string;
+    file: string;
+    submitted_at: string;
+    score: number;
+  };
+}

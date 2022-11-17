@@ -27,8 +27,12 @@ import {
   deleteMaterialSuccessReducer,
   DeleteSuccessAction,
   deleteSuccessReducer,
+  EditForumSuccessAction,
+  editForumSuccessReducer,
   LoginAction,
   loginReducer,
+  ReplyCommentSuccessAction,
+  replyCommentSuccessReducer,
   UpdateSuccessAction,
   updateSuccessReducer,
 } from '../reducers/reducers';
@@ -94,6 +98,12 @@ const contextInitialState: InitialStateType = {
   updateSuccess: {
     success: false,
   },
+  replyCommentSuccess: {
+    success: false,
+  },
+  editForumSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -111,6 +121,8 @@ export const MyContext = createContext<{
     | AddForumSuccessAction
     | AddAssignmentSuccessAction
     | UpdateSuccessAction
+    | ReplyCommentSuccessAction
+    | EditForumSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -131,6 +143,8 @@ const mainReducer = (
     addForumSuccess,
     addAssignmentSuccess,
     updateSuccess,
+    replyCommentSuccess,
+    editForumSuccess,
   }: InitialStateType,
   action: any,
 ) => ({
@@ -155,6 +169,8 @@ const mainReducer = (
     action,
   ),
   updateSuccess: updateSuccessReducer(updateSuccess, action),
+  replyCommentSuccess: replyCommentSuccessReducer(replyCommentSuccess, action),
+  editForumSuccess: editForumSuccessReducer(editForumSuccess, action),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

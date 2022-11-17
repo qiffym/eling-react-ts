@@ -15,7 +15,10 @@ import {
   DeleteContentSuccessType,
   DeleteMaterialSuccessType,
   DeleteSuccessType,
+  EditForumSuccessType,
+  EditForumType,
   LoginType,
+  ReplyCommentSuccessType,
   UpdateSuccessType,
   UpdateUserType,
 } from '../types/context-type';
@@ -37,7 +40,10 @@ import {
   DeleteContentSuccessPayload,
   DeleteMaterialSuccessPayload,
   DeleteSuccessPayload,
+  EditForumPayload,
+  EditForumSuccessPayload,
   LoginPayload,
+  ReplyCommentSuccessPayload,
   UpdateSuccessPayload,
   UpdateUserPayload,
 } from '../types/reducer-type';
@@ -418,6 +424,31 @@ export const addAssignmentReducer = (
   }
 };
 
+export type EditForumAction =
+  ActionMap<EditForumPayload>[keyof ActionMap<EditForumPayload>];
+
+export const editForumReducer = (
+  state: EditForumType,
+  action: EditForumAction,
+) => {
+  switch (action.type) {
+    case 'EDIT_FORUM_TOPIC':
+      return {
+        ...state,
+        topic: action.payload.topic,
+      };
+
+    case 'EDIT_FORUM_DESC':
+      return {
+        ...state,
+        description: action.payload.description,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export type DeleteSuccessAction =
   ActionMap<DeleteSuccessPayload>[keyof ActionMap<DeleteSuccessPayload>];
 
@@ -503,6 +534,44 @@ export const updateSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'UPDATE_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type ReplyCommentSuccessAction =
+  ActionMap<ReplyCommentSuccessPayload>[keyof ActionMap<ReplyCommentSuccessPayload>];
+
+export const replyCommentSuccessReducer = (
+  state: ReplyCommentSuccessType,
+  action: ReplyCommentSuccessAction,
+) => {
+  switch (action.type) {
+    case 'REPLY_COMMENT_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type EditForumSuccessAction =
+  ActionMap<EditForumSuccessPayload>[keyof ActionMap<EditForumSuccessPayload>];
+
+export const editForumSuccessReducer = (
+  state: EditForumSuccessType,
+  action: EditForumSuccessAction,
+) => {
+  switch (action.type) {
+    case 'EDIT_FORUM_SUCCESS':
       return {
         ...state,
         success: action.payload.success,

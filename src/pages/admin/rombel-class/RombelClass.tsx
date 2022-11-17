@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import RombelTable from '../../../component/admin/rombel/RombelTable';
+import RombelTable from '../../../components/admin/rombel/RombelTable';
 
-import Header from '../../../component/header/Header';
-import Loading from '../../../component/loading/Loading';
-import AddRombelModal from '../../../component/modal/AddRombelModal';
+import Header from '../../../components/header/Header';
+import Loading from '../../../components/loading/Loading';
+import AddRombelModal from '../../../components/modal/AddRombelModal';
 import { useFetch } from '../../../hooks/useFetch';
 
 const RombelClass = () => {

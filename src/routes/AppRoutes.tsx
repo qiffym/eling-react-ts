@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import LayoutIndex from '../component/layout';
+import LayoutIndex from '../components/layout';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import CreateUser from '../pages/admin/users/CreateUser';
@@ -18,7 +18,9 @@ import AddMotivational from '../pages/admin/motivational-words/AddMotivational';
 import AddRombel from '../pages/admin/rombel-class/AddRombel';
 import Forum from '../pages/teacher/forum/Forum';
 import AssignmentDetail from '../pages/teacher/assignment/AssignmentDetail';
-import HeaderIndex from '../component/layout/HeaderIndex';
+import HeaderIndex from '../components/layout/HeaderIndex';
+import StudentDetailClass from '../pages/student/classes/StudentDetailClass';
+import Submission from '../pages/student/submission/Submission';
 
 const AppRoutes = () => (
   <Routes>
@@ -31,17 +33,23 @@ const AppRoutes = () => (
           <Route path="/" element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Home />} />
           <Route path="me" element={<Profile />} />
+          <Route path="/" element={<ProtectedRoutes roleRequired="student" />}>
+            <Route path="my-classes">
+              <Route path=":id" element={<StudentDetailClass />} />
+              <Route path=":id/submissions" element={<Submission />} />
+              {/* <Route path=":id/submissions/:id" element={<Submission />} /> */}
+              <Route path=":id/contents/:id/forums/:id" element={<Forum />} />
+              {/* <Route path=":id/contents/:id/forums/:id" element={<Forum />} /> */}
+            </Route>
+          </Route>
+
           <Route path="/" element={<ProtectedRoutes roleRequired="teacher" />}>
             <Route path="online-class">
               <Route path=":id" element={<ClassDetail />} />
-              {/* TODO: Pakai path comment dibawah */}
-              {/* path=":id/contents/:id/assignment/:id" */}
               <Route
                 path=":id/contents/:id/assignment/:id"
                 element={<AssignmentDetail />}
               />
-              {/* TODO: Pakai path comment dibawah */}
-              {/* path=":id/contents/:id/forums/:id" */}
               <Route path=":id/contents/:id/forums/:id" element={<Forum />} />
             </Route>
           </Route>

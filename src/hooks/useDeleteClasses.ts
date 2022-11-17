@@ -99,3 +99,29 @@ export const useDeleteContent = (url: string) => {
 
   return deleteContent;
 };
+
+export const useDeleteForum = (classID: number, contentID: number) => {
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+
+  const deleteForum = async (id: number) => {
+    try {
+      await fetch(
+        `${baseURL}/api/teacher/online-classes/${classID}/contents/${contentID}/forums/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return deleteForum;
+};

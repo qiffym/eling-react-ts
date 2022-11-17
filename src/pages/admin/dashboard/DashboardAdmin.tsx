@@ -1,8 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Header from '../../../component/header/Header';
-import Stat from '../../../component/home/Stat';
-import Loading from '../../../component/loading/Loading';
+import Header from '../../../components/header/Header';
+import Stat from '../../../components/home/Stat';
+import Loading from '../../../components/loading/Loading';
 import { useFetch } from '../../../hooks/useFetch';
 
 const DashboardAdmin = () => {
@@ -17,6 +17,6 @@ const DashboardAdmin = () => {
       {isLoading ? <Loading /> : <Stat statData={data} />}
     </>
   );
-}
+};
 
 export default DashboardAdmin;

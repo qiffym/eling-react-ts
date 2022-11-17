@@ -2,10 +2,10 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiPlus } from 'react-icons/hi';
-import Loading from '../../../component/loading/Loading';
-import CreateClassModal from '../../../component/modal/CreateClassModal';
-import Header from '../../../component/header/Header';
-import CardClass from '../../../component/teacher/home/Card';
+import Loading from '../../../components/loading/Loading';
+import CreateClassModal from '../../../components/modal/CreateClassModal';
+import Header from '../../../components/header/Header';
+import CardClass from '../../../components/teacher/home/Card';
 import { useClasses } from '../../../hooks/useClasses';
 import { LoginType } from '../../../types/context-type';
 import { ClassesType } from '../../../types/class-type';
@@ -35,7 +35,7 @@ const DashboardTeacher = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard</title>
+        <title>Teacher | Dashboard</title>
       </Helmet>
       <Header>Dashboard</Header>
       <div className="px-3 flex flex-row justify-between sm:hidden">

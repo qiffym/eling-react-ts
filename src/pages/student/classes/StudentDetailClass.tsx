@@ -1,23 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AppBarClass from '../../../components/layout/AppBarClass';
 import Loading from '../../../components/loading/Loading';
-import EditClassModal from '../../../components/modal/EditClassModal';
-import AboutClass from '../../../components/teacher/home/online_class/AboutClass';
-import { ClassContent } from '../../../components/teacher/home/online_class/ClassContent';
-import { MyContext } from '../../../context/context';
+import AboutClass from '../../../components/student/my-class/AboutClass';
+import { ClassContent } from '../../../components/student/my-class/ClassContent';
 import { useFetch } from '../../../hooks/useFetch';
 import { ClassesDetailType, ClassesType } from '../../../types/class-type';
-import { Types } from '../../../types/reducer-type';
 
-const ClassDetail = () => {
+const StudentDetailClass = () => {
   const [tab, setTab] = useState(0);
   const { id } = useLocation().state as ClassesType;
-  const { isLoading, data } = useFetch(`/api/teacher/online-classes/${id}`);
-  const [openEditName, setOpenEditName] = useState(false);
-  const { dispatch } = useContext(MyContext);
+  const { isLoading, data } = useFetch(`/api/student/my-classes/${id}`);
   const navigate = useNavigate();
   const classData: ClassesDetailType = data;
 
@@ -44,9 +39,7 @@ const ClassDetail = () => {
                 <h3 className="text-lg font-medium">{classData.rombel_name}</h3>
               </div>
 
-              <h2
-                onClick={() => setOpenEditName(true)}
-                className="text-6xl w-max btn-ghost px-3 rounded-md font-bold mb-2 cursor-pointer transition-all duration-75">
+              <h2 className="text-6xl w-max  px-3 rounded-md font-bold mb-2 ">
                 {classData?.name}
               </h2>
               <div className="flex items-center space-x-2">
@@ -94,42 +87,18 @@ const ClassDetail = () => {
 
           {/* Konten */}
           {tab === 0 ? (
-            <ClassContent teacherName={classData.teacher?.name} classId={id} />
+            <ClassContent classId={id} />
           ) : (
             <AboutClass
-              classesRombelID={classData.rombel_id}
-              classesID={id}
-              classesName={classData.name}
-              classesDesc={classData.description}
               about={classData.description}
               student={classData.students?.data}
               total={classData.students?.total}
             />
           )}
-
-          {openEditName ? (
-            <EditClassModal
-              focusInputName
-              classesRombelID={classData.rombel_id}
-              classesID={id}
-              classesName={classData.name}
-              classesDesc={classData.description}
-              actionSave={() => {
-                dispatch({
-                  type: Types.UpdateSuccess,
-                  payload: {
-                    success: false,
-                  },
-                });
-                setOpenEditName(false);
-              }}
-              modalAction={() => setOpenEditName(false)}
-            />
-          ) : null}
         </div>
       )}
     </>
   );
 };
 
-export default ClassDetail;
+export default StudentDetailClass;
