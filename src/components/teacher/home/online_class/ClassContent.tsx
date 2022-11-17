@@ -10,6 +10,7 @@ import DropdownOptions from '../../../dropdown/Dropdown';
 import Loading from '../../../loading/Loading';
 import AddContentModal from '../../../modal/AddContentModal';
 import EditContentModal from '../../../modal/EditContentModal';
+import ModalDelete from '../../../modal/ModalDelete';
 import ContentDetail from './ContentDetail';
 
 type Props = {
@@ -23,9 +24,13 @@ export const ClassContent: FC<Props> = ({ teacherName, role, classId }) => {
     `/api/teacher/online-classes/${classId}/contents`,
   );
   const { dispatch } = useContext(MyContext);
+
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+
   const contentList: ContentType[] = data;
+  const [IDContent, setIDContent] = useState(0);
   const [display, setDisplay] = useState('hidden');
   const [contentData, setContentData] = useState({
     id: 0,
@@ -103,13 +108,8 @@ export const ClassContent: FC<Props> = ({ teacherName, role, classId }) => {
                           setOpenModalEdit(true);
                         }}
                         onDelete={() => {
-                          deleteContent(item.id!);
-                          dispatch({
-                            type: Types.DeleteContentSuccess,
-                            payload: {
-                              success: false,
-                            },
-                          });
+                          setIDContent(item.id!);
+                          setOpenModalDelete(true);
                         }}
                       />
                     )}
@@ -164,6 +164,22 @@ export const ClassContent: FC<Props> = ({ teacherName, role, classId }) => {
             setOpenModalEdit(false);
           }}
           modalAction={() => setOpenModalEdit(false)}
+        />
+      ) : null}
+
+      {openModalDelete ? (
+        <ModalDelete
+          isOpen={openModalDelete}
+          modalAction={() => setOpenModalDelete(false)}
+          actionDelete={() => {
+            deleteContent(IDContent);
+            dispatch({
+              type: Types.DeleteContentSuccess,
+              payload: {
+                success: false,
+              },
+            });
+          }}
         />
       ) : null}
     </>

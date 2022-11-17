@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import AppBarClass from '../../../component/layout/AppBarClass';
-import Loading from '../../../component/loading/Loading';
-import AboutClass from '../../../component/student/my-class/AboutClass';
-import { ClassContent } from '../../../component/student/my-class/ClassContent';
+import AppBarClass from '../../../components/layout/AppBarClass';
+import Loading from '../../../components/loading/Loading';
+import AboutClass from '../../../components/student/my-class/AboutClass';
+import { ClassContent } from '../../../components/student/my-class/ClassContent';
 import { useFetch } from '../../../hooks/useFetch';
 import { ClassesDetailType, ClassesType } from '../../../types/class-type';
 

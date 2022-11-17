@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
-import LoadingButton from '../../component/loading/LoadingButton';
+import LoadingButton from '../../components/loading/LoadingButton';
 import useLogin from '../../hooks/useLogin';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
 
@@ -71,7 +71,7 @@ const Login = () => {
                   </h3>
                   <div className="border-t-2 w-16 border-teal-600 inline-block mb-2" />
                   <form
-                    onSubmit={e =>
+                    onSubmit={(e) =>
                       authLogin(e, input.username, input.password)
                     }>
                     <div className="flex flex-col items-center">
@@ -171,6 +171,6 @@ const Login = () => {
       </section>
     </>
   );
-}
+};
 
 export default Login;

@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../../component/header/Header';
-import Loading from '../../../component/loading/Loading';
-import Table from '../../../component/admin/users/Table';
+import Header from '../../../components/header/Header';
+import Loading from '../../../components/loading/Loading';
+import Table from '../../../components/admin/users/Table';
 import { useFetch } from '../../../hooks/useFetch';
 
 const Users = () => {

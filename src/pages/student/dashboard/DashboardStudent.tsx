@@ -2,9 +2,9 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
-import Loading from '../../../component/loading/Loading';
-import Header from '../../../component/header/Header';
-import CardClass from '../../../component/student/CardClass';
+import Loading from '../../../components/loading/Loading';
+import Header from '../../../components/header/Header';
+import CardClass from '../../../components/student/CardClass';
 import { useFetch } from '../../../hooks/useFetch';
 import { StudentClasses } from '../../../types/student-type';
 

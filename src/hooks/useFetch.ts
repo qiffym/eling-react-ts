@@ -38,6 +38,7 @@ export const useFetch = (url: string) => {
     state.updateSuccess.success,
     state.deleteContentSuccess.success,
     state.replyCommentSuccess.success,
+    state.editForumSuccess.success,
   ]);
 
   useEffect(() => {

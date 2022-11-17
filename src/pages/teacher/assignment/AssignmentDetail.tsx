@@ -1,10 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-import GradingAssignment from '../../../component/teacher/home/online_class/GradingAssignment';
-import InstructionAssignment from '../../../component/teacher/home/online_class/InstructionAssignment';
+import { useLocation } from 'react-router-dom';
+import GradingAssignment from '../../../components/teacher/home/online_class/GradingAssignment';
+import InstructionAssignment from '../../../components/teacher/home/online_class/InstructionAssignment';
+import { useFetch } from '../../../hooks/useFetch';
+import { AssignmentDetailType } from '../../../types/class-type';
 
 const AssignmentDetail = () => {
   const [tab, setTab] = useState(1);
+  const { classID, contentID, assignmentID } = useLocation().state as any;
+  const { isLoading, data } = useFetch(
+    `/api/teacher/online-classes/${classID}/contents/${contentID}/assignments/${assignmentID}`,
+  );
+
+  const assignmentData: AssignmentDetailType = data;
+
   return (
     <>
       <section id="header" className="mt-20 mb-4">
@@ -36,7 +46,15 @@ const AssignmentDetail = () => {
       </section>
 
       {/* Penilaian Tugas */}
-      {tab === 1 ? <GradingAssignment /> : <InstructionAssignment />}
+      {tab === 1 ? (
+        <GradingAssignment
+          classID={classID}
+          contentID={contentID}
+          assignmentID={assignmentID}
+        />
+      ) : (
+        <InstructionAssignment isLoading={isLoading} data={assignmentData} />
+      )}
     </>
   );
 };

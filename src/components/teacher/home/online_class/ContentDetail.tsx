@@ -188,7 +188,13 @@ const ContentDetail: FC<Props> = ({
                 <div
                   key={item.id}
                   className="flex justify-between items-center mx-4">
-                  <Link to={`contents/${contentId}/assignment/${item.id}`}>
+                  <Link
+                    to={`contents/${contentId}/assignment/${item.id}`}
+                    state={{
+                      classID: classId,
+                      contentID: contentId,
+                      assignmentID: item.id,
+                    }}>
                     {item.title}
                   </Link>
                 </div>

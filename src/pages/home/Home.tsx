@@ -1,4 +1,4 @@
-import Header from '../../component/header/Header';
+import Header from '../../components/header/Header';
 
 import DashboardAdmin from '../admin/dashboard/DashboardAdmin';
 import DashboardStudent from '../student/dashboard/DashboardStudent';

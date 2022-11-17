@@ -6,8 +6,8 @@ import React, {
   useState,
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Header from '../../../component/header/Header';
-import LoadingButton from '../../../component/loading/LoadingButton';
+import Header from '../../../components/header/Header';
+import LoadingButton from '../../../components/loading/LoadingButton';
 import useUpdateUser from '../../../hooks/useUpdateUser';
 import { updateUserReducer } from '../../../reducers/reducers';
 import { Types } from '../../../types/reducer-type';

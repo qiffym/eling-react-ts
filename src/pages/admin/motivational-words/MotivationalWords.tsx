@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 // import { useNavigate } from 'react-router-dom';
-import MotivationalWordsTable from '../../../component/admin/motivational-words/MotivationalWordsTable';
-import Header from '../../../component/header/Header';
-import Loading from '../../../component/loading/Loading';
-import AddMotivationalModal from '../../../component/modal/AddMotivationalModal';
+import MotivationalWordsTable from '../../../components/admin/motivational-words/MotivationalWordsTable';
+import Header from '../../../components/header/Header';
+import Loading from '../../../components/loading/Loading';
+import AddMotivationalModal from '../../../components/modal/AddMotivationalModal';
 import { useFetch } from '../../../hooks/useFetch';
 
 const MotivationalWords = () => {

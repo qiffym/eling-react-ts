@@ -72,6 +72,10 @@ export type ReplyCommentSuccessType = {
   success: boolean;
 };
 
+export type EditForumSuccessType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -125,6 +129,11 @@ export type AddAssignmentType = {
   deadline: string;
 };
 
+export type EditForumType = {
+  topic: string;
+  description: string;
+};
+
 // Store to initial state Type for Global
 
 export type InitialStateType = {
@@ -141,4 +150,5 @@ export type InitialStateType = {
   deleteContentSuccess: DeleteContentSuccessType;
   updateSuccess: UpdateSuccessType;
   replyCommentSuccess: ReplyCommentSuccessType;
+  editForumSuccess: EditForumSuccessType;
 };
