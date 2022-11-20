@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react';
 import { FaComment } from 'react-icons/fa';
 import { HiPencilAlt, HiTrash, HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Loading2ND from '../../../component/loading/Loading2nd';
+import Loading2ND from '../../../components/loading/Loading2nd';
 import { useFetch } from '../../../hooks/useFetch';
 import { ForumDetailType, ForumType } from '../../../types/class-type';
-import AddCommentForum from '../../../component/modal/AddCommentForum';
+import AddCommentForum from '../../../components/modal/AddCommentForum';
 import { MyContext } from '../../../context/context';
 import { Types } from '../../../types/reducer-type';
 import {
