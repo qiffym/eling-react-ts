@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaComment } from 'react-icons/fa';
-import { HiChevronLeft } from 'react-icons/hi';
+import { HiChevronLeft, HiReply } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading2ND from '../../../components/loading/Loading2nd';
 import { useFetch } from '../../../hooks/useFetch';
@@ -49,18 +49,20 @@ const StudentForum = () => {
 
   return (
     <>
-      <section id="header" className="mt-20">
-        <div className="flex flex-row items-center space-x-2 container ml-16 mb-4 w-9/12 rounded-box">
-          <button
-            type="button"
-            onClick={() => navigate(-1)}
-            className="btn btn-ghost btn-square h-5 w-10">
-            <HiChevronLeft className="text-2xl" />
-          </button>
-          <h1 className="text-3xl font-bold">
-            Forum Diskusi {data.content_of}
-          </h1>
-          <hr className="mb-4 border-t-2" />
+      <section id="header" className="mt-4 sm:mt-20">
+        <div className="container mx-auto w-11/12 lg:ml-16 mb-4 lg:w-9/12 rounded-box">
+          <div className="flex flex-row items-center space-x-2">
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="btn btn-ghost btn-square h-5 w-10">
+              <HiChevronLeft className="text-2xl" />
+            </button>
+            <h1 className="text-3xl font-bold">
+              Forum Diskusi {data.content_of}
+            </h1>
+            <hr className="mb-4 border-t-2" />
+          </div>
         </div>
       </section>
       {/* Threat Section */}
@@ -73,10 +75,11 @@ const StudentForum = () => {
       ) : (
         <>
           <section id="threat" className="mb-5">
-            <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box">
+            <div className="container mx-auto w-11/12 lg:ml-16 p-4 lg:w-9/12 bg-white drop-shadow rounded-box">
               <div className="flex items-start space-x-4">
+                {/* avatar */}
                 <div className="avatar">
-                  <div className="w-16 mask mask-squircle">
+                  <div className="w-8 lg:w-16 mask mask-squircle">
                     <img src={forumDetailData.avatar} alt="avatar" />
                   </div>
                 </div>
@@ -95,29 +98,43 @@ const StudentForum = () => {
                         </span>
                       </div>
                     </div>
+                    {/* Total comment */}
                     <div className="flex font-medium items-center space-x-1 mr-5">
                       <FaComment /> <span className="text-sm">2</span>
                     </div>
                   </div>
+
                   {/* Topik dan Deskripsi */}
-                  <div>
-                    <div className="container mx-auto p-4 mb-2 bg-slate-200 rounded-box font-medium text-black text-lg">
+                  <div className="hidden lg:block">
+                    <div className="container mx-auto p-4 mb-2 bg-slate-200 rounded-box font-medium text-black text-md lg:text-lg">
                       <p>{forumDetailData.topic}</p>
                     </div>
-                    <p>{forumDetailData.description}</p>
+                    <p className="text-sm lg:text-md">
+                      {forumDetailData.description}
+                    </p>
                   </div>
                 </div>
               </div>
+
+              <div className="block lg:hidden">
+                <div className="container mx-auto p-4 mb-2 bg-slate-200 rounded-box font-medium text-black text-md lg:text-lg">
+                  <p>{forumDetailData.topic}</p>
+                </div>
+                <p className="text-sm lg:text-md">
+                  {forumDetailData.description}
+                </p>
+              </div>
             </div>
           </section>
+
           {/* Comment Section */}
           {forumDetailData?.comments?.map((item) => (
             <React.Fragment key={item.id}>
               <section id="comment" className="mb-5">
-                <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box">
+                <div className="container mx-auto w-11/12 lg:ml-16 p-4 lg:w-9/12 bg-white drop-shadow rounded-box">
                   <div className="flex items-start space-x-4">
                     <div className="avatar">
-                      <div className="w-16 mask mask-squircle">
+                      <div className="w-8 lg:w-16 mask mask-squircle">
                         <img src={item.avatar} alt="avatar" />
                       </div>
                     </div>
@@ -136,10 +153,32 @@ const StudentForum = () => {
                         </div>
                       </div>
                       {/* Comment */}
-                      <div className="mb-2">
-                        <p>{item.comment}</p>
+                      <div className="hidden lg:block">
+                        <div className="mb-2">
+                          <p>{item.comment}</p>
+                        </div>
+                        {/* Button Reply */}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setOpenReply(true);
+                            setAuthorComment(item.author);
+                            setIDComment(item.id);
+                          }}
+                          className="btn btn-sm btn-outline normal-case">
+                          Reply
+                        </button>
                       </div>
-                      {/* Button Reply */}
+                    </div>
+                  </div>
+
+                  {/* Comment Layar HP */}
+                  <div className="block lg:hidden">
+                    <div className="mb-2">
+                      <p>{item.comment}</p>
+                    </div>
+                    {/* Button Reply */}
+                    <div className="flex justify-end">
                       <button
                         type="button"
                         onClick={() => {
@@ -148,6 +187,7 @@ const StudentForum = () => {
                           setIDComment(item.id);
                         }}
                         className="btn btn-sm btn-outline normal-case">
+                        <HiReply className="mr-1" />
                         Reply
                       </button>
                     </div>
@@ -158,10 +198,10 @@ const StudentForum = () => {
               {/* Sub-Comment */}
               {item.sub_comments.map((subComments) => (
                 <section key={subComments.id} id="comment" className="mb-5">
-                  <div className="container ml-28 p-4 w-[72%] bg-white drop-shadow rounded-box">
+                  <div className="container ml-auto lg:ml-28 mr-4 md:mr-6 lg:mr-0 p-4 w-10/12 lg:w-[72%] bg-white drop-shadow rounded-box">
                     <div className="flex items-start space-x-4">
                       <div className="avatar">
-                        <div className="w-16 mask mask-squircle">
+                        <div className="w-8 lg:w-16 mask mask-squircle">
                           <img src={subComments.avatar} alt="avatar" />
                         </div>
                       </div>
@@ -180,10 +220,22 @@ const StudentForum = () => {
                           </div>
                         </div>
                         {/* Comment */}
-                        <div className="mb-2">
-                          <p>{subComments.comment}</p>
+                        <div className="hidden lg:block mb-2">
+                          <p>
+                            <span className="text-teal-700">
+                              @{item.author}{' '}
+                            </span>
+                            {subComments.comment}
+                          </p>
                         </div>
                       </div>
+                    </div>
+                    {/* Comment HP */}
+                    <div className="block lg:hidden mb-2">
+                      <p>
+                        <span className="text-teal-700">@{item.author} </span>
+                        {subComments.comment}
+                      </p>
                     </div>
                   </div>
                 </section>
@@ -191,8 +243,8 @@ const StudentForum = () => {
             </React.Fragment>
           ))}
           {/* Reply Section */}
-          <section>
-            <div className="container ml-16 w-9/12 drop-shadow rounded-box text-left">
+          <section className="mb-20">
+            <div className="container mx-auto lg:ml-16 w-11/12 lg:w-9/12 drop-shadow rounded-box text-left">
               <button
                 type="button"
                 onClick={() => setOpenComment(true)}

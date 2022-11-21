@@ -95,8 +95,10 @@ export interface StudentSubmissionDetail {
   deadline: string;
   created_at: string;
   submission: {
+    status_id: string;
     status: string;
     file: string;
+    filename: string;
     submitted_at: string;
     score: number;
   };

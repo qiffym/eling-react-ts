@@ -2,6 +2,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import Loading from '../../../components/loading/Loading';
 import Header from '../../../components/header/Header';
 import CardClass from '../../../components/student/CardClass';
@@ -139,6 +140,16 @@ const DashboardStudent = () => {
                   <p className="font-bold">Tenggat:</p>
                   <p>{item.deadline_tanggal}</p>
                   <p>Pukul {item.deadline_jam} WIB</p>
+                  <hr className="border-t-2" />
+                  <div className="flex justify-start">
+                    <button
+                      type="button"
+                      className="w-full btn btn-sm btn-ghost italic hover:text-teal-600 capitalize">
+                      <HiOutlineArrowNarrowRight className="text-2xl" />
+                      <span className="mx-1">lihat</span>{' '}
+                      <HiOutlineArrowNarrowRight className="text-2xl" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
