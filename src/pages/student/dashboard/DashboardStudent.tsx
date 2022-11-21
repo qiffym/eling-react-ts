@@ -135,10 +135,10 @@ const DashboardStudent = () => {
                   key={item.id}
                   className="p-3 border rounded-box bg-slate-100 w-[95%]">
                   <p>{item.online_class.name}</p>
-                  <p>{item.content.title}</p>
+                  <p>{item.title}</p>
                   <p className="font-bold">Tenggat:</p>
                   <p>{item.deadline_tanggal}</p>
-                  <p>{item.deadline_jam}</p>
+                  <p>Pukul {item.deadline_jam} WIB</p>
                 </div>
               ))}
             </div>

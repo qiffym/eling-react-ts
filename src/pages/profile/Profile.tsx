@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BiLogOut } from 'react-icons/bi';
 import {
   FaBirthdayCake,
@@ -13,6 +13,7 @@ import { UserType } from '../../types/user-type';
 
 const Profile = () => {
   const { data } = useFetch('/api/me');
+  const [disable, setDisable] = useState(true);
 
   const profileData: UserType = data;
 
@@ -74,6 +75,7 @@ const Profile = () => {
           </button>
           <button
             type="button"
+            onClick={() => setDisable(!disable)}
             className="btn btn-sm md:btn-md btn-yellow-500 normal-case">
             <FaPencilAlt className="mr-2" />
             Edit Profile
@@ -98,7 +100,7 @@ const Profile = () => {
                 placeholder="nama"
                 className="input input-bordered input-sm w-full"
                 defaultValue={profileData.name}
-                disabled
+                disabled={disable}
               />
             </div>
             {/* Jenis Kelamin */}
@@ -112,7 +114,7 @@ const Profile = () => {
                 placeholder="jenis kelamin"
                 className="input input-bordered input-sm w-full"
                 defaultValue={nullGender(profileData.gender)}
-                disabled
+                disabled={disable}
               />
             </div>
             {/* Username */}
@@ -130,7 +132,7 @@ const Profile = () => {
                   placeholder="info@site.com"
                   className="input input-bordered input-sm w-full"
                   defaultValue={profileData.username}
-                  disabled
+                  disabled={disable}
                 />
               </label>
             </div>
@@ -149,7 +151,7 @@ const Profile = () => {
                   placeholder="ryojino@example.com"
                   className="input input-bordered input-sm w-full"
                   defaultValue={checkNull(profileData.email)}
-                  disabled
+                  disabled={disable}
                 />
               </label>
             </div>
@@ -163,7 +165,7 @@ const Profile = () => {
                   <FaBirthdayCake />
                 </span>
                 <input
-                  disabled
+                  disabled={disable}
                   type="date"
                   name="birthday"
                   className="input input-bordered input-sm w-full"
@@ -180,7 +182,7 @@ const Profile = () => {
                 className="select select-bordered select-sm"
                 name="religion"
                 value={checkNull(profileData.religion)}
-                disabled>
+                disabled={disable}>
                 <option disabled>-- Pilih Agama --</option>
                 <option value="Islam">Islam</option>
                 <option value="Kristen">Kristen</option>
@@ -200,7 +202,7 @@ const Profile = () => {
                 name="address"
                 placeholder="Alamat"
                 defaultValue={checkNull(profileData.address)}
-                disabled
+                disabled={disable}
               />
             </div>
           </div>
@@ -219,7 +221,7 @@ const Profile = () => {
                   name="nip"
                   className="input input-bordered w-full"
                   defaultValue={checkNull(profileData.teacher?.nip)}
-                  disabled
+                  disabled={disable}
                 />
               </label>
             </div>
@@ -236,7 +238,7 @@ const Profile = () => {
                   name="nik"
                   className="input input-bordered w-full"
                   defaultValue={checkNull(profileData.teacher?.nik)}
-                  disabled
+                  disabled={disable}
                 />
               </label>
             </div>
