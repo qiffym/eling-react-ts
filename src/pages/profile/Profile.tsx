@@ -209,50 +209,120 @@ const Profile = () => {
 
           {/* Informasi Specific */}
           <div className="w-full xl:w-4/12">
-            {/* NIP */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Nomor Induk Pegawai</span>
-              </label>
-              <label className="input-group">
-                <span>NIP</span>
-                <input
-                  type="text"
-                  name="nip"
-                  className="input input-bordered w-full"
-                  defaultValue={checkNull(profileData.teacher?.nip)}
-                  disabled={disable}
-                />
-              </label>
+            {/* IF Teacher */}
+            <div id="specific-teacher">
+              {/* NIP */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Nomor Induk Pegawai</span>
+                </label>
+                <label className="input-group">
+                  <span>NIP</span>
+                  <input
+                    type="text"
+                    name="nip"
+                    className="input input-bordered w-full"
+                    defaultValue={checkNull(profileData.teacher?.nip)}
+                    disabled={disable}
+                  />
+                </label>
+              </div>
+
+              {/* NIK */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Nomor Induk Kependudukan</span>
+                </label>
+                <label className="input-group">
+                  <span>NIK</span>
+                  <input
+                    type="text"
+                    name="nik"
+                    className="input input-bordered w-full"
+                    defaultValue={checkNull(profileData.teacher?.nik)}
+                    disabled={disable}
+                  />
+                </label>
+              </div>
             </div>
 
-            {/* NIK */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Nomor Induk Kependudukan</span>
-              </label>
-              <label className="input-group">
-                <span>NIK</span>
-                <input
-                  type="text"
-                  name="nik"
-                  className="input input-bordered w-full"
-                  defaultValue={checkNull(profileData.teacher?.nik)}
-                  disabled={disable}
-                />
-              </label>
-            </div>
-          </div>
+            {/* IF Student */}
+            <div id="specific-student">
+              {/* Rombel Class */}
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text">Rombel Kelas</span>
+                </label>
+                <select
+                  className="select select-bordered"
+                  name="rombel"
+                  disabled={disable}>
+                  <option selected disabled>
+                    -- Pilih Rombel --
+                  </option>
+                  <option value="1">X TKJ 1</option>
+                  <option value="2">X TKJ 2</option>
+                  <option value="3">XI TKJ 1</option>
+                  <option value="4">XI TKJ 2</option>
+                  <option value="5">XII TKJ 1</option>
+                  <option value="6">XII TKJ 2</option>
+                </select>
+              </div>
+              {/* NIS */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Nomor Induk Siswa</span>
+                </label>
+                <label className="input-group">
+                  <span>NIS</span>
+                  <input
+                    type="text"
+                    name="nis"
+                    className="input input-bordered w-full"
+                    // defaultValue={'-'}
+                    disabled={disable}
+                  />
+                </label>
+              </div>
 
-          {/* Logout */}
-          <div className="mb-20 mt-5 md:mb-0 flex justify-end md:hidden">
-            <button type="button" className="btn btn-error text-white">
-              <BiLogOut className="text-lg mr-1" />
-              Keluar
-            </button>
+              {/* NISN */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Nomor Induk Siswa Nasional</span>
+                </label>
+                <label className="input-group">
+                  <span>NISN</span>
+                  <input
+                    type="text"
+                    name="nisn"
+                    className="input input-bordered w-full"
+                    // defaultValue={'-'}
+                    disabled={disable}
+                  />
+                </label>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Update Button */}
+        <div className="mt-5">
+          <button
+            type="submit"
+            disabled={disable}
+            className="btn btn-primary text-white">
+            Simpan Perubahan
+          </button>
+        </div>
       </form>
+
+      {/* Logout */}
+      <div className="mb-20 mt-5 md:mb-0 flex justify-start md:hidden">
+        <button type="button" className="btn btn-error text-white">
+          <BiLogOut className="text-lg mr-1" />
+          Keluar
+        </button>
+      </div>
     </section>
   );
 };

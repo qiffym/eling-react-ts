@@ -128,7 +128,7 @@ const DashboardStudent = () => {
           <div className="p-3 rounded-box w-full lg:w-[20%] bg-white drop-shadow">
             <div className="flex flex-col items-center space-y-2">
               <div className="text-2xl font-medium">
-                <h3>Mendatang</h3>
+                <h3>Tugas Mendatang</h3>
               </div>
               {upcomingAssignment.map((item) => (
                 <div
