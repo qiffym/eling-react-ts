@@ -7,9 +7,15 @@ import Header from '../../../components/header/Header';
 import CardClass from '../../../components/student/CardClass';
 import { useFetch } from '../../../hooks/useFetch';
 import { StudentClasses } from '../../../types/student-type';
+import {
+  useFetchMotivationalWord,
+  useFetchUpcomingAssignment,
+} from '../../../hooks/useStudent';
 
 const DashboardStudent = () => {
   const { isLoading, data } = useFetch('/api/student/my-classes');
+  const { motivationalWord } = useFetchMotivationalWord();
+  const { upcomingAssignment } = useFetchUpcomingAssignment();
   const [searchData, setSearchData] = useState<StudentClasses[] | undefined>();
   const classList: StudentClasses[] = data;
 
@@ -42,13 +48,10 @@ const DashboardStudent = () => {
             <div className="flex flex-col items-center text-center">
               <h3 className="title text-2xl font-medium">Quote</h3>
               <blockquote className="mb-3">
-                <p>
-                  Hanya pendidikan yang bisa menyelamatkan masa depan, tanpa
-                  pendidikan Indonesia tak mungkin bertahan
-                </p>
+                <p>{motivationalWord?.body}</p>
               </blockquote>
               <figcaption className="font-medium italic">
-                —Najwa Shihab
+                —{motivationalWord?.from}
               </figcaption>
             </div>
           </div>
@@ -127,13 +130,17 @@ const DashboardStudent = () => {
               <div className="text-2xl font-medium">
                 <h3>Mendatang</h3>
               </div>
-              <div className="p-3 border rounded-box bg-slate-100 w-[95%]">
-                <p>Komputer dan Jaringan Dasar</p>
-                <p>Tugas 1</p>
-                <p className="font-bold">Tenggat:</p>
-                <p>Rabu, 5 Maret</p>
-                <p>Pukul 23.59 WIB</p>
-              </div>
+              {upcomingAssignment.map((item) => (
+                <div
+                  key={item.id}
+                  className="p-3 border rounded-box bg-slate-100 w-[95%]">
+                  <p>{item.online_class.name}</p>
+                  <p>{item.content.title}</p>
+                  <p className="font-bold">Tenggat:</p>
+                  <p>{item.deadline_tanggal}</p>
+                  <p>{item.deadline_jam}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { HiChevronLeft } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useFetch } from '../../../hooks/useFetch';
+import { StudentSubmissionDetail } from '../../../types/student-type';
+
+type LocationAssignmentType = {
+  id: number;
+  title: string;
+  description: string;
+  deadline: string;
+  created_at: string;
+};
 
 const Submission = () => {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
+  const { assignment } = useLocation().state as any;
+  // const [openModal, setOpenModal] = useState(false);
+  const assignmentData: LocationAssignmentType = assignment;
+  const { data } = useFetch(`/api/student/submissions/${assignmentData.id}`);
 
-  console.log(openModal, setOpenModal);
+  const submissionDetail: StudentSubmissionDetail = data;
 
   return (
     <div className="mt-20 mb-4">
@@ -29,23 +42,25 @@ const Submission = () => {
           <div className="container w-full xl:w-8/12 drop-shadow bg-white rounded-box p-5">
             <div className="flex justify-between items-start">
               <div>
-                <h1 className="text-2xl md:text-3xl font-medium">Tugas 1</h1>
+                <h1 className="text-2xl md:text-3xl font-medium">
+                  {submissionDetail.title}
+                </h1>
                 <div className="text-sm md:text-md opacity-90 mb-4">
                   <span className="border-r border-r-slate-500 pr-2">
-                    Qiff Ya Muhammad
+                    {submissionDetail.author}
                   </span>
-                  <span className="px-2">Dibuat 1 minggu yang lalu</span>
+                  <span className="px-2">{submissionDetail.created_at}</span>
                 </div>
               </div>
             </div>
             <div className="flex flex-col justify-start items-start md:flex-row md:justify-between md:items-center text-sm md:text-md">
               <span className="font-semibold">100 poin</span>
               <span className="font-semibold">
-                Tenggat: 2 minggu dari sekarang
+                Tenggat: {submissionDetail.deadline}
               </span>
             </div>
             <hr className="my-3" />
-            <p>deskripsi tugas</p>
+            <p>{submissionDetail.description}</p>
           </div>
         </div>
       </section>
@@ -65,11 +80,13 @@ const Submission = () => {
                 <p>Score</p>
               </div>
               <div>
-                <p>: Tugas baru telah diberikan</p> {/* Status */}
-                <p>: 2 Minggu dari sekarang</p> {/* Deadline */}
-                <p>: -</p> {/* Submitted At */}
-                <p>: -</p> {/* File Submission */}
-                <p>: -</p> {/* Score */}
+                <p>: {submissionDetail.submission?.status}</p> {/* Status */}
+                <p>: {submissionDetail.deadline}</p> {/* Deadline */}
+                <p>: {submissionDetail.submission?.submitted_at}</p>
+                {/* Submitted At */}
+                <p>: {submissionDetail.submission?.file}</p>
+                {/* File Submission */}
+                <p>: {submissionDetail.submission?.score}</p> {/* Score */}
               </div>
             </div>
 

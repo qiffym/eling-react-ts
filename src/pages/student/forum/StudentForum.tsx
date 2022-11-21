@@ -1,20 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { FaComment } from 'react-icons/fa';
-import { HiPencilAlt, HiTrash, HiChevronLeft } from 'react-icons/hi';
+import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading2ND from '../../../components/loading/Loading2nd';
 import { useFetch } from '../../../hooks/useFetch';
-import { ForumDetailType, ForumType } from '../../../types/class-type';
+import { ForumType } from '../../../types/class-type';
 import AddCommentForum from '../../../components/modal/AddCommentForum';
 import { MyContext } from '../../../context/context';
 import { Types } from '../../../types/reducer-type';
+import { StudentForumDetail } from '../../../types/student-type';
 import {
-  useTeacherComment,
-  useTeacherReplyComment,
-} from '../../../hooks/useTeacher';
+  useStudentComment,
+  useStudentReplyComment,
+} from '../../../hooks/useStudent';
 
 const StudentForum = () => {
-  const { classID, forum, teacher } = useLocation().state as any;
+  const { classID, forum } = useLocation().state as any;
   const navigate = useNavigate();
   const idClass: number = classID;
   const forumData: ForumType = forum;
@@ -22,12 +23,12 @@ const StudentForum = () => {
     `/api/student/my-classes/${idClass}/contents/${forumData.content_id}/forums/${forumData.id}`,
   );
   const user = JSON.parse(localStorage.getItem('user') || '');
-  const forumDetailData: ForumDetailType = data;
+  const forumDetailData: StudentForumDetail = data;
   const [isOpenComment, setOpenComment] = useState(false);
   const [isOpenReply, setOpenReply] = useState(false);
   const { dispatch } = useContext(MyContext);
-  const { isLoadingComment, addComment } = useTeacherComment();
-  const { isLoadingReply, addReplyComment } = useTeacherReplyComment();
+  const { isLoadingComment, addComment } = useStudentComment();
+  const { isLoadingReply, addReplyComment } = useStudentReplyComment();
   const [IDComment, setIDComment] = useState(0);
   const [isComment, setComment] = useState('');
   const [isReply, setReply] = useState('');
@@ -83,7 +84,7 @@ const StudentForum = () => {
                   {/* Nama dan Waktu dibuat */}
                   <div className="flex justify-between items-start">
                     <div className="mb-2">
-                      <p className="font-bold">{teacher.name}</p>
+                      <p className="font-bold">{forumDetailData.author}</p>
                       <div className="flex items-center space-x-1 font-semibold text-2xs">
                         <span className="text-teal-700">
                           {changeLanguage(forumDetailData.author_role)}
@@ -105,25 +106,6 @@ const StudentForum = () => {
                     </div>
                     <p>{forumDetailData.description}</p>
                   </div>
-                </div>
-              </div>
-              {/* Hanya dapat dilihat guru */}
-              <div className="editable flex justify-end items-center space-x-2 mt-4">
-                <div className="tooltip" data-tip="edit forum">
-                  <button
-                    type="button"
-                    name="edit-forum"
-                    className="btn btn-sm btn-warning btn-square text-lg">
-                    <HiPencilAlt />
-                  </button>
-                </div>
-                <div className="tooltip" data-tip="delete forum">
-                  <button
-                    type="button"
-                    name="delete-forum"
-                    className="btn btn-sm btn-error btn-square text-lg">
-                    <HiTrash />
-                  </button>
                 </div>
               </div>
             </div>

@@ -43,7 +43,6 @@ const AppRoutes = () => (
                 path=":id/contents/:id/forums/:id"
                 element={<StudentForum />}
               />
-              {/* <Route path=":id/contents/:id/forums/:id" element={<Forum />} /> */}
             </Route>
           </Route>
 
