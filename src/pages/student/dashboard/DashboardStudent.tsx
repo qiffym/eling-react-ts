@@ -35,9 +35,9 @@ const DashboardStudent = () => {
       </div>
       <section
         id="random-motivation"
-        className="hidden md:block container mx-auto rounded-t-box bg-white shadow-sm">
+        className="block container mx-auto rounded-t-box bg-white shadow-sm">
         <div className="flex w-full justify-center items-center sm:space-x-10 md:space-x-10 py-10 px-3">
-          <FaQuoteLeft className="text-5xl" />
+          <FaQuoteLeft className="hidden md:block text-5xl" />
           <div>
             <div className="flex flex-col items-center text-center">
               <h3 className="title text-2xl font-medium">Quote</h3>
@@ -52,7 +52,7 @@ const DashboardStudent = () => {
               </figcaption>
             </div>
           </div>
-          <FaQuoteRight className="text-5xl" />
+          <FaQuoteRight className="hidden md:block text-5xl" />
         </div>
       </section>
 
@@ -69,9 +69,9 @@ const DashboardStudent = () => {
       </div>
 
       <section id="content" className="container mx-auto">
-        <div className="flex items-start space-x-3">
+        <div className="flex flex-col space-y-5 lg:flex-row lg:items-start lg:space-x-3 lg:space-y-0">
           {/* My Class */}
-          <div className="grow">
+          <div className="md:grow">
             <div className="flex flex-col space-y-3 px-3 py-3 sm:py-0 sm:space-y-0 sm:px-3 sm:flex-row sm:justify-between sm:items-center">
               <div>
                 <h2 className="hidden sm:block text-2xl font-medium">
@@ -120,8 +120,9 @@ const DashboardStudent = () => {
               </div>
             )}
           </div>
-          {/* Mendatang */}
-          <div className="p-3 rounded-box w-[20%] bg-white drop-shadow">
+
+          {/* Tugas Mendatang */}
+          <div className="p-3 rounded-box w-full lg:w-[20%] bg-white drop-shadow">
             <div className="flex flex-col items-center space-y-2">
               <div className="text-2xl font-medium">
                 <h3>Mendatang</h3>

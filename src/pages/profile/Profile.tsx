@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiLogOut } from 'react-icons/bi';
 import {
   FaBirthdayCake,
   FaCamera,
@@ -40,11 +41,12 @@ const Profile = () => {
       id="me"
       className="container mx-auto drop-shadow-lg w-11/12 p-10 rounded-box bg-white mt-20 ">
       {/* Header Profile */}
-      <div className="flex justify-between items-end">
-        <div className="flex items-center space-x-5">
+      <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end space-y-5 lg:space-y-0">
+        {/* Header Info */}
+        <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-x-5 lg:space-y-0">
           <div className="flex items-end">
             <div className="avatar">
-              <div className="w-44 rounded-full ring ring-slate-400 ring-offset-base-100 ring-offset-1">
+              <div className="w-40 lg:w-44 rounded-full ring ring-slate-400 ring-offset-base-100 ring-offset-1">
                 <img src={profileData.avatar} alt="foto_profile" />
               </div>
             </div>
@@ -54,19 +56,25 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col space-y">
+          <div className="flex flex-col space-y text-center lg:text-start">
             <h1 className="text-4xl font-bold">{profileData.name}</h1>
             <h3 className="text-2xl text-slate-500 font-medium">
               {profileData.role}
             </h3>
           </div>
         </div>
-        <div className="space-x-2">
-          <button type="button" className="btn btn-yellow-500 normal-case">
+
+        {/* Editable */}
+        <div className="space-x-2 text-center space-y-2">
+          <button
+            type="button"
+            className="btn btn-sm md:btn-md btn-yellow-500 normal-case">
             <MdPassword className="mr-2" />
             Ganti Password
           </button>
-          <button type="button" className="btn btn-yellow-500 normal-case">
+          <button
+            type="button"
+            className="btn btn-sm md:btn-md btn-yellow-500 normal-case">
             <FaPencilAlt className="mr-2" />
             Edit Profile
           </button>
@@ -232,6 +240,14 @@ const Profile = () => {
                 />
               </label>
             </div>
+          </div>
+
+          {/* Logout */}
+          <div className="mb-20 mt-5 md:mb-0 flex justify-end md:hidden">
+            <button type="button" className="btn btn-error text-white">
+              <BiLogOut className="text-lg mr-1" />
+              Keluar
+            </button>
           </div>
         </div>
       </form>
