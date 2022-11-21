@@ -12,7 +12,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
   return (
     <section>
       {/* Card Class */}
-      <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-2 sm:place-items-stretch sm:gap-5 lg:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 place-items-center gap-5 sm:grid-cols-2 sm:place-items-stretch sm:gap-5 lg:grid-cols-3 2xl:grid-cols-3">
         {classes
           ?.sort((rombA, rombB) =>
             rombA.rombel_class.localeCompare(rombB.rombel_class),
