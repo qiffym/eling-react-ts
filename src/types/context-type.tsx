@@ -134,6 +134,23 @@ export type EditForumType = {
   description: string;
 };
 
+export type EditProfileType = {
+  role: number;
+  name: string;
+  username: string;
+  email: string;
+  gender: string;
+  birthday: string;
+  religion: string;
+  address: string;
+  telpon: string;
+  nik?: string;
+  nip?: string;
+  nis?: string;
+  nisn?: string;
+  rombel?: number;
+};
+
 // Store to initial state Type for Global
 
 export type InitialStateType = {
