@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { HiPlusCircle } from 'react-icons/hi';
 import RombelTable from '../../../components/admin/rombel/RombelTable';
 
 import Header from '../../../components/header/Header';
@@ -46,6 +47,7 @@ const RombelClass = () => {
             type="button"
             onClick={() => setOpenModal(true)}
             className="btn btn-primary">
+            <HiPlusCircle className="mr-1 text-lg" />
             Add Rombel
           </button>
         </div>

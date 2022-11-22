@@ -72,7 +72,7 @@ const DashboardStudent = () => {
         </svg>
       </div>
 
-      <section id="content" className="container mx-auto">
+      <section id="content" className="container mx-auto mb-16">
         <div className="flex flex-col space-y-5 lg:flex-row lg:items-start lg:space-x-3 lg:space-y-0">
           {/* My Class */}
           <div className="md:grow">

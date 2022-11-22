@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { HiPlusCircle } from 'react-icons/hi';
 // import { useNavigate } from 'react-router-dom';
 import MotivationalWordsTable from '../../../components/admin/motivational-words/MotivationalWordsTable';
 import Header from '../../../components/header/Header';
@@ -50,6 +51,7 @@ const MotivationalWords = () => {
             type="button"
             onClick={() => setOpenModal(true)}
             className="btn btn-primary">
+            <HiPlusCircle className="mr-1 text-lg" />
             Add Motivational
           </button>
         </div>

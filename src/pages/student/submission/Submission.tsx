@@ -24,8 +24,8 @@ const Submission = () => {
   const submissionDetail: StudentSubmissionDetail = data;
 
   return (
-    <div className="mt-20 mb-4">
-      <section id="header" className="mt-20">
+    <div className="mt-5 sm:mt-20 mb-4">
+      <section id="header" className="mt-5 sm:mt-20">
         <div className="flex flex-row items-center space-x-2 container mx-auto xl:ml-16 w-11/12 mb-4">
           <button
             type="button"
