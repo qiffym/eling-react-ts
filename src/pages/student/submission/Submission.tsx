@@ -1,10 +1,11 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useState } from 'react';
 import { HiChevronLeft } from 'react-icons/hi';
 import { FcDocument } from 'react-icons/fc';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFetch } from '../../../hooks/useFetch';
 import { StudentSubmissionDetail } from '../../../types/student-type';
+import CreateSubmissionModal from '../../../components/student/modal/CreateSubmissionModal';
 
 type LocationAssignmentType = {
   id: number;
@@ -17,7 +18,7 @@ type LocationAssignmentType = {
 const Submission = () => {
   const navigate = useNavigate();
   const { assignment } = useLocation().state as any;
-  // const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const assignmentData: LocationAssignmentType = assignment;
   const { data } = useFetch(`/api/student/submissions/${assignmentData.id}`);
 
@@ -146,7 +147,7 @@ const Submission = () => {
             <div className="flex justify-center mt-4">
               <button
                 type="button"
-                // onClick={() => setOpenModal(true)}
+                onClick={() => setOpenModal(true)}
                 className="btn btn-primary text-center">
                 Update Submission
               </button>
@@ -155,14 +156,16 @@ const Submission = () => {
         </div>
       </section>
 
-      {/* {openModal ? (
+      {openModal ? (
         <CreateSubmissionModal
           actionSave={() => {
             setOpenModal(false);
           }}
           modalAction={() => setOpenModal(false)}
+          isOpen={openModal}
+          assignmentID={submissionDetail.assignment_id}
         />
-      ) : null} */}
+      ) : null}
     </div>
   );
 };

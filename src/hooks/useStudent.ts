@@ -192,3 +192,38 @@ export const useStudentReplyComment = () => {
     addReplyComment,
   };
 };
+
+export const usePostSubmission = (assignmentID: number) => {
+  const [isLoading, setLoading] = useState(false);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+
+  const postSubmission = async (file: any) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `${baseURL}/api/student/submissions/${assignmentID}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            // 'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: formData,
+        },
+      );
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return {
+    isLoading,
+    postSubmission,
+  };
+};
