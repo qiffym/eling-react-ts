@@ -163,6 +163,7 @@ const Submission = () => {
           }}
           modalAction={() => setOpenModal(false)}
           isOpen={openModal}
+          assignmentID={submissionDetail.assignment_id}
         />
       ) : null}
     </div>
