@@ -205,7 +205,12 @@ const Forum = () => {
                         </div>
                         {/* Comment */}
                         <div className="mb-2">
-                          <p>{subComments.comment}</p>
+                          <p>
+                            <span className="text-teal-600">
+                              @{item.author}
+                            </span>{' '}
+                            {subComments.comment}
+                          </p>
                         </div>
                       </div>
                     </div>
