@@ -6,7 +6,6 @@ import Loading2ND from '../../components/loading/Loading2nd';
 import ProfileForm from '../../components/profile/ProfileForm';
 import { useFetch } from '../../hooks/useFetch';
 import useUpdateProfile from '../../hooks/useUpdateProfile';
-// import useUpdateProfile from '../../hooks/useUpdateProfile';
 import { UserType } from '../../types/user-type';
 
 const Profile = () => {
@@ -22,11 +21,7 @@ const Profile = () => {
       id="me"
       className="container mx-auto drop-shadow-lg w-11/12 p-10 rounded-box bg-white mt-20 ">
       {isLoading ? (
-        <div className="flex h-screen">
-          <div className="m-auto flex flex-col space-y-5">
-            <Loading2ND />
-          </div>
-        </div>
+        <Loading2ND />
       ) : (
         <>
           {/* Header Profile */}

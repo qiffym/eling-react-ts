@@ -116,6 +116,7 @@ export const useGradingAssignment = (
   const [graded, setGraded] = useState<any>();
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
+  const { state } = useContext(MyContext);
 
   useEffect(() => {
     Promise.all([
@@ -166,7 +167,7 @@ export const useGradingAssignment = (
         setGraded(dataGraded);
       }),
     );
-  }, [baseURL, user.token]);
+  }, [baseURL, user.token, state.addAssignmentSuccess.success]);
 
   return {
     ungrading,
@@ -182,6 +183,7 @@ export const useGrading = (
 ) => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
 
   const addGrade = async (
     e: FormEvent<HTMLFormElement>,
@@ -210,6 +212,12 @@ export const useGrading = (
       );
       const result = await response.json();
       console.log(result);
+      dispatch({
+        type: Types.AddAssignmentSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
     } catch (error) {
       console.log(error);
     }

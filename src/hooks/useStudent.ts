@@ -197,17 +197,19 @@ export const usePostSubmission = (assignmentID: number) => {
   const [isLoading, setLoading] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
+  const { dispatch } = useContext(MyContext);
 
   const postSubmission = async (file: any) => {
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('_method', 'PUT');
 
     try {
       setLoading(true);
       const response = await fetch(
         `${baseURL}/api/student/submissions/${assignmentID}`,
         {
-          method: 'PUT',
+          method: 'POST',
           headers: {
             'Access-Control-Allow-Origin': '*',
             // 'Content-Type': 'multipart/form-data',
@@ -218,6 +220,12 @@ export const usePostSubmission = (assignmentID: number) => {
       );
       const result = await response.json();
       console.log(result);
+      dispatch({
+        type: Types.AddSubmissionSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
     } catch (error) {
       console.log(error);
     }

@@ -15,6 +15,8 @@ import {
   addForumSuccessReducer,
   AddMaterialSuccessAction,
   addMaterialSuccessReducer,
+  AddSubmissionSuccessAction,
+  addSubmissionSuccessReducer,
   ClassListAction,
   classReducer,
   CreateClassSuccessAction,
@@ -104,6 +106,9 @@ const contextInitialState: InitialStateType = {
   editForumSuccess: {
     success: false,
   },
+  addSubmissionSuccess: {
+    success: false,
+  },
 };
 
 export const MyContext = createContext<{
@@ -123,6 +128,7 @@ export const MyContext = createContext<{
     | UpdateSuccessAction
     | ReplyCommentSuccessAction
     | EditForumSuccessAction
+    | AddSubmissionSuccessAction
   >;
 }>({
   state: contextInitialState,
@@ -145,6 +151,7 @@ const mainReducer = (
     updateSuccess,
     replyCommentSuccess,
     editForumSuccess,
+    addSubmissionSuccess,
   }: InitialStateType,
   action: any,
 ) => ({
@@ -171,6 +178,10 @@ const mainReducer = (
   updateSuccess: updateSuccessReducer(updateSuccess, action),
   replyCommentSuccess: replyCommentSuccessReducer(replyCommentSuccess, action),
   editForumSuccess: editForumSuccessReducer(editForumSuccess, action),
+  addSubmissionSuccess: addSubmissionSuccessReducer(
+    addSubmissionSuccess,
+    action,
+  ),
 });
 
 const ContextProvider: FC<Props> = ({ children }) => {

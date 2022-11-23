@@ -24,6 +24,7 @@ export enum Types {
   UpdateSuccess = 'UPDATE_SUCCESS',
   ReplyCommentSuccess = 'REPLY_COMMENT_SUCCESS',
   EditForumSuccess = 'EDIT_FORUM_SUCCESS',
+  AddSubmissionSuccess = 'ADD_SUBMISSION_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -190,6 +191,12 @@ export type ReplyCommentSuccessPayload = {
 
 export type EditForumSuccessPayload = {
   [Types.EditForumSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddSubmissionSuccessPayload = {
+  [Types.AddSubmissionSuccess]: {
     success: boolean;
   };
 };

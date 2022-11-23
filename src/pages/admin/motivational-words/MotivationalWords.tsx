@@ -4,7 +4,7 @@ import { HiPlusCircle } from 'react-icons/hi';
 // import { useNavigate } from 'react-router-dom';
 import MotivationalWordsTable from '../../../components/admin/motivational-words/MotivationalWordsTable';
 import Header from '../../../components/header/Header';
-import Loading from '../../../components/loading/Loading';
+import Loading2ND from '../../../components/loading/Loading2nd';
 import AddMotivationalModal from '../../../components/modal/AddMotivationalModal';
 import { useFetch } from '../../../hooks/useFetch';
 
@@ -56,7 +56,7 @@ const MotivationalWords = () => {
           </button>
         </div>
         {isLoading ? (
-          <Loading />
+          <Loading2ND />
         ) : (
           <MotivationalWordsTable motivationalData={searchData} />
         )}

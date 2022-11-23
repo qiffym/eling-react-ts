@@ -72,11 +72,7 @@ const Forum = () => {
       </section>
       {/* Threat Section */}
       {isLoading ? (
-        <div className="flex h-screen">
-          <div className="m-auto flex flex-col space-y-5">
-            <Loading2ND />
-          </div>
-        </div>
+        <Loading2ND />
       ) : (
         <>
           <section id="threat" className="mb-5">

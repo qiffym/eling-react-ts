@@ -76,6 +76,10 @@ export type EditForumSuccessType = {
   success: boolean;
 };
 
+export type AddSubmissionSuccessType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -168,4 +172,5 @@ export type InitialStateType = {
   updateSuccess: UpdateSuccessType;
   replyCommentSuccess: ReplyCommentSuccessType;
   editForumSuccess: EditForumSuccessType;
+  addSubmissionSuccess: AddSubmissionSuccessType;
 };

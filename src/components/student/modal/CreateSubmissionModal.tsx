@@ -2,12 +2,14 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-use-before-define */
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, FC, FormEvent, createRef } from 'react';
+import { Fragment, FC, createRef, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { MyContext } from '../../../context/context';
 import { usePostSubmission } from '../../../hooks/useStudent';
+import { Types } from '../../../types/reducer-type';
 
 type Props = {
-  actionSave: (event: FormEvent<HTMLFormElement>) => void;
+  actionSave: () => void;
   modalAction: () => void;
   isOpen: boolean;
   title?: string;
@@ -23,10 +25,9 @@ const CreateSubmissionModal: FC<Props> = ({
 }) => {
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
   const { postSubmission } = usePostSubmission(assignmentID);
+  const { dispatch } = useContext(MyContext);
 
   const dropzoneRef: any = createRef();
-
-  console.log(actionSave);
 
   const openDialog = () => {
     // Note that the ref is set async,
@@ -101,7 +102,16 @@ const CreateSubmissionModal: FC<Props> = ({
                 {acceptedFiles.length > 0 ? (
                   <button
                     type="button"
-                    onClick={() => postSubmission(acceptedFiles[0])}
+                    onClick={() => {
+                      postSubmission(acceptedFiles[0]);
+                      actionSave();
+                      dispatch({
+                        type: Types.AddSubmissionSuccess,
+                        payload: {
+                          success: false,
+                        },
+                      });
+                    }}
                     className="btn btn-ghost w-full mt-5 transition-all justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                     Upload Submission
                   </button>

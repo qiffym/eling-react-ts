@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet';
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AppBarClass from '../../../components/layout/AppBarClass';
-import Loading from '../../../components/loading/Loading';
+
+import Loading2ND from '../../../components/loading/Loading2nd';
 import EditClassModal from '../../../components/modal/EditClassModal';
 import AboutClass from '../../../components/teacher/home/online_class/AboutClass';
 import { ClassContent } from '../../../components/teacher/home/online_class/ClassContent';
@@ -28,7 +29,7 @@ const ClassDetail = () => {
       </Helmet>
       <AppBarClass headerTitle={classData.name} />
       {isLoading ? (
-        <Loading />
+        <Loading2ND />
       ) : (
         <div className="pt-20">
           {/* Section Title Class */}

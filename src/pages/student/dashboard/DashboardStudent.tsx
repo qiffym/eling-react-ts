@@ -3,7 +3,6 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
-import Loading from '../../../components/loading/Loading';
 import Header from '../../../components/header/Header';
 import CardClass from '../../../components/student/CardClass';
 import { useFetch } from '../../../hooks/useFetch';
@@ -12,6 +11,7 @@ import {
   useFetchMotivationalWord,
   useFetchUpcomingAssignment,
 } from '../../../hooks/useStudent';
+import Loading2ND from '../../../components/loading/Loading2nd';
 
 const DashboardStudent = () => {
   const { isLoading, data } = useFetch('/api/student/my-classes');
@@ -113,7 +113,7 @@ const DashboardStudent = () => {
             <hr className="border-t border-gray-300 my-4" />
 
             {isLoading ? (
-              <Loading />
+              <Loading2ND />
             ) : searchData?.length ? (
               <CardClass classes={searchData} />
             ) : (

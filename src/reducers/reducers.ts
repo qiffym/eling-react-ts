@@ -7,6 +7,7 @@ import {
   AddForumType,
   AddMaterialSuccessType,
   AddMaterialType,
+  AddSubmissionSuccessType,
   ClassListType,
   CreateClassSuccessType,
   CreateClassType,
@@ -33,6 +34,7 @@ import {
   AddForumSuccessPayload,
   AddMaterialPayload,
   AddMaterialSuccessPayload,
+  AddSubmissionSuccessPayload,
   ClassPayload,
   CreateClassPayload,
   CreateClassSuccessPayload,
@@ -659,6 +661,25 @@ export const editForumSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'EDIT_FORUM_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddSubmissionSuccessAction =
+  ActionMap<AddSubmissionSuccessPayload>[keyof ActionMap<AddSubmissionSuccessPayload>];
+
+export const addSubmissionSuccessReducer = (
+  state: AddSubmissionSuccessType,
+  action: AddSubmissionSuccessAction,
+) => {
+  switch (action.type) {
+    case 'ADD_SUBMISSION_SUCCESS':
       return {
         ...state,
         success: action.payload.success,

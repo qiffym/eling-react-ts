@@ -1,8 +1,10 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import { FaUsers } from 'react-icons/fa';
 import { MdKeyboardReturn } from 'react-icons/md';
+import { MyContext } from '../../../../context/context';
 import { useGrading, useGradingAssignment } from '../../../../hooks/useTeacher';
 import { GradingAssignmentType } from '../../../../types/class-type';
+import { Types } from '../../../../types/reducer-type';
 
 type Props = {
   classID: number;
@@ -18,10 +20,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
   );
   const [grade, setGrade] = useState(0);
   const addGrade = useGrading(classID, contentID, assignmentID);
-
-  console.log('ungrad', ungrading);
-  console.log('unsub', unsubmitted);
-  console.log('grad', graded);
+  const { dispatch } = useContext(MyContext);
 
   return (
     <section id="content" className="-mb-10">
@@ -65,12 +64,18 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                     {/* Nilai */}
                     <div>
                       <form
-                        onSubmit={(e) =>
+                        onSubmit={(e) => {
                           addGrade(e, {
                             studentID: item.student_id,
                             score: grade,
-                          })
-                        }
+                          });
+                          dispatch({
+                            type: Types.AddAssignmentSuccess,
+                            payload: {
+                              success: false,
+                            },
+                          });
+                        }}
                         className="flex flex-row items-center space-x-2">
                         <div className="flex flex-row items-end text-lg">
                           <input

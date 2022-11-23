@@ -4,7 +4,8 @@ import { HiPlusCircle } from 'react-icons/hi';
 import RombelTable from '../../../components/admin/rombel/RombelTable';
 
 import Header from '../../../components/header/Header';
-import Loading from '../../../components/loading/Loading';
+
+import Loading2ND from '../../../components/loading/Loading2nd';
 import AddRombelModal from '../../../components/modal/AddRombelModal';
 import { useFetch } from '../../../hooks/useFetch';
 
@@ -51,7 +52,7 @@ const RombelClass = () => {
             Add Rombel
           </button>
         </div>
-        {isLoading ? <Loading /> : <RombelTable rombelData={searchData} />}
+        {isLoading ? <Loading2ND /> : <RombelTable rombelData={searchData} />}
         {openModal ? (
           <AddRombelModal modalAction={() => setOpenModal(false)} />
         ) : null}
