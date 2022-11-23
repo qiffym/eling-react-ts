@@ -19,10 +19,6 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
   const [grade, setGrade] = useState(0);
   const addGrade = useGrading(classID, contentID, assignmentID);
 
-  console.log('ungrad', ungrading);
-  console.log('unsub', unsubmitted);
-  console.log('grad', graded);
-
   return (
     <section id="content" className="-mb-10">
       <div className="container mx-auto w-[95%] rounded-box">

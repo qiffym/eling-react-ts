@@ -201,13 +201,14 @@ export const usePostSubmission = (assignmentID: number) => {
   const postSubmission = async (file: any) => {
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('_method', 'PUT');
 
     try {
       setLoading(true);
       const response = await fetch(
         `${baseURL}/api/student/submissions/${assignmentID}`,
         {
-          method: 'PUT',
+          method: 'POST',
           headers: {
             'Access-Control-Allow-Origin': '*',
             // 'Content-Type': 'multipart/form-data',

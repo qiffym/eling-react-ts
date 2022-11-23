@@ -99,10 +99,10 @@ const Submission = () => {
                       {submissionDetail.submission?.status_id === '1'
                         ? 'Belum Mengumpulkan'
                         : submissionDetail.submission?.status_id === '2' &&
-                          submissionDetail.submission?.score === null
+                          submissionDetail.submission?.score === 0
                         ? 'Menunggu untuk dinilai'
                         : submissionDetail.submission?.status_id === '3' &&
-                          submissionDetail.submission?.score === null
+                          submissionDetail.submission?.score === 0
                         ? 'Menunggu untuk dinilai'
                         : 'Sudah dinilai'}
                     </td>
