@@ -83,7 +83,7 @@ const Appbar = () => {
                 tabIndex={0}
                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                  <NavLink to="me">My Profile</NavLink>
+                  <NavLink to="/me">My Profile</NavLink>
                 </li>
                 <hr />
                 <li className="font-bold hover:text-red-500">
