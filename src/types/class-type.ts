@@ -120,6 +120,7 @@ export type ContentDetailType = {
 export type AssignmentDetailType = {
   created_at: string;
   deadline: string;
+  deadline_parse: string;
   description: string;
   id: number;
   submission: {

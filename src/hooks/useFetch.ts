@@ -40,6 +40,7 @@ export const useFetch = (url: string) => {
     state.replyCommentSuccess.success,
     state.editForumSuccess.success,
     state.addSubmissionSuccess.success,
+    state.addAssignmentSuccess.success,
   ]);
 
   useEffect(() => {

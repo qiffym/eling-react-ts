@@ -2,13 +2,10 @@ import React, { FC, useState } from 'react';
 import { HiPencilAlt, HiTrash } from 'react-icons/hi';
 import { MdAssignment } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-
 import { useAssignmentDelete } from '../../../../hooks/useDeleteClasses';
 import { AssignmentDetailType } from '../../../../types/class-type';
-
 import Loading2ND from '../../../loading/Loading2nd';
 import ModalDelete from '../../../modal/ModalDelete';
-// import DelAssignmentModal from './modal/DelAssignmentModal';
 import EditAssignmentModal from './modal/EditAssignmentModal';
 
 type Props = {
@@ -73,7 +70,7 @@ const InstructionAssignment: FC<Props> = ({
                 <div className="flex justify-between items-center">
                   <span className="font-semibold">100 poin</span>
                   <span className="font-semibold">
-                    Tenggat: {data?.deadline}
+                    Tenggat: {data?.deadline_parse}
                   </span>
                 </div>
                 <hr className="my-3" />
@@ -86,6 +83,9 @@ const InstructionAssignment: FC<Props> = ({
       {/* Edit Modal */}
       {openEditModal ? (
         <EditAssignmentModal
+          data={data}
+          classID={classID}
+          contentID={contentID}
           actionUpdate={() => {
             setOpenEditModal(false);
           }}

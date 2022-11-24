@@ -2,7 +2,8 @@
 import { FormEvent, useState } from 'react';
 
 const useUpdateProfile = (id: number) => {
-  const [isLoading, setLoading] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [errorToast, setErrorToast] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
 
   const user = JSON.parse(localStorage.getItem('user') || '');
@@ -27,7 +28,6 @@ const useUpdateProfile = (id: number) => {
     },
   ) => {
     e.preventDefault();
-    setLoading(true);
     try {
       const response = await fetch(`${baseURL}/api/profile/${id}`, {
         method: 'PUT',
@@ -56,15 +56,22 @@ const useUpdateProfile = (id: number) => {
       });
       const result = await response.json();
       console.log(result);
-      // navigate(-1);
+      if (response.status >= 200 && response.status < 300) {
+        setToast(true);
+        setTimeout(() => setToast(false), 3000);
+      } else {
+        setErrorToast(true);
+        setTimeout(() => setErrorToast(false), 3000);
+      }
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      setToast(false);
     }
   };
 
   return {
-    isLoading,
+    toast,
+    errorToast,
     updateProfile,
   };
 };
