@@ -125,3 +125,30 @@ export const useDeleteForum = (classID: number, contentID: number) => {
 
   return deleteForum;
 };
+
+export const useAssignmentDelete = (classID: number, contentID: number) => {
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const user = JSON.parse(localStorage.getItem('user') || '');
+
+  const assignmentDelete = async (id?: number) => {
+    try {
+      await fetch(
+        `${baseURL}/api/teacher/online-classes/${classID}/contents/${contentID}/assignments/${id}`,
+
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return assignmentDelete;
+};

@@ -37,8 +37,6 @@ const AddMaterialModal: FC<Props> = ({
   const dropzoneRef: any = createRef();
 
   const openDialog = () => {
-    // Note that the ref is set async,
-    // so it might be null at some point
     if (dropzoneRef.current) {
       dropzoneRef.current.open();
     }

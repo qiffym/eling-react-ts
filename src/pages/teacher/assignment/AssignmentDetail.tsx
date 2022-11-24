@@ -53,7 +53,12 @@ const AssignmentDetail = () => {
           assignmentID={assignmentID}
         />
       ) : (
-        <InstructionAssignment isLoading={isLoading} data={assignmentData} />
+        <InstructionAssignment
+          isLoading={isLoading}
+          data={assignmentData}
+          classID={classID}
+          contentID={contentID}
+        />
       )}
     </>
   );

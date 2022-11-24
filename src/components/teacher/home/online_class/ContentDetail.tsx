@@ -12,10 +12,11 @@ import {
 import { useDeleteMaterial } from '../../../../hooks/useDeleteClasses';
 import { ContentDetailType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
-import Loading2ND from '../../../loading/Loading2nd';
+import LoadingContent from '../../../loading/LoadingContent';
 import AddAssignmentModal from '../../../modal/AddAssignmentModal';
 import AddForumModal from '../../../modal/AddForumModal';
 import AddMaterialModal from '../../../modal/AddMaterialModal';
+import ModalDelete from '../../../modal/ModalDelete';
 
 type Props = {
   classId: number;
@@ -43,6 +44,13 @@ const ContentDetail: FC<Props> = ({
   const [openModal, setOpenModal] = useState(false);
   const [openModalForum, setOpenModalForum] = useState(false);
   const [openModalAssignment, setOpenModalAssignment] = useState(false);
+  const [openDelModal, setOpenDelModal] = useState(false);
+
+  const [materialsData, setMaterialsData] = useState({
+    id: 0,
+    title: '',
+  });
+
   const { dispatch } = useContext(MyContext);
   const contentData: ContentDetailType = data;
   const forumList: ContentDetailType = forumData;
@@ -97,7 +105,7 @@ const ContentDetail: FC<Props> = ({
               <div className="flex flex-col w-full">
                 {isLoading ? (
                   <div className="flex flex-row items-center justify-center">
-                    <Loading2ND />
+                    <LoadingContent />
                   </div>
                 ) : (
                   contentData.materials?.map((item) => (
@@ -114,13 +122,12 @@ const ContentDetail: FC<Props> = ({
                             name="delete-materi"
                             className="btn btn-xs btn-error btn-square"
                             onClick={() => {
-                              deleteMaterial(item.id);
-                              dispatch({
-                                type: Types.DeleteMaterialSuccess,
-                                payload: {
-                                  success: false,
-                                },
+                              setOpenDelModal(true);
+                              setMaterialsData({
+                                id: item.id,
+                                title: item.title,
                               });
+                              // deleteMaterial(item.id);
                             }}>
                             <HiTrash />
                           </button>
@@ -146,7 +153,7 @@ const ContentDetail: FC<Props> = ({
               <div className="flex flex-col w-full">
                 {loadingForum ? (
                   <div className="flex flex-row items-center justify-center">
-                    <Loading2ND />
+                    <LoadingContent />
                   </div>
                 ) : (
                   forumList.forums?.map((item) => (
@@ -181,7 +188,7 @@ const ContentDetail: FC<Props> = ({
             </label>
             {loadingAssignment ? (
               <div className="flex flex-row items-center justify-center">
-                <Loading2ND />
+                <LoadingContent />
               </div>
             ) : (
               assignmentList.assignment?.map((item) => (
@@ -252,6 +259,24 @@ const ContentDetail: FC<Props> = ({
           modalAction={() => setOpenModalForum(false)}
           idClasses={classId}
           idContent={contentId!}
+        />
+      ) : null}
+
+      {openDelModal ? (
+        <ModalDelete
+          isOpen={openDelModal}
+          data={materialsData.title}
+          modalAction={() => setOpenDelModal(false)}
+          actionDelete={() => {
+            deleteMaterial(materialsData.id);
+            dispatch({
+              type: Types.DeleteMaterialSuccess,
+              payload: {
+                success: false,
+              },
+            });
+            setOpenDelModal(false);
+          }}
         />
       ) : null}
     </>
