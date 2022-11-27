@@ -1,18 +1,19 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiPlusCircle } from 'react-icons/hi';
 import RombelTable from '../../../components/admin/rombel/RombelTable';
-
 import Header from '../../../components/header/Header';
-
 import Loading2ND from '../../../components/loading/Loading2nd';
 import AddRombelModal from '../../../components/modal/AddRombelModal';
+import { MyContext } from '../../../context/context';
 import { useFetch } from '../../../hooks/useFetch';
+import { Types } from '../../../types/reducer-type';
 
 const RombelClass = () => {
   const { isLoading, data } = useFetch('/api/admin/resources/rombel-classes');
   const [searchData, setSearchData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const { dispatch } = useContext(MyContext);
 
   const searchUser = (value: string) => {
     setSearchData(
@@ -54,7 +55,18 @@ const RombelClass = () => {
         </div>
         {isLoading ? <Loading2ND /> : <RombelTable rombelData={searchData} />}
         {openModal ? (
-          <AddRombelModal modalAction={() => setOpenModal(false)} />
+          <AddRombelModal
+            actionSave={() => {
+              setOpenModal(false);
+              dispatch({
+                type: Types.AddAssignmentSuccess,
+                payload: {
+                  success: false,
+                },
+              });
+            }}
+            modalAction={() => setOpenModal(false)}
+          />
         ) : null}
       </div>
     </>

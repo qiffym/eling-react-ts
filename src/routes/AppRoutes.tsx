@@ -15,7 +15,6 @@ import Profile from '../pages/profile/Profile';
 import RombelClass from '../pages/admin/rombel-class/RombelClass';
 import MotivationalWords from '../pages/admin/motivational-words/MotivationalWords';
 import AddMotivational from '../pages/admin/motivational-words/AddMotivational';
-import AddRombel from '../pages/admin/rombel-class/AddRombel';
 import Forum from '../pages/teacher/forum/Forum';
 import AssignmentDetail from '../pages/teacher/assignment/AssignmentDetail';
 import HeaderIndex from '../components/layout/HeaderIndex';
@@ -65,7 +64,6 @@ const AppRoutes = () => (
                 <Route path=":id" element={<ViewUser />} />
               </Route>
               <Route path="rombel-class">
-                <Route path="new" element={<AddRombel />} />
                 <Route index element={<RombelClass />} />
               </Route>
               <Route path="motivational-words">

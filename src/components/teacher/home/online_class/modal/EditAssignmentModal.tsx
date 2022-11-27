@@ -25,7 +25,7 @@ const EditAssignmentModal: FC<Props> = ({
   const [input, setInput] = useState({
     title: data?.title,
     description: data?.description,
-    deadline: data?.deadline,
+    deadline: data!.deadline,
   });
 
   const handleInput = (
@@ -33,7 +33,7 @@ const EditAssignmentModal: FC<Props> = ({
   ) => {
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.currentTarget.value,
     });
   };
 
@@ -104,8 +104,7 @@ const EditAssignmentModal: FC<Props> = ({
                 <input
                   name="deadline"
                   type="datetime-local"
-                  defaultValue={data?.deadline}
-                  placeholder="Judul Tugas"
+                  value={input.deadline}
                   className="input input-bordered w-full max-w-xs"
                   onChange={(e) => handleInput(e)}
                 />
