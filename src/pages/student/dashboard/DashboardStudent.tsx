@@ -149,6 +149,7 @@ const DashboardStudent = () => {
                       onClick={() =>
                         navigate(
                           `/my-classes/${item.online_class?.id}/submissions/${item.id}`,
+                          { state: { assignment: item } },
                         )
                       }
                       className="w-full btn btn-sm btn-ghost italic hover:text-teal-600 capitalize">
