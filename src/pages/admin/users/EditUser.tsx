@@ -8,6 +8,8 @@ import React, {
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../../components/header/Header';
 import LoadingButton from '../../../components/loading/LoadingButton';
+import Toast from '../../../components/toast/Toast';
+import ToastError from '../../../components/toast/ToastError';
 import useUpdateUser from '../../../hooks/useUpdateUser';
 import { updateUserReducer } from '../../../reducers/reducers';
 import { Types } from '../../../types/reducer-type';
@@ -19,7 +21,7 @@ type LocationParams = {
 
 const EditUser = () => {
   const navigate = useNavigate();
-  const { isLoading, updateUser } = useUpdateUser();
+  const { isLoading, updateUser, toast, errorToast, message } = useUpdateUser();
   const [isDisable, setDisable] = useState(false);
   const { user } = useLocation().state as LocationParams;
   const [state, dispatch] = useReducer(updateUserReducer, {
@@ -51,6 +53,17 @@ const EditUser = () => {
 
   return (
     <div className=" px-6 py-14">
+      {toast ? (
+        <div className="px-5">
+          <Toast desc={`${message}`} />
+        </div>
+      ) : null}
+      {errorToast ? (
+        <div className="px-5">
+          <ToastError desc={`${message} please try again!`} />
+        </div>
+      ) : null}
+
       <Header>Edit User</Header>
       <form
         onSubmit={(e) => {
@@ -65,10 +78,12 @@ const EditUser = () => {
             address: state.address,
             telpon: state.telpon,
             password: state.password,
+            confirm_password: state.confirm_password,
           });
         }}>
         <div className="flex flex-col space-y-3 bg-white p-4 py-8 rounded-lg">
           <div className="flex flex-col space-y-3 mb-6">
+            {/* Name */}
             <label className="text-sm font-semibold text-slate-400">Name</label>
             <input
               type="text"
@@ -83,6 +98,8 @@ const EditUser = () => {
                 })
               }
             />
+
+            {/* Gender */}
             <label className="text-sm font-semibold text-slate-400">
               Gender
             </label>
@@ -124,11 +141,15 @@ const EditUser = () => {
                 <p>Perempuan</p>
               </div>
             </div>
+
+            {/* Username */}
             <label className="text-sm font-semibold text-slate-400">
               Username
             </label>
             <input
               type="text"
+              minLength={3}
+              maxLength={50}
               defaultValue={user.username}
               className="input input-bordered w-full bg-gray-50 max-w-2xl"
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -140,6 +161,8 @@ const EditUser = () => {
                 })
               }
             />
+
+            {/* Email */}
             <label className="text-sm font-semibold text-slate-400">
               Email
             </label>
@@ -156,6 +179,8 @@ const EditUser = () => {
                 })
               }
             />
+
+            {/* Address */}
             <label className="text-sm font-semibold text-slate-400">
               Address
             </label>
@@ -172,6 +197,8 @@ const EditUser = () => {
                 })
               }
             />
+
+            {/* Religion */}
             <label className="text-sm font-semibold text-slate-400">
               Religion
             </label>
@@ -196,12 +223,15 @@ const EditUser = () => {
               <option value="Buddha">Buddha</option>
               <option value="Konghucu">Konghucu</option>
             </select>
+
+            {/* Birthday */}
             <label className="text-sm font-semibold text-slate-400">
               Birthday
             </label>
             <input
               type="date"
               defaultValue={user.birthday}
+              max="2021-12-31"
               className="input input-bordered w-full bg-gray-50 max-w-2xl mb-10"
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 dispatch({
@@ -212,13 +242,18 @@ const EditUser = () => {
                 })
               }
             />
+
+            {/* Telpon */}
             <label className="text-sm font-semibold text-slate-400">
               Telpon
             </label>
             <input
               type="tel"
               defaultValue={user.telpon}
-              placeholder="08xxxxxxxxxxxx"
+              pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}"
+              maxLength={14}
+              placeholder="08xx-xxxx-xxxx"
+              autoCorrect="on"
               className="input input-bordered w-full bg-gray-50 max-w-2xl mb-10"
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 dispatch({
@@ -229,7 +264,10 @@ const EditUser = () => {
                 })
               }
             />
-            <label className="text-sm font-semibold text-slate-400">
+            <small>* Telpon Format: 0812-4567-7890</small>
+
+            {/* Status */}
+            {/* <label className="text-sm font-semibold text-slate-400">
               Status
             </label>
             <div className="flex flex-row space-x-20">
@@ -269,15 +307,15 @@ const EditUser = () => {
                 />
                 <p>Inactive</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <label className="text-sm font-semibold text-slate-400 mb-3">
+          {/* <label className="text-sm font-semibold text-slate-400 mb-3">
             Reset Password
           </label>
           <div className="flex flex-col border rounded-lg p-4 space-y-3">
             <label className="text-sm font-semibold text-slate-400">
-              Password
+              New Password
             </label>
             <input
               type="password"
@@ -294,7 +332,7 @@ const EditUser = () => {
               }
             />
             <label className="text-sm font-semibold text-slate-400">
-              Password Confirmation
+              New Password Confirmation
             </label>
             <input
               type="password"
@@ -310,7 +348,7 @@ const EditUser = () => {
                 })
               }
             />
-          </div>
+          </div> */}
         </div>
         <div className="my-8 flex flex-row justify-end space-x-4">
           <button
