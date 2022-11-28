@@ -90,8 +90,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIP</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nip"
+                  maxLength={18}
                   className="input input-bordered w-full"
                   defaultValue={checkNull(profileData.teacher?.nip)}
                   disabled={disable}
@@ -118,8 +119,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIK</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nik"
+                  maxLength={16}
                   className="input input-bordered w-full"
                   defaultValue={checkNull(profileData.teacher?.nik)}
                   disabled={disable}
@@ -160,7 +162,9 @@ const ProfileForm: FC<Props> = ({
                 }
                 defaultValue={profileData.student?.rombel_id}
                 disabled={disable}>
-                <option value="DEFAULT">-- Pilih Rombel --</option>
+                <option value="DEFAULT" disabled>
+                  -- Pilih Rombel --
+                </option>
                 <option value={1}>X TKJ 1</option>
                 <option value={2}>X TKJ 2</option>
                 <option value={3}>XI TKJ 1</option>
@@ -177,8 +181,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIS</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nis"
+                  maxLength={8}
                   className="input input-bordered w-full"
                   defaultValue={profileData.student?.nis}
                   disabled={disable}
@@ -202,8 +207,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NISN</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nisn"
+                  maxLength={10}
                   className="input input-bordered w-full"
                   defaultValue={profileData.student?.nisn}
                   disabled={disable}
@@ -267,6 +273,7 @@ const ProfileForm: FC<Props> = ({
             <input
               type="text"
               name="name"
+              maxLength={100}
               placeholder="nama"
               className="input input-bordered input-sm w-full"
               defaultValue={profileData.name}
@@ -343,7 +350,7 @@ const ProfileForm: FC<Props> = ({
                 <FaEnvelope />
               </span>
               <input
-                type="text"
+                type="email"
                 name="email"
                 placeholder="ryojino@example.com"
                 className="input input-bordered input-sm w-full"
@@ -373,6 +380,8 @@ const ProfileForm: FC<Props> = ({
                 disabled={disable}
                 type="date"
                 name="birthday"
+                min="1960-1-31"
+                max="2021-12-31"
                 className="input input-bordered input-sm w-full"
                 defaultValue={checkNull(profileData.birthday)}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
