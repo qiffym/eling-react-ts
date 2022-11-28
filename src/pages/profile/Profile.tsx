@@ -7,6 +7,7 @@ import ProfileForm from '../../components/profile/ProfileForm';
 import Toast from '../../components/toast/Toast';
 import ToastError from '../../components/toast/ToastError';
 import { useFetch } from '../../hooks/useFetch';
+import useLogout from '../../hooks/useLogout';
 import useUpdateProfile from '../../hooks/useUpdateProfile';
 import { UserType } from '../../types/user-type';
 
@@ -14,6 +15,7 @@ const Profile = () => {
   const { isLoading, data } = useFetch('/api/me');
   const [disable, setDisable] = useState(true);
   const [isSubmit, setSubmit] = useState(false);
+  const authLogout = useLogout();
 
   const profileData: UserType = data;
   const { toast, errorToast, updateProfile } = useUpdateProfile(profileData.id);
@@ -95,7 +97,14 @@ const Profile = () => {
 
             {/* Logout */}
             <div className="mb-20 mt-5 md:mb-0 flex justify-start md:hidden">
-              <button type="button" className="btn btn-error text-white">
+              <button
+                type="button"
+                onClick={() => {
+                  authLogout();
+                  localStorage.clear();
+                  window.location.reload();
+                }}
+                className="btn btn-error text-white">
                 <BiLogOut className="text-lg mr-1" />
                 Keluar
               </button>

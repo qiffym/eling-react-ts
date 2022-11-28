@@ -62,9 +62,9 @@ const ProfileForm: FC<Props> = ({
       case null:
         return '-';
       case 'L':
-        return 'Laki-Laki';
+        return 'L';
       case 'P':
-        return 'Perempuan';
+        return 'P';
       default:
         return '-';
     }
@@ -154,7 +154,7 @@ const ProfileForm: FC<Props> = ({
                 }
                 defaultValue={profileData.student?.rombel_id}
                 disabled={disable}>
-                <option disabled>-- Pilih Rombel --</option>
+                <option value="DEFAULT">-- Pilih Rombel --</option>
                 <option value={1}>X TKJ 1</option>
                 <option value={2}>X TKJ 2</option>
                 <option value={3}>XI TKJ 1</option>
@@ -199,7 +199,7 @@ const ProfileForm: FC<Props> = ({
                   type="text"
                   name="nisn"
                   className="input input-bordered w-full"
-                  defaultValue={profileData.student?.nis}
+                  defaultValue={profileData.student?.nisn}
                   disabled={disable}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setInput({
@@ -277,7 +277,25 @@ const ProfileForm: FC<Props> = ({
             <label className="label">
               <span className="label-text">Jenis Kelamin</span>
             </label>
-            <input
+            <select
+              className="select select-bordered"
+              name="gender"
+              onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                setInput({
+                  type: Types.EditProfileGender,
+                  payload: {
+                    gender: e.currentTarget.value,
+                  },
+                })
+              }
+              defaultValue={nullGender(profileData.gender)}
+              disabled={disable}>
+              <option value="DEFAULT">-- Pilih Gender --</option>
+              <option value="L">Laki-laki</option>
+              <option value="P">Perempuan</option>
+            </select>
+
+            {/* <input
               type="text"
               name="gender"
               placeholder="jenis kelamin"
@@ -292,7 +310,7 @@ const ProfileForm: FC<Props> = ({
                   },
                 })
               }
-            />
+            /> */}
           </div>
           {/* Username */}
           <div className="form-control">
