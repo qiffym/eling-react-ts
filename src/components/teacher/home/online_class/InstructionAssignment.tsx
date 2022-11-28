@@ -43,7 +43,7 @@ const InstructionAssignment: FC<Props> = ({
                     <h1 className="text-3xl font-medium">{data?.title}</h1>
                     <div className="text-md opacity-90 mb-4">
                       <span className="border-r border-r-slate-500 pr-2">
-                        Qiff Ya Muhammad
+                        {data?.author}
                       </span>
                       <span className="px-2">Dibuat {data?.created_at}</span>
                     </div>

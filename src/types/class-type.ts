@@ -123,6 +123,7 @@ export type AssignmentDetailType = {
   deadline_parse: string;
   description: string;
   id: number;
+  author: string;
   submission: {
     assignment: {
       file: string;
