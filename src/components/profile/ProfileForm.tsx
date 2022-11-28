@@ -106,6 +106,9 @@ const ProfileForm: FC<Props> = ({
                 />
               </label>
             </div>
+            <label className="label">
+              <span className="label-text-alt italic">* 18 digit angka</span>
+            </label>
 
             {/* NIK */}
             <div className="form-control">
@@ -131,6 +134,9 @@ const ProfileForm: FC<Props> = ({
                 />
               </label>
             </div>
+            <label className="label">
+              <span className="label-text-alt italic">* 16 digit angka</span>
+            </label>
           </div>
         );
       case 'student':
@@ -212,6 +218,9 @@ const ProfileForm: FC<Props> = ({
                 />
               </label>
             </div>
+            <label className="label">
+              <span className="label-text-alt italic">* 10 digit angka</span>
+            </label>
           </div>
         );
 
