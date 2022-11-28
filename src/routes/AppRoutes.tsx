@@ -36,7 +36,7 @@ const AppRoutes = () => (
           <Route path="/" element={<ProtectedRoutes roleRequired="student" />}>
             <Route path="my-classes">
               <Route path=":id" element={<StudentDetailClass />} />
-              <Route path=":id/submissions" element={<Submission />} />
+              <Route path=":id/submissions/:id" element={<Submission />} />
               {/* <Route path=":id/submissions/:id" element={<Submission />} /> */}
               <Route
                 path=":id/contents/:id/forums/:id"

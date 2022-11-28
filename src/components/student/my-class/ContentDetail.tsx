@@ -103,7 +103,7 @@ const ContentDetail: FC<Props> = ({ classID, contentID }) => {
                 key={item.id}
                 className="flex justify-between items-center mx-4">
                 <Link
-                  to="submissions"
+                  to={`submissions/${item.id}`}
                   state={{
                     assignment: item,
                   }}>

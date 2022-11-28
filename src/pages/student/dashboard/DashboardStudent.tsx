@@ -3,6 +3,7 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header/Header';
 import CardClass from '../../../components/student/CardClass';
 import { useFetch } from '../../../hooks/useFetch';
@@ -19,6 +20,7 @@ const DashboardStudent = () => {
   const { upcomingAssignment } = useFetchUpcomingAssignment();
   const [searchData, setSearchData] = useState<StudentClasses[] | undefined>();
   const classList: StudentClasses[] = data;
+  const navigate = useNavigate();
 
   const searchClass = (value: string) => {
     setSearchData(
@@ -131,7 +133,7 @@ const DashboardStudent = () => {
               <div className="text-2xl font-medium">
                 <h3>Tugas Mendatang</h3>
               </div>
-              {upcomingAssignment.map((item) => (
+              {upcomingAssignment.map((item: any) => (
                 <div
                   key={item.id}
                   className="p-3 border rounded-box bg-slate-100 w-[95%]">
@@ -144,6 +146,11 @@ const DashboardStudent = () => {
                   <div className="flex justify-start">
                     <button
                       type="button"
+                      onClick={() =>
+                        navigate(
+                          `/my-classes/${item.online_class?.id}/submissions/${item.id}`,
+                        )
+                      }
                       className="w-full btn btn-sm btn-ghost italic hover:text-teal-600 capitalize">
                       <HiOutlineArrowNarrowRight className="text-2xl" />
                       <span className="mx-1">lihat</span>{' '}

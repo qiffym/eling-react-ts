@@ -155,6 +155,7 @@ const Submission = () => {
                 <div className="flex justify-center mt-4">
                   <button
                     type="button"
+                    disabled={submissionDetail.submission?.score !== 0}
                     onClick={() => setOpenModal(true)}
                     className="btn btn-primary text-center">
                     Update Submission
