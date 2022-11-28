@@ -1,13 +1,13 @@
 import React, { ChangeEvent, FC, useState, useEffect } from 'react';
-import { useAdminAddRombel } from '../../hooks/useAdmin';
+import { useAdminEditRombel } from '../../hooks/useAdmin';
 
 type Props = {
   actionSave: () => void;
   modalAction: () => void;
 };
 
-const AddRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
-  const addAdminRombel = useAdminAddRombel();
+const EditRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
+  const addAdminRombel = useAdminEditRombel();
   const [isDisable, setDisable] = useState(false);
   const [input, setInput] = useState({
     department_id: 1,
@@ -43,7 +43,7 @@ const AddRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
               onClick={modalAction}>
               ✕
             </button>
-            <h3 className="text-lg font-bold">Tambah Rombel</h3>
+            <h3 className="text-lg font-bold">Edit Rombel</h3>
           </div>
           <form
             onSubmit={(e) => {
@@ -113,4 +113,4 @@ const AddRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
     </>
   );
 };
-export default AddRombelModal;
+export default EditRombelModal;
