@@ -18,7 +18,9 @@ const Profile = () => {
   const authLogout = useLogout();
 
   const profileData: UserType = data;
-  const { toast, errorToast, updateProfile } = useUpdateProfile(profileData.id);
+  const { toast, errorToast, message, updateProfile } = useUpdateProfile(
+    profileData.id,
+  );
 
   return (
     <>
@@ -114,12 +116,12 @@ const Profile = () => {
       </section>
       {toast ? (
         <div className="px-5">
-          <Toast desc="Update your profile success" />
+          <Toast desc={`${message}`} />
         </div>
       ) : null}
       {errorToast ? (
         <div className="px-5">
-          <ToastError desc="Error! Please check your field" />
+          <ToastError desc={`${message} please try again!`} />
         </div>
       ) : null}
     </>
