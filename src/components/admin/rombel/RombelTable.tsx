@@ -48,7 +48,7 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
                     onClick={() =>
                       navigate(`${item.id}`, {
                         state: {
-                          user: item,
+                          rombel: item,
                         },
                       })
                     }
@@ -60,7 +60,7 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
                     onClick={() =>
                       navigate(`${item.id}/edit`, {
                         state: {
-                          user: item,
+                          rombel: item,
                         },
                       })
                     }

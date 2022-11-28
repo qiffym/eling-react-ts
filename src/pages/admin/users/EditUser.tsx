@@ -64,7 +64,7 @@ const EditUser = () => {
         </div>
       ) : null}
 
-      <Header>Edit User</Header>
+      <Header>Edit User: {user.name}</Header>
       <form
         onSubmit={(e) => {
           updateUser(e, user.id, {
@@ -84,10 +84,13 @@ const EditUser = () => {
         <div className="flex flex-col space-y-3 bg-white p-4 py-8 rounded-lg">
           <div className="flex flex-col space-y-3 mb-6">
             {/* Name */}
-            <label className="text-sm font-semibold text-slate-400">Name</label>
+            <label className="text-sm font-semibold text-slate-400">
+              *Name
+            </label>
             <input
               type="text"
               defaultValue={user.name}
+              required
               className="input input-bordered w-full max-w-2xl bg-gray-50"
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 dispatch({
@@ -101,7 +104,7 @@ const EditUser = () => {
 
             {/* Gender */}
             <label className="text-sm font-semibold text-slate-400">
-              Gender
+              *Gender
             </label>
             <div className="flex flex-row space-x-20">
               <div className="flex flex-row space-x-2">
@@ -144,12 +147,13 @@ const EditUser = () => {
 
             {/* Username */}
             <label className="text-sm font-semibold text-slate-400">
-              Username
+              *Username
             </label>
             <input
               type="text"
               minLength={3}
               maxLength={50}
+              required
               defaultValue={user.username}
               className="input input-bordered w-full bg-gray-50 max-w-2xl"
               onChange={(e: ChangeEvent<HTMLInputElement>) =>

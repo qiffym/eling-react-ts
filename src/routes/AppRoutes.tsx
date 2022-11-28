@@ -21,6 +21,7 @@ import HeaderIndex from '../components/layout/HeaderIndex';
 import StudentDetailClass from '../pages/student/classes/StudentDetailClass';
 import Submission from '../pages/student/submission/Submission';
 import StudentForum from '../pages/student/forum/StudentForum';
+import ViewRombel from '../pages/admin/rombel-class/ViewRombel';
 
 const AppRoutes = () => (
   <Routes>
@@ -65,6 +66,7 @@ const AppRoutes = () => (
               </Route>
               <Route path="rombel-class">
                 <Route index element={<RombelClass />} />
+                <Route path=":id" element={<ViewRombel />} />
               </Route>
               <Route path="motivational-words">
                 <Route path="new" element={<AddMotivational />} />

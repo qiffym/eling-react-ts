@@ -268,12 +268,13 @@ const ProfileForm: FC<Props> = ({
           {/* Nama Lengkap */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Nama Lengkap</span>
+              <span className="label-text">*Nama Lengkap</span>
             </label>
             <input
               type="text"
               name="name"
               maxLength={100}
+              required
               placeholder="nama"
               className="input input-bordered input-sm w-full"
               defaultValue={profileData.name}
@@ -291,10 +292,10 @@ const ProfileForm: FC<Props> = ({
           {/* Jenis Kelamin */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Jenis Kelamin</span>
+              <span className="label-text">*Jenis Kelamin</span>
             </label>
             <select
-              className="select select-bordered"
+              className="select select-bordered select-sm"
               name="gender"
               onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                 setInput({
@@ -316,7 +317,7 @@ const ProfileForm: FC<Props> = ({
           {/* Username */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Username</span>
+              <span className="label-text">*Username</span>
             </label>
             <label className="input-group">
               <span>
@@ -325,7 +326,7 @@ const ProfileForm: FC<Props> = ({
               <input
                 type="text"
                 name="username"
-                placeholder="info@site.com"
+                required
                 className="input input-bordered input-sm w-full"
                 defaultValue={profileData.username}
                 disabled={disable}
