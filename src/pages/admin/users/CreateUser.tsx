@@ -9,6 +9,8 @@ import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header/Header';
 import LoadingButton from '../../../components/loading/LoadingButton';
+import Toast from '../../../components/toast/Toast';
+import ToastError from '../../../components/toast/ToastError';
 import { useCreateUser } from '../../../hooks/useCreateUser';
 import { createUserReducer } from '../../../reducers/reducers';
 import { Types } from '../../../types/reducer-type';
@@ -26,7 +28,7 @@ const CreateUser = () => {
     password: '',
     confirm_password: '',
   });
-  const { isLoading, createUser } = useCreateUser();
+  const { isLoading, createUser, toast, errorToast, message } = useCreateUser();
 
   const cancelAction = (e: MouseEvent) => {
     e.preventDefault();
@@ -62,6 +64,17 @@ const CreateUser = () => {
       <Helmet>
         <title>Users | Create User</title>
       </Helmet>
+
+      {toast ? (
+        <div className="px-5">
+          <Toast desc={`${message}`} />
+        </div>
+      ) : null}
+      {errorToast ? (
+        <div className="px-5">
+          <ToastError desc={`${message} please try again!`} />
+        </div>
+      ) : null}
 
       <div className=" px-6 py-14">
         <Header>Create User</Header>

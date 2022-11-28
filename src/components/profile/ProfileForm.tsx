@@ -299,27 +299,12 @@ const ProfileForm: FC<Props> = ({
               }
               defaultValue={nullGender(profileData.gender)}
               disabled={disable}>
-              <option value="DEFAULT">-- Pilih Gender --</option>
+              <option value="DEFAULT" disabled>
+                -- Pilih Gender --
+              </option>
               <option value="L">Laki-laki</option>
               <option value="P">Perempuan</option>
             </select>
-
-            {/* <input
-              type="text"
-              name="gender"
-              placeholder="jenis kelamin"
-              className="input input-bordered input-sm w-full"
-              defaultValue={nullGender(profileData.gender)}
-              disabled={disable}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setInput({
-                  type: Types.EditProfileGender,
-                  payload: {
-                    gender: e.currentTarget.value,
-                  },
-                })
-              }
-            /> */}
           </div>
           {/* Username */}
           <div className="form-control">
