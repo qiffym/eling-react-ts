@@ -1,6 +1,8 @@
 import React from 'react';
 import { HiChevronLeft } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useFetch } from '../../../hooks/useFetch';
+import { AdminRombelDetailType } from '../../../types/admin-type';
 import { RombelType } from '../../../types/rombel-type';
 
 type LocationParams = {
@@ -10,6 +12,9 @@ type LocationParams = {
 const ViewRombel = () => {
   const navigate = useNavigate();
   const { rombel } = useLocation().state as LocationParams;
+  const { data } = useFetch(`/api/admin/resources/rombel-classes/${rombel.id}`);
+
+  const rombelData: AdminRombelDetailType = data;
 
   return (
     <section id="rombel-detail" className="py-20">
@@ -23,28 +28,30 @@ const ViewRombel = () => {
             <HiChevronLeft className="text-2xl" />
           </button>
           <h1 className="text-3xl font-bold">
-            Rombel Class Details: {rombel.name}
+            Rombel Class Details: {rombelData.name}
           </h1>
         </div>
 
         <div className="container mx-auto p-4 w-11/12 bg-white drop-shadow rounded-box mb-6">
           <div className="flex border-b px-6">
             <div className="w-1/5 py-4 font-bold">ID</div>
-            <div className="w-4/4 py-4 break-words">{rombel.id}</div>
+            <div className="w-4/4 py-4 break-words">
+              {rombelData.department_id}
+            </div>
           </div>
           <div className="flex border-b px-6">
             <div className="w-1/5 py-4 font-bold">Department</div>
             <div className="w-4/4 py-4 break-words">
-              {rombel.department_name}
+              {rombelData.department_name}
             </div>
           </div>
           <div className="flex border-b px-6">
             <div className="w-1/5 py-4 font-bold">Rombel Name</div>
-            <div className="w-4/4 py-4 break-words">{rombel.name}</div>
+            <div className="w-4/4 py-4 break-words">{rombelData.name}</div>
           </div>
           <div className="flex px-6">
             <div className="w-1/5 py-4 font-bold">Grade</div>
-            <div className="w-4/4 py-4 break-words">{rombel.grade}</div>
+            <div className="w-4/4 py-4 break-words">{rombelData.grade}</div>
           </div>
         </div>
       </section>
@@ -53,7 +60,7 @@ const ViewRombel = () => {
       <section>
         <div className="container mx-auto w-11/12 flex flex-row items-center mb-4 space-x-1">
           <h1 className="text-3xl font-bold">
-            Students: {rombel.total_student}
+            Students: {rombelData.total_student}
           </h1>
         </div>
         <div className="container mx-auto w-11/12 overflow-x-auto drop-shadow rounded-box mb-6">
@@ -67,13 +74,16 @@ const ViewRombel = () => {
                 <th>NISN</th>
               </tr>
             </thead>
-            <tbody>
-              <th className="text-center">1</th>
-              <th>{rombel.students?.id}</th>
-              <td>{rombel.students?.name}</td>
-              <td>{rombel.students?.nis}</td>
-              <td>{rombel.students?.nisn}</td>
-            </tbody>
+
+            {rombelData.students?.map((item, index) => (
+              <tbody>
+                <th className="text-center">{index + 1}</th>
+                <th>{item.id}</th>
+                <td>{item.name}</td>
+                <td>{item.nis}</td>
+                <td>{item.nisn}</td>
+              </tbody>
+            ))}
           </table>
         </div>
       </section>

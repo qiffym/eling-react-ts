@@ -4,15 +4,22 @@ import { useAdminEditRombel } from '../../hooks/useAdmin';
 type Props = {
   actionSave: () => void;
   modalAction: () => void;
+  rombelName: string;
+  rombelGrade: number;
 };
 
-const EditRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
-  const addAdminRombel = useAdminEditRombel();
+const EditRombelModal: FC<Props> = ({
+  actionSave,
+  modalAction,
+  rombelName,
+  rombelGrade,
+}) => {
+  const editAdminRombel = useAdminEditRombel();
   const [isDisable, setDisable] = useState(false);
   const [input, setInput] = useState({
     department_id: 1,
-    name: '',
-    grade: 0,
+    name: rombelName,
+    grade: rombelGrade,
   });
 
   useEffect(() => {
@@ -47,7 +54,7 @@ const EditRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
           </div>
           <form
             onSubmit={(e) => {
-              addAdminRombel(e, input.department_id, input.name, input.grade);
+              editAdminRombel(e, input.department_id, input.name, input.grade);
               actionSave();
             }}
             className="mt-4 flex flex-col space-y-5 w-full">
@@ -78,6 +85,7 @@ const EditRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
                   name="name"
                   type="text"
                   placeholder="X TKJ 1"
+                  defaultValue={input.name}
                   className="input input-bordered w-full"
                   onChange={handleChange}
                 />
@@ -90,6 +98,7 @@ const EditRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
                 <select
                   className="select select-bordered"
                   name="grade"
+                  defaultValue={input.grade}
                   onChange={handleChange}>
                   <option disabled selected>
                     -- Pilih Grade --
