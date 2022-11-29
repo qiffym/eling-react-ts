@@ -19,6 +19,10 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
     rombelID: 0,
     rombelName: '',
   });
+  const [rombelDataDelete, setRombelDataDelete] = useState({
+    rombelName: '',
+    rombelGrade: 0,
+  });
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
@@ -59,7 +63,13 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setOpenEditModal(true)}
+                    onClick={() => {
+                      setRombelDataDelete({
+                        rombelName: item.name,
+                        rombelGrade: item.grade,
+                      });
+                      setOpenEditModal(true);
+                    }}
                     className="btn btn-warning btn-xs mx-2 space-x-1">
                     <HiPencilAlt className="text-md" />
                     <span>Edit</span>
@@ -84,6 +94,8 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
       </div>
       {openEditModal ? (
         <EditRombelModal
+          rombelName={rombelDataDelete.rombelName}
+          rombelGrade={rombelDataDelete.rombelGrade}
           actionSave={() => {
             setOpenEditModal(false);
             dispatch({

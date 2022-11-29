@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
-import { LoginType } from '../../types/context-type';
 import useLogout from '../../hooks/useLogout';
+import { LoginType } from '../../types/context-type';
 
 const Appbar = () => {
   const user: LoginType = JSON.parse(localStorage.getItem('user') || '');

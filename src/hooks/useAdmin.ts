@@ -88,7 +88,7 @@ export const useAdminEditRombel = () => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
 
-  const addAdminRombel = async (
+  const editAdminRombel = async (
     e: FormEvent<HTMLFormElement>,
     id: number,
     name: string,
@@ -125,7 +125,7 @@ export const useAdminEditRombel = () => {
     }
   };
 
-  return addAdminRombel;
+  return editAdminRombel;
 };
 
 // Motivational Word
@@ -176,6 +176,7 @@ export const useAdminAddMotivationalWord = () => {
   return addAdminMotivationalWord;
 };
 
+// Delete Motivational Word
 export const useAdminDeleteMotivationalWord = () => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
