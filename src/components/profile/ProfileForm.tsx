@@ -90,7 +90,7 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIP</span>
                 <input
-                  type="number"
+                  type="text"
                   name="nip"
                   maxLength={18}
                   className="input input-bordered w-full"
@@ -119,7 +119,7 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIK</span>
                 <input
-                  type="number"
+                  type="text"
                   name="nik"
                   maxLength={16}
                   className="input input-bordered w-full"
@@ -181,7 +181,7 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIS</span>
                 <input
-                  type="number"
+                  type="text"
                   name="nis"
                   maxLength={8}
                   className="input input-bordered w-full"
@@ -207,7 +207,7 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NISN</span>
                 <input
-                  type="number"
+                  type="text"
                   name="nisn"
                   maxLength={10}
                   className="input input-bordered w-full"

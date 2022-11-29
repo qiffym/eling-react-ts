@@ -85,7 +85,7 @@ const ChangePasswordModal: FC<Props> = ({ actionSave, modalAction }) => {
                   onChange={handleChange}
                   placeholder="Old Password"
                   className={`input input-bordered w-full ${
-                    errMessage ? 'ring ring-error' : null
+                    errMessage ? 'input-error' : null
                   }`}
                 />
                 {/* Error Message */}
@@ -103,6 +103,8 @@ const ChangePasswordModal: FC<Props> = ({ actionSave, modalAction }) => {
                 <input
                   type="password"
                   name="new_password"
+                  minLength={5}
+                  maxLength={12}
                   onChange={handleChange}
                   placeholder="New Password"
                   className="input input-bordered w-full"
@@ -115,6 +117,8 @@ const ChangePasswordModal: FC<Props> = ({ actionSave, modalAction }) => {
                 </label>
                 <input
                   type="password"
+                  minLength={5}
+                  maxLength={12}
                   name="new_password_confirmation"
                   onChange={handleChange}
                   placeholder="New Password Confirmation"
