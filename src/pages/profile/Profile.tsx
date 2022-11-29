@@ -3,6 +3,7 @@ import { BiLogOut } from 'react-icons/bi';
 import { FaCamera, FaPencilAlt } from 'react-icons/fa';
 import { MdPassword } from 'react-icons/md';
 import Loading2ND from '../../components/loading/Loading2nd';
+import ChangePasswordModal from '../../components/profile/ChangePasswordModal';
 import ProfileForm from '../../components/profile/ProfileForm';
 import Toast from '../../components/toast/Toast';
 import ToastError from '../../components/toast/ToastError';
@@ -15,12 +16,13 @@ const Profile = () => {
   const { isLoading, data } = useFetch('/api/me');
   const [disable, setDisable] = useState(true);
   const [isSubmit, setSubmit] = useState(false);
-  const authLogout = useLogout();
+  const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false);
 
   const profileData: UserType = data;
   const { toast, errorToast, message, updateProfile } = useUpdateProfile(
     profileData.id,
   );
+  const authLogout = useLogout();
 
   return (
     <>
@@ -59,6 +61,9 @@ const Profile = () => {
               <div className="space-x-2 text-center space-y-2">
                 <button
                   type="button"
+                  onClick={() => {
+                    setOpenChangePasswordModal(true);
+                  }}
                   className="btn btn-sm md:btn-md btn-yellow-500 normal-case">
                   <MdPassword className="mr-2" />
                   Ganti Password
@@ -114,6 +119,24 @@ const Profile = () => {
           </>
         )}
       </section>
+
+      {/* Modal Change Password */}
+      {openChangePasswordModal ? (
+        <ChangePasswordModal
+          actionSave={() => {
+            // setOpenChangePasswordModal(false);
+            // dispatch({
+            //   type: Types.AddAssignmentSuccess,
+            //   payload: {
+            //     success: false,
+            //   },
+            // });
+          }}
+          modalAction={() => setOpenChangePasswordModal(false)}
+        />
+      ) : null}
+
+      {/* Toast Message */}
       {toast ? (
         <div className="px-5">
           <Toast desc={`${message}`} />
