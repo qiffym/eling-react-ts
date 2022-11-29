@@ -90,8 +90,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIP</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nip"
+                  maxLength={18}
                   className="input input-bordered w-full"
                   defaultValue={checkNull(profileData.teacher?.nip)}
                   disabled={disable}
@@ -118,8 +119,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIK</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nik"
+                  maxLength={16}
                   className="input input-bordered w-full"
                   defaultValue={checkNull(profileData.teacher?.nik)}
                   disabled={disable}
@@ -160,7 +162,9 @@ const ProfileForm: FC<Props> = ({
                 }
                 defaultValue={profileData.student?.rombel_id}
                 disabled={disable}>
-                <option value="DEFAULT">-- Pilih Rombel --</option>
+                <option value="DEFAULT" disabled>
+                  -- Pilih Rombel --
+                </option>
                 <option value={1}>X TKJ 1</option>
                 <option value={2}>X TKJ 2</option>
                 <option value={3}>XI TKJ 1</option>
@@ -177,8 +181,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NIS</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nis"
+                  maxLength={8}
                   className="input input-bordered w-full"
                   defaultValue={profileData.student?.nis}
                   disabled={disable}
@@ -202,8 +207,9 @@ const ProfileForm: FC<Props> = ({
               <label className="input-group">
                 <span>NISN</span>
                 <input
-                  type="text"
+                  type="number"
                   name="nisn"
+                  maxLength={10}
                   className="input input-bordered w-full"
                   defaultValue={profileData.student?.nisn}
                   disabled={disable}
@@ -262,11 +268,13 @@ const ProfileForm: FC<Props> = ({
           {/* Nama Lengkap */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Nama Lengkap</span>
+              <span className="label-text">*Nama Lengkap</span>
             </label>
             <input
               type="text"
               name="name"
+              maxLength={100}
+              required
               placeholder="nama"
               className="input input-bordered input-sm w-full"
               defaultValue={profileData.name}
@@ -284,10 +292,10 @@ const ProfileForm: FC<Props> = ({
           {/* Jenis Kelamin */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Jenis Kelamin</span>
+              <span className="label-text">*Jenis Kelamin</span>
             </label>
             <select
-              className="select select-bordered"
+              className="select select-bordered select-sm"
               name="gender"
               onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                 setInput({
@@ -299,32 +307,17 @@ const ProfileForm: FC<Props> = ({
               }
               defaultValue={nullGender(profileData.gender)}
               disabled={disable}>
-              <option value="DEFAULT">-- Pilih Gender --</option>
+              <option value="DEFAULT" disabled>
+                -- Pilih Gender --
+              </option>
               <option value="L">Laki-laki</option>
               <option value="P">Perempuan</option>
             </select>
-
-            {/* <input
-              type="text"
-              name="gender"
-              placeholder="jenis kelamin"
-              className="input input-bordered input-sm w-full"
-              defaultValue={nullGender(profileData.gender)}
-              disabled={disable}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setInput({
-                  type: Types.EditProfileGender,
-                  payload: {
-                    gender: e.currentTarget.value,
-                  },
-                })
-              }
-            /> */}
           </div>
           {/* Username */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Username</span>
+              <span className="label-text">*Username</span>
             </label>
             <label className="input-group">
               <span>
@@ -333,7 +326,7 @@ const ProfileForm: FC<Props> = ({
               <input
                 type="text"
                 name="username"
-                placeholder="info@site.com"
+                required
                 className="input input-bordered input-sm w-full"
                 defaultValue={profileData.username}
                 disabled={disable}
@@ -358,7 +351,7 @@ const ProfileForm: FC<Props> = ({
                 <FaEnvelope />
               </span>
               <input
-                type="text"
+                type="email"
                 name="email"
                 placeholder="ryojino@example.com"
                 className="input input-bordered input-sm w-full"
@@ -388,6 +381,8 @@ const ProfileForm: FC<Props> = ({
                 disabled={disable}
                 type="date"
                 name="birthday"
+                min="1960-1-31"
+                max="2021-12-31"
                 className="input input-bordered input-sm w-full"
                 defaultValue={checkNull(profileData.birthday)}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>

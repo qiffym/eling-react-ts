@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 const useUpdateUser = () => {
   const [isLoading, setLoading] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [errorToast, setErrorToast] = useState(false);
+  const [message, setMessage] = useState('');
+
   const baseURL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user') || '');
@@ -16,6 +20,7 @@ const useUpdateUser = () => {
       email: string;
       username: string;
       password: string | undefined;
+      confirm_password: string | undefined;
       gender: string;
       birthday: string;
       status: number;
@@ -42,6 +47,7 @@ const useUpdateUser = () => {
             email: input.email,
             username: input.username,
             password: input?.password,
+            confirm_password: input?.confirm_password,
             gender: input.gender,
             birthday: input.birthday,
             status: input.status,
@@ -52,15 +58,29 @@ const useUpdateUser = () => {
         },
       );
       const result = await response.json();
-      console.log(result);
-      navigate(-1);
+      if (response.status >= 200 && response.status < 300) {
+        setToast(true);
+        setMessage(result.message);
+        setTimeout(() => setToast(false), 3000);
+        // navigate(`/resources/users/${}`);
+        navigate(-1);
+      } else {
+        setErrorToast(true);
+        setMessage(result.message);
+        setTimeout(() => setErrorToast(false), 3000);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
+      setToast(false);
       setLoading(false);
     }
   };
 
   return {
+    toast,
+    errorToast,
+    message,
     isLoading,
     updateUser,
   };

@@ -6,6 +6,7 @@ import { useAdminDeleteRombel } from '../../../hooks/useAdmin';
 import ModalDelete from '../../modal/ModalDelete';
 import { MyContext } from '../../../context/context';
 import { Types } from '../../../types/reducer-type';
+import EditRombelModal from '../../modal/EditRombelModal';
 
 type Props = {
   rombelData: RombelType[];
@@ -18,6 +19,7 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
     rombelID: 0,
     rombelName: '',
   });
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
   const { dispatch } = useContext(MyContext);
@@ -48,7 +50,7 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
                     onClick={() =>
                       navigate(`${item.id}`, {
                         state: {
-                          user: item,
+                          rombel: item,
                         },
                       })
                     }
@@ -57,13 +59,7 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
                   </button>
                   <button
                     type="button"
-                    onClick={() =>
-                      navigate(`${item.id}/edit`, {
-                        state: {
-                          user: item,
-                        },
-                      })
-                    }
+                    onClick={() => setOpenEditModal(true)}
                     className="btn btn-warning btn-xs mx-2 space-x-1">
                     <HiPencilAlt className="text-md" />
                     <span>Edit</span>
@@ -86,6 +82,21 @@ const RombelTable: FC<Props> = ({ rombelData }) => {
           </tbody>
         </table>
       </div>
+      {openEditModal ? (
+        <EditRombelModal
+          actionSave={() => {
+            setOpenEditModal(false);
+            dispatch({
+              type: Types.AddAssignmentSuccess,
+              payload: {
+                success: false,
+              },
+            });
+          }}
+          modalAction={() => setOpenEditModal(false)}
+        />
+      ) : null}
+
       {openModalDelete ? (
         <ModalDelete
           isOpen={openModalDelete}

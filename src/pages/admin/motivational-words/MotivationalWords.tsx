@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiPlusCircle } from 'react-icons/hi';
 // import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,9 @@ import MotivationalWordsTable from '../../../components/admin/motivational-words
 import Header from '../../../components/header/Header';
 import Loading2ND from '../../../components/loading/Loading2nd';
 import AddMotivationalModal from '../../../components/modal/AddMotivationalModal';
+import { MyContext } from '../../../context/context';
 import { useFetch } from '../../../hooks/useFetch';
+import { Types } from '../../../types/reducer-type';
 
 const MotivationalWords = () => {
   const { isLoading, data } = useFetch(
@@ -15,6 +17,7 @@ const MotivationalWords = () => {
   const [searchData, setSearchData] = useState([]);
   // const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const { dispatch } = useContext(MyContext);
 
   const searchUser = (value: string) => {
     setSearchData(
@@ -61,7 +64,18 @@ const MotivationalWords = () => {
           <MotivationalWordsTable motivationalData={searchData} />
         )}
         {openModal ? (
-          <AddMotivationalModal modalAction={() => setOpenModal(false)} />
+          <AddMotivationalModal
+            actionSave={() => {
+              setOpenModal(false);
+              dispatch({
+                type: Types.AddAssignmentSuccess,
+                payload: {
+                  success: false,
+                },
+              });
+            }}
+            modalAction={() => setOpenModal(false)}
+          />
         ) : null}
       </div>
     </>

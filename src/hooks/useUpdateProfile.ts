@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 const useUpdateProfile = (id: number) => {
   const [toast, setToast] = useState(false);
   const [errorToast, setErrorToast] = useState(false);
+  const [message, setMessage] = useState('');
   const baseURL = process.env.REACT_APP_BASE_URL;
 
   const user = JSON.parse(localStorage.getItem('user') || '');
@@ -58,9 +59,11 @@ const useUpdateProfile = (id: number) => {
       console.log(result);
       if (response.status >= 200 && response.status < 300) {
         setToast(true);
+        setMessage(result.message);
         setTimeout(() => setToast(false), 3000);
       } else {
         setErrorToast(true);
+        setMessage(result.message);
         setTimeout(() => setErrorToast(false), 3000);
       }
     } catch (error) {
@@ -72,6 +75,7 @@ const useUpdateProfile = (id: number) => {
   return {
     toast,
     errorToast,
+    message,
     updateProfile,
   };
 };
