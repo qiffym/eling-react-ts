@@ -6,7 +6,7 @@ import { useGrading, useGradingAssignment } from '../../../../hooks/useTeacher';
 import { GradingAssignmentType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
 import filedownload from '../../../../assets/images/filedownload.png';
-import ryujin from '../../../../assets/ryujin1.jpg';
+import { GradedType } from '../../../../types/graded-type';
 
 type Props = {
   classID: number;
@@ -23,6 +23,8 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
   const [grade, setGrade] = useState(0);
   const addGrade = useGrading(classID, contentID, assignmentID);
   const { dispatch } = useContext(MyContext);
+
+  const gradedData: GradedType = graded;
 
   const text = '185150601111008_QIFF YA MUHAMMAD_LAPORAN PRAKTIKUM BAB 10';
 
@@ -233,40 +235,40 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
               <div className="container mx-auto mt-10">
                 <div className="grid grid-cols-5 gap-5">
                   {/* Card 1 */}
-                  <div className="card w-40 bg-base-200 shadow-xl">
-                    <div className="card-body p-4">
-                      <div className="flex space-x-2">
-                        <div className="avatar">
-                          <div className="mask mask-circle w-8 h-8">
-                            <img
-                              src={ryujin}
-                              alt="Avatar Tailwind CSS Component"
-                            />
+                  {gradedData.data.map((item) => (
+                    <div className="card w-40 bg-base-200 shadow-xl">
+                      <div className="card-body p-4">
+                        <div className="flex space-x-2">
+                          <div className="avatar">
+                            <div className="mask mask-circle w-8 h-8">
+                              <img src={item.avatar} alt={item.name} />
+                            </div>
                           </div>
+                          <h3 className="break-words font-medium text-sm">
+                            {item.name}
+                          </h3>
                         </div>
-                        <h3 className="break-words font-medium text-sm">
-                          Qiff Ya Muhammad bin Fardan
-                        </h3>
-                      </div>
-                      <figure className="py-2">
-                        <img
-                          src={filedownload}
-                          alt="file_download"
-                          width={65}
-                          height="200px"
-                          className="mask mask-square opacity-30"
-                        />
-                      </figure>
-                      <div className="card-actions justify-start">
-                        <span className="link-hover cursor-pointer text-sm">
-                          {text.slice(0, 16)}...
-                        </span>
+
+                        <figure className="py-2">
+                          <img
+                            src={filedownload}
+                            alt="file_download"
+                            width={65}
+                            height="200px"
+                            className="mask mask-square opacity-30"
+                          />
+                        </figure>
+                        <div className="card-actions justify-start">
+                          <span className="link-hover cursor-pointer text-sm">
+                            {text.slice(0, 16)}...
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
 
                   {/* Card 1 */}
-                  <div className="card w-40 bg-base-200 shadow-xl">
+                  {/* <div className="card w-40 bg-base-200 shadow-xl">
                     <div className="card-body p-4">
                       <div className="flex space-x-2">
                         <div className="avatar">
@@ -296,7 +298,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </section>

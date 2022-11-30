@@ -1,11 +1,15 @@
 /* eslint-disable no-console */
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import { MyContext } from '../context/context';
+import { Types } from '../types/reducer-type';
 
 const useUpdateProfile = (id: number) => {
   const [toast, setToast] = useState(false);
   const [errorToast, setErrorToast] = useState(false);
+  const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
   const baseURL = process.env.REACT_APP_BASE_URL;
+  const { dispatch } = useContext(MyContext);
 
   const user = JSON.parse(localStorage.getItem('user') || '');
 
@@ -59,20 +63,29 @@ const useUpdateProfile = (id: number) => {
       console.log(result);
       if (response.status >= 200 && response.status < 300) {
         setToast(true);
+        setError(false);
         setMessage(result.message);
+        dispatch({
+          type: Types.UpdateSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
         setTimeout(() => setToast(false), 3000);
       } else {
         setErrorToast(true);
+        setError(true);
         setMessage(result.message);
         setTimeout(() => setErrorToast(false), 3000);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       setToast(false);
     }
   };
 
   return {
+    error,
     toast,
     errorToast,
     message,

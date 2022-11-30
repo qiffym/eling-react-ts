@@ -3,18 +3,21 @@ import React, { FC, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { HiOutlineChevronDown, HiChevronLeft } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
-import { LoginType } from '../../types/context-type';
 import useLogout from '../../hooks/useLogout';
+import { useFetch } from '../../hooks/useFetch';
+import { UserType } from '../../types/user-type';
 
 type Props = {
   headerTitle?: string;
 };
 
 const AppBarClass: FC<Props> = ({ headerTitle }) => {
-  const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
+  const { data } = useFetch('/api/me');
   const authLogout = useLogout();
   const [color, setColor] = useState(false);
   const navigate = useNavigate();
+
+  const userData: UserType = data;
 
   const scrollAppbar = () => {
     if (window.scrollY >= 150) {
@@ -61,10 +64,10 @@ const AppBarClass: FC<Props> = ({ headerTitle }) => {
               <div className="flex flex-row items-center space-x-2">
                 <div className="avatar ">
                   <div className="w-9 rounded-full ring-2 ring-slate-300 ring-offset-base-100 ring-offset-1">
-                    <img src={user.user.avatar} alt={user.user.name} />
+                    <img src={userData.avatar} alt={userData.name} />
                   </div>
                 </div>
-                <h1>{user.user.name}</h1>
+                <h1>{userData.name}</h1>
               </div>
               <HiOutlineChevronDown />
             </label>

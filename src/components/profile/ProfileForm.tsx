@@ -3,10 +3,12 @@ import React, {
   createRef,
   FC,
   LegacyRef,
+  useContext,
   useEffect,
   useReducer,
 } from 'react';
 import { FaBirthdayCake, FaEnvelope, FaUser } from 'react-icons/fa';
+import { MyContext } from '../../context/context';
 import { editProfileReducer } from '../../reducers/reducers';
 import { Types } from '../../types/reducer-type';
 import { UserType } from '../../types/user-type';
@@ -28,6 +30,7 @@ const ProfileForm: FC<Props> = ({
 }) => {
   const user = JSON.parse(localStorage.getItem('user') || '');
   const submitButton: LegacyRef<HTMLButtonElement> | undefined = createRef();
+  const { dispatch } = useContext(MyContext);
 
   function convertToRoleNumber(role: string) {
     switch (role) {
@@ -239,6 +242,12 @@ const ProfileForm: FC<Props> = ({
     if (isSubmit) {
       submitButton.current?.click();
       setSubmit(false);
+      dispatch({
+        type: Types.UpdateSuccess,
+        payload: {
+          success: false,
+        },
+      });
     }
   }, [isSubmit]);
 
