@@ -18,3 +18,10 @@ export interface GradedType {
     },
   ];
 }
+
+export interface SubmissionType {
+  assignment_id: string;
+  file: string;
+  submitted_at: string;
+  score: number;
+}
