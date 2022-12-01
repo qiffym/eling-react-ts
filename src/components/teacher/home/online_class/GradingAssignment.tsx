@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import { FaUsers } from 'react-icons/fa';
 import { MdKeyboardReturn } from 'react-icons/md';
+
 import { MyContext } from '../../../../context/context';
 import { useGrading, useGradingAssignment } from '../../../../hooks/useTeacher';
 import { GradingAssignmentType } from '../../../../types/class-type';
@@ -114,6 +115,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                 <h3 className="text-xl font-bold bg-slate-200 p-2 mb-2">
                   Ditugaskan
                 </h3>
+
                 {/* Baris ke-1 */}
                 {unsubmitted?.data?.map((item: GradingAssignmentType) => (
                   <div
@@ -150,6 +152,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                 <h3 className="text-xl font-bold bg-slate-200 p-2 mb-2">
                   Dinilai
                 </h3>
+
                 {/* Baris ke-1 */}
                 {graded?.data?.map((item: GradingAssignmentType) => (
                   <div

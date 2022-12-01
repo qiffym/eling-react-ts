@@ -4,16 +4,13 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
 import useLogout from '../../hooks/useLogout';
-import { useFetch } from '../../hooks/useFetch';
-import { UserType } from '../../types/user-type';
+import { useMe } from '../../hooks/useMe';
 
 const Appbar = () => {
-  const { data } = useFetch('/api/me');
+  const { profile } = useMe();
   const authLogout = useLogout();
   const pathLoc = useLocation().pathname;
   const [color, setColor] = useState(false);
-
-  const userData: UserType = data;
 
   const scrollAppbar = () => {
     if (window.scrollY >= 40) {
@@ -36,7 +33,7 @@ const Appbar = () => {
       case '/resources/motivational-words':
         return 'Motivational Words';
       case '/me':
-        return userData.name;
+        return profile?.name;
       default:
         return '';
     }
@@ -74,10 +71,10 @@ const Appbar = () => {
                 <div className="flex flex-row items-center space-x-2">
                   <div className="avatar ">
                     <div className="w-9 rounded-full ring-2 ring-slate-300 ring-offset-base-100 ring-offset-1">
-                      <img src={userData.avatar} alt={userData.name} />
+                      <img src={profile?.avatar} alt={profile?.name} />
                     </div>
                   </div>
-                  <h1>{userData.name}</h1>
+                  <h1>{profile?.name}</h1>
                 </div>
                 <HiOutlineChevronDown />
               </label>
