@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import { FaUsers } from 'react-icons/fa';
 import { MdKeyboardReturn } from 'react-icons/md';
@@ -23,6 +25,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
   );
   const [grade, setGrade] = useState(0);
   const [specific, setSpecific] = useState(false);
+  const [show, setShow] = useState(false);
 
   const [submissionData, setSubmissionData] = useState<SubmissionType>();
   const [submissionStudentName, setSubmissionStudentName] = useState('');
@@ -40,7 +43,11 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
           <div className="p-4 h-[85vh] rounded-box w-4/12 bg-white drop-shadow-lg overflow-auto">
             <div className="flex flex-row items-center space-x-2">
               <FaUsers className="text-2xl rounded-full" />
-              <span className="hover:link text-sm">All users</span>
+              <span
+                onClick={() => setShow(!show)}
+                className="hover:link text-sm">
+                All users
+              </span>
             </div>
             <hr className="my-4" />
 
@@ -238,115 +245,121 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
               </div>
 
               {/* File Yang Diserahkan Siswa */}
-              <div className="container mx-auto mt-10">
-                <div className="grid grid-cols-5 gap-5">
-                  {/* Card 1 */}
-                  {gradedData?.data?.map((item) => (
-                    <div className="card w-40 bg-base-200 shadow-xl">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSubmissionStudentName(item.name);
-                          setSubmissionData(item.submission);
-                          setSpecific(true);
-                        }}
-                        className="card-body flex items-center p-4 hover:cursor-pointer">
-                        <div className="flex space-x-2">
-                          <div className="avatar">
-                            <div className="mask mask-circle w-8 h-8">
-                              <img src={item.avatar} alt={item.name} />
+              {show ? (
+                <div className="container mx-auto mt-10">
+                  <div className="grid grid-cols-5 gap-5">
+                    {/* Card 1 */}
+                    {gradedData?.data?.map((item) => (
+                      <div className="card w-40 bg-base-200 shadow-xl">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSubmissionStudentName(item.name);
+                            setSubmissionData(item.submission);
+                            setSpecific(true);
+                          }}
+                          className="card-body flex items-center p-4 hover:cursor-pointer">
+                          <div className="flex space-x-2">
+                            <div className="avatar">
+                              <div className="mask mask-circle w-8 h-8">
+                                <img src={item.avatar} alt={item.name} />
+                              </div>
                             </div>
+                            <h3 className="break-words font-medium text-sm">
+                              {item.name}
+                            </h3>
                           </div>
-                          <h3 className="break-words font-medium text-sm">
-                            {item.name}
-                          </h3>
-                        </div>
 
-                        <figure className="py-2">
-                          <img
-                            src={filedownload}
-                            alt="file_download"
-                            width={65}
-                            height="200px"
-                            className="mask mask-square opacity-30"
-                          />
-                        </figure>
-                        <div className="card-actions justify-start">
-                          <span className="link-hover cursor-pointer text-sm">
-                            {item.submission.file.slice(0, 16)}...
-                          </span>
-                        </div>
-                      </button>
-                    </div>
-                  ))}
+                          <figure className="py-2">
+                            <img
+                              src={filedownload}
+                              alt="file_download"
+                              width={65}
+                              height="200px"
+                              className="mask mask-square opacity-30"
+                            />
+                          </figure>
+                          <div className="card-actions justify-start">
+                            <span className="link-hover cursor-pointer text-sm">
+                              {item.submission.file.slice(0, 16)}...
+                            </span>
+                          </div>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </section>
 
             {/* Specific Submission */}
-            {specific ? (
-              <section id="specific-submission">
-                <div className="flex flex-col space-y-3">
-                  <div className="flex justify-end">
-                    <div
-                      className="tooltip tooltip-left"
-                      data-tip="back to summery">
-                      <button
-                        type="button"
-                        onClick={() => setSpecific(false)}
-                        className="btn btn-sm btn-circle btn-outline">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-2xl font-medium">
-                      {submissionStudentName}
-                    </h3>
-                    <h3 className="text-xl opacity-80">
-                      {submissionData?.score}
-                    </h3>
-                  </div>
+            {show ? (
+              <>
+                {specific ? (
+                  <section id="specific-submission">
+                    <div className="flex flex-col space-y-3">
+                      <div className="flex justify-end">
+                        <div
+                          className="tooltip tooltip-left"
+                          data-tip="back to summery">
+                          <button
+                            type="button"
+                            onClick={() => setSpecific(false)}
+                            className="btn btn-sm btn-circle btn-outline">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-2xl font-medium">
+                          {submissionStudentName}
+                        </h3>
+                        <h3 className="text-xl opacity-80">
+                          {submissionData?.score}
+                        </h3>
+                      </div>
 
-                  {/* File Download */}
-                  {/* Tambahkan onClick menuju link url file nya */}
-                  <div className="flex hover:opacity-80 cursor-pointer">
-                    <div className="flex space-x-4 items-center w-[60%] border border-slate-300 rounded-box">
-                      <figure className="p-3 border-r border-slate-300">
-                        <img
-                          src={filedownload}
-                          alt="file_download"
-                          width={65}
-                          height="200px"
-                          className="mask mask-square opacity-40"
-                        />
-                      </figure>
-                      <div className="grow">
-                        <a
-                          href={submissionData?.file}
-                          target="_blank"
-                          className="font-medium"
-                          rel="noreferrer">
-                          {submissionData?.file.slice(0, 48)}...
-                        </a>
-                        <h2 className="opacity-90">PDF</h2>
+                      {/* File Download */}
+                      {/* Tambahkan onClick menuju link url file nya */}
+                      <div className="flex hover:opacity-80 cursor-pointer">
+                        <div className="flex space-x-4 items-center w-[60%] border border-slate-300 rounded-box">
+                          <figure className="p-3 border-r border-slate-300">
+                            <img
+                              src={filedownload}
+                              alt="file_download"
+                              width={65}
+                              height="200px"
+                              className="mask mask-square opacity-40"
+                            />
+                          </figure>
+                          <div className="grow">
+                            <a
+                              href={submissionData?.file}
+                              target="_blank"
+                              className="font-medium"
+                              rel="noreferrer">
+                              {submissionData?.file.slice(0, 48)}...
+                            </a>
+                            <h2 className="opacity-90">PDF</h2>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </section>
+                  </section>
+                ) : null}
+              </>
             ) : null}
           </div>
         </div>
