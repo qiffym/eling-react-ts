@@ -249,6 +249,44 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                 <div className="container mx-auto mt-10">
                   <div className="grid grid-cols-5 gap-5">
                     {/* Card 1 */}
+                    {ungrading?.data?.map((item: any) => (
+                      <div className="card w-40 bg-base-200 shadow-xl">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSubmissionStudentName(item.name);
+                            setSubmissionData(item.submission);
+                            setSpecific(true);
+                          }}
+                          className="card-body flex items-center p-4 hover:cursor-pointer">
+                          <div className="flex space-x-2">
+                            <div className="avatar">
+                              <div className="mask mask-circle w-8 h-8">
+                                <img src={item.avatar} alt={item.name} />
+                              </div>
+                            </div>
+                            <h3 className="break-words font-medium text-sm">
+                              {item.name}
+                            </h3>
+                          </div>
+
+                          <figure className="py-2">
+                            <img
+                              src={filedownload}
+                              alt="file_download"
+                              width={65}
+                              height="200px"
+                              className="mask mask-square opacity-30"
+                            />
+                          </figure>
+                          <div className="card-actions justify-start">
+                            <span className="link-hover cursor-pointer text-sm">
+                              {item.submission.file.slice(0, 16)}...
+                            </span>
+                          </div>
+                        </button>
+                      </div>
+                    ))}
                     {gradedData?.data?.map((item) => (
                       <div className="card w-40 bg-base-200 shadow-xl">
                         <button
