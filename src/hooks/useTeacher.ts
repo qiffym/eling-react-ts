@@ -44,6 +44,7 @@ export const useTeacherComment = () => {
           success: result.success,
         },
       });
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -96,6 +97,7 @@ export const useTeacherReplyComment = () => {
           success: result.success,
         },
       });
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }

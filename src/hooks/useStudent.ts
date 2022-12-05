@@ -131,6 +131,7 @@ export const useStudentComment = () => {
           success: result.success,
         },
       });
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -183,6 +184,7 @@ export const useStudentReplyComment = () => {
           success: result.success,
         },
       });
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
