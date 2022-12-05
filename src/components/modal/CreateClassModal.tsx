@@ -64,7 +64,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
                 }}
                 className="select select-bordered w-full ">
                 <option value="DEFAULT" disabled>
-                  -- Rombel ID --
+                  -- Pilih Rombel --
                 </option>
                 <option value="1">X TKJ 1</option>
                 <option value="2">X TKJ 2</option>

@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
-import { LoginType } from '../../types/context-type';
 import useLogout from '../../hooks/useLogout';
+import { useMe } from '../../hooks/useMe';
 
 const Appbar = () => {
-  const user: LoginType = JSON.parse(localStorage.getItem('user') || '');
+  const { profile } = useMe();
   const authLogout = useLogout();
   const pathLoc = useLocation().pathname;
   const [color, setColor] = useState(false);
@@ -33,7 +33,7 @@ const Appbar = () => {
       case '/resources/motivational-words':
         return 'Motivational Words';
       case '/me':
-        return user.user.name;
+        return profile?.name;
       default:
         return '';
     }
@@ -71,10 +71,10 @@ const Appbar = () => {
                 <div className="flex flex-row items-center space-x-2">
                   <div className="avatar ">
                     <div className="w-9 rounded-full ring-2 ring-slate-300 ring-offset-base-100 ring-offset-1">
-                      <img src={user.user.avatar} alt={user.user.name} />
+                      <img src={profile?.avatar} alt={profile?.name} />
                     </div>
                   </div>
-                  <h1>{user.user.name}</h1>
+                  <h1>{profile?.name}</h1>
                 </div>
                 <HiOutlineChevronDown />
               </label>
@@ -83,7 +83,7 @@ const Appbar = () => {
                 tabIndex={0}
                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                  <NavLink to="me">My Profile</NavLink>
+                  <NavLink to="/me">My Profile</NavLink>
                 </li>
                 <hr />
                 <li className="font-bold hover:text-red-500">

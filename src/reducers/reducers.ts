@@ -7,6 +7,7 @@ import {
   AddForumType,
   AddMaterialSuccessType,
   AddMaterialType,
+  AddSubmissionSuccessType,
   ClassListType,
   CreateClassSuccessType,
   CreateClassType,
@@ -17,6 +18,7 @@ import {
   DeleteSuccessType,
   EditForumSuccessType,
   EditForumType,
+  EditProfileType,
   LoginType,
   ReplyCommentSuccessType,
   UpdateSuccessType,
@@ -32,6 +34,7 @@ import {
   AddForumSuccessPayload,
   AddMaterialPayload,
   AddMaterialSuccessPayload,
+  AddSubmissionSuccessPayload,
   ClassPayload,
   CreateClassPayload,
   CreateClassSuccessPayload,
@@ -42,6 +45,7 @@ import {
   DeleteSuccessPayload,
   EditForumPayload,
   EditForumSuccessPayload,
+  EditProfilePayload,
   LoginPayload,
   ReplyCommentSuccessPayload,
   UpdateSuccessPayload,
@@ -285,6 +289,91 @@ export const updateUserReducer = (
         confirm_password: action.payload?.confirm_password,
       };
 
+    default:
+      return state;
+  }
+};
+
+export type EditProfileAction =
+  ActionMap<EditProfilePayload>[keyof ActionMap<EditProfilePayload>];
+
+export const editProfileReducer = (
+  state: EditProfileType,
+  action: EditProfileAction,
+) => {
+  switch (action.type) {
+    case 'EDIT_PROFILE_ROLE':
+      return {
+        ...state,
+        role: action.payload.role,
+      };
+    case 'EDIT_PROFILE_NAME':
+      return {
+        ...state,
+        name: action.payload.name,
+      };
+    case 'EDIT_PROFILE_USERNAME':
+      return {
+        ...state,
+        username: action.payload.username,
+      };
+    case 'EDIT_PROFILE_EMAIL':
+      return {
+        ...state,
+        email: action.payload.email,
+      };
+
+    case 'EDIT_PROFILE_GENDER':
+      return {
+        ...state,
+        gender: action.payload.gender,
+      };
+    case 'EDIT_PROFILE_RELIGION':
+      return {
+        ...state,
+        religion: action.payload.religion,
+      };
+    case 'EDIT_PROFILE_BIRTHDAY':
+      return {
+        ...state,
+        birthday: action.payload.birthday,
+      };
+    case 'EDIT_PROFILE_ADDRESS':
+      return {
+        ...state,
+        address: action.payload.address,
+      };
+
+    case 'EDIT_PROFILE_TELPON':
+      return {
+        ...state,
+        telpon: action.payload.telpon,
+      };
+    case 'EDIT_PROFILE_NIK':
+      return {
+        ...state,
+        nik: action.payload?.nik,
+      };
+    case 'EDIT_PROFILE_NIP':
+      return {
+        ...state,
+        nip: action.payload?.nip,
+      };
+    case 'EDIT_PROFILE_NIS':
+      return {
+        ...state,
+        nis: action.payload?.nis,
+      };
+    case 'EDIT_PROFILE_NISN':
+      return {
+        ...state,
+        nisn: action.payload?.nisn,
+      };
+    case 'EDIT_PROFILE_ROMBEL':
+      return {
+        ...state,
+        rombel: action.payload?.rombel,
+      };
     default:
       return state;
   }
@@ -572,6 +661,25 @@ export const editForumSuccessReducer = (
 ) => {
   switch (action.type) {
     case 'EDIT_FORUM_SUCCESS':
+      return {
+        ...state,
+        success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type AddSubmissionSuccessAction =
+  ActionMap<AddSubmissionSuccessPayload>[keyof ActionMap<AddSubmissionSuccessPayload>];
+
+export const addSubmissionSuccessReducer = (
+  state: AddSubmissionSuccessType,
+  action: AddSubmissionSuccessAction,
+) => {
+  switch (action.type) {
+    case 'ADD_SUBMISSION_SUCCESS':
       return {
         ...state,
         success: action.payload.success,

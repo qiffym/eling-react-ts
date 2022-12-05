@@ -19,7 +19,7 @@ export const ClassContent: FC<Props> = ({ classId }) => {
   return (
     <>
       {/* Section Content Class */}
-      <section id="content-class">
+      <section id="content-class" className="mb-16">
         <div className="container mx-auto w-11/12">
           <div id="header-content" className="mb-5">
             <h2 className="text-lg font-bold">Materi Pembelajaran</h2>

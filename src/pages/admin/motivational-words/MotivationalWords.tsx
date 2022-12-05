@@ -1,11 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { HiPlusCircle } from 'react-icons/hi';
 // import { useNavigate } from 'react-router-dom';
 import MotivationalWordsTable from '../../../components/admin/motivational-words/MotivationalWordsTable';
 import Header from '../../../components/header/Header';
-import Loading from '../../../components/loading/Loading';
+import Loading2ND from '../../../components/loading/Loading2nd';
 import AddMotivationalModal from '../../../components/modal/AddMotivationalModal';
+import { MyContext } from '../../../context/context';
 import { useFetch } from '../../../hooks/useFetch';
+import { Types } from '../../../types/reducer-type';
 
 const MotivationalWords = () => {
   const { isLoading, data } = useFetch(
@@ -14,6 +17,7 @@ const MotivationalWords = () => {
   const [searchData, setSearchData] = useState([]);
   // const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const { dispatch } = useContext(MyContext);
 
   const searchUser = (value: string) => {
     setSearchData(
@@ -50,16 +54,28 @@ const MotivationalWords = () => {
             type="button"
             onClick={() => setOpenModal(true)}
             className="btn btn-primary">
+            <HiPlusCircle className="mr-1 text-lg" />
             Add Motivational
           </button>
         </div>
         {isLoading ? (
-          <Loading />
+          <Loading2ND />
         ) : (
           <MotivationalWordsTable motivationalData={searchData} />
         )}
         {openModal ? (
-          <AddMotivationalModal modalAction={() => setOpenModal(false)} />
+          <AddMotivationalModal
+            actionSave={() => {
+              setOpenModal(false);
+              dispatch({
+                type: Types.AddAssignmentSuccess,
+                payload: {
+                  success: false,
+                },
+              });
+            }}
+            modalAction={() => setOpenModal(false)}
+          />
         ) : null}
       </div>
     </>

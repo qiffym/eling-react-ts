@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import { HiPlusCircle } from 'react-icons/hi';
 import Header from '../../../components/header/Header';
 import Loading from '../../../components/loading/Loading';
 import Table from '../../../components/admin/users/Table';
@@ -55,6 +56,7 @@ const Users = () => {
             type="button"
             onClick={() => navigate('new')}
             className="btn btn-primary">
+            <HiPlusCircle className="mr-1 text-lg" />
             Add User
           </button>
         </div>

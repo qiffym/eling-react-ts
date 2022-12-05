@@ -35,7 +35,7 @@ const ViewUser = () => {
         <h1 className="text-3xl font-bold">User Detail</h1>
       </div>
       <div className="overflow-x-auto bg-white rounded-lg p-2">
-        <table className="table w-full px-10">
+        <table className="table w-4/5 px-10">
           <tbody>
             <tr>
               <td>
@@ -45,52 +45,43 @@ const ViewUser = () => {
                   alt={user.name}
                 />
               </td>
-              <td />
-              <td />
               <td>
                 <h2 className="font-bold text-xl">{user.name}</h2>
               </td>
             </tr>
 
             <tr>
+              <td className="text-gray-400">ID</td>
+              <td className="font-semibold">{user.id}</td>
+            </tr>
+
+            <tr>
               <td className="text-gray-400">Username</td>
-              <td />
-              <td />
               <td className="font-semibold">{user.username}</td>
             </tr>
 
             <tr>
               <td className="text-gray-400">Birthday</td>
-              <td />
-              <td />
               <td className="font-semibold">{user.birthday}</td>
             </tr>
 
             <tr>
               <td className="text-gray-400">Religion</td>
-              <td />
-              <td />
               <td className="font-semibold">{user.religion}</td>
             </tr>
 
             <tr>
               <td className="text-gray-400">Gender</td>
-              <td />
-              <td />
               <td className="font-semibold">{convertGender()}</td>
             </tr>
 
             <tr>
               <td className="text-gray-400">Email</td>
-              <td />
-              <td />
               <td className="font-semibold">{user.email}</td>
             </tr>
 
             <tr>
               <td className="text-gray-400">Address</td>
-              <td />
-              <td />
               <td className="font-semibold">{user.address}</td>
             </tr>
           </tbody>

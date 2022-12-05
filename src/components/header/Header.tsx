@@ -5,7 +5,7 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ children }) => (
-  <h1 className="hidden sm:block mb-4 text-3xl font-bold">{children}</h1>
+  <h1 className="block mb-4 text-3xl font-bold">{children}</h1>
 );
 
 export default Header;

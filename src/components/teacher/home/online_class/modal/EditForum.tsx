@@ -29,8 +29,8 @@ const EditForum: FC<Props> = ({
   desc,
 }) => {
   const [input, setInput] = useReducer(editForumReducer, {
-    topic: '',
-    description: '',
+    topic,
+    description: desc,
   });
   const { isLoading, editForum } = useEditForum(classID, contentID);
 

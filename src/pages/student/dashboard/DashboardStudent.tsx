@@ -2,16 +2,25 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
-import Loading from '../../../components/loading/Loading';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header/Header';
 import CardClass from '../../../components/student/CardClass';
 import { useFetch } from '../../../hooks/useFetch';
 import { StudentClasses } from '../../../types/student-type';
+import {
+  useFetchMotivationalWord,
+  useFetchUpcomingAssignment,
+} from '../../../hooks/useStudent';
+import Loading2ND from '../../../components/loading/Loading2nd';
 
 const DashboardStudent = () => {
   const { isLoading, data } = useFetch('/api/student/my-classes');
+  const { motivationalWord } = useFetchMotivationalWord();
+  const { upcomingAssignment } = useFetchUpcomingAssignment();
   const [searchData, setSearchData] = useState<StudentClasses[] | undefined>();
   const classList: StudentClasses[] = data;
+  const navigate = useNavigate();
 
   const searchClass = (value: string) => {
     setSearchData(
@@ -35,24 +44,21 @@ const DashboardStudent = () => {
       </div>
       <section
         id="random-motivation"
-        className="hidden md:block container mx-auto rounded-t-box bg-white shadow-sm">
+        className="block container mx-auto rounded-t-box bg-white shadow-sm">
         <div className="flex w-full justify-center items-center sm:space-x-10 md:space-x-10 py-10 px-3">
-          <FaQuoteLeft className="text-5xl" />
+          <FaQuoteLeft className="hidden md:block text-5xl" />
           <div>
             <div className="flex flex-col items-center text-center">
               <h3 className="title text-2xl font-medium">Quote</h3>
               <blockquote className="mb-3">
-                <p>
-                  Hanya pendidikan yang bisa menyelamatkan masa depan, tanpa
-                  pendidikan Indonesia tak mungkin bertahan
-                </p>
+                <p>{motivationalWord?.body}</p>
               </blockquote>
               <figcaption className="font-medium italic">
-                —Najwa Shihab
+                —{motivationalWord?.from}
               </figcaption>
             </div>
           </div>
-          <FaQuoteRight className="text-5xl" />
+          <FaQuoteRight className="hidden md:block text-5xl" />
         </div>
       </section>
 
@@ -68,10 +74,10 @@ const DashboardStudent = () => {
         </svg>
       </div>
 
-      <section id="content" className="container mx-auto">
-        <div className="flex items-start space-x-3">
+      <section id="content" className="container mx-auto mb-16">
+        <div className="flex flex-col space-y-5 lg:flex-row lg:items-start lg:space-x-3 lg:space-y-0">
           {/* My Class */}
-          <div className="grow">
+          <div className="md:grow">
             <div className="flex flex-col space-y-3 px-3 py-3 sm:py-0 sm:space-y-0 sm:px-3 sm:flex-row sm:justify-between sm:items-center">
               <div>
                 <h2 className="hidden sm:block text-2xl font-medium">
@@ -109,7 +115,7 @@ const DashboardStudent = () => {
             <hr className="border-t border-gray-300 my-4" />
 
             {isLoading ? (
-              <Loading />
+              <Loading2ND />
             ) : searchData?.length ? (
               <CardClass classes={searchData} />
             ) : (
@@ -120,19 +126,40 @@ const DashboardStudent = () => {
               </div>
             )}
           </div>
-          {/* Mendatang */}
-          <div className="p-3 rounded-box w-[20%] bg-white drop-shadow">
+
+          {/* Tugas Mendatang */}
+          <div className="p-3 rounded-box w-full lg:w-[20%] bg-white drop-shadow">
             <div className="flex flex-col items-center space-y-2">
               <div className="text-2xl font-medium">
-                <h3>Mendatang</h3>
+                <h3>Tugas Mendatang</h3>
               </div>
-              <div className="p-3 border rounded-box bg-slate-100 w-[95%]">
-                <p>Komputer dan Jaringan Dasar</p>
-                <p>Tugas 1</p>
-                <p className="font-bold">Tenggat:</p>
-                <p>Rabu, 5 Maret</p>
-                <p>Pukul 23.59 WIB</p>
-              </div>
+              {upcomingAssignment.map((item: any) => (
+                <div
+                  key={item.id}
+                  className="p-3 border rounded-box bg-slate-100 w-[95%]">
+                  <p>{item.online_class.name}</p>
+                  <p>{item.title}</p>
+                  <p className="font-bold">Tenggat:</p>
+                  <p>{item.deadline_tanggal}</p>
+                  <p>Pukul {item.deadline_jam} WIB</p>
+                  <hr className="border-t-2" />
+                  <div className="flex justify-start">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        navigate(
+                          `/my-classes/${item.online_class?.id}/submissions/${item.id}`,
+                          { state: { assignment: item } },
+                        )
+                      }
+                      className="w-full btn btn-sm btn-ghost italic hover:text-teal-600 capitalize">
+                      <HiOutlineArrowNarrowRight className="text-2xl" />
+                      <span className="mx-1">lihat</span>{' '}
+                      <HiOutlineArrowNarrowRight className="text-2xl" />
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

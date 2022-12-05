@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 export const useCreateUser = () => {
   const [isLoading, setLoading] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [errorToast, setErrorToast] = useState(false);
+  const [message, setMessage] = useState('');
+
   const baseURL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user') || '');
@@ -40,15 +44,29 @@ export const useCreateUser = () => {
         }),
       });
       const result = await response.json();
-      console.log(result);
-      navigate(-1);
+      if (response.status >= 200 && response.status < 300) {
+        setToast(true);
+        setMessage(result.message);
+        setTimeout(() => setToast(false), 3000);
+        // navigate(`/resources/users/${}`);
+        navigate(-1);
+      } else {
+        setErrorToast(true);
+        setMessage(result.message);
+        setTimeout(() => setErrorToast(false), 3000);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
+      setToast(false);
       setLoading(false);
     }
   };
 
   return {
+    toast,
+    errorToast,
+    message,
     isLoading,
     createUser,
   };

@@ -18,4 +18,10 @@ export interface UserType {
     nip: string;
     user_id: number;
   };
+  student?: {
+    id: number;
+    nis: string;
+    nisn: string;
+    rombel_id: number;
+  };
 }

@@ -14,7 +14,7 @@ type Props = {
 };
 
 const AboutClass: FC<Props> = ({ about, student, total }) => (
-  <section id="about-class">
+  <section id="about-class" className="mb-20">
     <div className="container mx-auto w-11/12 px-5 py-3 shadow-xl border-l-4 border-l-primary rounded-box bg-white">
       {/* Tentang Aplikasi */}
       <section id="about-app" className="mb-8">
@@ -29,7 +29,7 @@ const AboutClass: FC<Props> = ({ about, student, total }) => (
             </p>
           </div>
         </div>
-        <p className="w-4/5">
+        <p className="w-full lg:w-4/5">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi eum
           deleniti odio et laborum in minus hic. Ullam, quas deleniti tempora
           neque quam facilis dolore, unde eum sunt ad excepturi perspiciatis
@@ -49,7 +49,7 @@ const AboutClass: FC<Props> = ({ about, student, total }) => (
           </p>
         </div>
 
-        <hr className="border-t-2 border-slate-400 w-4/5 my-3" />
+        <hr className="border-t-2 border-slate-400 w-full lg:w-4/5 my-3" />
 
         <div id="student">
           <h2 className="title text-2xl font-bold mb-4">Siswa</h2>
@@ -61,7 +61,7 @@ const AboutClass: FC<Props> = ({ about, student, total }) => (
           </p>
 
           {/* Data Siswa */}
-          <div className="overflow-x-auto w-4/5">
+          <div className="overflow-x-auto w-full lg:w-4/5">
             <table className="table table-compact w-full">
               <tbody>
                 {/* List Kedua */}
@@ -74,7 +74,7 @@ const AboutClass: FC<Props> = ({ about, student, total }) => (
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
-                          <div className="mask mask-circle w-12 h-12">
+                          <div className="mask mask-circle w-10 lg:w-12 h-10 lg:h-12">
                             <img
                               src={item.avatar}
                               alt="Avatar Tailwind CSS Component"

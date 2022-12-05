@@ -39,6 +39,8 @@ export const useFetch = (url: string) => {
     state.deleteContentSuccess.success,
     state.replyCommentSuccess.success,
     state.editForumSuccess.success,
+    state.addSubmissionSuccess.success,
+    state.addAssignmentSuccess.success,
   ]);
 
   useEffect(() => {

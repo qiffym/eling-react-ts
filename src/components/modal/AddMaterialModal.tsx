@@ -1,4 +1,13 @@
-import React, { ChangeEvent, FC, useEffect, useReducer, useState } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, {
+  ChangeEvent,
+  createRef,
+  FC,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
+import { useDropzone } from 'react-dropzone';
 import { useAddMaterial } from '../../hooks/useClasses';
 import { addMaterialReducer } from '../../reducers/reducers';
 import { Types } from '../../types/reducer-type';
@@ -18,24 +27,39 @@ const AddMaterialModal: FC<Props> = ({
   idContent,
 }) => {
   const { isLoading, addMaterial } = useAddMaterial();
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
   const [isDisable, setDisable] = useState(false);
   const [state, dispatch] = useReducer(addMaterialReducer, {
     title: '',
     file: null,
   });
 
+  const dropzoneRef: any = createRef();
+
+  const openDialog = () => {
+    if (dropzoneRef.current) {
+      dropzoneRef.current.open();
+    }
+  };
+
+  const files = acceptedFiles.map((file: any) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
   useEffect(() => {
-    if (state.title === '' || state.file === null) {
+    if (state.title === '' || acceptedFiles.length === 0) {
       setDisable(true);
     } else {
       setDisable(false);
     }
-  }, [state]);
+  }, [state, acceptedFiles.length]);
 
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none transition-all ease-in-out">
-        <div className="modal-box w-[40%] max-w-5xl">
+        <div className="modal-box w-[50%] max-w-5xl">
           <div className="felx flex-row justify-between items-center">
             <button
               type="button"
@@ -47,10 +71,10 @@ const AddMaterialModal: FC<Props> = ({
           </div>
           <form
             className="mt-4 flex flex-col space-y-5 w-full"
-            onSubmit={e => {
+            onSubmit={(e) => {
               addMaterial(e, idClasses, idContent, {
                 title: state.title,
-                file: state.file,
+                file: acceptedFiles[0],
               });
               actionSave();
             }}>
@@ -77,7 +101,7 @@ const AddMaterialModal: FC<Props> = ({
               <label htmlFor="desc-textarea" className="font-medium">
                 Material File
               </label>
-              <input
+              {/* <input
                 type="file"
                 className="file:cursor-pointer block w-full text-sm text-slate-500
                 file:mr-4 file:py-2 file:px-4
@@ -93,7 +117,30 @@ const AddMaterialModal: FC<Props> = ({
                     },
                   })
                 }
-              />
+              /> */}
+              <div
+                {...getRootProps({
+                  className:
+                    'mt-4 flex justify-center items-center p-20 flex-col space-y-5 w-full border-dashed border-2 border-indigo-300 rounded-lg',
+                })}>
+                <input type="file" {...getInputProps()} />
+                <p>Drag and drop your file here or</p>
+                <button
+                  type="button"
+                  onClick={openDialog}
+                  className="btn btn-ghost max-w-xs justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  Choose a file
+                </button>
+                <ul>{files}</ul>
+              </div>
+              {/* {acceptedFiles.length > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => postSubmission(acceptedFiles[0])}
+                  className="btn btn-ghost w-full mt-5 transition-all justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  Upload Submission
+                </button>
+              ) : null} */}
             </div>
             <button
               type="submit"

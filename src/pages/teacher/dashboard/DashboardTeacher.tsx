@@ -2,7 +2,6 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HiPlus } from 'react-icons/hi';
-import Loading from '../../../components/loading/Loading';
 import CreateClassModal from '../../../components/modal/CreateClassModal';
 import Header from '../../../components/header/Header';
 import CardClass from '../../../components/teacher/home/Card';
@@ -11,6 +10,7 @@ import { LoginType } from '../../../types/context-type';
 import { ClassesType } from '../../../types/class-type';
 import { MyContext } from '../../../context/context';
 import { Types } from '../../../types/reducer-type';
+import Loading2ND from '../../../components/loading/Loading2nd';
 
 const DashboardTeacher = () => {
   const { isLoading, classList } = useClasses();
@@ -99,7 +99,7 @@ const DashboardTeacher = () => {
         </button>
 
         {isLoading ? (
-          <Loading />
+          <Loading2ND />
         ) : searchData?.length ? (
           <CardClass classes={searchData} />
         ) : (

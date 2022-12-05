@@ -120,8 +120,10 @@ export type ContentDetailType = {
 export type AssignmentDetailType = {
   created_at: string;
   deadline: string;
+  deadline_parse: string;
   description: string;
   id: number;
+  author: string;
   submission: {
     assignment: {
       file: string;
@@ -151,6 +153,8 @@ export interface GradingAssignmentType {
   submission: {
     assignment_id: string;
     file: string;
+    filename: string;
+    file_extension: string;
     submitted_at: string;
     score: number;
   };

@@ -76,6 +76,10 @@ export type EditForumSuccessType = {
   success: boolean;
 };
 
+export type AddSubmissionSuccessType = {
+  success: boolean;
+};
+
 // Local Reducer Type
 
 export type CreateUserType = {
@@ -134,6 +138,23 @@ export type EditForumType = {
   description: string;
 };
 
+export type EditProfileType = {
+  role: number;
+  name: string;
+  username: string;
+  email: string;
+  gender: string;
+  birthday: string;
+  religion: string;
+  address: string;
+  telpon: string;
+  nik?: string;
+  nip?: string;
+  nis?: string;
+  nisn?: string;
+  rombel?: number;
+};
+
 // Store to initial state Type for Global
 
 export type InitialStateType = {
@@ -151,4 +172,5 @@ export type InitialStateType = {
   updateSuccess: UpdateSuccessType;
   replyCommentSuccess: ReplyCommentSuccessType;
   editForumSuccess: EditForumSuccessType;
+  addSubmissionSuccess: AddSubmissionSuccessType;
 };

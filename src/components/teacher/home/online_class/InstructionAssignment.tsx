@@ -1,19 +1,30 @@
 import React, { FC, useState } from 'react';
 import { HiPencilAlt, HiTrash } from 'react-icons/hi';
 import { MdAssignment } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { useAssignmentDelete } from '../../../../hooks/useDeleteClasses';
 import { AssignmentDetailType } from '../../../../types/class-type';
 import Loading2ND from '../../../loading/Loading2nd';
-import DelAssignmentModal from './modal/DelAssignmentModal';
+import ModalDelete from '../../../modal/ModalDelete';
 import EditAssignmentModal from './modal/EditAssignmentModal';
 
 type Props = {
   isLoading?: boolean;
   data?: AssignmentDetailType;
+  classID: number;
+  contentID: number;
 };
 
-const InstructionAssignment: FC<Props> = ({ isLoading, data }) => {
+const InstructionAssignment: FC<Props> = ({
+  isLoading,
+  data,
+  classID,
+  contentID,
+}) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDelModal, setOpenDelModal] = useState(false);
+  const assignmentDelete = useAssignmentDelete(classID, contentID);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -32,7 +43,7 @@ const InstructionAssignment: FC<Props> = ({ isLoading, data }) => {
                     <h1 className="text-3xl font-medium">{data?.title}</h1>
                     <div className="text-md opacity-90 mb-4">
                       <span className="border-r border-r-slate-500 pr-2">
-                        Qiff Ya Muhammad
+                        {data?.author}
                       </span>
                       <span className="px-2">Dibuat {data?.created_at}</span>
                     </div>
@@ -59,7 +70,7 @@ const InstructionAssignment: FC<Props> = ({ isLoading, data }) => {
                 <div className="flex justify-between items-center">
                   <span className="font-semibold">100 poin</span>
                   <span className="font-semibold">
-                    Tenggat: {data?.deadline}
+                    Tenggat: {data?.deadline_parse}
                   </span>
                 </div>
                 <hr className="my-3" />
@@ -72,6 +83,9 @@ const InstructionAssignment: FC<Props> = ({ isLoading, data }) => {
       {/* Edit Modal */}
       {openEditModal ? (
         <EditAssignmentModal
+          data={data}
+          classID={classID}
+          contentID={contentID}
           actionUpdate={() => {
             setOpenEditModal(false);
           }}
@@ -81,9 +95,12 @@ const InstructionAssignment: FC<Props> = ({ isLoading, data }) => {
 
       {/* Delete Modal */}
       {openDelModal ? (
-        <DelAssignmentModal
+        <ModalDelete
+          isOpen={openDelModal}
           actionDelete={() => {
+            assignmentDelete(data?.id);
             setOpenDelModal(false);
+            navigate(-1);
           }}
           modalAction={() => setOpenDelModal(false)}
         />

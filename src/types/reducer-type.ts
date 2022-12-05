@@ -24,6 +24,7 @@ export enum Types {
   UpdateSuccess = 'UPDATE_SUCCESS',
   ReplyCommentSuccess = 'REPLY_COMMENT_SUCCESS',
   EditForumSuccess = 'EDIT_FORUM_SUCCESS',
+  AddSubmissionSuccess = 'ADD_SUBMISSION_SUCCESS',
 
   // Payload Create User
   Role = 'ROLE',
@@ -72,6 +73,22 @@ export enum Types {
   // Payload Edit Forum
   EditForumTopic = 'EDIT_FORUM_TOPIC',
   EditForumDesc = 'EDIT_FORUM_DESC',
+
+  // Payload Edit Profile
+  EditProfileRole = 'EDIT_PROFILE_ROLE',
+  EditProfileName = 'EDIT_PROFILE_NAME',
+  EditProfileUsername = 'EDIT_PROFILE_USERNAME',
+  EditProfileEmail = 'EDIT_PROFILE_EMAIL',
+  EditProfileGender = 'EDIT_PROFILE_GENDER',
+  EditProfileBirthday = 'EDIT_PROFILE_BIRTHDAY',
+  EditProfileReligion = 'EDIT_PROFILE_RELIGION',
+  EditProfileAddress = 'EDIT_PROFILE_ADDRESS',
+  EditProfileTelpon = 'EDIT_PROFILE_TELPON',
+  EditProfileNIK = 'EDIT_PROFILE_NIK',
+  EditProfileNIP = 'EDIT_PROFILE_NIP',
+  EditProfileNIS = 'EDIT_PROFILE_NIS',
+  EditProfileNISN = 'EDIT_PROFILE_NISN',
+  EditProfileRombel = 'EDIT_PROFILE_ROMBEL',
 }
 
 export type LoginPayload = {
@@ -174,6 +191,12 @@ export type ReplyCommentSuccessPayload = {
 
 export type EditForumSuccessPayload = {
   [Types.EditForumSuccess]: {
+    success: boolean;
+  };
+};
+
+export type AddSubmissionSuccessPayload = {
+  [Types.AddSubmissionSuccess]: {
     success: boolean;
   };
 };
@@ -302,5 +325,54 @@ export type EditForumPayload = {
   };
   [Types.EditForumDesc]: {
     description: string;
+  };
+};
+
+export type EditProfilePayload = {
+  [Types.EditProfileRole]: {
+    role: number;
+  };
+  [Types.EditProfileName]: {
+    name: string;
+  };
+  [Types.EditProfileUsername]: {
+    username: string;
+  };
+  [Types.EditProfileEmail]: {
+    email: string;
+  };
+  [Types.EditProfileGender]: {
+    gender: string;
+  };
+  [Types.EditProfileBirthday]: {
+    birthday: string;
+  };
+  [Types.EditProfileReligion]: {
+    religion: string;
+  };
+  [Types.EditProfileAddress]: {
+    address: string;
+  };
+  [Types.EditProfileTelpon]: {
+    telpon: string;
+  };
+  [Types.EditProfileNIK]: {
+    nik: string;
+  };
+
+  [Types.EditProfileNIP]: {
+    nip: string;
+  };
+
+  [Types.EditProfileNIS]: {
+    nis: string;
+  };
+
+  [Types.EditProfileNISN]: {
+    nisn: string;
+  };
+
+  [Types.EditProfileRombel]: {
+    rombel: number;
   };
 };
