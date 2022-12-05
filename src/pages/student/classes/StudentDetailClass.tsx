@@ -39,9 +39,10 @@ const StudentDetailClass = () => {
                 <h3 className="text-lg font-medium">{classData.rombel_name}</h3>
               </div>
 
-              <h2 className="text-4xl md:text-6xl w-max  px-3 rounded-md font-bold mb-2 ">
+              <h2 className="text-3xl md:text-6xl w-max  px-3 rounded-md font-bold mb-2 break-words">
                 {classData?.name}
               </h2>
+
               <div className="flex items-center space-x-3 px-3">
                 <div className="avatar">
                   <div className="w-7 md:w-8 rounded-full ring ring-slate-100">
