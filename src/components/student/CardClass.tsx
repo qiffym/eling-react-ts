@@ -36,7 +36,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                   {item.name}
                 </button>
                 <p className="font-medium text-sm opacity-90">
-                  <span>Senin</span> | <span>07.30 - 09.00 WIB</span>
+                  {/* <span>Senin</span> | <span>07.30 - 09.00 WIB</span> */}
                 </p>
                 {/* <p>{item.description}</p> */}
                 <hr className="" />
@@ -52,9 +52,13 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                           />
                         </div>
                       </div>
-                      <p className="font-semibold text-sm">
-                        {item.teacher.name}
-                      </p>
+                      <div className="tooltip" data-tip={item.teacher.name}>
+                        <p className="font-semibold text-sm">
+                          {Number(item.teacher.name?.length) <= 20
+                            ? item.teacher.name
+                            : `${item.teacher.name?.slice(0, 20)}...`}
+                        </p>
+                      </div>
                     </div>
                     <button
                       type="button"

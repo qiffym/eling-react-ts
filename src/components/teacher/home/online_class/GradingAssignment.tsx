@@ -25,7 +25,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
   );
   const [grade, setGrade] = useState(0);
   const [specific, setSpecific] = useState(false);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   const [submissionData, setSubmissionData] = useState<SubmissionType>();
   const [submissionStudentName, setSubmissionStudentName] = useState('');
@@ -44,7 +44,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
             <div className="flex flex-row items-center space-x-2">
               <FaUsers className="text-2xl rounded-full" />
               <span
-                onClick={() => setShow(!show)}
+                onClick={() => setShow(true)}
                 className="hover:link text-sm">
                 All users
               </span>
@@ -74,7 +74,11 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                           </div>
                         </div>
                         <div>
-                          <div className="font-medium">{item.name}</div>
+                          <div className="font-medium">
+                            {item.name.length <= 25
+                              ? item.name
+                              : item.name.slice(0, 25)}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -365,7 +369,9 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                           {submissionStudentName}
                         </h3>
                         <h3 className="text-xl opacity-80">
-                          {submissionData?.score}
+                          {submissionData?.score === null
+                            ? 'Belum dinilai'
+                            : submissionData?.score}
                         </h3>
                       </div>
 
@@ -388,9 +394,13 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                               target="_blank"
                               className="font-medium"
                               rel="noreferrer">
-                              {submissionData?.file.slice(0, 48)}...
+                              {Number(submissionData?.filename.length) <= 48
+                                ? submissionData?.filename
+                                : `${submissionData?.filename.slice(0, 48)}...`}
                             </a>
-                            <h2 className="opacity-90">PDF</h2>
+                            <h2 className="opacity-90 uppercase">
+                              {submissionData?.file_extension}
+                            </h2>
                           </div>
                         </div>
                       </div>

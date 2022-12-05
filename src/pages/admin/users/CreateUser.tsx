@@ -40,7 +40,6 @@ const CreateUser = () => {
       state.role === 0 ||
       state.gender === '' ||
       state.name === '' ||
-      state.email === '' ||
       state.password === '' ||
       state.confirm_password === ''
     ) {

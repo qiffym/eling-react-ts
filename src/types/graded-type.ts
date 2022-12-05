@@ -12,6 +12,8 @@ export interface GradedType {
       submission: {
         assignment_id: string;
         file: string;
+        filename: string;
+        file_extension: string;
         submitted_at: string;
         score: number;
       };
@@ -22,6 +24,8 @@ export interface GradedType {
 export interface SubmissionType {
   assignment_id: string;
   file: string;
+  filename: string;
+  file_extension: string;
   submitted_at: string;
   score: number;
 }
