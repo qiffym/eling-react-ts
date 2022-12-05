@@ -44,7 +44,7 @@ const ChangePasswordModal: FC<Props> = ({ actionSave, modalAction }) => {
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none transition-all ease-in-out">
-        <div className="modal-box w-[30%] max-w-5xl">
+        <div className="modal-box w-11/12 md:w-[30%] max-w-5xl">
           <div className="felx flex-row justify-between items-center">
             <button
               type="button"
