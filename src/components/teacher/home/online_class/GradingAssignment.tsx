@@ -22,15 +22,13 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
     assignmentID,
   );
   const [grade, setGrade] = useState(0);
-  // const [specific, setSpecific] = useState(false);
+
   const [show, setShow] = useState(false);
 
   const [submissionData, setSubmissionData] = useState<GradingAssignmentType>();
 
   const addGrade = useGrading(classID, contentID, assignmentID);
   const { dispatch } = useContext(MyContext);
-
-  // const gradedData: GradedType = graded;
 
   return (
     <section id="content" className="-mb-10">
@@ -40,11 +38,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
           <div className="p-4 h-[85vh] rounded-box w-4/12 bg-white drop-shadow-lg overflow-auto">
             <div className="flex flex-row items-center space-x-2">
               <FaUsers className="text-2xl rounded-full" />
-              <span
-                onClick={() => setShow(!show)}
-                className="hover:link text-sm">
-                All users
-              </span>
+              <span className="text-sm">All users</span>
             </div>
             <hr className="my-4" />
 
