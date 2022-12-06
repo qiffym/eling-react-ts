@@ -28,7 +28,7 @@ const Profile = () => {
     <>
       <section
         id="me"
-        className="container mx-auto drop-shadow-lg w-11/12 p-10 rounded-box bg-white mt-20 ">
+        className="container mx-auto drop-shadow-lg w-11/12 p-10 rounded-box bg-white mt-5 md:mt-20 mb-20 md:mb-0">
         {isLoading ? (
           <Loading2ND />
         ) : (
@@ -118,6 +118,18 @@ const Profile = () => {
             </div>
           </>
         )}
+
+        {/* Toast Message */}
+        {toast ? (
+          <div className="px-5">
+            <Toast desc={`${message}`} />
+          </div>
+        ) : null}
+        {errorToast ? (
+          <div className="px-5">
+            <ToastError desc={`${message} please try again!`} />
+          </div>
+        ) : null}
       </section>
 
       {/* Modal Change Password */}
@@ -134,18 +146,6 @@ const Profile = () => {
           }}
           modalAction={() => setOpenChangePasswordModal(false)}
         />
-      ) : null}
-
-      {/* Toast Message */}
-      {toast ? (
-        <div className="px-5">
-          <Toast desc={`${message}`} />
-        </div>
-      ) : null}
-      {errorToast ? (
-        <div className="px-5">
-          <ToastError desc={`${message} please try again!`} />
-        </div>
       ) : null}
     </>
   );
