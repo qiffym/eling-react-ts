@@ -38,7 +38,7 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
           <div className="p-4 h-[85vh] rounded-box w-4/12 bg-white drop-shadow-lg overflow-auto">
             <div className="flex flex-row items-center space-x-2">
               <FaUsers className="text-2xl rounded-full" />
-              <span className="text-sm">All users</span>
+              <span className="text-sm">All students</span>
             </div>
             <hr className="my-4" />
 
@@ -248,7 +248,6 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
               </div>
 
               {/* File Yang Diserahkan Siswa */}
-
               {show ? (
                 <div className="container mx-auto mt-10">
                   <div className="grid grid-cols-5 gap-5">
