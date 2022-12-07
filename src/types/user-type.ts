@@ -4,6 +4,7 @@ export interface UserType {
   gender: string;
   id: number;
   name: string;
+  role_id: number;
   role: string;
   username: string;
   verified: boolean;

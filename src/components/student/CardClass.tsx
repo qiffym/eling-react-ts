@@ -20,7 +20,7 @@ const CardClass: FC<ListClass> = ({ classes }) => {
           .map((item) => (
             <div
               key={item.id}
-              className="card overflow-visible static w-full md:w-[17rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
+              className="card overflow-visible static w-full md:w-[17rem] lg:w-[20rem] bg-base-100 drop-shadow-sm sm:drop-shadow-xl">
               <div className="card-body py-5 overflow-visible">
                 <div>
                   <h2 className="font-bold text-xl">{item.rombel_class}</h2>
@@ -43,33 +43,37 @@ const CardClass: FC<ListClass> = ({ classes }) => {
                 <div className="flex flex-col">
                   <div className="card-actions flex flex-row justify-between items-center">
                     <div className="flex items-center space-x-2">
-                      <div className="avatar">
-                        <div className="mask mask-circle w-7 h-7">
-                          <img
-                            className="w-10 rounded-full"
-                            src={item.teacher.avatar}
-                            alt="teacher"
-                          />
+                      <div className="flex items-center space-x-1">
+                        <div className="avatar">
+                          <div className="mask mask-circle w-7 h-7">
+                            <img
+                              className="w-10 rounded-full"
+                              src={item.teacher.avatar}
+                              alt="teacher"
+                            />
+                          </div>
+                        </div>
+                        <div className="tooltip" data-tip={item.teacher.name}>
+                          <p className="font-semibold text-sm">
+                            {Number(item.teacher.name?.length) <= 15
+                              ? item.teacher.name
+                              : `${item.teacher.name?.slice(0, 15)}...`}
+                          </p>
                         </div>
                       </div>
-                      <div className="tooltip" data-tip={item.teacher.name}>
-                        <p className="font-semibold text-sm">
-                          {Number(item.teacher.name?.length) <= 20
-                            ? item.teacher.name
-                            : `${item.teacher.name?.slice(0, 20)}...`}
-                        </p>
-                      </div>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        navigate(`/my-classes/${item.id}`, {
-                          state: item,
-                        })
-                      }
-                      className="btn btn-primary btn-sm">
-                      View
-                    </button>
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          navigate(`/my-classes/${item.id}`, {
+                            state: item,
+                          })
+                        }
+                        className="btn btn-primary btn-sm">
+                        View
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

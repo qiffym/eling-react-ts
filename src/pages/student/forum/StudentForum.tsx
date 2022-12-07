@@ -70,8 +70,8 @@ const StudentForum = () => {
         <Loading2ND />
       ) : (
         <>
-          <section id="threat" className="mb-5">
-            <div className="container mx-auto w-11/12 lg:ml-16 p-4 lg:w-9/12 bg-white drop-shadow rounded-box">
+          <section id="threat" className="mb-5 ">
+            <div className="container mx-auto w-11/12 lg:ml-16 p-4 lg:w-9/12 bg-white drop-shadow rounded-box border-l-8 border-b-2 border-gray-600">
               <div className="flex items-start space-x-4">
                 {/* avatar */}
                 <div className="avatar">

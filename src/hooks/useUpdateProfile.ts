@@ -71,12 +71,12 @@ const useUpdateProfile = (id: number) => {
             success: result.success,
           },
         });
-        setTimeout(() => setToast(false), 3000);
+        setTimeout(() => setToast(false), 5000);
       } else {
         setErrorToast(true);
         setError(true);
         setMessage(result.message);
-        setTimeout(() => setErrorToast(false), 3000);
+        setTimeout(() => setErrorToast(false), 5000);
       }
     } catch (err) {
       console.log(err);

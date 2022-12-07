@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BiLogOut } from 'react-icons/bi';
 import { FaCamera, FaPencilAlt } from 'react-icons/fa';
 import { MdPassword } from 'react-icons/md';
 import Loading2ND from '../../components/loading/Loading2nd';
 import ChangePasswordModal from '../../components/profile/ChangePasswordModal';
+import ChangePhotoProfileModal from '../../components/profile/ChangePhotoProfileModal';
 import ProfileForm from '../../components/profile/ProfileForm';
 import Toast from '../../components/toast/Toast';
 import ToastError from '../../components/toast/ToastError';
+import { MyContext } from '../../context/context';
 import { useFetch } from '../../hooks/useFetch';
 import useLogout from '../../hooks/useLogout';
 import useUpdateProfile from '../../hooks/useUpdateProfile';
+import { Types } from '../../types/reducer-type';
 import { UserType } from '../../types/user-type';
 
 const Profile = () => {
@@ -17,6 +20,8 @@ const Profile = () => {
   const [disable, setDisable] = useState(true);
   const [isSubmit, setSubmit] = useState(false);
   const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false);
+  const [openChangePhoto, setOpenChangePhoto] = useState(false);
+  const { dispatch } = useContext(MyContext);
 
   const profileData: UserType = data;
   const { toast, errorToast, message, updateProfile } = useUpdateProfile(
@@ -28,7 +33,7 @@ const Profile = () => {
     <>
       <section
         id="me"
-        className="container mx-auto drop-shadow-lg w-11/12 p-10 rounded-box bg-white mt-20 ">
+        className="container mx-auto drop-shadow-lg w-11/12 p-10 rounded-box bg-white mt-5 md:mt-20 mb-20 md:mb-0">
         {isLoading ? (
           <Loading2ND />
         ) : (
@@ -44,14 +49,19 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="-ml-12 z-10 bottom-3">
-                    <button type="button" className="btn btn-circle text-2xl">
+                    <button
+                      type="button"
+                      onClick={() => setOpenChangePhoto(true)}
+                      className="btn btn-circle text-2xl">
                       <FaCamera />
                     </button>
                   </div>
                 </div>
                 <div className="flex flex-col space-y text-center lg:text-start">
-                  <h1 className="text-4xl font-bold">{profileData.name}</h1>
-                  <h3 className="text-2xl text-slate-500 font-medium">
+                  <h1 className="text-2xl md:text-4xl font-bold">
+                    {profileData.name}
+                  </h1>
+                  <h3 className="text-xl md:text-2xl text-slate-500 font-medium">
                     {profileData.role}
                   </h3>
                 </div>
@@ -120,6 +130,35 @@ const Profile = () => {
         )}
       </section>
 
+      {/* Toast Message */}
+      {toast ? (
+        <div className="px-5 z-50 mb-24">
+          <Toast desc={`${message}`} />
+        </div>
+      ) : null}
+      {errorToast ? (
+        <div className="px-5 z-50 mb-24">
+          <ToastError desc={`${message} please try again!`} />
+        </div>
+      ) : null}
+
+      {/* Modal Change Photo */}
+      {openChangePhoto ? (
+        <ChangePhotoProfileModal
+          actionSave={() => {
+            setOpenChangePhoto(false);
+            dispatch({
+              type: Types.UpdateSuccess,
+              payload: {
+                success: false,
+              },
+            });
+          }}
+          modalAction={() => setOpenChangePhoto(false)}
+          isOpen={openChangePhoto}
+        />
+      ) : null}
+
       {/* Modal Change Password */}
       {openChangePasswordModal ? (
         <ChangePasswordModal
@@ -134,18 +173,6 @@ const Profile = () => {
           }}
           modalAction={() => setOpenChangePasswordModal(false)}
         />
-      ) : null}
-
-      {/* Toast Message */}
-      {toast ? (
-        <div className="px-5">
-          <Toast desc={`${message}`} />
-        </div>
-      ) : null}
-      {errorToast ? (
-        <div className="px-5">
-          <ToastError desc={`${message} please try again!`} />
-        </div>
       ) : null}
     </>
   );

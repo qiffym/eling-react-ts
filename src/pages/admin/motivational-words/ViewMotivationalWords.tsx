@@ -44,7 +44,7 @@ const ViewMotivationalWords = () => {
             <div className="w-1/5 py-4 font-bold">Body</div>
             <div className="w-4/4 py-4 break-words">{word.body}</div>
           </div>
-          <div className="flex px-6">
+          <div className="flex border-b px-6">
             <div className="w-1/5 py-4 font-bold">From</div>
             <div className="w-4/4 py-4 break-words">{word.from}</div>
           </div>

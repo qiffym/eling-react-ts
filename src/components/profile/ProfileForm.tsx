@@ -75,7 +75,7 @@ const ProfileForm: FC<Props> = ({
 
   function checkNull(check?: string) {
     if (check === null) {
-      return '-';
+      return '';
     }
     return check;
   }
@@ -165,7 +165,7 @@ const ProfileForm: FC<Props> = ({
                 }
                 defaultValue={profileData.student?.rombel_id}
                 disabled={disable}>
-                <option value="DEFAULT" disabled>
+                <option selected value="DEFAULT" disabled>
                   -- Pilih Rombel --
                 </option>
                 <option value={1}>X TKJ 1</option>
@@ -413,7 +413,7 @@ const ProfileForm: FC<Props> = ({
             <select
               className="select select-bordered select-sm"
               name="religion"
-              value={checkNull(profileData.religion)}
+              defaultValue={profileData?.religion}
               onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                 setInput({
                   type: Types.EditProfileReligion,
@@ -423,7 +423,9 @@ const ProfileForm: FC<Props> = ({
                 })
               }
               disabled={disable}>
-              <option disabled>-- Pilih Agama --</option>
+              <option selected value="DEFAULT" disabled>
+                -- Pilih Agama --
+              </option>
               <option value="Islam">Islam</option>
               <option value="Kristen">Kristen</option>
               <option value="Katolik">Katolik</option>
