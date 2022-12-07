@@ -37,11 +37,18 @@ const Table: FC<Props> = ({ userData }) => {
           <tbody>
             {userData
               .filter((usr) => usr.username !== user.user.username)
-              .sort((a, b) => a?.role?.localeCompare(b?.role))
+              .sort((a, b) => {
+                const compareRole = a?.role_id
+                  ?.toString()
+                  .localeCompare(b?.role_id?.toString());
+                const compareName = a?.name?.localeCompare(b?.name);
+
+                return compareRole || compareName;
+              })
               .map((item) => (
                 <React.Fragment key={item.id}>
                   <tr>
-                    <td>{item.role}</td>
+                    <td className="font-bold">{item.role}</td>
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
@@ -53,7 +60,7 @@ const Table: FC<Props> = ({ userData }) => {
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{item.name}</div>
+                          <div className="">{item.name}</div>
                           {/* <div className="text-sm opacity-50">United States</div> */}
                         </div>
                       </div>

@@ -19,9 +19,10 @@ const Users = () => {
     setSearchData(
       data.filter(
         (item: any) =>
-          item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.username.toLowerCase().includes(value.toLowerCase()) ||
-          item.email.toLowerCase().includes(value.toLowerCase()),
+          item?.name?.toLowerCase().includes(value.toLowerCase()) ||
+          item?.username?.toLowerCase().includes(value.toLowerCase()) ||
+          item?.email?.toLowerCase().includes(value.toLowerCase()) ||
+          item?.role?.toLowerCase().includes(value.toLowerCase()),
       ),
     );
   };
@@ -45,7 +46,7 @@ const Users = () => {
         <Header>Users</Header>
         <div className="flex flex-row justify-between mb-4">
           <input
-            type="text"
+            type="search"
             placeholder="Search..."
             className="input input-bordered w-full max-w-xs"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
