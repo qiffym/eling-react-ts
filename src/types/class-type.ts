@@ -54,6 +54,7 @@ export type ForumType = {
 
 export type ForumDetailType = {
   comments: ForumCommentType[];
+  total_comment: number;
   content_id?: number;
   content_of: string;
   description: string;
@@ -71,6 +72,7 @@ export type ForumCommentType = {
   comment: string;
   edited: boolean;
   created_at: string;
+  total_sub_comment: number;
   sub_comments: ForumSubCommentType[];
 };
 

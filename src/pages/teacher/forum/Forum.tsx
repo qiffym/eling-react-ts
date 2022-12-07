@@ -78,7 +78,7 @@ const Forum = () => {
       ) : (
         <>
           <section id="threat" className="mb-5">
-            <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box">
+            <div className="container ml-16 p-4 w-9/12 bg-white drop-shadow rounded-box border-l-8 border-b-2 border-gray-600">
               <div className="flex items-start space-x-4">
                 <div className="avatar">
                   <div className="w-16 mask mask-squircle">
@@ -101,7 +101,10 @@ const Forum = () => {
                       </div>
                     </div>
                     <div className="flex font-medium items-center space-x-1 mr-5">
-                      <FaComment /> <span className="text-sm">2</span>
+                      <FaComment />{' '}
+                      <span className="text-sm">
+                        {forumDetailData.total_comment}
+                      </span>
                     </div>
                   </div>
                   {/* Topik dan Deskripsi */}
