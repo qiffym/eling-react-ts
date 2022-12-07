@@ -60,7 +60,7 @@ const Table: FC<Props> = ({ userData }) => {
                           </div>
                         </div>
                         <div>
-                          <div className="">{item.name}</div>
+                          <div className="font-medium">{item.name}</div>
                           {/* <div className="text-sm opacity-50">United States</div> */}
                         </div>
                       </div>
