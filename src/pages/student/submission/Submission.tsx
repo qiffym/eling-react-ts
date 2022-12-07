@@ -51,6 +51,8 @@ const Submission = () => {
           <section id="instruction-assignment">
             <div className="container mx-auto xl:ml-16 w-11/12">
               <div className="container w-full xl:w-8/12 drop-shadow bg-white rounded-box p-5">
+                <h3 className="text-3xl font-medium">Instruksi Tugas</h3>
+                <hr className="my-3" />
                 <div className="flex justify-between items-start">
                   <div>
                     <h1 className="text-2xl md:text-3xl font-medium">

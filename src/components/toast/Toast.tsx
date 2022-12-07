@@ -5,7 +5,7 @@ type Props = {
 };
 
 const Toast: FC<Props> = ({ desc }) => (
-  <div className="alert alert-success shadow-lg fixed bottom-5 w-[80%]">
+  <div className="alert alert-success shadow-lg fixed bottom-20 md:bottom-10 w-11/12 md:w-[80%]">
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@ const Toast: FC<Props> = ({ desc }) => (
           d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
-      <span>{desc}</span>
+      <span className="text-sm md:text-md">{desc}</span>
     </div>
   </div>
 );

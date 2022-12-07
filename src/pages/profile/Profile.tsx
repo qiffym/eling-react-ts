@@ -50,8 +50,10 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="flex flex-col space-y text-center lg:text-start">
-                  <h1 className="text-4xl font-bold">{profileData.name}</h1>
-                  <h3 className="text-2xl text-slate-500 font-medium">
+                  <h1 className="text-2xl md:text-4xl font-bold">
+                    {profileData.name}
+                  </h1>
+                  <h3 className="text-xl md:text-2xl text-slate-500 font-medium">
                     {profileData.role}
                   </h3>
                 </div>
@@ -118,19 +120,19 @@ const Profile = () => {
             </div>
           </>
         )}
-
-        {/* Toast Message */}
-        {toast ? (
-          <div className="px-5">
-            <Toast desc={`${message}`} />
-          </div>
-        ) : null}
-        {errorToast ? (
-          <div className="px-5">
-            <ToastError desc={`${message} please try again!`} />
-          </div>
-        ) : null}
       </section>
+
+      {/* Toast Message */}
+      {toast ? (
+        <div className="px-5 z-50 mb-24">
+          <Toast desc={`${message}`} />
+        </div>
+      ) : null}
+      {errorToast ? (
+        <div className="px-5 z-50 mb-24">
+          <ToastError desc={`${message} please try again!`} />
+        </div>
+      ) : null}
 
       {/* Modal Change Password */}
       {openChangePasswordModal ? (

@@ -25,7 +25,7 @@ const StudentDetailClass = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="pt-20">
+        <div className="pt-5 md:pt-20">
           {/* Section Title Class */}
           <section id="title-class" className="mb-5">
             <div className="container space-y-5 mx-auto bg-primary w-11/12 px-5 py-3 rounded-box">
@@ -39,9 +39,11 @@ const StudentDetailClass = () => {
                 <h3 className="text-lg font-medium">{classData.rombel_name}</h3>
               </div>
 
-              <h2 className="text-3xl md:text-6xl w-max  px-3 rounded-md font-bold mb-2 break-words">
-                {classData?.name}
-              </h2>
+              <div className="">
+                <h2 className="text-2xl md:text-4xl lg:text-6xl px-3 rounded-md font-bold mb-2 break-words">
+                  {classData?.name}
+                </h2>
+              </div>
 
               <div className="flex items-center space-x-3 px-3">
                 <div className="avatar">
@@ -98,6 +100,10 @@ const StudentDetailClass = () => {
           )}
         </div>
       )}
+
+      <div className="mb-20 lg:hidden">
+        <hr className="opacity-0" />
+      </div>
     </>
   );
 };

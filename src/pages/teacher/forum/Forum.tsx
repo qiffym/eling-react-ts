@@ -15,6 +15,7 @@ import {
 import EditForum from '../../../components/teacher/home/online_class/modal/EditForum';
 import ModalDelete from '../../../components/modal/ModalDelete';
 import { useDeleteForum } from '../../../hooks/useDeleteClasses';
+import AppBarClass from '../../../components/layout/AppBarClass';
 
 const Forum = () => {
   const { classID, forum, teacher } = useLocation().state as any;
@@ -56,6 +57,7 @@ const Forum = () => {
 
   return (
     <>
+      <AppBarClass headerTitle={teacher.name} />
       <section id="header" className="mt-20">
         <div className="flex flex-row items-center space-x-2 container ml-16 mb-4 w-9/12 rounded-box">
           <button
