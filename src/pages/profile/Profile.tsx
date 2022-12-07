@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BiLogOut } from 'react-icons/bi';
 import { FaCamera, FaPencilAlt } from 'react-icons/fa';
 import { MdPassword } from 'react-icons/md';
@@ -8,9 +8,11 @@ import ChangePhotoProfileModal from '../../components/profile/ChangePhotoProfile
 import ProfileForm from '../../components/profile/ProfileForm';
 import Toast from '../../components/toast/Toast';
 import ToastError from '../../components/toast/ToastError';
+import { MyContext } from '../../context/context';
 import { useFetch } from '../../hooks/useFetch';
 import useLogout from '../../hooks/useLogout';
 import useUpdateProfile from '../../hooks/useUpdateProfile';
+import { Types } from '../../types/reducer-type';
 import { UserType } from '../../types/user-type';
 
 const Profile = () => {
@@ -19,6 +21,7 @@ const Profile = () => {
   const [isSubmit, setSubmit] = useState(false);
   const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false);
   const [openChangePhoto, setOpenChangePhoto] = useState(false);
+  const { dispatch } = useContext(MyContext);
 
   const profileData: UserType = data;
   const { toast, errorToast, message, updateProfile } = useUpdateProfile(
@@ -144,6 +147,12 @@ const Profile = () => {
         <ChangePhotoProfileModal
           actionSave={() => {
             setOpenChangePhoto(false);
+            dispatch({
+              type: Types.UpdateSuccess,
+              payload: {
+                success: false,
+              },
+            });
           }}
           modalAction={() => setOpenChangePhoto(false)}
           isOpen={openChangePhoto}

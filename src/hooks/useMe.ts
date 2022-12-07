@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
+import { Types } from '../types/reducer-type';
 import { UserType } from '../types/user-type';
 
 export const useMe = () => {
@@ -49,7 +50,9 @@ export const useUpdatePhotoProfile = () => {
   const [errorToast, setErrorToast] = useState(false);
   const [message, setMessage] = useState('');
   const [errMessage, setErrMessage] = useState('');
+
   const baseURL = process.env.REACT_APP_BASE_URL;
+  const { dispatch } = useContext(MyContext);
 
   const user = JSON.parse(localStorage.getItem('user') || '');
 
@@ -73,6 +76,12 @@ export const useUpdatePhotoProfile = () => {
       if (response.status >= 200 && response.status < 300) {
         setToast(true);
         setMessage(result.message);
+        dispatch({
+          type: Types.UpdateSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
         setTimeout(() => setToast(false), 5000);
       } else {
         setErrorToast(true);
@@ -81,6 +90,7 @@ export const useUpdatePhotoProfile = () => {
       }
     } catch (error) {
       console.log(error);
+      setToast(false);
     }
   };
   return {
