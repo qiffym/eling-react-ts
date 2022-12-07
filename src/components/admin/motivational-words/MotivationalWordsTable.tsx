@@ -42,7 +42,7 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
               <tr key={item.id} className="text-center">
                 <th>{item.id}</th>
                 <td>{item.title}</td>
-                <td>{item.body}</td>
+                <td>{item.body.slice(0, 70)}...</td>
                 <td>{item.from}</td>
                 <td>{item.active === true ? 'True' : 'False'}</td>
                 <td>
