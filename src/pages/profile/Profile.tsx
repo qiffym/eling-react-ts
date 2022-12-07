@@ -4,6 +4,7 @@ import { FaCamera, FaPencilAlt } from 'react-icons/fa';
 import { MdPassword } from 'react-icons/md';
 import Loading2ND from '../../components/loading/Loading2nd';
 import ChangePasswordModal from '../../components/profile/ChangePasswordModal';
+import ChangePhotoProfileModal from '../../components/profile/ChangePhotoProfileModal';
 import ProfileForm from '../../components/profile/ProfileForm';
 import Toast from '../../components/toast/Toast';
 import ToastError from '../../components/toast/ToastError';
@@ -17,6 +18,7 @@ const Profile = () => {
   const [disable, setDisable] = useState(true);
   const [isSubmit, setSubmit] = useState(false);
   const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false);
+  const [openChangePhoto, setOpenChangePhoto] = useState(false);
 
   const profileData: UserType = data;
   const { toast, errorToast, message, updateProfile } = useUpdateProfile(
@@ -44,7 +46,10 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="-ml-12 z-10 bottom-3">
-                    <button type="button" className="btn btn-circle text-2xl">
+                    <button
+                      type="button"
+                      onClick={() => setOpenChangePhoto(true)}
+                      className="btn btn-circle text-2xl">
                       <FaCamera />
                     </button>
                   </div>
@@ -132,6 +137,17 @@ const Profile = () => {
         <div className="px-5 z-50 mb-24">
           <ToastError desc={`${message} please try again!`} />
         </div>
+      ) : null}
+
+      {/* Modal Change Photo */}
+      {openChangePhoto ? (
+        <ChangePhotoProfileModal
+          actionSave={() => {
+            setOpenChangePhoto(false);
+          }}
+          modalAction={() => setOpenChangePhoto(false)}
+          isOpen={openChangePhoto}
+        />
       ) : null}
 
       {/* Modal Change Password */}
