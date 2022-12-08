@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
+import useLogout from './useLogout';
 
 export const useFetch = (url: string) => {
   const [data, setData] = useState<any>([]);
@@ -9,6 +10,8 @@ export const useFetch = (url: string) => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
   const { state } = useContext(MyContext);
+
+  const authLogout = useLogout();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -25,6 +28,11 @@ export const useFetch = (url: string) => {
       const result = await response.json();
       setData(result.data);
       setLoading(false);
+      if (response.status === 401) {
+        authLogout();
+        localStorage.clear();
+        window.location.reload();
+      }
     } catch (e) {
       console.log(e);
       setLoading(false);

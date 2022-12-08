@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
 import { Types } from '../types/reducer-type';
 import { UserType } from '../types/user-type';
+import useLogout from './useLogout';
 
 export const useMe = () => {
   const [profile, setProfile] = useState<UserType>();
@@ -11,6 +12,8 @@ export const useMe = () => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
   const { state } = useContext(MyContext);
+
+  const authLogout = useLogout();
 
   const fetchProfile = useCallback(async () => {
     setLoading(true);
@@ -27,6 +30,12 @@ export const useMe = () => {
       const result = await response.json();
       setProfile(result.data);
       setLoading(false);
+
+      if (response.status === 401) {
+        authLogout();
+        localStorage.clear();
+        window.location.reload();
+      }
     } catch (e) {
       console.log(e);
       setLoading(false);
