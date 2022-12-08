@@ -5,15 +5,14 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, FC, createRef, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { MyContext } from '../../../context/context';
-import { usePostSubmission } from '../../../hooks/useStudent';
 import { Types } from '../../../types/reducer-type';
 
 type Props = {
+  uploadSubmission: Function;
   actionSave: () => void;
   modalAction: () => void;
   isOpen: boolean;
   title?: string;
-  assignmentID: number;
 };
 
 const CreateSubmissionModal: FC<Props> = ({
@@ -21,17 +20,15 @@ const CreateSubmissionModal: FC<Props> = ({
   actionSave,
   modalAction,
   title,
-  assignmentID,
+  uploadSubmission,
 }) => {
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
-  const { postSubmission } = usePostSubmission(assignmentID);
+
   const { dispatch } = useContext(MyContext);
 
   const dropzoneRef: any = createRef();
 
   const openDialog = () => {
-    // Note that the ref is set async,
-    // so it might be null at some point
     if (dropzoneRef.current) {
       dropzoneRef.current.open();
     }
@@ -103,7 +100,7 @@ const CreateSubmissionModal: FC<Props> = ({
                   <button
                     type="button"
                     onClick={() => {
-                      postSubmission(acceptedFiles[0]);
+                      uploadSubmission(acceptedFiles[0]);
                       actionSave();
                       dispatch({
                         type: Types.AddSubmissionSuccess,

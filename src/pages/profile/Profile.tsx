@@ -32,8 +32,6 @@ const Profile = () => {
   );
   const authLogout = useLogout();
 
-  console.log(messagePhoto);
-
   return (
     <>
       <section

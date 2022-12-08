@@ -197,6 +197,9 @@ export const useStudentReplyComment = () => {
 
 export const usePostSubmission = (assignmentID: number) => {
   const [isLoading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [toast, setToast] = useState(false);
+  const [toastError, setToastError] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
   const { dispatch } = useContext(MyContext);
@@ -221,19 +224,32 @@ export const usePostSubmission = (assignmentID: number) => {
         },
       );
       const result = await response.json();
-      console.log(result);
-      dispatch({
-        type: Types.AddSubmissionSuccess,
-        payload: {
-          success: result.success,
-        },
-      });
+      if (response.status >= 200 && response.status < 300) {
+        setToast(true);
+        setMessage(result.message);
+        dispatch({
+          type: Types.AddSubmissionSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
+        setTimeout(() => setToast(false), 5000);
+      } else {
+        setToastError(true);
+        setMessage(result.error);
+        setTimeout(() => setToastError(false), 5000);
+      }
     } catch (error) {
       console.log(error);
+      setToast(false);
+      setToastError(false);
     }
   };
   return {
     isLoading,
     postSubmission,
+    toast,
+    toastError,
+    message,
   };
 };

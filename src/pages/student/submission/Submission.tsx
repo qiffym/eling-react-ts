@@ -8,6 +8,9 @@ import { StudentSubmissionDetail } from '../../../types/student-type';
 import CreateSubmissionModal from '../../../components/student/modal/CreateSubmissionModal';
 
 import Loading2ND from '../../../components/loading/Loading2nd';
+import { usePostSubmission } from '../../../hooks/useStudent';
+import ToastError from '../../../components/toast/ToastError';
+import Toast from '../../../components/toast/Toast';
 
 type LocationAssignmentType = {
   id: number;
@@ -27,6 +30,10 @@ const Submission = () => {
   );
 
   const submissionDetail: StudentSubmissionDetail = data;
+
+  const { postSubmission, message, toast, toastError } = usePostSubmission(
+    submissionDetail.assignment_id,
+  );
 
   return (
     <div className="mt-5 sm:mt-20 mb-4">
@@ -171,13 +178,25 @@ const Submission = () => {
 
       {openModal ? (
         <CreateSubmissionModal
+          uploadSubmission={postSubmission}
           actionSave={() => {
             setOpenModal(false);
           }}
           modalAction={() => setOpenModal(false)}
           isOpen={openModal}
-          assignmentID={submissionDetail.assignment_id}
         />
+      ) : null}
+
+      {toast ? (
+        <div className="px-5 z-50 mb-24">
+          <Toast desc={`${message} please try again!`} />
+        </div>
+      ) : null}
+
+      {toastError ? (
+        <div className="px-5 z-50 mb-24">
+          <ToastError desc={`${message} please try again!`} />
+        </div>
       ) : null}
     </div>
   );
