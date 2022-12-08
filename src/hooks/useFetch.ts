@@ -39,8 +39,11 @@ export const useFetch = (url: string) => {
       }
 
       if (response.status === 404) {
-        alert('Hubungi gurumu untuk dapat mengerjakan tugas ini. ✌🏼');
+        alert(
+          'Silahkan hubungi guru pengajar untuk dapat mengerjakan tugas ini.',
+        );
         navigate(-1);
+        window.location.reload();
       }
     } catch (e) {
       console.log(e);
