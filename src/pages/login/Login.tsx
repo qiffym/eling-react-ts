@@ -112,7 +112,7 @@ const Login = () => {
                       </div>
 
                       {/* Remember Me & Forget Password */}
-                      <div className="w-72 flex justify-between mb-5 mt-1">
+                      <div className="w-72 hidden justify-between mb-5 mt-1">
                         <label
                           htmlFor="remember"
                           className="flex items-center text-xs text-slate-500 hover:text-slate-700">
@@ -136,7 +136,7 @@ const Login = () => {
                       <button
                         disabled={disable}
                         type="submit"
-                        className="btn w-72 bg-teal-600 border-slate-400">
+                        className="btn w-72 bg-teal-600 border-slate-400 mt-5">
                         {isLoading ? <LoadingButton /> : 'Masuk'}
                       </button>
                     </div>
