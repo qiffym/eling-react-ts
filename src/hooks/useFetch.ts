@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
+/* eslint-disable no-alert */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../context/context';
 import useLogout from './useLogout';
 
@@ -10,6 +12,7 @@ export const useFetch = (url: string) => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const user = JSON.parse(localStorage.getItem('user') || '');
   const { state } = useContext(MyContext);
+  const navigate = useNavigate();
 
   const authLogout = useLogout();
 
@@ -28,10 +31,16 @@ export const useFetch = (url: string) => {
       const result = await response.json();
       setData(result.data);
       setLoading(false);
+
       if (response.status === 401) {
         authLogout();
         localStorage.clear();
         window.location.reload();
+      }
+
+      if (response.status === 404) {
+        alert('Hubungi gurumu untuk dapat mengerjakan tugas ini. ✌🏼');
+        navigate(-1);
       }
     } catch (e) {
       console.log(e);
