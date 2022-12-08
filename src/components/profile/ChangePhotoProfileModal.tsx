@@ -5,7 +5,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, FC, createRef, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { MyContext } from '../../context/context';
-import { useUpdatePhotoProfile } from '../../hooks/useMe';
+import { useUpdatePhotoProfile } from '../../hooks/useUpdatePhotoProfile';
 import { Types } from '../../types/reducer-type';
 
 type Props = {
@@ -27,7 +27,7 @@ const ChangePhotoProfileModal: FC<Props> = ({
       'image/png': [],
     },
   });
-  const { updatePhotoProfile, errMessage } = useUpdatePhotoProfile();
+  const { updatePhotoProfile, messagePhoto } = useUpdatePhotoProfile();
   const { dispatch } = useContext(MyContext);
 
   const dropzoneRef: any = createRef();
@@ -94,8 +94,10 @@ const ChangePhotoProfileModal: FC<Props> = ({
                       'mt-4 flex justify-center items-center p-20 flex-col space-y-5 w-full border-dashed border-2 border-indigo-300 rounded-lg',
                   })}>
                   <input type="file" {...getInputProps()} />
+                  <em className="text-warning">
+                    Only *.jpeg and *.png images will be accepted
+                  </em>
                   <p>Drag and drop your photo here or</p>
-                  <em>(Only *.jpeg and *.png images will be accepted)</em>
                   <button
                     onClick={openDialog}
                     className="btn btn-ghost max-w-xs justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
@@ -103,9 +105,9 @@ const ChangePhotoProfileModal: FC<Props> = ({
                   </button>
                   <ul>{files}</ul>
                   {/* Error Message */}
-                  <p className={`${errMessage ? 'block' : 'hidden'}`}>
+                  <p className={`${messagePhoto ? 'block' : 'hidden'}`}>
                     <span className="text-error italic">
-                      &ldquo; {errMessage} &ldquo;
+                      &ldquo; {messagePhoto} &ldquo;
                     </span>
                   </p>
                 </div>

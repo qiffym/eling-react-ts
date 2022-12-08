@@ -11,6 +11,7 @@ import ToastError from '../../components/toast/ToastError';
 import { MyContext } from '../../context/context';
 import { useFetch } from '../../hooks/useFetch';
 import useLogout from '../../hooks/useLogout';
+import { useUpdatePhotoProfile } from '../../hooks/useUpdatePhotoProfile';
 import useUpdateProfile from '../../hooks/useUpdateProfile';
 import { Types } from '../../types/reducer-type';
 import { UserType } from '../../types/user-type';
@@ -24,6 +25,7 @@ const Profile = () => {
   const { dispatch } = useContext(MyContext);
 
   const profileData: UserType = data;
+  const { toastPhoto, errorToastPhoto, messagePhoto } = useUpdatePhotoProfile();
   const { toast, errorToast, message, updateProfile } = useUpdateProfile(
     profileData.id,
   );
@@ -139,6 +141,16 @@ const Profile = () => {
       {errorToast ? (
         <div className="px-5 z-50 mb-24">
           <ToastError desc={`${message} please try again!`} />
+        </div>
+      ) : null}
+      {toastPhoto ? (
+        <div className="px-5 z-50 mb-24">
+          <Toast desc={`${messagePhoto}`} />
+        </div>
+      ) : null}
+      {errorToastPhoto ? (
+        <div className="px-5 z-50 mb-24">
+          <ToastError desc={`${messagePhoto} please try again!`} />
         </div>
       ) : null}
 

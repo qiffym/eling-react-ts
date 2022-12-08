@@ -33,7 +33,6 @@ const useUpdatePassword = () => {
         }),
       });
       const result = await response.json();
-      console.log(result);
       if (response.status >= 200 && response.status < 300) {
         setToast(true);
         setMessage(result.message);
