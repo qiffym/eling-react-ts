@@ -6,7 +6,7 @@ import { Types } from '../types/reducer-type';
 const useUpdateProfile = (id: number) => {
   const [toast, setToast] = useState(false);
   const [errorToast, setErrorToast] = useState(false);
-  const [error, setError] = useState(false);
+
   const [message, setMessage] = useState('');
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
@@ -60,10 +60,8 @@ const useUpdateProfile = (id: number) => {
         }),
       });
       const result = await response.json();
-      console.log(result);
       if (response.status >= 200 && response.status < 300) {
         setToast(true);
-        setError(false);
         setMessage(result.message);
         dispatch({
           type: Types.UpdateSuccess,
@@ -74,7 +72,7 @@ const useUpdateProfile = (id: number) => {
         setTimeout(() => setToast(false), 5000);
       } else {
         setErrorToast(true);
-        setError(true);
+
         setMessage(result.message);
         setTimeout(() => setErrorToast(false), 5000);
       }
@@ -85,7 +83,6 @@ const useUpdateProfile = (id: number) => {
   };
 
   return {
-    error,
     toast,
     errorToast,
     message,

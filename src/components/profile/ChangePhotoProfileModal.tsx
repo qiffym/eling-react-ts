@@ -5,13 +5,14 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, FC, createRef, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { MyContext } from '../../context/context';
-import { useUpdatePhotoProfile } from '../../hooks/useUpdatePhotoProfile';
 import { Types } from '../../types/reducer-type';
 
 type Props = {
   actionSave: () => void;
   modalAction: () => void;
+  update: Function;
   isOpen: boolean;
+  message: string;
   title?: string;
 };
 
@@ -19,6 +20,8 @@ const ChangePhotoProfileModal: FC<Props> = ({
   isOpen,
   actionSave,
   modalAction,
+  update,
+  message,
   title,
 }) => {
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
@@ -27,7 +30,6 @@ const ChangePhotoProfileModal: FC<Props> = ({
       'image/png': [],
     },
   });
-  const { updatePhotoProfile, messagePhoto } = useUpdatePhotoProfile();
   const { dispatch } = useContext(MyContext);
 
   const dropzoneRef: any = createRef();
@@ -105,9 +107,9 @@ const ChangePhotoProfileModal: FC<Props> = ({
                   </button>
                   <ul>{files}</ul>
                   {/* Error Message */}
-                  <p className={`${messagePhoto ? 'block' : 'hidden'}`}>
+                  <p className={`${message ? 'block' : 'hidden'}`}>
                     <span className="text-error italic">
-                      &ldquo; {messagePhoto} &ldquo;
+                      &ldquo; {message} &ldquo;
                     </span>
                   </p>
                 </div>
@@ -115,7 +117,7 @@ const ChangePhotoProfileModal: FC<Props> = ({
                   <button
                     type="button"
                     onClick={() => {
-                      updatePhotoProfile(acceptedFiles[0]);
+                      update(acceptedFiles[0]);
                       actionSave();
                       dispatch({
                         type: Types.AddSubmissionSuccess,

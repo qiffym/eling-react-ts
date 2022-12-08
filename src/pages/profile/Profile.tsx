@@ -25,11 +25,14 @@ const Profile = () => {
   const { dispatch } = useContext(MyContext);
 
   const profileData: UserType = data;
-  const { toastPhoto, errorToastPhoto, messagePhoto } = useUpdatePhotoProfile();
+  const { updatePhotoProfile, messagePhoto, photoToast, photoToastError } =
+    useUpdatePhotoProfile();
   const { toast, errorToast, message, updateProfile } = useUpdateProfile(
     profileData.id,
   );
   const authLogout = useLogout();
+
+  console.log(messagePhoto);
 
   return (
     <>
@@ -143,12 +146,12 @@ const Profile = () => {
           <ToastError desc={`${message} please try again!`} />
         </div>
       ) : null}
-      {toastPhoto ? (
+      {photoToast ? (
         <div className="px-5 z-50 mb-24">
           <Toast desc={`${messagePhoto}`} />
         </div>
       ) : null}
-      {errorToastPhoto ? (
+      {photoToastError ? (
         <div className="px-5 z-50 mb-24">
           <ToastError desc={`${messagePhoto} please try again!`} />
         </div>
@@ -157,6 +160,8 @@ const Profile = () => {
       {/* Modal Change Photo */}
       {openChangePhoto ? (
         <ChangePhotoProfileModal
+          message={messagePhoto}
+          update={updatePhotoProfile}
           actionSave={() => {
             setOpenChangePhoto(false);
             dispatch({
