@@ -189,7 +189,7 @@ const Submission = () => {
 
       {toast ? (
         <div className="px-5 z-50 mb-24">
-          <Toast desc={`${message} please try again!`} />
+          <Toast desc={`${message}, Tugasmu berhasil dikumpulkan.`} />
         </div>
       ) : null}
 
