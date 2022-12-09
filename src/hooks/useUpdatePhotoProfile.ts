@@ -6,10 +6,9 @@ import { Types } from '../types/reducer-type';
 // Profile Picture
 export const useUpdatePhotoProfile = () => {
   const [isLoading, setLoading] = useState(false);
-  const [toastPhoto, setToastPhoto] = useState(false);
-  const [errorToastPhoto, setErrorToastPhoto] = useState(false);
-  const [messagePhoto, setMessagePhoto] = useState<string>();
-
+  const [messagePhoto, setMessagePhoto] = useState('');
+  const [photoToast, setPhotoToast] = useState(false);
+  const [photoToastError, setPhotoToastError] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
 
@@ -32,9 +31,8 @@ export const useUpdatePhotoProfile = () => {
       });
 
       const result = await response.json();
-      console.log(result);
       if (response.status >= 200 && response.status < 300) {
-        setToastPhoto(true);
+        setPhotoToast(true);
         setMessagePhoto(result.message);
         dispatch({
           type: Types.UpdateSuccess,
@@ -42,24 +40,22 @@ export const useUpdatePhotoProfile = () => {
             success: result.success,
           },
         });
-        setTimeout(() => setToastPhoto(false), 5000);
+        setTimeout(() => setPhotoToast(false), 5000);
       } else {
-        setErrorToastPhoto(true);
-        console.log(errorToastPhoto);
-
+        setPhotoToastError(true);
         setMessagePhoto(result.error);
-        setTimeout(() => setErrorToastPhoto(false), 5000);
+        setTimeout(() => setPhotoToastError(false), 5000);
       }
     } catch (error) {
       console.log(error);
-      setToastPhoto(false);
+      setPhotoToast(false);
     }
   };
   return {
     updatePhotoProfile,
     messagePhoto,
     isLoading,
-    toastPhoto,
-    errorToastPhoto,
+    photoToast,
+    photoToastError,
   };
 };
