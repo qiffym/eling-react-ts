@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const useLogin = () => {
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+  const [toast, setToast] = useState(false);
   const baseURL = process.env.REACT_APP_BASE_URL;
 
   const authLogin = async (
@@ -35,8 +37,10 @@ const useLogin = () => {
         setLoading(false);
         navigate('/');
       } else {
-        alert('Username atau passsword salah');
+        setToast(true);
+        setMessage('Username atau passsword salah');
         setLoading(false);
+        setTimeout(() => setToast(false), 3000);
       }
     } catch (error) {
       console.log(error);
@@ -44,7 +48,7 @@ const useLogin = () => {
     }
   };
 
-  return { isLoading, authLogin };
+  return { isLoading, authLogin, message, toast };
 };
 
 export default useLogin;

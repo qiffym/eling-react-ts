@@ -4,10 +4,11 @@ import { FaUserAlt, FaLock } from 'react-icons/fa';
 import LoadingButton from '../../components/loading/LoadingButton';
 import useLogin from '../../hooks/useLogin';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
+import ToastError from '../../components/toast/ToastError';
 
 const Login = () => {
   const currentYear = new Date().getFullYear();
-  const { isLoading, authLogin } = useLogin();
+  const { isLoading, authLogin, message, toast } = useLogin();
   const [disable, setDisable] = useState(false);
   const [input, setInput] = useState({
     username: '',
@@ -168,6 +169,12 @@ const Login = () => {
             </div>
           </div>
         </div>
+
+        {toast ? (
+          <div className="px-5 z-50 mb-24 flex justify-center items-center">
+            <ToastError desc={message} />
+          </div>
+        ) : null}
       </section>
     </>
   );
