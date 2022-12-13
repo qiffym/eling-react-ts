@@ -210,3 +210,50 @@ export const useAdminDeleteMotivationalWord = () => {
 
   return deleteAdminMotivationalWord;
 };
+
+export const useAdminEditMotivational = (id: number) => {
+  const user = JSON.parse(localStorage.getItem('user') || '');
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const { dispatch } = useContext(MyContext);
+
+  const editAdminMotivational = async (
+    e: FormEvent<HTMLFormElement>,
+    title: string,
+    body: string,
+    from: string,
+    active: boolean,
+  ) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${baseURL}/api/admin/resources/motivational-words/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            title,
+            body,
+            from,
+            active,
+          }),
+        },
+      );
+      const result = await response.json();
+      dispatch({
+        type: Types.UpdateSuccess,
+        payload: {
+          success: result.success,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return editAdminMotivational;
+};

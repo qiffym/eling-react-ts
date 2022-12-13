@@ -217,7 +217,6 @@ export const usePostSubmission = (assignmentID: number) => {
           method: 'POST',
           headers: {
             'Access-Control-Allow-Origin': '*',
-            // 'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${user.token}`,
           },
           body: formData,

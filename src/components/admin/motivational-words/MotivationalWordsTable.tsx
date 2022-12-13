@@ -5,6 +5,7 @@ import { MyContext } from '../../../context/context';
 import { useAdminDeleteMotivationalWord } from '../../../hooks/useAdmin';
 import { MotivationalWordsType } from '../../../types/motivational-type';
 import { Types } from '../../../types/reducer-type';
+import EditMotivationalWord from '../../modal/EditMotivationalWord';
 import ModalDelete from '../../modal/ModalDelete';
 
 type Props = {
@@ -19,6 +20,8 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
     dataFrom: '',
   });
   const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [motivationalWordData, setMotivationalWordData] = useState<any>();
 
   const { dispatch } = useContext(MyContext);
 
@@ -60,6 +63,10 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
                   </button>
                   <button
                     type="button"
+                    onClick={() => {
+                      setMotivationalWordData(item);
+                      setOpenEdit(true);
+                    }}
                     className="btn btn-warning btn-xs mx-2 space-x-1">
                     <HiPencilAlt className="text-md" />
                     <span>Edit</span>
@@ -96,6 +103,22 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
               },
             });
           }}
+        />
+      ) : null}
+
+      {openEdit ? (
+        <EditMotivationalWord
+          motivationalWordData={motivationalWordData}
+          actionSave={() => {
+            setOpenEdit(false);
+            dispatch({
+              type: Types.UpdateSuccess,
+              payload: {
+                success: false,
+              },
+            });
+          }}
+          modalAction={() => setOpenEdit(false)}
         />
       ) : null}
     </div>

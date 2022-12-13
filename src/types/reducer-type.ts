@@ -89,6 +89,12 @@ export enum Types {
   EditProfileNIS = 'EDIT_PROFILE_NIS',
   EditProfileNISN = 'EDIT_PROFILE_NISN',
   EditProfileRombel = 'EDIT_PROFILE_ROMBEL',
+
+  // Payload Edit Motivational
+  EditMotivationalTitle = 'EDIT_MOTIVATIONAL_TITLE',
+  EditMotivationalBody = 'EDIT_MOTIVATIONAL_BODY',
+  EditMotivationalFrom = 'EDIT_MOTIVATIONAL_FROM',
+  EditMotivationalActive = 'EDIT_MOTIVATIONAL_ACTIVE',
 }
 
 export type LoginPayload = {
@@ -325,6 +331,21 @@ export type EditForumPayload = {
   };
   [Types.EditForumDesc]: {
     description: string;
+  };
+};
+
+export type EditMotivationalWordPayload = {
+  [Types.EditMotivationalTitle]: {
+    title: string;
+  };
+  [Types.EditMotivationalBody]: {
+    body: string;
+  };
+  [Types.EditMotivationalFrom]: {
+    from: string;
+  };
+  [Types.EditMotivationalActive]: {
+    active: boolean;
   };
 };
 
