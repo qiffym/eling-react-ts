@@ -138,6 +138,13 @@ export type EditForumType = {
   description: string;
 };
 
+export type EditMotivationalWordType = {
+  title: string;
+  body: string;
+  from: string;
+  active: boolean;
+};
+
 export type EditProfileType = {
   role: number;
   name: string;

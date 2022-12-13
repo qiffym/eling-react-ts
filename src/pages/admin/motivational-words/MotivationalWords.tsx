@@ -17,6 +17,7 @@ const MotivationalWords = () => {
   const [searchData, setSearchData] = useState([]);
   // const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+
   const { dispatch } = useContext(MyContext);
 
   const searchUser = (value: string) => {

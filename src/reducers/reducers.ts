@@ -18,6 +18,7 @@ import {
   DeleteSuccessType,
   EditForumSuccessType,
   EditForumType,
+  EditMotivationalWordType,
   EditProfileType,
   LoginType,
   ReplyCommentSuccessType,
@@ -45,6 +46,7 @@ import {
   DeleteSuccessPayload,
   EditForumPayload,
   EditForumSuccessPayload,
+  EditMotivationalWordPayload,
   EditProfilePayload,
   LoginPayload,
   ReplyCommentSuccessPayload,
@@ -664,6 +666,43 @@ export const editForumSuccessReducer = (
       return {
         ...state,
         success: action.payload.success,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export type EditMotivationalWordAction =
+  ActionMap<EditMotivationalWordPayload>[keyof ActionMap<EditMotivationalWordPayload>];
+
+export const editMotivationalWordReducer = (
+  state: EditMotivationalWordType,
+  action: EditMotivationalWordAction,
+) => {
+  switch (action.type) {
+    case 'EDIT_MOTIVATIONAL_TITLE':
+      return {
+        ...state,
+        title: action.payload.title,
+      };
+
+    case 'EDIT_MOTIVATIONAL_BODY':
+      return {
+        ...state,
+        body: action.payload.body,
+      };
+
+    case 'EDIT_MOTIVATIONAL_FROM':
+      return {
+        ...state,
+        from: action.payload.from,
+      };
+
+    case 'EDIT_MOTIVATIONAL_ACTIVE':
+      return {
+        ...state,
+        active: action.payload.active,
       };
 
     default:
