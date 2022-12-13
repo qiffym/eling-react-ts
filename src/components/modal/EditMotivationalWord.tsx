@@ -46,7 +46,7 @@ const EditMotivationalWord: FC<Props> = ({
               onClick={modalAction}>
               ✕
             </button>
-            <h3 className="text-lg font-bold">Edit Rombel</h3>
+            <h3 className="text-lg font-bold">Edit Kata Motivasi</h3>
           </div>
           <form
             onSubmit={(e) => {
@@ -87,7 +87,7 @@ const EditMotivationalWord: FC<Props> = ({
                 </label>
                 <textarea
                   name="body"
-                  placeholder="X TKJ 1"
+                  placeholder="Tulis kata katanya..."
                   defaultValue={input.body}
                   className="textarea textarea-bordered w-full resize-none"
                   rows={4}
