@@ -14,8 +14,10 @@ const EditRombelModal: FC<Props> = ({
   rombelName,
   rombelGrade,
 }) => {
-  const editAdminRombel = useAdminEditRombel();
+  const { editAdminRombel, message } = useAdminEditRombel();
   const [isDisable, setDisable] = useState(false);
+  const [eMsg, setEMsg] = useState('');
+  const [error, setError] = useState(false);
   const [input, setInput] = useState({
     department_id: 1,
     name: rombelName,

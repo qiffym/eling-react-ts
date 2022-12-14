@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { FormEvent, useContext } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { MyContext } from '../context/context';
 import { Types } from '../types/reducer-type';
 
@@ -8,6 +8,7 @@ export const useAdminAddRombel = () => {
   const user = JSON.parse(localStorage.getItem('user') || '');
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
+  const [message, setMessage] = useState('');
 
   const addAdminRombel = async (
     e: FormEvent<HTMLFormElement>,
@@ -35,18 +36,26 @@ export const useAdminAddRombel = () => {
         },
       );
       const result = await response.json();
-      dispatch({
-        type: Types.AddAssignmentSuccess,
-        payload: {
-          success: result.success,
-        },
-      });
+      if (response.status >= 200 && response.status < 300) {
+        setMessage(result.message);
+        dispatch({
+          type: Types.AddAssignmentSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
+      } else {
+        setMessage(result.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return addAdminRombel;
+  return {
+    addAdminRombel,
+    message,
+  };
 };
 
 export const useAdminDeleteRombel = () => {
@@ -87,6 +96,7 @@ export const useAdminEditRombel = () => {
   const user = JSON.parse(localStorage.getItem('user') || '');
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
+  const [message, setMessage] = useState('');
 
   const editAdminRombel = async (
     e: FormEvent<HTMLFormElement>,
@@ -114,18 +124,23 @@ export const useAdminEditRombel = () => {
         },
       );
       const result = await response.json();
-      dispatch({
-        type: Types.AddAssignmentSuccess,
-        payload: {
-          success: result.success,
-        },
-      });
+      if (response.status >= 200 && response.status < 300) {
+        setMessage(result.message);
+        dispatch({
+          type: Types.AddAssignmentSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
+      } else {
+        setMessage(result.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return editAdminRombel;
+  return { editAdminRombel, message };
 };
 
 // Motivational Word
@@ -133,6 +148,7 @@ export const useAdminAddMotivationalWord = () => {
   const user = JSON.parse(localStorage.getItem('user') || '');
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
+  const [message, setMessage] = useState('');
 
   const addAdminMotivationalWord = async (
     title: string,
@@ -160,18 +176,23 @@ export const useAdminAddMotivationalWord = () => {
         },
       );
       const result = await response.json();
-      dispatch({
-        type: Types.AddAssignmentSuccess,
-        payload: {
-          success: result.success,
-        },
-      });
+      if (response.status >= 200 && response.status < 300) {
+        setMessage(result.message);
+        dispatch({
+          type: Types.AddAssignmentSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
+      } else {
+        setMessage(result.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return addAdminMotivationalWord;
+  return { addAdminMotivationalWord, message };
 };
 
 // Delete Motivational Word
@@ -213,6 +234,7 @@ export const useAdminEditMotivational = (id: number) => {
   const user = JSON.parse(localStorage.getItem('user') || '');
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
+  const [message, setMessage] = useState('');
 
   const editAdminMotivational = async (
     e: FormEvent<HTMLFormElement>,
@@ -242,16 +264,21 @@ export const useAdminEditMotivational = (id: number) => {
         },
       );
       const result = await response.json();
-      dispatch({
-        type: Types.UpdateSuccess,
-        payload: {
-          success: result.success,
-        },
-      });
+      if (response.status >= 200 && response.status < 300) {
+        setMessage(result.message);
+        dispatch({
+          type: Types.AddAssignmentSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
+      } else {
+        setMessage(result.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return editAdminMotivational;
+  return { editAdminMotivational, message };
 };

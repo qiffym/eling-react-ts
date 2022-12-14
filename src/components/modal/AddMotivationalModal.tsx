@@ -7,9 +7,9 @@ type Props = {
 };
 
 const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
-  const addAdminMotivationalWord = useAdminAddMotivationalWord();
+  const { addAdminMotivationalWord, message } = useAdminAddMotivationalWord();
   const [isDisable, setDisable] = useState(false);
-  const [message, setMessage] = useState('');
+  const [eMsg, setEMsg] = useState('');
   const [error, setError] = useState(false);
   const [input, setInput] = useState({
     title: '',
@@ -29,8 +29,8 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
 
   const submitAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input.title) {
-      setMessage('Tidak boleh menggunakan angka atau spesial karakter');
+    if (message) {
+      setEMsg('Tidak boleh menggunakan angka atau spesial karakter');
       setError(true);
     } else {
       addAdminMotivationalWord(
@@ -47,7 +47,7 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
     if (input.title === '' || input.body === '' || input.from === '') {
       setDisable(true);
       setError(false);
-      setMessage('');
+      setEMsg('');
     } else {
       setDisable(false);
     }
@@ -84,7 +84,7 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
                     error ? 'border-red-500' : ''
                   }`}
                 />
-                <p className=" text-red-500">{message}</p>
+                <p className=" text-red-500">{eMsg}</p>
               </div>
               {/* Body */}
               <div className="form-control">
