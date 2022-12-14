@@ -135,13 +135,11 @@ export const useAdminAddMotivationalWord = () => {
   const { dispatch } = useContext(MyContext);
 
   const addAdminMotivationalWord = async (
-    e: FormEvent<HTMLFormElement>,
     title: string,
     body: string,
     from: string,
     active: number,
   ) => {
-    e.preventDefault();
     try {
       const response = await fetch(
         `${baseURL}/api/admin/resources/motivational-words`,

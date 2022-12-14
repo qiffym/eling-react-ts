@@ -72,7 +72,12 @@ const useUpdateProfile = (id: number) => {
         setTimeout(() => setToast(false), 5000);
       } else {
         setErrorToast(true);
-
+        dispatch({
+          type: Types.UpdateSuccess,
+          payload: {
+            success: result.success,
+          },
+        });
         setMessage(result.message);
         setTimeout(() => setErrorToast(false), 5000);
       }
