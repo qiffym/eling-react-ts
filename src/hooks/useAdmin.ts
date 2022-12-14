@@ -149,6 +149,8 @@ export const useAdminAddMotivationalWord = () => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
   const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
+  const [resStatus, setResStatus] = useState(421);
 
   const addAdminMotivationalWord = async (
     title: string,
@@ -176,8 +178,10 @@ export const useAdminAddMotivationalWord = () => {
         },
       );
       const result = await response.json();
+      setResStatus(response.status);
       if (response.status >= 200 && response.status < 300) {
         setMessage(result.message);
+        setError(false);
         dispatch({
           type: Types.AddAssignmentSuccess,
           payload: {
@@ -186,13 +190,15 @@ export const useAdminAddMotivationalWord = () => {
         });
       } else {
         setMessage(result.message);
+        setError(true);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      console.log(e);
+      setError(false);
     }
   };
 
-  return { addAdminMotivationalWord, message };
+  return { addAdminMotivationalWord, message, error, resStatus };
 };
 
 // Delete Motivational Word
@@ -235,15 +241,15 @@ export const useAdminEditMotivational = (id: number) => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const { dispatch } = useContext(MyContext);
   const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
+  const [resStatus, setResStatus] = useState(421);
 
   const editAdminMotivational = async (
-    e: FormEvent<HTMLFormElement>,
     title: string,
     body: string,
     from: string,
     active: boolean,
   ) => {
-    e.preventDefault();
     try {
       const response = await fetch(
         `${baseURL}/api/admin/resources/motivational-words/${id}`,
@@ -264,8 +270,10 @@ export const useAdminEditMotivational = (id: number) => {
         },
       );
       const result = await response.json();
+      setResStatus(response.status);
       if (response.status >= 200 && response.status < 300) {
         setMessage(result.message);
+        setError(false);
         dispatch({
           type: Types.AddAssignmentSuccess,
           payload: {
@@ -274,11 +282,12 @@ export const useAdminEditMotivational = (id: number) => {
         });
       } else {
         setMessage(result.message);
+        setError(true);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      console.log(e);
     }
   };
 
-  return { editAdminMotivational, message };
+  return { editAdminMotivational, message, error, resStatus };
 };

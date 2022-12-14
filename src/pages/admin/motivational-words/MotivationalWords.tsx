@@ -67,7 +67,6 @@ const MotivationalWords = () => {
         {openModal ? (
           <AddMotivationalModal
             actionSave={() => {
-              setOpenModal(false);
               dispatch({
                 type: Types.AddAssignmentSuccess,
                 payload: {
@@ -75,7 +74,7 @@ const MotivationalWords = () => {
                 },
               });
             }}
-            modalAction={() => setOpenModal(false)}
+            modalAction={setOpenModal}
           />
         ) : null}
       </div>

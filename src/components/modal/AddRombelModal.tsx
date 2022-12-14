@@ -7,7 +7,7 @@ type Props = {
 };
 
 const AddRombelModal: FC<Props> = ({ actionSave, modalAction }) => {
-  const addAdminRombel = useAdminAddRombel();
+  const { addAdminRombel } = useAdminAddRombel();
   const [isDisable, setDisable] = useState(false);
   const [input, setInput] = useState({
     department_id: 1,
