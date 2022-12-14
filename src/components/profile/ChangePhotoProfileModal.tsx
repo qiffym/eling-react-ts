@@ -97,7 +97,8 @@ const ChangePhotoProfileModal: FC<Props> = ({
                   })}>
                   <input type="file" {...getInputProps()} />
                   <em className="text-warning">
-                    Only *.jpeg and *.png images will be accepted
+                    Only *.jpeg and *.png images will be accepted and 5MB image
+                    file size
                   </em>
                   <p>Drag and drop your photo here or</p>
                   <button

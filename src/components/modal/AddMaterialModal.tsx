@@ -124,6 +124,9 @@ const AddMaterialModal: FC<Props> = ({
                     'mt-4 flex justify-center items-center p-20 flex-col space-y-5 w-full border-dashed border-2 border-indigo-300 rounded-lg',
                 })}>
                 <input type="file" {...getInputProps()} />
+                <em className="text-info">
+                  You can upload document files, images, or videos.
+                </em>
                 <p>Drag and drop your file here or</p>
                 <button
                   type="button"
