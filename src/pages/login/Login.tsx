@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import LoadingButton from '../../components/loading/LoadingButton';
 import useLogin from '../../hooks/useLogin';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
@@ -10,6 +11,7 @@ const Login = () => {
   const currentYear = new Date().getFullYear();
   const { isLoading, authLogin, message, toast } = useLogin();
   const [disable, setDisable] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({
     username: '',
     password: '',
@@ -101,7 +103,7 @@ const Login = () => {
                             <FaLock className="text-gray-500" />
                           </span>
                           <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             placeholder="password"
                             className="input input-bordered bg-slate-100 focus:outline-none border-slate-100 w-[244px]"
                             name="password"
@@ -109,6 +111,17 @@ const Login = () => {
                             value={input.password}
                             onChange={handleChange}
                           />
+                          <span>
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}>
+                              {showPassword ? (
+                                <AiOutlineEyeInvisible />
+                              ) : (
+                                <AiOutlineEye />
+                              )}
+                            </button>
+                          </span>
                         </label>
                       </div>
 
