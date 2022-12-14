@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import LoadingButton from '../../components/loading/LoadingButton';
 import useLogin from '../../hooks/useLogin';
 import logosmk from '../../assets/images/smkn3mlg150x150.png';
@@ -10,6 +11,7 @@ const Login = () => {
   const currentYear = new Date().getFullYear();
   const { isLoading, authLogin, message, toast } = useLogin();
   const [disable, setDisable] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({
     username: '',
     password: '',
@@ -85,7 +87,7 @@ const Login = () => {
                           <input
                             type="text"
                             placeholder="username / email"
-                            className="input input-bordered bg-slate-100 focus:outline-none border-slate-100 w-[244px]"
+                            className="input input-bordered bg-slate-100 focus:outline-none border-slate-100 md:w-[255px]"
                             name="username"
                             id="username"
                             value={input.username}
@@ -101,14 +103,25 @@ const Login = () => {
                             <FaLock className="text-gray-500" />
                           </span>
                           <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             placeholder="password"
-                            className="input input-bordered bg-slate-100 focus:outline-none border-slate-100 w-[244px]"
+                            className="input input-bordered bg-slate-100 focus:outline-none border-slate-100 md:w-[205px]"
                             name="password"
                             id="password"
                             value={input.password}
                             onChange={handleChange}
                           />
+                          <span className="bg-slate-100 hidden md:flex">
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}>
+                              {showPassword ? (
+                                <AiOutlineEyeInvisible />
+                              ) : (
+                                <AiOutlineEye />
+                              )}
+                            </button>
+                          </span>
                         </label>
                       </div>
 
@@ -137,7 +150,7 @@ const Login = () => {
                       <button
                         disabled={disable}
                         type="submit"
-                        className="btn w-72 bg-teal-600 border-slate-400 mt-5">
+                        className="btn w-11/12 md:w-72 bg-teal-600 border-slate-400 mt-5">
                         {isLoading ? <LoadingButton /> : 'Masuk'}
                       </button>
                     </div>

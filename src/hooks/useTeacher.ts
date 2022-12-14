@@ -187,15 +187,8 @@ export const useGrading = (
   const user = JSON.parse(localStorage.getItem('user') || '');
   const { dispatch } = useContext(MyContext);
 
-  const addGrade = async (
-    e: FormEvent<HTMLFormElement>,
-    input: {
-      studentID: number;
-      score: number;
-    },
-  ) => {
+  const addGrade = async (input: { studentID: number; score: number }) => {
     try {
-      e.preventDefault();
       const response = await fetch(
         `${baseURL}/api/teacher/online-classes/${classID}/contents/${contentID}/assignments/${assignmentID}/grade`,
         {

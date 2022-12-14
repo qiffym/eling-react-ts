@@ -80,7 +80,7 @@ export const useClasses = () => {
     } else if (user.user.role === 'student') {
       fetchStudentClass();
     } else {
-      console.log('Admin');
+      console.log('');
     }
   }, [fetchData, fetchStudentClass]);
 

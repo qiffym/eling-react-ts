@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
+import React, { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
 import { FaUsers } from 'react-icons/fa';
 import { MdKeyboardReturn } from 'react-icons/md';
 import { MyContext } from '../../../../context/context';
@@ -8,6 +8,7 @@ import { useGrading, useGradingAssignment } from '../../../../hooks/useTeacher';
 import { GradingAssignmentType } from '../../../../types/class-type';
 import { Types } from '../../../../types/reducer-type';
 import filedownload from '../../../../assets/images/filedownload.png';
+import ToastError from '../../../toast/ToastError';
 
 type Props = {
   classID: number;
@@ -24,11 +25,33 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
   const [grade, setGrade] = useState(0);
 
   const [show, setShow] = useState(false);
+  const [message, setMessage] = useState('');
+  const [toastError, setToastError] = useState(false);
 
   const [submissionData, setSubmissionData] = useState<GradingAssignmentType>();
 
   const addGrade = useGrading(classID, contentID, assignmentID);
   const { dispatch } = useContext(MyContext);
+
+  const submitGrade = (e: FormEvent<HTMLFormElement>, studentID: number) => {
+    e.preventDefault();
+    if (grade >= 0 && grade <= 100) {
+      addGrade({
+        studentID,
+        score: grade,
+      });
+      dispatch({
+        type: Types.AddAssignmentSuccess,
+        payload: {
+          success: false,
+        },
+      });
+    } else {
+      setMessage('Score tidak boleh kurang dari 0 / lebih dari 100');
+      setToastError(true);
+      setTimeout(() => setToastError(false), 3000);
+    }
+  };
 
   return (
     <section id="content" className="-mb-10">
@@ -80,29 +103,20 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
                     {/* Nilai */}
                     <div>
                       <form
-                        onSubmit={(e) => {
-                          addGrade(e, {
-                            studentID: item.student_id,
-                            score: grade,
-                          });
-                          dispatch({
-                            type: Types.AddAssignmentSuccess,
-                            payload: {
-                              success: false,
-                            },
-                          });
-                        }}
+                        onSubmit={(e) => submitGrade(e, item.student_id)}
                         className="flex flex-row items-center space-x-2">
-                        <div className="flex flex-row items-end text-lg">
-                          <input
-                            type="text"
-                            placeholder="0"
-                            className="w-9 border-b-gray-500 font-bold hover:border-b-2 group-hover:bg-slate-100 focus:outline-none focus:border-b-2"
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setGrade(Number(e.currentTarget.value))
-                            }
-                          />
-                          <span className="mr-2 text-slate-600">/100</span>
+                        <div className="flex flex-col items-center">
+                          <div className="flex flex-row items-end text-lg">
+                            <input
+                              type="text"
+                              placeholder="0"
+                              className="w-9 border-b-gray-500 font-bold hover:border-b-2 group-hover:bg-slate-100 focus:outline-none focus:border-b-2"
+                              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                setGrade(Number(e.currentTarget.value))
+                              }
+                            />
+                            <span className="mr-2 text-slate-600">/100</span>
+                          </div>
                         </div>
                         {/* Submit */}
                         <button
@@ -383,6 +397,11 @@ const GradingAssignment: FC<Props> = ({ classID, contentID, assignmentID }) => {
           </div>
         </div>
       </div>
+      {toastError ? (
+        <div className="px-5 z-50 mb-24">
+          <ToastError desc={`${message} please try again!`} />
+        </div>
+      ) : null}
     </section>
   );
 };

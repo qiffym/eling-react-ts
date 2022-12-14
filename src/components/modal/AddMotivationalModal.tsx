@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState, useEffect } from 'react';
+import React, { ChangeEvent, FC, useState, useEffect, FormEvent } from 'react';
 import { useAdminAddMotivationalWord } from '../../hooks/useAdmin';
 
 type Props = {
@@ -9,21 +9,14 @@ type Props = {
 const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
   const addAdminMotivationalWord = useAdminAddMotivationalWord();
   const [isDisable, setDisable] = useState(false);
-  // const [checked, setChecked] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
   const [input, setInput] = useState({
     title: '',
     body: '',
     from: '',
     active: 1,
   });
-
-  useEffect(() => {
-    if (input.title === '' || input.body === '' || input.from === '') {
-      setDisable(true);
-    } else {
-      setDisable(false);
-    }
-  }, [input]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
@@ -33,6 +26,32 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const submitAdd = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (input.title) {
+      setMessage('Tidak boleh menggunakan angka atau spesial karakter');
+      setError(true);
+    } else {
+      addAdminMotivationalWord(
+        input.title,
+        input.body,
+        input.from,
+        input.active,
+      );
+      actionSave();
+    }
+  };
+
+  useEffect(() => {
+    if (input.title === '' || input.body === '' || input.from === '') {
+      setDisable(true);
+      setError(false);
+      setMessage('');
+    } else {
+      setDisable(false);
+    }
+  }, [input]);
 
   return (
     <>
@@ -48,16 +67,7 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
             <h3 className="text-lg font-bold">Tambah Kata Motivasi</h3>
           </div>
           <form
-            onSubmit={(e) => {
-              addAdminMotivationalWord(
-                e,
-                input.title,
-                input.body,
-                input.from,
-                input.active,
-              );
-              actionSave();
-            }}
+            onSubmit={submitAdd}
             className="mt-4 flex flex-col space-y-5 w-full">
             <div className="flex flex-col space-y-3">
               {/* Title */}
@@ -70,8 +80,11 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
                   name="title"
                   onChange={handleChange}
                   placeholder="Kata Motivasi"
-                  className="input input-bordered w-full"
+                  className={`input input-bordered w-full ${
+                    error ? 'border-red-500' : ''
+                  }`}
                 />
+                <p className=" text-red-500">{message}</p>
               </div>
               {/* Body */}
               <div className="form-control">
