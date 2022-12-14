@@ -30,7 +30,7 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
   const submitAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.title) {
-      setMessage('Masukkan title yang benar');
+      setMessage('Tidak boleh menggunakan angka atau spesial karakter');
       setError(true);
     } else {
       addAdminMotivationalWord(
