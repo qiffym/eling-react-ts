@@ -1,4 +1,11 @@
-import React, { ChangeEvent, FC, useEffect, useReducer, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
 import { useAdminEditMotivational } from '../../hooks/useAdmin';
 import { editMotivationalWordReducer } from '../../reducers/reducers';
 import { MotivationalWordsType } from '../../types/motivational-type';
@@ -6,7 +13,7 @@ import { Types } from '../../types/reducer-type';
 
 type Props = {
   actionSave: () => void;
-  modalAction: () => void;
+  modalAction: Function;
   motivationalWordData: MotivationalWordsType;
 };
 
@@ -23,9 +30,13 @@ const EditMotivationalWord: FC<Props> = ({
     active: motivationalWordData.active,
   });
 
-  const editAdminMotivational = useAdminEditMotivational(
-    motivationalWordData.id,
-  );
+  const { editAdminMotivational, message, error, resStatus } =
+    useAdminEditMotivational(motivationalWordData.id);
+
+  const submitEdit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    editAdminMotivational(input.title, input.body, input.from, input.active);
+  };
 
   useEffect(() => {
     if (input.title === '' || input.body === '' || input.from === '') {
@@ -35,6 +46,15 @@ const EditMotivationalWord: FC<Props> = ({
     }
   }, [input]);
 
+  useEffect(() => {
+    if (resStatus >= 200 && resStatus < 300) {
+      modalAction(false);
+      actionSave();
+    } else {
+      modalAction(true);
+    }
+  }, [resStatus]);
+
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none transition-all ease-in-out">
@@ -43,22 +63,13 @@ const EditMotivationalWord: FC<Props> = ({
             <button
               type="button"
               className="btn btn-sm btn-circle absolute right-2 top-2"
-              onClick={modalAction}>
+              onClick={() => modalAction(false)}>
               ✕
             </button>
             <h3 className="text-lg font-bold">Edit Kata Motivasi</h3>
           </div>
           <form
-            onSubmit={(e) => {
-              editAdminMotivational(
-                e,
-                input.title,
-                input.body,
-                input.from,
-                input.active,
-              );
-              actionSave();
-            }}
+            onSubmit={submitEdit}
             className="mt-4 flex flex-col space-y-5 w-full">
             <div className="flex flex-col space-y-1">
               <div className="form-control w-full">
@@ -69,7 +80,9 @@ const EditMotivationalWord: FC<Props> = ({
                   name="title"
                   type="text"
                   defaultValue={input.title}
-                  className="input input-bordered w-full"
+                  className={`input input-bordered w-full ${
+                    error ? 'border-red-500' : ''
+                  }`}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setInput({
                       type: Types.EditMotivationalTitle,
@@ -79,6 +92,7 @@ const EditMotivationalWord: FC<Props> = ({
                     })
                   }
                 />
+                <p className=" text-red-500">{message}</p>
               </div>
 
               <div className="form-control w-full">

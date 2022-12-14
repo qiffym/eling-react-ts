@@ -110,7 +110,6 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
         <EditMotivationalWord
           motivationalWordData={motivationalWordData}
           actionSave={() => {
-            setOpenEdit(false);
             dispatch({
               type: Types.UpdateSuccess,
               payload: {
@@ -118,7 +117,7 @@ const MotivationalWordsTable: FC<Props> = ({ motivationalData }) => {
               },
             });
           }}
-          modalAction={() => setOpenEdit(false)}
+          modalAction={setOpenEdit}
         />
       ) : null}
     </div>

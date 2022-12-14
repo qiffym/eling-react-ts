@@ -3,14 +3,13 @@ import { useAdminAddMotivationalWord } from '../../hooks/useAdmin';
 
 type Props = {
   actionSave: () => void;
-  modalAction: () => void;
+  modalAction: Function;
 };
 
 const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
-  const addAdminMotivationalWord = useAdminAddMotivationalWord();
+  const { addAdminMotivationalWord, message, error, resStatus } =
+    useAdminAddMotivationalWord();
   const [isDisable, setDisable] = useState(false);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState(false);
   const [input, setInput] = useState({
     title: '',
     body: '',
@@ -27,27 +26,23 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
     });
   };
 
-  const submitAdd = (e: FormEvent<HTMLFormElement>) => {
+  const submitAdd = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input.title) {
-      setMessage('Tidak boleh menggunakan angka atau spesial karakter');
-      setError(true);
-    } else {
-      addAdminMotivationalWord(
-        input.title,
-        input.body,
-        input.from,
-        input.active,
-      );
-      actionSave();
-    }
+    addAdminMotivationalWord(input.title, input.body, input.from, input.active);
   };
+
+  useEffect(() => {
+    if (resStatus >= 200 && resStatus < 300) {
+      modalAction(false);
+      actionSave();
+    } else {
+      modalAction(true);
+    }
+  });
 
   useEffect(() => {
     if (input.title === '' || input.body === '' || input.from === '') {
       setDisable(true);
-      setError(false);
-      setMessage('');
     } else {
       setDisable(false);
     }
@@ -61,7 +56,7 @@ const AddMotivationalModal: FC<Props> = ({ actionSave, modalAction }) => {
             <button
               type="button"
               className="btn btn-sm btn-circle btn-error text-white absolute right-2 top-2"
-              onClick={modalAction}>
+              onClick={() => modalAction(false)}>
               ✕
             </button>
             <h3 className="text-lg font-bold">Tambah Kata Motivasi</h3>
