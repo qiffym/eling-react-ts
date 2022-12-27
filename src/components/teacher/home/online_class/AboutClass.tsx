@@ -1,5 +1,5 @@
 import React, { FC, useState, useContext } from 'react';
-import logosmk from '../../../../assets/images/smkn3mlg150x150.png';
+// import logosmk from '../../../../assets/images/smkn3mlg150x150.png';
 import { MyContext } from '../../../../context/context';
 import { Types } from '../../../../types/reducer-type';
 import EditClassModal from '../../../modal/EditClassModal';
@@ -36,7 +36,7 @@ const AboutClass: FC<Props> = ({
     <section id="about-class">
       <div className="container mx-auto w-11/12 px-5 py-3 shadow-xl border-l-4 border-l-primary rounded-box bg-white">
         {/* Tentang Aplikasi */}
-        <section id="about-app" className="mb-8">
+        {/* <section id="about-app" className="mb-8">
           <div className="flex items-center space-x-2 p-3">
             <div className="mask mask-circle w-20 h-20">
               <img src={logosmk} alt="logo_smk" />
@@ -54,7 +54,7 @@ const AboutClass: FC<Props> = ({
             neque quam facilis dolore, unde eum sunt ad excepturi perspiciatis
             quia doloremque distinctio ducimus.
           </p>
-        </section>
+        </section> */}
 
         {/* Tentang Online Class */}
         <section id="about-online-class">
