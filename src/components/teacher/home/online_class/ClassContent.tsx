@@ -72,7 +72,8 @@ export const ClassContent: FC<Props> = ({ teacherName, role, classId }) => {
           <div id="header-content" className="mb-5">
             <h2 className="text-lg font-bold">Materi Pembelajaran</h2>
             <blockquote>
-              Unduh materi, kerjakan tugas, dan ikuti forum diskusi
+              Buat agenda pembelajaran, lengkapi dengan materi, tugas, ataupun
+              forum diskusi
             </blockquote>
           </div>
 
