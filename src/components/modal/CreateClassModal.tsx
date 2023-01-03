@@ -37,7 +37,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
             </button>
-            <h3 className="text-lg font-bold">Tambah Kelas</h3>
+            <h3 className="text-lg font-bold">Tambah Kelas Baru</h3>
           </div>
           <form
             onSubmit={(e) => {
@@ -51,7 +51,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
             className="mt-4 flex flex-col space-y-5 w-full">
             <div className="flex flex-col space-y-1">
               <label htmlFor="romble-textinput" className="font-medium">
-                Romble ID
+                Rombongan Belajar
               </label>
               <select
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
@@ -76,7 +76,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">
-                Nama Kelas
+                Nama Kelas Online
               </label>
               <input
                 type="text"
@@ -95,7 +95,7 @@ const CreateClassModal: FC<Props> = ({ actionSave, modalAction }) => {
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="desc-textarea" className="font-medium">
-                Description
+                Deskripsi
               </label>
               <textarea
                 name="desc-textarea"

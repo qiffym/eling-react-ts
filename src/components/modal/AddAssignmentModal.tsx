@@ -62,7 +62,7 @@ const AddAssignmentModal: FC<Props> = ({
             }}>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">
-                Judul
+                Title
               </label>
               <input
                 type="text"
@@ -81,7 +81,7 @@ const AddAssignmentModal: FC<Props> = ({
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">
-                Set Deadline
+                Set Due Date
               </label>
               <input
                 type="datetime-local"

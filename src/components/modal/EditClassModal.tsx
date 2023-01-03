@@ -67,7 +67,7 @@ const EditClassModal: FC<Props> = ({
             className="mt-4 flex flex-col space-y-5 w-full">
             <div className="flex flex-col space-y-1">
               <label htmlFor="romble-textinput" className="font-medium">
-                Romble ID
+                Rombongan Belajar
               </label>
               <select
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
@@ -81,7 +81,7 @@ const EditClassModal: FC<Props> = ({
                 defaultValue={state.rombel_class_id}
                 className="select select-bordered w-full ">
                 <option value="DEFAULT" disabled>
-                  -- Rombel ID --
+                  -- Pilih Rombel --
                 </option>
                 <option value="1">X TKJ 1</option>
                 <option value="2">X TKJ 2</option>
@@ -93,7 +93,7 @@ const EditClassModal: FC<Props> = ({
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">
-                Nama Kelas
+                Nama Kelas Online
               </label>
               <input
                 autoFocus={focusInputName}
@@ -114,7 +114,7 @@ const EditClassModal: FC<Props> = ({
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="desc-textarea" className="font-medium">
-                Description
+                Deskripsi
               </label>
               <textarea
                 autoFocus={focusInputDesc}

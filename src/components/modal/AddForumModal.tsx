@@ -47,7 +47,7 @@ const AddForumModal: FC<Props> = ({
           </div>
           <form
             className="mt-4 flex flex-col space-y-5 w-full"
-            onSubmit={e => {
+            onSubmit={(e) => {
               addForum(e, idClasses, idContent, {
                 topic: state.topic,
                 description: state.description,
@@ -56,7 +56,7 @@ const AddForumModal: FC<Props> = ({
             }}>
             <div className="flex flex-col space-y-1">
               <label htmlFor="class-textinput" className="font-medium">
-                Topik
+                Topik Diskusi
               </label>
               <input
                 type="text"
@@ -75,7 +75,7 @@ const AddForumModal: FC<Props> = ({
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="desc-textarea" className="font-medium">
-                Description
+                Deskripsi
               </label>
               <textarea
                 name="desc-textarea"
