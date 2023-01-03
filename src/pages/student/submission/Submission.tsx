@@ -125,7 +125,7 @@ const Submission = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td>Deadline</td>
+                        <td>Due Date</td>
                         <td>: {submissionDetail.deadline} WIB</td>
                       </tr>
                       <tr>

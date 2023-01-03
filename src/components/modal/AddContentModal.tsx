@@ -37,7 +37,9 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
               className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
             </button>
-            <h3 className="text-lg font-bold">Tambah Konten</h3>
+            <h3 className="text-lg font-bold">
+              Tambah Agenda/Konten Pembelajaran
+            </h3>
           </div>
           <form
             onSubmit={(e) => {
@@ -49,7 +51,9 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
             }}
             className="mt-4 flex flex-col space-y-5 w-full">
             <div className="flex flex-col space-y-1">
-              <label htmlFor="class-textinput" className="font-medium" />
+              <label htmlFor="desc-textarea" className="font-medium">
+                Nama Agenda
+              </label>
               <input
                 type="text"
                 placeholder="Nama Materi"
@@ -67,7 +71,7 @@ const AddContentModal: FC<Props> = ({ actionSave, modalAction, idClasses }) => {
             </div>
             <div className="flex flex-col space-y-1">
               <label htmlFor="desc-textarea" className="font-medium">
-                Description
+                Deskripsi
               </label>
               <textarea
                 name="desc-textarea"
